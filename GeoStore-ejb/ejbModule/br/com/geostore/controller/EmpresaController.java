@@ -79,18 +79,55 @@ public class EmpresaController {
 		}		
 	}
 	
-	public void validar() throws Exception{				
+	public void validar() throws Exception{		
+		
+		if(empresa.getStatusEmpresa()==null || empresa.getStatusEmpresa().getDescricao().isEmpty())
+			throw new RuntimeException("É necessário selecionar o status!");
+		
+		if(empresa.getDocumento().isEmpty())
+			throw new RuntimeException("É necessário preencher o CNPJ!");	
 		
 		if(!DocumentoValidator.validarCNPJCPF(empresa.getDocumento()))
-			throw new RuntimeException("CNPJ digitado é inválido!");			
+			throw new RuntimeException("CNPJ digitado é inválido!");	
+			
+		//if (empresaDAO.buscarPorCNPJ(empresa))
+			//throw new RuntimeException("CNPJ digitado já existe!");
 		
+		if(empresa.getRazaoSocial().isEmpty())
+			throw new RuntimeException("É necessário preencher a razão social!");
 		
-		if (empresaDAO.buscarPorCNPJ(empresa))
-			throw new RuntimeException("CNPJ digitado já existe!");			
+		if(empresa.getNomeFantasia().isEmpty())
+			throw new RuntimeException("É necessário preencher o nome fantasia!");
 		
+		if(empresa.getInscricaoEstadual().isEmpty())
+			throw new RuntimeException("É necessário preencher a inscrição estadual!");
+		
+		if(empresa.getContato().isEmpty())
+			throw new RuntimeException("É necessário preencher o contato!");
+		
+		if(empresa.getTelefone().isEmpty())
+			throw new RuntimeException("É necessário preencher o telefone!");
+		
+		if(empresa.getEmail().isEmpty())
+			throw new RuntimeException("É necessário preencher o email!");
+		
+		if(empresa.getEndereco().getCEP().isEmpty())
+			throw new RuntimeException("É necessário preencher o cep!");
+		
+		if(empresa.getEndereco().getLogradouro().isEmpty())
+			throw new RuntimeException("É necessário preencher o nome da rua!");
+		
+		if(empresa.getEndereco().getNumeroLogradouro().isEmpty())
+			throw new RuntimeException("É necessário preencher o número da rua!");
+		
+		if(empresa.getEndereco().getBairro().isEmpty())
+			throw new RuntimeException("É necessário preencher o bairro!");
 		
 		if(empresa.getEndereco().getCidade()==null || empresa.getEndereco().getCidade().getDescricao().isEmpty())
-			throw new RuntimeException("Selecione uma Cidade!");		
+			throw new RuntimeException("Selecione uma Cidade!");
+		
+		if(empresa.getEndereco().getLatitude().isEmpty() || empresa.getEndereco().getLongitude().isEmpty())
+			throw new RuntimeException("É necessário buscar as coordenadas!");			
 					
 	}	
 	
