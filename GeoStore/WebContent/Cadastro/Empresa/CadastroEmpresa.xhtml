@@ -56,7 +56,7 @@
 											
 						<s:decorate template="../../layout/edit.xhtml">
 							<ui:define name="label">Status</ui:define>			
-							<h:selectOneMenu value="#{empresaController.empresa.statusEmpresa}" required="true" requiredMessage="É necessário selecionar um status!">
+							<h:selectOneMenu value="#{empresaController.empresa.statusEmpresa}" >
 								<s:selectItems value="#{empresaController.statusEmpresas}" var="s" label="#{s.descricao}" noSelectionLabel="Selecione..." />
 								<s:convertEntity/>
 							</h:selectOneMenu>
@@ -64,29 +64,29 @@
 											
 						<s:decorate template="../../layout/edit.xhtml">						 
 							<ui:define name="label">CNPJ</ui:define>
-							<h:inputText id="cnpj" value="#{empresaController.empresa.documento}" converter="#{cnpjConverter}" required="true" requiredMessage="É necessário informar CNPJ!" >
+							<h:inputText id="cnpj" value="#{empresaController.empresa.documento}" converter="#{cnpjConverter}"  >
 								<rich:jQuery selector="#cnpj" query="mask('99.999.999/9999-99')" timing="onload" />												
 							</h:inputText>
 						</s:decorate>
 						
 						<s:decorate template="../../layout/edit.xhtml">	
 							<ui:define name="label">Razão Social</ui:define>
-							<h:inputText size="100" value="#{empresaController.empresa.razaoSocial}" required="true" requiredMessage="É necessário informar a razão social!" />
+							<h:inputText size="100" value="#{empresaController.empresa.razaoSocial}"  />
 						</s:decorate>
 					
 						<s:decorate template="../../layout/edit.xhtml">
 							<ui:define name="label">Nome Fantasia</ui:define>
-							<h:inputText size="100" value="#{empresaController.empresa.nomeFantasia}" required="true" requiredMessage="É necessário informar o nome fantasia!" />	
+							<h:inputText size="100" value="#{empresaController.empresa.nomeFantasia}"  />	
 						</s:decorate>
 						
 						<s:decorate id="txtInscricaoEstadual" template="../../layout/edit.xhtml">											
 							<ui:define name="label">Inscrição Estadual</ui:define>
-							<h:inputText id="ie" maxlength="14" value="#{empresaController.empresa.inscricaoEstadual}" required="true" requiredMessage="É necessário informar a inscrição estadual!"/>
+							<h:inputText id="ie" maxlength="14" value="#{empresaController.empresa.inscricaoEstadual}" />
 						</s:decorate>
 
 						<s:decorate id="txtContato" template="../../layout/edit.xhtml" >
 							<ui:define name="label">Contato</ui:define>
-							<h:inputText size="60" value="#{empresaController.empresa.contato}" required="true" requiredMessage="É necessário informar um contato!"/>
+							<h:inputText size="60" value="#{empresaController.empresa.contato}" />
 							<!-- 
 							<h:message styleClass="errors" showDetail="true" for="txtContato" rendered="true" style="color: red"  />
 						 	-->
@@ -94,14 +94,14 @@
 
 						<s:decorate id="txtTelefone" template="../../layout/edit.xhtml">											
 							<ui:define name="label">Telefone</ui:define>
-							<h:inputText id="telefone" value="#{empresaController.empresa.telefone}" converter="telefoneConverter" required="true" requiredMessage="É necessário informar um número de telefone!">
+							<h:inputText id="telefone" value="#{empresaController.empresa.telefone}" converter="telefoneConverter" >
 								<rich:jQuery selector="#telefone" query="mask('(99)9999-9999')" timing="onload"/>												
 							</h:inputText>
 						</s:decorate>
 
 						<s:decorate template="../../layout/edit.xhtml">
 							<ui:define name="label">E-Mail</ui:define>
-							<h:inputText size="60" value="#{empresaController.empresa.email}" required="true" requiredMessage="É necessário informar um e-mail!">
+							<h:inputText size="60" value="#{empresaController.empresa.email}" >
 							</h:inputText>	
 						</s:decorate>
 					
@@ -114,19 +114,19 @@
 						
 						<s:decorate id="txtCep" template="../../layout/edit.xhtml">											
 							<ui:define name="label">CEP</ui:define>
-							<h:inputText id="cep" value="#{empresaController.empresa.endereco.CEP}" converter="cepConverter" required="true" requiredMessage="É necessário informar o CEP!">
+							<h:inputText id="cep" value="#{empresaController.empresa.endereco.CEP}" converter="cepConverter" >
 								<rich:jQuery selector="#cep" query="mask('99.999-999')" timing="onload"/>												
 							</h:inputText>
 						</s:decorate>
 						
 						<s:decorate template="../../layout/edit.xhtml">
 								<ui:define name="label">Rua</ui:define>
-								<h:inputText size="100" value="#{empresaController.empresa.endereco.logradouro}" required="true" requiredMessage="É necessário informar o logradouro!"/>	
+								<h:inputText size="100" value="#{empresaController.empresa.endereco.logradouro}" />	
 						</s:decorate>
 
 						<s:decorate template="../../layout/edit.xhtml">	
 								<ui:define name="label">Nº</ui:define>
-								<h:inputText size="20" value="#{empresaController.empresa.endereco.numeroLogradouro}" required="true" requiredMessage="É necessário informar o número logradouro!">
+								<h:inputText size="20" value="#{empresaController.empresa.endereco.numeroLogradouro}" >
 								</h:inputText>
 						</s:decorate>
 							
@@ -137,14 +137,14 @@
 							
 						<s:decorate template="../../layout/edit.xhtml">
 								<ui:define name="label">Bairro</ui:define>
-								<h:inputText size="60" value="#{empresaController.empresa.endereco.bairro}" required="true" requiredMessage="É necessário informar o bairro!"/>	
+								<h:inputText size="60" value="#{empresaController.empresa.endereco.bairro}"/>	
 						</s:decorate>
 											
 						<s:decorate template="../../layout/edit.xhtml">
 							<ui:define name="label">Estado</ui:define>
-                            <h:selectOneMenu id="comboEstado" value="#{empresaController.unidadeFederacao}">
+                            <h:selectOneMenu id="comboEstado" value="#{enderecoController.uf}">
                                 <s:selectItems  value="#{unidadesFederacao}" var="uf" label="#{uf.descricao}" noSelectionLabel="Selecione..." />
-                                <a4j:support event="onchange" reRender="comboCidade"/>
+                                <a4j:support event="onchange" reRender="comboCidade" />
                                 <s:convertEntity/>                               
                             </h:selectOneMenu>
                         </s:decorate>
@@ -152,19 +152,19 @@
                     	<s:decorate template="../../layout/edit.xhtml" >
                     		<ui:define name="label">Cidade</ui:define>
                             <h:selectOneMenu id="comboCidade" value="#{empresaController.empresa.endereco.cidade}">
-                                <s:selectItems value="#{enderecoController.getCidades(empresaController.unidadeFederacao)}" var="c" label="#{c.descricao}" noSelectionLabel="Selecione..." />
+                                <s:selectItems value="#{enderecoController.getCidades(enderecoController.uf)}" var="c" label="#{c.descricao}" noSelectionLabel="Selecione..." />
                                 <s:convertEntity/>                               
                             </h:selectOneMenu>
                        	</s:decorate>
                        	
                        	<s:decorate template="../../layout/edit.xhtml">
 								<ui:define name="label">Latitude:</ui:define>
-								<h:inputText size="30" value="#{empresaController.empresa.endereco.latitude}" required="true" requiredMessage="É necessário consultar as Coordenadas!"/>	
+								<h:inputText size="30" value="#{empresaController.empresa.endereco.latitude}" />	
 						</s:decorate>
 						
                        	<s:decorate template="../../layout/edit.xhtml">
 								<ui:define name="label">Latitude:</ui:define>
-								<h:inputText size="30" value="#{empresaController.empresa.endereco.longitude}" required="true" requiredMessage="É necessário consultar as Coordenadas!"/>	
+								<h:inputText size="30" value="#{empresaController.empresa.endereco.longitude}" />	
 						</s:decorate>
 						
 						<a4j:commandButton value="Buscar Coordenadas" action="#{empresaController.buscarCoordenadas()}" />
