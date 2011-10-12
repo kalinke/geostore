@@ -36,11 +36,11 @@ public class Empresa {
 	private String nomeFantasia;
 
 	@Column(name = "inscricao_estadual",length=14)
-	@Pattern(regex="^([0-9]{5,14})+$",message="A Inscrição Estadual deve conter apenas números!")
+	//@Pattern(regex="^([0-9]{5,14})+$",message="A Inscrição Estadual deve conter apenas números!")
 	private String inscricaoEstadual;
 	
 	@Column(name = "contato",length=30)
-	@Pattern(regex="^[aA-zZzZãÃõÕêÊâÂôÔóÓúÚáÁéÉíÍàÀ\\s]+((\\s[aA-zZãÃõÕêÊâÂôÔóÓúÚáÁéÉíÍàÀ\\s]+)+)?$", message="Nome do contato inválido!")
+	//@Pattern(regex="^[aA-zZzZãÃõÕêÊâÂôÔóÓúÚáÁéÉíÍàÀ\\s]+((\\s[aA-zZãÃõÕêÊâÂôÔóÓúÚáÁéÉíÍàÀ\\s]+)+)?$", message="Nome do contato inválido!")
 	private String contato;
 
 	@Column(name = "telefone", length=11)
@@ -48,7 +48,7 @@ public class Empresa {
 	
 	@Column(name = "email", length=90)
 	//@Pattern(regex="^([0-9a-zA-Z]+([_.-]?[0-9a-zA-Z]+)*@[0-9a-zA-Z]+[0-9,a-z,A-Z,.,-]*(.){1}[a-zA-Z]{2,4})+$",message="Digite um e-mail válido!")
-	@Pattern(regex="^([0-9a-zA-Z]+([_.-]?[0-9a-zA-Z]+)*@[0-9a-zA-Z-]+.[-0-9a-zA-Z]+.[-0-9a-zA-Z]+.[a-zA-Z]{2,3})+$",message="Digite um e-mail válido!")
+	//@Pattern(regex="^([0-9a-zA-Z]+([_.-]?[0-9a-zA-Z]+)*@[0-9a-zA-Z-]+.[-0-9a-zA-Z]+.[-0-9a-zA-Z]+.[a-zA-Z]{2,3})+$",message="Digite um e-mail válido!")
 	private String email;
 
 	

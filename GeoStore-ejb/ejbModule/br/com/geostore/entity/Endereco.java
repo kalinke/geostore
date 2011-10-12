@@ -28,18 +28,18 @@ public class Endereco implements Serializable {
 	private String CEP;
 	
 	@Column(name="numero_logradouro",length=6)
-	@Pattern(regex="^[0-9]{1,40}", message="Número do logradouro inválido!")
+	//@Pattern(regex="^[0-9]{1,40}", message="Número do logradouro inválido!")
 	private String numeroLogradouro;
 	
 	@Column(name="logradouro",length=150)
-	@Pattern(regex="^[aA-zZzZãÃõÕêÊâÂôÔóÓúÚáÁéÉíÍàÀ\\s]+((\\s[aA-zZãÃõÕêÊâÂôÔóÓúÚáÁéÉíÍàÀ\\s]+)+)?$", message="Nome da rua inválido!")
+	//@Pattern(regex="^[aA-zZzZãÃõÕêÊâÂôÔóÓúÚáÁéÉíÍàÀ\\s]+((\\s[aA-zZãÃõÕêÊâÂôÔóÓúÚáÁéÉíÍàÀ\\s]+)+)?$", message="Nome da rua inválido!")
 	private String logradouro;
 	
 	@Column(name="complemento_logradouro",length=30)
 	private String complementoLogradouro;
 	
 	@Column(name="bairro",length=40)
-	@Pattern(regex="^[aA-zZzZãÃõÕêÊâÂôÔóÓúÚáÁéÉíÍàÀ\\s]+((\\s[aA-zZãÃõÕêÊâÂôÔóÓúÚáÁéÉíÍàÀ\\s]+)+)?$", message="Nome do bairro inválido!")
+	//@Pattern(regex="^[aA-zZzZãÃõÕêÊâÂôÔóÓúÚáÁéÉíÍàÀ\\s]+((\\s[aA-zZãÃõÕêÊâÂôÔóÓúÚáÁéÉíÍàÀ\\s]+)+)?$", message="Nome do bairro inválido!")
 	private String bairro;
 		
 	@ManyToOne
