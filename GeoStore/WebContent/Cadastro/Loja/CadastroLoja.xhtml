@@ -55,7 +55,7 @@
 				
 						<s:decorate template="../../layout/edit.xhtml">
 							<ui:define name="label">Empresa Superior</ui:define>		
-							<h:selectOneMenu value="#{lojaController.loja.empresaSuperior}" required="true" requiredMessage="É necessário selecionar uma empresa superior!">	
+							<h:selectOneMenu value="#{lojaController.loja.empresaSuperior}" >	
 								<s:selectItems value="#{empresaController.empresas}" var="empresaSuperior" label="#{empresaSuperior.documento} - #{empresaSuperior.razaoSocial}" noSelectionLabel="Selecione..."/>								
 								<s:convertEntity/>
 							</h:selectOneMenu>
@@ -63,7 +63,7 @@
 
 						<s:decorate template="../../layout/edit.xhtml">
 							<ui:define name="label">Status</ui:define>			
-							<h:selectOneMenu value="#{lojaController.loja.statusLoja}" required="true" requiredMessage="É necessário selecionar um status!">
+							<h:selectOneMenu value="#{lojaController.loja.statusLoja}">
 								<s:selectItems value="#{lojaController.statusLojas}" var="s" label="#{s.descricao}" noSelectionLabel="Selecione..."/>
 								<s:convertEntity/>
 							</h:selectOneMenu>
@@ -71,29 +71,29 @@
 						
 						<s:decorate template="../../layout/edit.xhtml">			
 							<ui:define name="label">CNPJ</ui:define>
-							<h:inputText id="cnpj" value="#{lojaController.loja.documento}" converter="#{cnpjConverter}" required="true" requiredMessage="É necessário informar CNPJ!">
+							<h:inputText id="cnpj" value="#{lojaController.loja.documento}" converter="#{cnpjConverter}">
 								<rich:jQuery selector="#cnpj" query="mask('99.999.999/9999-99')" timing="onload" />												
 							</h:inputText>
 						</s:decorate>
 						
 						<s:decorate template="../../layout/edit.xhtml">	
 							<ui:define name="label">Razão Social</ui:define>
-							<h:inputText size="100" value="#{lojaController.loja.razaoSocial}" required="true" requiredMessage="É necessário informar a razão social!"/>
+							<h:inputText size="100" value="#{lojaController.loja.razaoSocial}" />
 						</s:decorate>
 					
 						<s:decorate template="../../layout/edit.xhtml">
 							<ui:define name="label">Nome Fantasia</ui:define>
-							<h:inputText size="100" value="#{lojaController.loja.nomeFantasia}" required="true" requiredMessage="É necessário informar o nome fantasia!"/>	
+							<h:inputText size="100" value="#{lojaController.loja.nomeFantasia}" />	
 						</s:decorate>
 						
 						<s:decorate id="txtInscricaoEstadual" template="../../layout/edit.xhtml">											
 							<ui:define name="label">Inscrição Estadual</ui:define>
-							<h:inputText id="ie" maxlength="14" value="#{lojaController.loja.inscricaoEstadual}" required="true" requiredMessage="É necessário informar a inscrição estadual!"/>
+							<h:inputText id="ie" maxlength="14" value="#{lojaController.loja.inscricaoEstadual}"/>
 						</s:decorate>
 
 						<s:decorate id="txtContato" template="../../layout/edit.xhtml" >
 							<ui:define name="label">Contato</ui:define>
-							<h:inputText size="60" value="#{lojaController.loja.contato}" required="true" requiredMessage="É necessário informar um contato!"/>
+							<h:inputText size="60" value="#{lojaController.loja.contato}"/>
 							<!-- 
 							<h:message styleClass="errors" showDetail="true" for="txtContato" rendered="true" style="color: red"  />
 						 	-->
@@ -101,14 +101,14 @@
 
 						<s:decorate id="txtTelefone" template="../../layout/edit.xhtml">											
 							<ui:define name="label">Telefone</ui:define>
-							<h:inputText id="telefone" value="#{lojaController.loja.telefone}" converter="telefoneConverter" required="true" requiredMessage="É necessário informar um número de telefone!">
+							<h:inputText id="telefone" value="#{lojaController.loja.telefone}" converter="telefoneConverter">
 								<rich:jQuery selector="#telefone" query="mask('(99)9999-9999')" timing="onload" />												
 							</h:inputText>
 						</s:decorate>
 
 						<s:decorate template="../../layout/edit.xhtml">
 							<ui:define name="label">E-Mail</ui:define>
-							<h:inputText size="60" value="#{lojaController.loja.email}" required="true" requiredMessage="É necessário informar um e-mail!"/>	
+							<h:inputText size="60" value="#{lojaController.loja.email}" />	
 						</s:decorate>
 					
 					</h:panelGrid>				
@@ -120,19 +120,19 @@
 						
 						<s:decorate id="txtCep" template="../../layout/edit.xhtml">											
 							<ui:define name="label">CEP</ui:define>
-							<h:inputText id="cep" value="#{lojaController.loja.endereco.CEP}" converter="cepConverter" required="true" requiredMessage="É necessário informar o CEP!">
+							<h:inputText id="cep" value="#{lojaController.loja.endereco.CEP}" converter="cepConverter">
 								<rich:jQuery selector="#cep" query="mask('99.999-999')" timing="onload"/>												
 							</h:inputText>
 						</s:decorate>
 						
 						<s:decorate template="../../layout/edit.xhtml">
 								<ui:define name="label">Rua</ui:define>
-								<h:inputText size="100" value="#{lojaController.loja.endereco.logradouro}" required="true" requiredMessage="É necessário informar o logradouro!"/>	
+								<h:inputText size="100" value="#{lojaController.loja.endereco.logradouro}" />	
 						</s:decorate>
 
 						<s:decorate template="../../layout/edit.xhtml">
 								<ui:define name="label">Nº</ui:define>
-								<h:inputText size="20" value="#{lojaController.loja.endereco.numeroLogradouro}" required="true" requiredMessage="É necessário informar o número logradouro!"/>	
+								<h:inputText size="20" value="#{lojaController.loja.endereco.numeroLogradouro}" />	
 						</s:decorate>
 							
 						<s:decorate template="../../layout/edit.xhtml">
@@ -142,7 +142,7 @@
 							
 						<s:decorate template="../../layout/edit.xhtml">
 								<ui:define name="label">Bairro</ui:define>
-								<h:inputText size="60" value="#{lojaController.loja.endereco.bairro}" required="true" requiredMessage="É necessário informar o bairro!"/>	
+								<h:inputText size="60" value="#{lojaController.loja.endereco.bairro}"/>	
 						</s:decorate>
 						
 						<s:decorate template="../../layout/edit.xhtml">
