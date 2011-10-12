@@ -28,6 +28,8 @@ public class EmpresaController {
 	@In private FacesMessages facesMessages;
 	private Usuario usuarioLogado;
 	
+	private boolean gravar = true;
+	
 	private UnidadeFederacao unidadeFederacao = new UnidadeFederacao();	
 	private Empresa empresa = new Empresa();
 	private Long idEmpresa;
@@ -61,9 +63,12 @@ public class EmpresaController {
 		try{			
 			validar();			
 			
+			if (gravar){
 			empresaDAO.salvar(empresa);		
 			return "SALVAR";
+			}
 			
+			return null;
 		}catch (Exception e) {
 			facesMessages.add(e.getMessage());
 			return null;
@@ -72,15 +77,22 @@ public class EmpresaController {
 	
 	public void validar() throws Exception{		
 		
-		if(!DocumentoValidator.validarCNPJCPF(empresa.getDocumento()))			
+		
+		
+		if(!DocumentoValidator.validarCNPJCPF(empresa.getDocumento())){
+			gravar = false;
 			throw new RuntimeException("CNPJ digitado é inválido!");			
-				
-		if (empresaDAO.buscarPorCNPJ(empresa))				
+		}
+		
+		if (empresaDAO.buscarPorCNPJ(empresa)){		
+			gravar = false;
 			throw new RuntimeException("CNPJ digitado já existe!");			
-
-			
-		if(empresa.getEndereco().getCidade()==null || empresa.getEndereco().getCidade().getDescricao().isEmpty())
+		}
+		
+		if(empresa.getEndereco().getCidade()==null || empresa.getEndereco().getCidade().getDescricao().isEmpty()){
+			gravar = false;
 			throw new RuntimeException("Selecione uma Cidade!");
+		}
 					
 	}	
 	
