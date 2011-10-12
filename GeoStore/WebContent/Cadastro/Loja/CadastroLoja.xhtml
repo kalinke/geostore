@@ -12,7 +12,6 @@
 	
 		<ui:define name="body" >
 		
-		<ui:include src="../../layout/messages.xhtml"/>
 		
 		<rich:panel>
 		
@@ -21,30 +20,28 @@
 		<a4j:form id="cadastroLojaForm">
 			<rich:panel>
 				<rich:toolBar height="34"  itemSeparator="line" >					
-					<rich:toolBarGroup >     	         		
-     	         		<h:commandLink action="#{lojaController.salvar}" >						
-           	  				<h:graphicImage id="imgSalvar" value="../../img/salvarIcon.png" styleClass="imgButton" />
-           	  				<rich:spacer width="4" />
-           	  				<h:outputText value="Salvar" styleClass="txtButton" /> 
-           	  			</h:commandLink>           	 	
-           	  		</rich:toolBarGroup>
+					
+       		    	<rich:toolBarGroup>
+       		    		<rich:menuItem action="#{lojaController.salvar}"  >
+        					<h:graphicImage value="../../img/salvarIcon.png" styleClass="pic"/>
+	   		 				<h:outputText value="Salvar" styleClass="txtButton"/>
+	   					</rich:menuItem>
+       		    	</rich:toolBarGroup>
+       		    	
+       		    	<rich:toolBarGroup>
+       		    		<rich:menuItem action="#{lojaController.cancelar}"  >
+        					<h:graphicImage value="../../img/cancelarIcon.png" styleClass="pic"/>
+	   		 				<h:outputText value="Voltar" styleClass="txtButton"/>
+	   					</rich:menuItem>
+       		    	</rich:toolBarGroup>
            	  		
-           	  		<rich:toolBarGroup>     	         		
-     	         		<h:commandLink action="#{lojaController.cancelar}" immediate="true">						
-           	  				<h:graphicImage id="imgVoltar" value="../../img/cancelarIcon.png" styleClass="imgButton" />
-           	  				<rich:spacer width="4" />
-           	  				<h:outputText value="Voltar" styleClass="txtButton" /> 
-           	  			</h:commandLink>           	 	
-           	  		</rich:toolBarGroup>
-	
-					<rich:toolBarGroup >     	         		
-     	         		<h:commandLink action="#{lojaController.remover()}" >						
-           	  				<h:graphicImage id="imgExcluir" value="../../img/excluirIcon.png" styleClass="imgButton" />
-           	  				<rich:spacer width="4" />
-           	  				<h:outputText value="Excluir" styleClass="txtButton" /> 
-           	  			</h:commandLink>           	 	
-           	  		</rich:toolBarGroup>
-	   		     			
+       		    	<rich:toolBarGroup>
+       		    		<rich:menuItem action="#{lojaController.remover()}"  onclick="javascript:if(!confirm('Deseja realmente excluir a loja e suas dependências?'))return false;" >
+        					<h:graphicImage value="../../img/excluirIcon.png" styleClass="pic"/>
+	   		 				<h:outputText value="Excluir" styleClass="txtButton"/>
+	   					</rich:menuItem>
+       		    	</rich:toolBarGroup>
+		   		     			
 	   		    	<rich:toolBarGroup/>	   		    			
 				</rich:toolBar>		
 			</rich:panel>	
@@ -58,32 +55,45 @@
 				
 						<s:decorate template="../../layout/edit.xhtml">
 							<ui:define name="label">Empresa Superior</ui:define>		
-							<h:selectOneMenu value="#{lojaController.loja.empresaSuperior}">	
+							<h:selectOneMenu value="#{lojaController.loja.empresaSuperior}" required="true" requiredMessage="É necessário selecionar uma empresa superior!">	
 								<s:selectItems value="#{empresaController.empresas}" var="empresaSuperior" label="#{empresaSuperior.documento} - #{empresaSuperior.razaoSocial}" noSelectionLabel="Selecione..."/>								
+								<s:convertEntity/>
+							</h:selectOneMenu>
+						</s:decorate>
+
+						<s:decorate template="../../layout/edit.xhtml">
+							<ui:define name="label">Status</ui:define>			
+							<h:selectOneMenu value="#{lojaController.loja.statusLoja}" required="true" requiredMessage="É necessário selecionar um status!">
+								<s:selectItems value="#{lojaController.statusLojas}" var="s" label="#{s.descricao}" noSelectionLabel="Selecione..."/>
 								<s:convertEntity/>
 							</h:selectOneMenu>
 						</s:decorate>
 						
 						<s:decorate template="../../layout/edit.xhtml">			
 							<ui:define name="label">CNPJ</ui:define>
-							<h:inputText id="cnpj" value="#{lojaController.loja.documento}" converter="#{cnpjConverter}" >
+							<h:inputText id="cnpj" value="#{lojaController.loja.documento}" converter="#{cnpjConverter}" required="true" requiredMessage="É necessário informar CNPJ!">
 								<rich:jQuery selector="#cnpj" query="mask('99.999.999/9999-99')" timing="onload" />												
 							</h:inputText>
 						</s:decorate>
 						
 						<s:decorate template="../../layout/edit.xhtml">	
 							<ui:define name="label">Razão Social</ui:define>
-							<h:inputText size="100" value="#{lojaController.loja.razaoSocial}" />
+							<h:inputText size="100" value="#{lojaController.loja.razaoSocial}" required="true" requiredMessage="É necessário informar a razão social!"/>
 						</s:decorate>
 					
 						<s:decorate template="../../layout/edit.xhtml">
 							<ui:define name="label">Nome Fantasia</ui:define>
-							<h:inputText size="100" value="#{lojaController.loja.nomeFantasia}" />	
+							<h:inputText size="100" value="#{lojaController.loja.nomeFantasia}" required="true" requiredMessage="É necessário informar o nome fantasia!"/>	
+						</s:decorate>
+						
+						<s:decorate id="txtInscricaoEstadual" template="../../layout/edit.xhtml">											
+							<ui:define name="label">Inscrição Estadual</ui:define>
+							<h:inputText id="ie" maxlength="14" value="#{lojaController.loja.inscricaoEstadual}" required="true" requiredMessage="É necessário informar a inscrição estadual!"/>
 						</s:decorate>
 
 						<s:decorate id="txtContato" template="../../layout/edit.xhtml" >
 							<ui:define name="label">Contato</ui:define>
-							<h:inputText size="60" value="#{lojaController.loja.contato}" />
+							<h:inputText size="60" value="#{lojaController.loja.contato}" required="true" requiredMessage="É necessário informar um contato!"/>
 							<!-- 
 							<h:message styleClass="errors" showDetail="true" for="txtContato" rendered="true" style="color: red"  />
 						 	-->
@@ -91,14 +101,14 @@
 
 						<s:decorate id="txtTelefone" template="../../layout/edit.xhtml">											
 							<ui:define name="label">Telefone</ui:define>
-							<h:inputText id="telefone" value="#{lojaController.loja.telefone}" converter="telefoneConverter" >
+							<h:inputText id="telefone" value="#{lojaController.loja.telefone}" converter="telefoneConverter" required="true" requiredMessage="É necessário informar um número de telefone!">
 								<rich:jQuery selector="#telefone" query="mask('(99)9999-9999')" timing="onload" />												
 							</h:inputText>
 						</s:decorate>
 
 						<s:decorate template="../../layout/edit.xhtml">
 							<ui:define name="label">E-Mail</ui:define>
-							<h:inputText size="60" value="#{lojaController.loja.email}"/>	
+							<h:inputText size="60" value="#{lojaController.loja.email}" required="true" requiredMessage="É necessário informar um e-mail!"/>	
 						</s:decorate>
 					
 					</h:panelGrid>				
@@ -107,24 +117,32 @@
 				<rich:tab label="Endereço">
 					
 					<h:panelGrid >	
+						
+						<s:decorate id="txtCep" template="../../layout/edit.xhtml">											
+							<ui:define name="label">CEP</ui:define>
+							<h:inputText id="cep" value="#{lojaController.loja.endereco.CEP}" converter="cepConverter" required="true" requiredMessage="É necessário informar o CEP!">
+								<rich:jQuery selector="#cep" query="mask('99.999-999')" timing="onload"/>												
+							</h:inputText>
+						</s:decorate>
+						
 						<s:decorate template="../../layout/edit.xhtml">
 								<ui:define name="label">Rua</ui:define>
-								<h:inputText size="100" value="#{lojaController.loja.endereco.logradouro}" />	
+								<h:inputText size="100" value="#{lojaController.loja.endereco.logradouro}" required="true" requiredMessage="É necessário informar o logradouro!"/>	
 						</s:decorate>
 
 						<s:decorate template="../../layout/edit.xhtml">
 								<ui:define name="label">Nº</ui:define>
-								<h:inputText size="20" value="#{lojaController.loja.endereco.numeroLogradouro}" />	
+								<h:inputText size="20" value="#{lojaController.loja.endereco.numeroLogradouro}" required="true" requiredMessage="É necessário informar o número logradouro!"/>	
 						</s:decorate>
 							
 						<s:decorate template="../../layout/edit.xhtml">
 								<ui:define name="label">Complemento</ui:define>
-								<h:inputText size="60" value="#{lojaController.loja.endereco.complementoLogradouro}" />	
+								<h:inputText size="60" value="#{lojaController.loja.endereco.complementoLogradouro}"/>	
 						</s:decorate>
 							
 						<s:decorate template="../../layout/edit.xhtml">
 								<ui:define name="label">Bairro</ui:define>
-								<h:inputText size="60" value="#{lojaController.loja.endereco.bairro}" />	
+								<h:inputText size="60" value="#{lojaController.loja.endereco.bairro}" required="true" requiredMessage="É necessário informar o bairro!"/>	
 						</s:decorate>
 						
 						<s:decorate template="../../layout/edit.xhtml">

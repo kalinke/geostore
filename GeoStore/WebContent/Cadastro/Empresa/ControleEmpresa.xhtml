@@ -17,18 +17,14 @@
 			<a4j:form>
 			<rich:panel>
 			
-
-			
 				<rich:toolBar height="34" itemSeparator="line" >
-				 		
-       		     	<rich:toolBarGroup>
-       		     		<h:commandLink action="#{empresaController.nova()}" >						
-           	  				<h:graphicImage id="imgNovo" value="../../img/novoIcon.png" styleClass="imgButton" />
-           	  				<rich:spacer width="4" />
-           	  				<h:outputText value="Adicionar" styleClass="txtButton" /> 
-           	  			</h:commandLink>
-           	  			  
-       		     	</rich:toolBarGroup>
+
+       		    	<rich:toolBarGroup>
+       		    		<rich:menuItem action="#{empresaController.nova()}"  >
+        					<h:graphicImage value="../../img/novoIcon.png" styleClass="pic"/>
+	   		 				<h:outputText value="Adicionar" styleClass="txtButton"/>
+	   					</rich:menuItem>
+       		    	</rich:toolBarGroup>
        		    
        		    	<rich:toolBarGroup />
        		     	 			
@@ -41,28 +37,30 @@
 			<rich:spacer height="10" />
 
 		
-				<rich:panel>
-					              <rich:toolTip followMouse="true" direction="top-right" showDelay="500" styleClass="tooltip">
+				
+			<rich:panel>
+			  <rich:toolTip followMouse="true" direction="top-right" showDelay="500" styleClass="tooltip">
             	<span  style="white-space:nowrap">Duplo clique para editar.</span>
         	  </rich:toolTip>
 				
 				
 				
-				<rich:dataTable id="tabelaEnderecos"  
+				<rich:dataTable id="tabelaEmpresas"  
 					onRowMouseOver="this.style.backgroundColor='#D0D0D0'"
                     onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
-                    value="#{empresaController.empresas}" var="e"
-                    >
+                    value="#{empresaController.empresas}" var="e">
                     
 
-                    
-                    
 					<f:facet name="header">Empresas Cadastradas</f:facet>				
 								
-					<rich:column sortBy="#{e.documento}">
-					
+					<rich:column sortBy="#{e.documento}">					
 						<f:facet name="header">Documento</f:facet>
 						<h:outputText value="#{e.documento}"/>
+					</rich:column>
+					
+					<rich:column sortBy="#{e.statusEmpresa.descricao}">					
+						<f:facet name="header">Status</f:facet>
+						<h:outputText value="#{e.statusEmpresa.descricao}"/>
 					</rich:column>
 					
 					<rich:column sortBy="#{e.razaoSocial}">

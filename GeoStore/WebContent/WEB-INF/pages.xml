@@ -1,279 +1,206 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pages xmlns="http://jboss.com/products/seam/pages"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.2.xsd"
-       no-conversation-view-id="/home.xhtml"
-       login-view-id="/login.xhtml">
-
+<pages login-view-id="/login.xhtml" no-conversation-view-id="/home.xhtml"
+	xmlns="http://jboss.com/products/seam/pages" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.2.xsd">
 	<!-- FLUXO PRINCIPAL HOME -->
-	
-    <page view-id="*">
-		
+	<page view-id="*">
 		<navigation from-action="#{identity.logout()}">
-   			<redirect view-id="/login.xhtml"/>
-    	</navigation>
-    	 	
-    	
-        <navigation>    
-    	
-            <rule if-outcome="home">
-                <redirect view-id="/home.xhtml"/>
-            </rule>
-            
-            <rule if-outcome="cadastro.empresa">
-            	<redirect view-id="/Cadastro/Empresa/CadastroEmpresa.xhtml"/>
-            </rule>            
-            <rule if-outcome="controle.empresa">
-            	<redirect view-id="/Cadastro/Empresa/ControleEmpresa.xhtml"/>
-            </rule>
-            
-            <rule if-outcome="cadastro.loja">
-            	<redirect view-id="/Cadastro/Loja/CadastroLoja.xhtml"/>
-            </rule>            
-            <rule if-outcome="controle.loja">
-            	<redirect view-id="/Cadastro/Loja/ControleLoja.xhtml"/>
-            </rule>
-            
-            <rule if-outcome="cadastro.usuario">
-            	<redirect view-id="/Cadastro/Usuario/CadastroUsuario.xhtml"/>
-            </rule>            
-            <rule if-outcome="controle.usuario">
-            	<redirect view-id="/Cadastro/Usuario/ControleUsuario.xhtml"/>
-            </rule>
-            
-            <rule if-outcome="cadastro.produto">
-            	<redirect view-id="/Cadastro/Produto/CadastroProduto.xhtml"/>
-            </rule>            
-            <rule if-outcome="controle.produto">
-            	<redirect view-id="/Cadastro/Produto/ControleProduto.xhtml"/>
-            </rule>
- 
-            
-        </navigation>
-    </page>
-    
-    <!-- FLUXO CONTROLE EMPRESAS -->
-    
-        <page view-id="/Cadastro/Empresa/ControleEmpresa.xhtml">
-        <navigation>    
-       
-            <rule if-outcome="ADICIONAR">
-                <redirect view-id="/Cadastro/Empresa/CadastroEmpresa.xhtml"/>
-            </rule>
-            
-            <rule if-outcome="EDITAR">
-                <redirect view-id="/Cadastro/Empresa/CadastroEmpresa.xhtml"/>
-            </rule>
-            
-        </navigation>
-    </page>
-    
-    <!-- FLUXO CADASTRO EMPRESAS -->
-    
-    <page view-id="/Cadastro/Empresa/CadastroEmpresa.xhtml">
-    	<begin-conversation join="true" flush-mode="auto" />
-    	<navigation>
-    		
+			<redirect view-id="/login.xhtml" />
+		</navigation>
+		<navigation>
+			<rule if-outcome="home">
+				<redirect view-id="/home.xhtml" />
+			</rule>
+			<rule if-outcome="cadastro.empresa">
+				<redirect view-id="/Cadastro/Empresa/CadastroEmpresa.xhtml" />
+			</rule>
+			<rule if-outcome="controle.empresa">
+				<redirect view-id="/Cadastro/Empresa/ControleEmpresa.xhtml" />
+			</rule>
+			<rule if-outcome="cadastro.loja">
+				<redirect view-id="/Cadastro/Loja/CadastroLoja.xhtml" />
+			</rule>
+			<rule if-outcome="controle.loja">
+				<redirect view-id="/Cadastro/Loja/ControleLoja.xhtml" />
+			</rule>
+			<rule if-outcome="cadastro.usuario">
+				<redirect view-id="/Cadastro/Usuario/CadastroUsuario.xhtml" />
+			</rule>
+			<rule if-outcome="controle.usuario">
+				<redirect view-id="/Cadastro/Usuario/ControleUsuario.xhtml" />
+			</rule>
+			<rule if-outcome="cadastro.produto">
+				<redirect view-id="/Cadastro/Produto/CadastroProduto.xhtml" />
+			</rule>
+			<rule if-outcome="controle.produto">
+				<redirect view-id="/Cadastro/Produto/ControleProduto.xhtml" />
+			</rule>
+		</navigation>
+	</page>
+	<!-- FLUXO CONTROLE EMPRESAS -->
+	<page login-required="true" view-id="/Cadastro/Empresa/ControleEmpresa.xhtml" >
+		<restrict>#{s:hasRole('admin')}</restrict>
+		<navigation>
+			<rule if-outcome="ADICIONAR">
+				<redirect view-id="/Cadastro/Empresa/CadastroEmpresa.xhtml" />
+			</rule>
+			<rule if-outcome="EDITAR">
+				<redirect view-id="/Cadastro/Empresa/CadastroEmpresa.xhtml" />
+			</rule>
+		</navigation>
+	</page>
+	<!-- FLUXO CADASTRO EMPRESAS -->
+	<page login-required="true" view-id="/Cadastro/Empresa/CadastroEmpresa.xhtml">
+		<restrict>#{s:hasRole('admin')}</restrict>
+		<begin-conversation flush-mode="auto" join="true" />
+		<navigation>
 			<rule if-outcome="SALVAR">
-				<end-conversation/>
-                <redirect view-id="/Cadastro/Empresa/ControleEmpresa.xhtml"/>
-            </rule>
-                
-            <rule if-outcome="CANCELAR">
-            	<end-conversation/>
-            	<redirect view-id="/Cadastro/Empresa/ControleEmpresa.xhtml"/>
-            </rule>
-            
-            <rule if-outcome="EXCLUIR">
-            	<end-conversation/>
-            	<redirect view-id="/Cadastro/Empresa/ControleEmpresa.xhtml"/>
-            </rule>
-    	
-    	</navigation> 
-    
-    </page>
-    
-     <!-- FLUXO CONTROLE LOJAS -->
-    
-        <page view-id="/Cadastro/Loja/ControleLoja.xhtml">
-        <navigation>    
-       
-            <rule if-outcome="ADICIONAR">
-                <redirect view-id="/Cadastro/Loja/CadastroLoja.xhtml"/>
-            </rule>
-            
-            <rule if-outcome="EDITAR">
-                <redirect view-id="/Cadastro/Loja/CadastroLoja.xhtml"/>
-            </rule>
-            
-        </navigation>
-    </page>
-    
-    <!-- FLUXO CADASTRO LOJAS -->
-    
-    <page view-id="/Cadastro/Loja/CadastroLoja.xhtml">
-    	<begin-conversation join="true" flush-mode="auto" />
-    	<navigation>
-    		
+				<end-conversation />
+				<redirect view-id="/Cadastro/Empresa/ControleEmpresa.xhtml" />
+			</rule>
+			<rule if-outcome="CANCELAR">
+				<end-conversation />
+				<redirect view-id="/Cadastro/Empresa/ControleEmpresa.xhtml" />
+			</rule>
+			<rule if-outcome="EXCLUIR">
+				<end-conversation />
+				<redirect view-id="/Cadastro/Empresa/ControleEmpresa.xhtml" />
+			</rule>
+		</navigation>
+	</page>
+	<!-- FLUXO CONTROLE LOJAS -->
+	<page login-required="true" view-id="/Cadastro/Loja/ControleLoja.xhtml">
+		<navigation>
+			<rule if-outcome="ADICIONAR">
+				<redirect view-id="/Cadastro/Loja/CadastroLoja.xhtml" />
+			</rule>
+			<rule if-outcome="EDITAR">
+				<redirect view-id="/Cadastro/Loja/CadastroLoja.xhtml" />
+			</rule>
+		</navigation>
+	</page>
+	<!-- FLUXO CADASTRO LOJAS -->
+	<page login-required="true" view-id="/Cadastro/Loja/CadastroLoja.xhtml">
+		<begin-conversation flush-mode="auto" join="true" />
+		<navigation>
 			<rule if-outcome="SALVAR">
-				<end-conversation/>
-                <redirect view-id="/Cadastro/Loja/ControleLoja.xhtml"/>
-            </rule>
-                
-            <rule if-outcome="CANCELAR">
-            	<end-conversation/>
-            	<redirect view-id="/Cadastro/Loja/ControleLoja.xhtml"/>
-            </rule>
-            
-            <rule if-outcome="EXCLUIR">
-            	<end-conversation/>
-            	<redirect view-id="/Cadastro/Loja/ControleLoja.xhtml"/>
-            </rule>
-    	
-    	</navigation> 
-    
-    </page>
-    
-    
-     <!-- FLUXO CONTROLE USUARIOS -->
-    
-        <page view-id="/Cadastro/Usuario/ControleUsuario.xhtml">
-        <navigation>    
-       
-            <rule if-outcome="ADICIONAR">
-                <redirect view-id="/Cadastro/Usuario/CadastroUsuario.xhtml"/>
-            </rule>
-            
-            <rule if-outcome="EDITAR">
-                <redirect view-id="/Cadastro/Usuario/CadastroUsuario.xhtml"/>
-            </rule>
-            
-        </navigation>
-    </page>
-    
-    <!-- FLUXO CADASTRO USUARIO -->
-    
-    <page view-id="/Cadastro/Usuario/CadastroUsuario.xhtml">
-    	<begin-conversation join="true" flush-mode="auto" />
-    	<navigation>
-    		
+				<end-conversation />
+				<redirect view-id="/Cadastro/Loja/ControleLoja.xhtml" />
+			</rule>
+			<rule if-outcome="CANCELAR">
+				<end-conversation />
+				<redirect view-id="/Cadastro/Loja/ControleLoja.xhtml" />
+			</rule>
+			<rule if-outcome="EXCLUIR">
+				<end-conversation />
+				<redirect view-id="/Cadastro/Loja/ControleLoja.xhtml" />
+			</rule>
+		</navigation>
+	</page>
+	<!-- FLUXO CONTROLE USUARIOS -->
+	<page login-required="true" view-id="/Cadastro/Usuario/ControleUsuario.xhtml">
+		<restrict>#{s:hasRole('admin')}</restrict>
+		<navigation>
+			<rule if-outcome="ADICIONAR">
+				<redirect view-id="/Cadastro/Usuario/CadastroUsuario.xhtml" />
+			</rule>
+			<rule if-outcome="EDITAR">
+				<redirect view-id="/Cadastro/Usuario/CadastroUsuario.xhtml" />
+			</rule>
+		</navigation>
+	</page>
+	<!-- FLUXO CADASTRO USUARIO -->
+	<page login-required="true" view-id="/Cadastro/Usuario/CadastroUsuario.xhtml">
+		<restrict>#{s:hasRole('admin')}</restrict>
+		<begin-conversation flush-mode="auto" join="true" />
+		<navigation>
 			<rule if-outcome="SALVAR">
-				<end-conversation/>
-                <redirect view-id="/Cadastro/Usuario/ControleUsuario.xhtml"/>
-            </rule>
-                
-            <rule if-outcome="CANCELAR">
-            	<end-conversation/>
-            	<redirect view-id="/Cadastro/Usuario/ControleUsuario.xhtml"/>
-            </rule>
-            
-            <rule if-outcome="EXCLUIR">
-            	<end-conversation/>
-            	<redirect view-id="/Cadastro/Usuario/ControleUsuario.xhtml"/>
-            </rule>
-    	
-    	</navigation> 
-    
-    </page>
-    
-    
-        
-     <!-- FLUXO CONTROLE PRODUTO -->
-    
-        <page view-id="/Cadastro/Produto/ControleProduto.xhtml">
-        <navigation>    
-       
-            <rule if-outcome="ADICIONAR">
-                <redirect view-id="/Cadastro/Produto/CadastroProduto.xhtml"/>
-            </rule>
-            
-            <rule if-outcome="EDITAR">
-                <redirect view-id="/Cadastro/Produto/CadastroProduto.xhtml"/>
-            </rule>
-            
-        </navigation>
-    </page>
-    
-    <!-- FLUXO CADASTRO PRODUTO -->
-    
-    <page view-id="/Cadastro/Produto/CadastroProduto.xhtml">
-    	<begin-conversation join="true" flush-mode="auto" />
-    	<navigation>
-    		
+				<end-conversation />
+				<redirect view-id="/Cadastro/Usuario/ControleUsuario.xhtml" />
+			</rule>
+			<rule if-outcome="CANCELAR">
+				<end-conversation />
+				<redirect view-id="/Cadastro/Usuario/ControleUsuario.xhtml" />
+			</rule>
+			<rule if-outcome="EXCLUIR">
+				<end-conversation />
+				<redirect view-id="/Cadastro/Usuario/ControleUsuario.xhtml" />
+			</rule>
+		</navigation>
+	</page>
+	<!-- FLUXO CONTROLE PRODUTO -->
+	<page login-required="true" view-id="/Cadastro/Produto/ControleProduto.xhtml">
+		<navigation>
+			<rule if-outcome="ADICIONAR">
+				<redirect view-id="/Cadastro/Produto/CadastroProduto.xhtml" />
+			</rule>
+			<rule if-outcome="EDITAR">
+				<redirect view-id="/Cadastro/Produto/CadastroProduto.xhtml" />
+			</rule>
+		</navigation>
+	</page>
+	<!-- FLUXO CADASTRO PRODUTO -->
+	<page login-required="true" view-id="/Cadastro/Produto/CadastroProduto.xhtml">
+		<begin-conversation flush-mode="auto" join="true" />
+		<navigation>
 			<rule if-outcome="SALVAR">
-				<end-conversation/>
-                <redirect view-id="/Cadastro/Produto/ControleProduto.xhtml"/>
-            </rule>
-                
-            <rule if-outcome="CANCELAR">
-            	<end-conversation/>
-            	<redirect view-id="/Cadastro/Produto/ControleProduto.xhtml"/>
-            </rule>
-            
-            <rule if-outcome="EXCLUIR">
-            	<end-conversation/>
-            	<redirect view-id="/Cadastro/Produto/ControleProduto.xhtml"/>
-            </rule>
-    	
-    	</navigation> 
-    
-    </page>
-    
-    
-    
-    <!-- EXCEPTION -->
-    
-    <exception class="org.jboss.seam.framework.EntityNotFoundException">
-        <redirect view-id="/error.xhtml">
-            <message severity="warn">Record not found</message>
-        </redirect>
-    </exception>
-    
-    <exception class="javax.persistence.EntityNotFoundException">
-        <redirect view-id="/error.xhtml">
-            <message severity="warn">Record not found</message>
-        </redirect>
-    </exception>
-    
-    <exception class="javax.persistence.EntityExistsException">
-        <redirect view-id="/error.xhtml">
-            <message severity="warn">Duplicate record</message>
-        </redirect>
-    </exception>
-    
-    <exception class="javax.persistence.OptimisticLockException">
-        <end-conversation/>
-        <redirect view-id="/error.xhtml">
-            <message severity="warn">Another user changed the same data, please try again</message>
-        </redirect>
-    </exception>
-    
-    <exception class="org.jboss.seam.security.AuthorizationException">
-        <redirect view-id="/error.xhtml">
-            <message severity="error">You don't have permission to access this resource</message>
-        </redirect>
-    </exception>
-    
-    <exception class="org.jboss.seam.security.NotLoggedInException">
-        <redirect view-id="/login.xhtml">
-            <message severity="warn">#{messages['org.jboss.seam.NotLoggedIn']}</message>
-        </redirect>
-    </exception>
-    
-    <exception class="javax.faces.application.ViewExpiredException">
-        <redirect view-id="/error.xhtml">
-            <message severity="warn">Your session has timed out, please try again</message>
-        </redirect>
-    </exception>
-    
-    <exception class="org.jboss.seam.ConcurrentRequestTimeoutException" log-level="trace">
-      <http-error error-code="503" />
-    </exception>
-     
-    <exception>
-        <redirect view-id="/error.xhtml">
-            <message severity="error">Unexpected error, please try again</message>
-        </redirect>
-    </exception>
-    
+				<end-conversation />
+				<redirect view-id="/Cadastro/Produto/ControleProduto.xhtml" />
+			</rule>
+			<rule if-outcome="CANCELAR">
+				<end-conversation />
+				<redirect view-id="/Cadastro/Produto/ControleProduto.xhtml" />
+			</rule>
+			<rule if-outcome="EXCLUIR">
+				<end-conversation />
+				<redirect view-id="/Cadastro/Produto/ControleProduto.xhtml" />
+			</rule>
+		</navigation>
+	</page>
+	<!-- EXCEPTION -->
+	<exception class="org.jboss.seam.framework.EntityNotFoundException">
+		<redirect view-id="/error.xhtml">
+			<message severity="warn">Record not found</message>
+		</redirect>
+	</exception>
+	<exception class="javax.persistence.EntityNotFoundException">
+		<redirect view-id="/error.xhtml">
+			<message severity="warn">Record not found</message>
+		</redirect>
+	</exception>
+	<exception class="javax.persistence.EntityExistsException">
+		<redirect view-id="/error.xhtml">
+			<message severity="warn">Duplicate record</message>
+		</redirect>
+	</exception>
+	<exception class="javax.persistence.OptimisticLockException">
+		<end-conversation />
+		<redirect view-id="/error.xhtml">
+			<message severity="warn">Another user changed the same data, please try again</message>
+		</redirect>
+	</exception>
+	<exception class="org.jboss.seam.security.AuthorizationException">
+		<redirect view-id="/error.xhtml">
+			<message severity="error">Você não possui permissão para usar essa funcionalidade.</message>
+		</redirect>
+	</exception>
+	<exception class="org.jboss.seam.security.NotLoggedInException">
+		<redirect view-id="/login.xhtml">
+			<message severity="warn">#{messages['org.jboss.seam.NotLoggedIn']}</message>
+		</redirect>
+	</exception>
+	<exception class="javax.faces.application.ViewExpiredException">
+		<redirect view-id="/error.xhtml">
+			<message severity="warn">Your session has timed out, please try again</message>
+		</redirect>
+	</exception>
+	<exception class="org.jboss.seam.ConcurrentRequestTimeoutException"
+		log-level="trace">
+		<http-error error-code="503" />
+	</exception>
+	<exception>
+		<redirect view-id="/error.xhtml">
+			<message severity="error">Unexpected error, please try again</message>
+		</redirect>
+	</exception>
 </pages>

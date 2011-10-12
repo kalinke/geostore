@@ -12,7 +12,6 @@
 	
 		<ui:define name="body" >
 		
-		<ui:include src="../../layout/messages.xhtml"/>
 		
 		<rich:panel>
 		
@@ -21,31 +20,28 @@
 		<a4j:form id="cadastroProdutoForm">
 			<rich:panel>
 				<rich:toolBar height="34"  itemSeparator="line" >					
-					<rich:toolBarGroup >     	         		
-     	         		<h:commandLink action="#{produtoController.salvar()}" >						
-           	  				<h:graphicImage id="imgSalvar" value="../../img/salvarIcon.png" styleClass="imgButton" />
-           	  				<rich:spacer width="4" />
-           	  				<h:outputText value="Salvar" styleClass="txtButton" /> 
-           	  				
-           	  			</h:commandLink>           	 	
-           	  		</rich:toolBarGroup>
+					
+       		    	<rich:toolBarGroup>
+       		    		<rich:menuItem action="#{produtoController.salvar()}"  >
+        					<h:graphicImage value="../../img/salvarIcon.png" styleClass="pic"/>
+	   		 				<h:outputText value="Salvar" styleClass="txtButton"/>
+	   					</rich:menuItem>
+       		    	</rich:toolBarGroup>
+					
+       		    	<rich:toolBarGroup>
+       		    		<rich:menuItem action="#{produtoController.cancelar()}"  >
+        					<h:graphicImage value="../../img/cancelarIcon.png" styleClass="pic"/>
+	   		 				<h:outputText value="Voltar" styleClass="txtButton"/>
+	   					</rich:menuItem>
+       		    	</rich:toolBarGroup>
            	  		
-           	  		<rich:toolBarGroup>     	         		
-     	         		<h:commandLink action="#{produtoController.cancelar()}" immediate="true">						
-           	  				<h:graphicImage id="imgVoltar" value="../../img/cancelarIcon.png" styleClass="imgButton" />
-           	  				<rich:spacer width="4" />
-           	  				<h:outputText value="Voltar" styleClass="txtButton" /> 
-           	  			</h:commandLink>           	 	
-           	  		</rich:toolBarGroup>
-	
-					<rich:toolBarGroup >     	         		
-     	         		<h:commandLink action="#{produtoController.remover()}" >						
-           	  				<h:graphicImage id="imgExcluir" value="../../img/excluirIcon.png" styleClass="imgButton" />
-           	  				<rich:spacer width="4" />
-           	  				<h:outputText value="Excluir" styleClass="txtButton" /> 
-           	  			</h:commandLink>           	 	
-           	  		</rich:toolBarGroup>
-	   		     			
+       		    	<rich:toolBarGroup>
+       		    		<rich:menuItem action="#{produtoController.remover()}"  onclick="javascript:if(!confirm('Deseja realmente excluir o produto e suas dependências?'))return false;" >
+        					<h:graphicImage value="../../img/excluirIcon.png" styleClass="pic"/>
+	   		 				<h:outputText value="Excluir" styleClass="txtButton"/>
+	   					</rich:menuItem>
+       		    	</rich:toolBarGroup>
+		   		     			
 	   		    	<rich:toolBarGroup/>	   		    			
 				</rich:toolBar>		
 			</rich:panel>	
@@ -61,6 +57,14 @@
 							<ui:define name="label">Loja Vínculo</ui:define>		
 							<h:selectOneMenu value="#{produtoController.produto.loja}">	
 								<s:selectItems value="#{lojaController.lojas}" var="loja" label="#{loja.documento}" noSelectionLabel="Selecione..."/>								
+								<s:convertEntity/>
+							</h:selectOneMenu>
+						</s:decorate>
+						
+						<s:decorate template="../../layout/edit.xhtml">
+							<ui:define name="label">Status</ui:define>			
+							<h:selectOneMenu value="#{produtoController.produto.statusProduto}">
+								<s:selectItems value="#{produtoController.statusProdutos}" var="s" label="#{s.descricao}" noSelectionLabel="Selecione..."/>
 								<s:convertEntity/>
 							</h:selectOneMenu>
 						</s:decorate>

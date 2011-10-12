@@ -12,7 +12,6 @@
 	
 		<ui:define name="body" >
 	
-		<ui:include src="../../layout/messages.xhtml"/>
 		
 		<rich:panel>
 		
@@ -21,30 +20,29 @@
 		<a4j:form id="cadastroEmpresaForm">
 			<rich:panel>
 				<rich:toolBar height="34"  itemSeparator="line" >					
-					<rich:toolBarGroup >     	         		
-     	         		<h:commandLink action="#{empresaController.salvar}" >						
-           	  				<h:graphicImage id="imgSalvar" value="../../img/salvarIcon.png" styleClass="imgButton" />
-           	  				<rich:spacer width="4" />
-           	  				<h:outputText value="Salvar" styleClass="txtButton" /> 
-           	  			</h:commandLink>           	 	
-           	  		</rich:toolBarGroup>
-           	  		
-           	  		<rich:toolBarGroup>     	         		
-     	         		<h:commandLink action="#{empresaController.cancelar}" immediate="true">						
-           	  				<h:graphicImage id="imgVoltar" value="../../img/cancelarIcon.png" styleClass="imgButton" />
-           	  				<rich:spacer width="4" />
-           	  				<h:outputText value="Voltar" styleClass="txtButton" /> 
-           	  			</h:commandLink>           	 	
-           	  		</rich:toolBarGroup>
-	
-					<rich:toolBarGroup >     	         		
-     	         		<h:commandLink action="#{empresaController.remover()}" >						
-           	  				<h:graphicImage id="imgExcluir" value="../../img/excluirIcon.png" styleClass="imgButton" />
-           	  				<rich:spacer width="4" />
-           	  				<h:outputText value="Excluir" styleClass="txtButton" /> 
-           	  			</h:commandLink>           	 	
-           	  		</rich:toolBarGroup>
-	   		     			
+					
+       		    	<rich:toolBarGroup>
+       		    		<rich:menuItem action="#{empresaController.salvar}"  >
+        					<h:graphicImage value="../../img/salvarIcon.png" styleClass="pic"/>
+	   		 				<h:outputText value="Salvar" styleClass="txtButton"/>
+	   					</rich:menuItem>
+       		    	</rich:toolBarGroup>
+
+					
+       		    	<rich:toolBarGroup>
+       		    		<rich:menuItem action="#{empresaController.cancelar}" immediate="true" >
+        					<h:graphicImage value="../../img/cancelarIcon.png" styleClass="pic"/>
+	   		 				<h:outputText value="Voltar" styleClass="txtButton"/>
+	   					</rich:menuItem>
+       		    	</rich:toolBarGroup>
+       		    	
+       		    	<rich:toolBarGroup>
+       		    		<rich:menuItem action="#{empresaController.remover}"  onclick="javascript:if(!confirm('Deseja realmente excluir a empresa e suas dependências?'))return false;">
+        					<h:graphicImage value="../../img/excluirIcon.png" styleClass="pic" />
+	   		 				<h:outputText value="Excluir" styleClass="txtButton"/>
+	   					</rich:menuItem>
+       		    	</rich:toolBarGroup>
+		   		     			
 	   		    	<rich:toolBarGroup/>	   		    			
 				</rich:toolBar>		
 			</rich:panel>	
@@ -56,10 +54,17 @@
 		  		<rich:tab label="Dados Cadastrais">	
 					<h:panelGrid >		
 											
-						<s:decorate template="../../layout/edit.xhtml">			
-						 
+						<s:decorate template="../../layout/edit.xhtml">
+							<ui:define name="label">Status</ui:define>			
+							<h:selectOneMenu value="#{empresaController.empresa.statusEmpresa}" required="true" requiredMessage="É necessário selecionar um status!">
+								<s:selectItems value="#{empresaController.statusEmpresas}" var="s" label="#{s.descricao}" noSelectionLabel="Selecione..." />
+								<s:convertEntity/>
+							</h:selectOneMenu>
+						</s:decorate>											
+											
+						<s:decorate template="../../layout/edit.xhtml">						 
 							<ui:define name="label">CNPJ</ui:define>
-							<h:inputText id="cnpj" value="#{empresaController.empresa.documento}" converter="#{cnpjConverter}" >
+							<h:inputText id="cnpj" value="#{empresaController.empresa.documento}" converter="#{cnpjConverter}" required="true" requiredMessage="É necessário informar CNPJ!" >
 								<rich:jQuery selector="#cnpj" query="mask('99.999.999/9999-99')" timing="onload" />												
 							</h:inputText>
 						</s:decorate>
@@ -71,12 +76,17 @@
 					
 						<s:decorate template="../../layout/edit.xhtml">
 							<ui:define name="label">Nome Fantasia</ui:define>
-							<h:inputText size="100" value="#{empresaController.empresa.nomeFantasia}" />	
+							<h:inputText size="100" value="#{empresaController.empresa.nomeFantasia}" required="true" requiredMessage="É necessário informar o nome fantasia!" />	
+						</s:decorate>
+						
+						<s:decorate id="txtInscricaoEstadual" template="../../layout/edit.xhtml">											
+							<ui:define name="label">Inscrição Estadual</ui:define>
+							<h:inputText id="ie" maxlength="14" value="#{empresaController.empresa.inscricaoEstadual}" required="true" requiredMessage="É necessário informar a inscrição estadual!"/>
 						</s:decorate>
 
 						<s:decorate id="txtContato" template="../../layout/edit.xhtml" >
 							<ui:define name="label">Contato</ui:define>
-							<h:inputText size="60" value="#{empresaController.empresa.contato}" />
+							<h:inputText size="60" value="#{empresaController.empresa.contato}" required="true" requiredMessage="É necessário informar um contato!"/>
 							<!-- 
 							<h:message styleClass="errors" showDetail="true" for="txtContato" rendered="true" style="color: red"  />
 						 	-->
@@ -84,14 +94,15 @@
 
 						<s:decorate id="txtTelefone" template="../../layout/edit.xhtml">											
 							<ui:define name="label">Telefone</ui:define>
-							<h:inputText id="telefone" value="#{empresaController.empresa.telefone}" converter="telefoneConverter" >
-								<rich:jQuery selector="#telefone" query="mask('(99)9999-9999')" timing="onload" />												
+							<h:inputText id="telefone" value="#{empresaController.empresa.telefone}" converter="telefoneConverter" required="true" requiredMessage="É necessário informar um número de telefone!">
+								<rich:jQuery selector="#telefone" query="mask('(99)9999-9999')" timing="onload"/>												
 							</h:inputText>
 						</s:decorate>
 
 						<s:decorate template="../../layout/edit.xhtml">
 							<ui:define name="label">E-Mail</ui:define>
-							<h:inputText size="60" value="#{empresaController.empresa.email}"/>	
+							<h:inputText size="60" value="#{empresaController.empresa.email}" required="true" requiredMessage="É necessário informar um e-mail!">
+							</h:inputText>	
 						</s:decorate>
 					
 					</h:panelGrid>				
@@ -99,36 +110,40 @@
 			
 				<rich:tab label="Endereço">
 					
-					<h:panelGrid >	
+					<h:panelGrid >
+						
+						<s:decorate id="txtCep" template="../../layout/edit.xhtml">											
+							<ui:define name="label">CEP</ui:define>
+							<h:inputText id="cep" value="#{empresaController.empresa.endereco.CEP}" converter="cepConverter" required="true" requiredMessage="É necessário informar o CEP!">
+								<rich:jQuery selector="#cep" query="mask('99.999-999')" timing="onload"/>												
+							</h:inputText>
+						</s:decorate>
+						
 						<s:decorate template="../../layout/edit.xhtml">
 								<ui:define name="label">Rua</ui:define>
-								<h:inputText size="100" value="#{empresaController.empresa.endereco.logradouro}" />	
+								<h:inputText size="100" value="#{empresaController.empresa.endereco.logradouro}" required="true" requiredMessage="É necessário informar o logradouro!"/>	
 						</s:decorate>
 
-						<s:decorate template="../../layout/edit.xhtml">
+						<s:decorate template="../../layout/edit.xhtml">	
 								<ui:define name="label">Nº</ui:define>
-								<h:inputText size="20" value="#{empresaController.empresa.endereco.numeroLogradouro}" />	
+								<h:inputText size="20" value="#{empresaController.empresa.endereco.numeroLogradouro}" required="true" requiredMessage="É necessário informar o número logradouro!">
+								</h:inputText>
 						</s:decorate>
 							
 						<s:decorate template="../../layout/edit.xhtml">
 								<ui:define name="label">Complemento</ui:define>
-								<h:inputText size="60" value="#{empresaController.empresa.endereco.complementoLogradouro}" />	
+								<h:inputText size="60" value="#{empresaController.empresa.endereco.complementoLogradouro}"/>	
 						</s:decorate>
 							
 						<s:decorate template="../../layout/edit.xhtml">
 								<ui:define name="label">Bairro</ui:define>
-								<h:inputText size="60" value="#{empresaController.empresa.endereco.bairro}" />	
+								<h:inputText size="60" value="#{empresaController.empresa.endereco.bairro}" required="true" requiredMessage="É necessário informar o bairro!"/>	
 						</s:decorate>
-					
-						<s:decorate template="../../layout/edit.xhtml">
-								<ui:define name="label">CEP</ui:define>
-								<h:inputText size="60" value="#{empresaController.empresa.endereco.CEP}" />	
-						</s:decorate>	
-					
+											
 						<s:decorate template="../../layout/edit.xhtml">
 							<ui:define name="label">Estado</ui:define>
                             <h:selectOneMenu id="comboEstado" value="#{empresaController.unidadeFederacao}">
-                                <s:selectItems  value="#{unidadesFederacao}" var="uf" label="#{uf.descricao}" noSelectionLabel="Selecione..."/>
+                                <s:selectItems  value="#{unidadesFederacao}" var="uf" label="#{uf.descricao}" noSelectionLabel="Selecione..." />
                                 <a4j:support event="onchange" reRender="comboCidade"/>
                                 <s:convertEntity/>                               
                             </h:selectOneMenu>
@@ -136,26 +151,12 @@
                     
                     	<s:decorate template="../../layout/edit.xhtml" >
                     		<ui:define name="label">Cidade</ui:define>
-                            <h:selectOneMenu id="comboCidade" value="#{empresaController.empresa.endereco.cidade}" >
-                                <s:selectItems value="#{enderecoController.getCidades(empresaController.unidadeFederacao)}" var="c" label="#{c.descricao}" noSelectionLabel="Selecione..."/>
+                            <h:selectOneMenu id="comboCidade" value="#{empresaController.empresa.endereco.cidade}">
+                                <s:selectItems value="#{enderecoController.getCidades(empresaController.unidadeFederacao)}" var="c" label="#{c.descricao}" noSelectionLabel="Selecione..." />
                                 <s:convertEntity/>                               
                             </h:selectOneMenu>
                        	</s:decorate>
-                    
-                    	
-                    	<s:decorate template="../../layout/edit.xhtml">
-								<ui:define name="label">Latitude</ui:define>
-								<h:inputText size="20" value="#{empresaController.empresa.endereco.latitude}" />	
-						</s:decorate>
-						
-						<s:decorate template="../../layout/edit.xhtml">
-								<ui:define name="label">Longitude</ui:define>
-								<h:inputText size="20" value="#{empresaController.empresa.endereco.longitude}" />	
-						</s:decorate>
-						
-						<a4j:commandButton value="Buscar Coordenadas" action="#{empresaController.buscarCoordenadas()}" reRender="cadastroEmpresaForm" />
-						<a4j:commandButton value="Validar Coordenadas" action="#{empresaController.validarCoordenadas}" />
-						
+                    					
 					</h:panelGrid>
 
 				</rich:tab>
