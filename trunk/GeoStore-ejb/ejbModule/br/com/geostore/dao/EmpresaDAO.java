@@ -111,6 +111,7 @@ public class EmpresaDAO {
 		}
 	}
 	
+
 	public boolean buscarPorCNPJ(Empresa empresa) throws Exception {
 		try{
 			
