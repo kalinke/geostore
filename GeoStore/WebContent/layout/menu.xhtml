@@ -1,0 +1,101 @@
+<a4j:form 	
+	xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:a4j="http://richfaces.org/a4j" >
+	<rich:toolBar>
+
+	    <rich:toolBarGroup>
+	    
+    	    <h:outputText value="#{projectName}:"/>
+         	         		
+        	<rich:menuItem action="home"  >
+        		<h:graphicImage value="/img/homeIcon.png" styleClass="pic"/>
+	   		 	<h:outputText value="Home" styleClass="txtButtonMenu"/>
+	   		</rich:menuItem>
+		
+   		 			 	
+   		 	<rich:dropDownMenu submitMode="ajax">
+   		 		<f:facet name="label">
+   		 			<h:panelGroup>
+   		 				<h:graphicImage value="/img/empresaIcon.png" styleClass="pic"/>
+	   		 			<h:outputText value="Empresas" />
+	   		 		</h:panelGroup> 		 		
+   		 		</f:facet>
+   		 		<rich:menuItem value="Cadastro" action="cadastro.empresa" />
+   		 		<rich:menuItem value="Controle" action="controle.empresa" />
+   		 	</rich:dropDownMenu>
+        	
+        	<rich:dropDownMenu submitMode="ajax">
+   		 		<f:facet name="label">
+   		 			<h:panelGroup>
+   		 				<h:graphicImage value="/img/lojaIcon.gif" styleClass="pic"/>
+	   		 			<h:outputText value="Lojas" />
+	   		 		</h:panelGroup> 		 		
+   		 		</f:facet>
+   		 		<rich:menuItem value="Cadastro" action="cadastro.loja" />   
+   				<rich:menuItem value="Controle" action="controle.loja" />   
+   		 	</rich:dropDownMenu>
+   		 	
+   		 	<rich:dropDownMenu submitMode="ajax">
+   		 		<f:facet name="label">
+   		 			<h:panelGroup>
+   		 				<h:graphicImage value="/img/usuarioIcon.png" styleClass="pic"/>
+	   		 			<h:outputText value="Usuários" />
+	   		 		</h:panelGroup> 		 		
+   		 		</f:facet>
+   		 		<rich:menuItem value="Cadastro" action="cadastro.usuario" /> 
+   				<rich:menuItem value="Controle" action="controle.usuario" />
+   		 	</rich:dropDownMenu>
+   		 	
+   		 	<rich:dropDownMenu submitMode="ajax">
+   		 		<f:facet name="label">
+   		 			<h:panelGroup>
+   		 				<h:graphicImage value="/img/produtoIcon.png" styleClass="pic"/>
+	   		 			<h:outputText value="Produtos" />
+	   		 		</h:panelGroup> 		 		
+   		 		</f:facet>
+   		 		<rich:menuItem value="Cadastro" action="cadastro.produto" /> 
+   				<rich:menuItem value="Controle" action="controle.produto" /> 
+   		 	</rich:dropDownMenu>
+   		 	
+   		 	
+   		 	
+    		<rich:dropDownMenu showDelay="250" hideDelay="0" submitMode="ajax">        
+   		 		<f:facet name="label">
+   		 			<h:panelGroup>
+   		 				<h:graphicImage value="/img/reportIcon.png" styleClass="pic"/>
+	   		 			<h:outputText value="Relatórios" />
+	   		 		</h:panelGroup> 		 		
+   		 		</f:facet>    	        	
+				<rich:menuItem icon="/img/empresaIcon.png">
+    				<h:commandLink value="Lista de Empresas" action="#{relatorioManager.geraRelatorioListaEmpresas()}" />   			
+     			</rich:menuItem>
+     			
+     			<rich:menuItem icon="/img/lojaIcon.gif">
+    				<h:commandLink value="Lista de Lojas" action="#{relatorioManager.geraRelatorioListaLojas()}" />   			
+     			</rich:menuItem>
+     			
+     			<rich:menuItem icon="/img/usuarioIcon.png">
+    				<h:commandLink value="Lista de Usuários" action="#{relatorioManager.geraRelatorioListaUsuarios()}" />   			
+     			</rich:menuItem>
+     			
+     			<rich:menuItem icon="/img/produtoIcon.png">
+    				<h:commandLink value="Lista de Produtos" action="#{relatorioManager.geraRelatorioListaProdutos()}" />   			
+     			</rich:menuItem>
+     			     		
+    		</rich:dropDownMenu>
+    
+	    </rich:toolBarGroup>
+
+    	<!-- @newMenuItem@ -->
+    	<rich:toolBarGroup location="right">
+        	<h:outputText id="menuWelcomeId" value="signed in as: #{credentials.username}" rendered="#{identity.loggedIn}"/>
+        	<s:link id="menuLoginId" view="/login.xhtml" value="Login" rendered="#{not identity.loggedIn}" propagation="none"/>
+        	<s:link id="menuLogoutId" view="/home.xhtml" action="#{identity.logout}" value="Logout" rendered="#{identity.loggedIn}" propagation="none"/>
+    	</rich:toolBarGroup>
+	</rich:toolBar>
+</a4j:form>

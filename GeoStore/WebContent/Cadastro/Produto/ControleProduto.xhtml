@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+       xmlns:s="http://jboss.com/products/seam/taglib"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      > 
+
+<ui:composition template="../../layout/template.xhtml">
+	<ui:define name="body" >
+		
+		<rich:panel>
+		
+		<f:facet name="header">Controle de Produtos</f:facet>
+			<a4j:form>
+			<rich:panel>
+				<rich:toolBar height="34" itemSeparator="line" >
+				 		
+       		     	<rich:toolBarGroup>
+       		     		<h:commandLink action="#{produtoController.novo()}" >						
+           	  				<h:graphicImage id="imgNovo" value="../../img/novoIcon.png" styleClass="imgButton" />
+           	  				<rich:spacer width="4" />
+           	  				<h:outputText value="Adicionar" styleClass="txtButton" /> 
+           	  			</h:commandLink>
+           	  			  
+       		     	</rich:toolBarGroup>
+       		    
+       		    	<rich:toolBarGroup />
+       		     	 			
+				</rich:toolBar>
+				
+				
+						
+			</rich:panel>	
+
+			<rich:spacer height="10" />
+
+		
+		
+				<rich:dataTable id="tabelaProdutos"  
+					onRowMouseOver="this.style.backgroundColor='#D0D0D0'"
+                    onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
+                    value="#{produtoController.produtos}" var="p">
+                    
+					<f:facet name="header">Produtos Cadastrados</f:facet>				
+						
+					<rich:column sortBy="#{p.loja.documento}">
+						<f:facet name="header">Loja Vinculada</f:facet>
+						<h:outputText value="#{p.loja.documento}"/>
+					</rich:column>	
+								
+					<rich:column sortBy="#{p.nome}">
+						<f:facet name="header">Nome</f:facet>
+						<h:outputText value="#{p.nome}"/>
+					</rich:column>
+					
+					<rich:column sortBy="#{p.descricao}">
+						<f:facet name="header">Descrição</f:facet>
+						#{p.descricao}
+					</rich:column>
+			
+					<rich:column>
+						<f:facet name="header">Valor</f:facet>
+						#{p.valor}
+					</rich:column>
+									
+					<rich:column>						
+						<h:commandLink value="Editar" action="#{produtoController.editar()}">
+							<f:setPropertyActionListener target="#{produtoController.idProduto}" value="#{p.id}"/>
+						</h:commandLink>	
+					</rich:column>		
+								
+				</rich:dataTable>
+				
+			</a4j:form>						
+	 	</rich:panel>
+		<rich:spacer height="20"/>	
+			
+	</ui:define>
+</ui:composition>
+
+
+</html>

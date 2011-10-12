@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:s="http://jboss.com/products/seam/taglib"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:x="http://www.xseam.org"
+      > 
+<ui:composition template="../../layout/template.xhtml">
+	
+		<ui:define name="body" >
+		
+		<ui:include src="../../layout/messages.xhtml"/>
+		
+		<rich:panel>
+		
+		<f:facet name="header">Editar Loja</f:facet>
+		
+		<a4j:form id="cadastroLojaForm">
+			<rich:panel>
+				<rich:toolBar height="34"  itemSeparator="line" >					
+					<rich:toolBarGroup >     	         		
+     	         		<h:commandLink action="#{lojaController.salvar}" >						
+           	  				<h:graphicImage id="imgSalvar" value="../../img/salvarIcon.png" styleClass="imgButton" />
+           	  				<rich:spacer width="4" />
+           	  				<h:outputText value="Salvar" styleClass="txtButton" /> 
+           	  			</h:commandLink>           	 	
+           	  		</rich:toolBarGroup>
+           	  		
+           	  		<rich:toolBarGroup>     	         		
+     	         		<h:commandLink action="#{lojaController.cancelar}" immediate="true">						
+           	  				<h:graphicImage id="imgVoltar" value="../../img/cancelarIcon.png" styleClass="imgButton" />
+           	  				<rich:spacer width="4" />
+           	  				<h:outputText value="Voltar" styleClass="txtButton" /> 
+           	  			</h:commandLink>           	 	
+           	  		</rich:toolBarGroup>
+	
+					<rich:toolBarGroup >     	         		
+     	         		<h:commandLink action="#{lojaController.remover()}" >						
+           	  				<h:graphicImage id="imgExcluir" value="../../img/excluirIcon.png" styleClass="imgButton" />
+           	  				<rich:spacer width="4" />
+           	  				<h:outputText value="Excluir" styleClass="txtButton" /> 
+           	  			</h:commandLink>           	 	
+           	  		</rich:toolBarGroup>
+	   		     			
+	   		    	<rich:toolBarGroup/>	   		    			
+				</rich:toolBar>		
+			</rich:panel>	
+
+			<rich:spacer height="10" />		
+		 	<a4j:loadScript src="../../js/jquery.maskedinput-1.1.4.pack.js" />
+		 	<rich:tabPanel switchType="client">
+		  	
+		  		<rich:tab label="Dados Cadastrais">	
+					<h:panelGrid >		
+				
+						<s:decorate template="../../layout/edit.xhtml">
+							<ui:define name="label">Empresa Superior</ui:define>		
+							<h:selectOneMenu value="#{lojaController.loja.empresaSuperior}">	
+								<s:selectItems value="#{empresaController.empresas}" var="empresaSuperior" label="#{empresaSuperior.documento} - #{empresaSuperior.razaoSocial}" noSelectionLabel="Selecione..."/>								
+								<s:convertEntity/>
+							</h:selectOneMenu>
+						</s:decorate>
+						
+						<s:decorate template="../../layout/edit.xhtml">			
+							<ui:define name="label">CNPJ</ui:define>
+							<h:inputText id="cnpj" value="#{lojaController.loja.documento}" converter="#{cnpjConverter}" >
+								<rich:jQuery selector="#cnpj" query="mask('99.999.999/9999-99')" timing="onload" />												
+							</h:inputText>
+						</s:decorate>
+						
+						<s:decorate template="../../layout/edit.xhtml">	
+							<ui:define name="label">Razão Social</ui:define>
+							<h:inputText size="100" value="#{lojaController.loja.razaoSocial}" />
+						</s:decorate>
+					
+						<s:decorate template="../../layout/edit.xhtml">
+							<ui:define name="label">Nome Fantasia</ui:define>
+							<h:inputText size="100" value="#{lojaController.loja.nomeFantasia}" />	
+						</s:decorate>
+
+						<s:decorate id="txtContato" template="../../layout/edit.xhtml" >
+							<ui:define name="label">Contato</ui:define>
+							<h:inputText size="60" value="#{lojaController.loja.contato}" />
+							<!-- 
+							<h:message styleClass="errors" showDetail="true" for="txtContato" rendered="true" style="color: red"  />
+						 	-->
+						</s:decorate>
+
+						<s:decorate id="txtTelefone" template="../../layout/edit.xhtml">											
+							<ui:define name="label">Telefone</ui:define>
+							<h:inputText id="telefone" value="#{lojaController.loja.telefone}" converter="telefoneConverter" >
+								<rich:jQuery selector="#telefone" query="mask('(99)9999-9999')" timing="onload" />												
+							</h:inputText>
+						</s:decorate>
+
+						<s:decorate template="../../layout/edit.xhtml">
+							<ui:define name="label">E-Mail</ui:define>
+							<h:inputText size="60" value="#{lojaController.loja.email}"/>	
+						</s:decorate>
+					
+					</h:panelGrid>				
+				</rich:tab>
+			
+				<rich:tab label="Endereço">
+					
+					<h:panelGrid >	
+						<s:decorate template="../../layout/edit.xhtml">
+								<ui:define name="label">Rua</ui:define>
+								<h:inputText size="100" value="#{lojaController.loja.endereco.logradouro}" />	
+						</s:decorate>
+
+						<s:decorate template="../../layout/edit.xhtml">
+								<ui:define name="label">Nº</ui:define>
+								<h:inputText size="20" value="#{lojaController.loja.endereco.numeroLogradouro}" />	
+						</s:decorate>
+							
+						<s:decorate template="../../layout/edit.xhtml">
+								<ui:define name="label">Complemento</ui:define>
+								<h:inputText size="60" value="#{lojaController.loja.endereco.complementoLogradouro}" />	
+						</s:decorate>
+							
+						<s:decorate template="../../layout/edit.xhtml">
+								<ui:define name="label">Bairro</ui:define>
+								<h:inputText size="60" value="#{lojaController.loja.endereco.bairro}" />	
+						</s:decorate>
+						
+						<s:decorate template="../../layout/edit.xhtml">
+							<ui:define name="label">Estado</ui:define>
+                            <h:selectOneMenu id="comboEstado" value="#{lojaController.unidadeFederacao}">
+                                <s:selectItems  value="#{unidadesFederacao}" var="uf" label="#{uf.descricao}" noSelectionLabel="Selecione..."/>
+                                <a4j:support event="onchange" reRender="comboCidade"/>
+                                <s:convertEntity/>                               
+                            </h:selectOneMenu>
+                        </s:decorate>
+                    
+                    	<s:decorate template="../../layout/edit.xhtml" >
+                    		<ui:define name="label">Cidade</ui:define>
+                            <h:selectOneMenu id="comboCidade" value="#{lojaController.loja.endereco.cidade}" >
+                                <s:selectItems value="#{enderecoController.getCidades(lojaController.unidadeFederacao)}" var="c" label="#{c.descricao}" noSelectionLabel="Selecione..."/>
+                                <s:convertEntity/>                               
+                            </h:selectOneMenu>
+                       	</s:decorate>
+						
+					</h:panelGrid>
+
+				</rich:tab>
+				
+			</rich:tabPanel>
+		
+							
+		</a4j:form>	
+	
+		 				
+	 	</rich:panel>
+		<rich:spacer height="20"/>	
+			
+	</ui:define>
+</ui:composition>
+
+</html>
+

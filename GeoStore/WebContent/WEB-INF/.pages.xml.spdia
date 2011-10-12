@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram model-entity="SeamPagesDiagram">
+ <item ID="*" NAME="*" PATH="*" SHAPE="24,17,0,0" TYPE="page" model-entity="SeamPagesDiagramItem">
+  <output ID="/login.xhtml" NAME="output" PATH="/login.xhtml"
+   TARGET="#xlogin.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/home.xhtml" NAME="output1" PATH="/home.xhtml"
+   TARGET="#xhome.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/Cadastro/Empresa/CadastroEmpresa.xhtml" NAME="output2"
+   PATH="/Cadastro/Empresa/CadastroEmpresa.xhtml"
+   TARGET="#xCadastro#xEmpresa#xCadastroEmpresa.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/Cadastro/Empresa/ControleEmpresa.xhtml" NAME="output3"
+   PATH="/Cadastro/Empresa/ControleEmpresa.xhtml"
+   TARGET="#xCadastro#xEmpresa#xControleEmpresa.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/Cadastro/Loja/CadastroLoja.xhtml" NAME="output4"
+   PATH="/Cadastro/Loja/CadastroLoja.xhtml"
+   TARGET="#xCadastro#xLoja#xCadastroLoja.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/Cadastro/Loja/ControleLoja.xhtml" NAME="output5"
+   PATH="/Cadastro/Loja/ControleLoja.xhtml"
+   TARGET="#xCadastro#xLoja#xControleLoja.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/Cadastro/Usuario/CadastroUsuario.xhtml" NAME="output6"
+   PATH="/Cadastro/Usuario/CadastroUsuario.xhtml"
+   TARGET="#xCadastro#xUsuario#xCadastroUsuario.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/Cadastro/Usuario/ControleUsuario.xhtml" NAME="output7"
+   PATH="/Cadastro/Usuario/ControleUsuario.xhtml"
+   TARGET="#xCadastro#xUsuario#xControleUsuario.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/Cadastro/Produto/CadastroProduto.xhtml" NAME="output8"
+   PATH="/Cadastro/Produto/CadastroProduto.xhtml"
+   TARGET="#xCadastro#xProduto#xCadastroProduto.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/Cadastro/Produto/ControleProduto.xhtml" NAME="output9"
+   PATH="/Cadastro/Produto/ControleProduto.xhtml"
+   TARGET="#xCadastro#xProduto#xControleProduto.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
+ <item ID="#Cadastro#Empresa#ControleEmpresa.xhtml"
+  NAME="#xCadastro#xEmpresa#xControleEmpresa.xhtml"
+  PATH="/Cadastro/Empresa/ControleEmpresa.xhtml" SHAPE="376,249,0,0"
+  TYPE="page" model-entity="SeamPagesDiagramItem">
+  <output ID="/Cadastro/Empresa/CadastroEmpresa.xhtml" NAME="output"
+   PATH="/Cadastro/Empresa/CadastroEmpresa.xhtml"
+   TARGET="#xCadastro#xEmpresa#xCadastroEmpresa.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/Cadastro/Empresa/CadastroEmpresa.xhtml" NAME="output1"
+   PATH="/Cadastro/Empresa/CadastroEmpresa.xhtml"
+   TARGET="#xCadastro#xEmpresa#xCadastroEmpresa.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
+ <item ID="#Cadastro#Empresa#CadastroEmpresa.xhtml"
+  NAME="#xCadastro#xEmpresa#xCadastroEmpresa.xhtml"
+  PATH="/Cadastro/Empresa/CadastroEmpresa.xhtml" SHAPE="824,273,0,0"
+  TYPE="page" model-entity="SeamPagesDiagramItem">
+  <output ID="/Cadastro/Empresa/ControleEmpresa.xhtml" NAME="output"
+   PATH="/Cadastro/Empresa/ControleEmpresa.xhtml"
+   TARGET="#xCadastro#xEmpresa#xControleEmpresa.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/Cadastro/Empresa/ControleEmpresa.xhtml" NAME="output1"
+   PATH="/Cadastro/Empresa/ControleEmpresa.xhtml"
+   TARGET="#xCadastro#xEmpresa#xControleEmpresa.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/Cadastro/Empresa/ControleEmpresa.xhtml" NAME="output2"
+   PATH="/Cadastro/Empresa/ControleEmpresa.xhtml"
+   TARGET="#xCadastro#xEmpresa#xControleEmpresa.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
+ <item ID="#Cadastro#Loja#ControleLoja.xhtml"
+  NAME="#xCadastro#xLoja#xControleLoja.xhtml"
+  PATH="/Cadastro/Loja/ControleLoja.xhtml" SHAPE="440,945,0,0"
+  TYPE="page" model-entity="SeamPagesDiagramItem">
+  <output ID="/Cadastro/Loja/CadastroLoja.xhtml" NAME="output"
+   PATH="/Cadastro/Loja/CadastroLoja.xhtml"
+   TARGET="#xCadastro#xLoja#xCadastroLoja.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/Cadastro/Loja/CadastroLoja.xhtml" NAME="output1"
+   PATH="/Cadastro/Loja/CadastroLoja.xhtml"
+   TARGET="#xCadastro#xLoja#xCadastroLoja.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
+ <item ID="#Cadastro#Loja#CadastroLoja.xhtml"
+  NAME="#xCadastro#xLoja#xCadastroLoja.xhtml"
+  PATH="/Cadastro/Loja/CadastroLoja.xhtml" SHAPE="56,1177,0,0"
+  TYPE="page" model-entity="SeamPagesDiagramItem">
+  <output ID="/Cadastro/Loja/ControleLoja.xhtml" NAME="output"
+   PATH="/Cadastro/Loja/ControleLoja.xhtml"
+   TARGET="#xCadastro#xLoja#xControleLoja.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/Cadastro/Loja/ControleLoja.xhtml" NAME="output1"
+   PATH="/Cadastro/Loja/ControleLoja.xhtml"
+   TARGET="#xCadastro#xLoja#xControleLoja.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/Cadastro/Loja/ControleLoja.xhtml" NAME="output2"
+   PATH="/Cadastro/Loja/ControleLoja.xhtml"
+   TARGET="#xCadastro#xLoja#xControleLoja.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
+ <item ID="#Cadastro#Usuario#ControleUsuario.xhtml"
+  NAME="#xCadastro#xUsuario#xControleUsuario.xhtml"
+  PATH="/Cadastro/Usuario/ControleUsuario.xhtml" SHAPE="440,969,0,0"
+  TYPE="page" model-entity="SeamPagesDiagramItem">
+  <output ID="/Cadastro/Usuario/CadastroUsuario.xhtml" NAME="output"
+   PATH="/Cadastro/Usuario/CadastroUsuario.xhtml"
+   TARGET="#xCadastro#xUsuario#xCadastroUsuario.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/Cadastro/Usuario/CadastroUsuario.xhtml" NAME="output1"
+   PATH="/Cadastro/Usuario/CadastroUsuario.xhtml"
+   TARGET="#xCadastro#xUsuario#xCadastroUsuario.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
+ <item ID="#Cadastro#Usuario#CadastroUsuario.xhtml"
+  NAME="#xCadastro#xUsuario#xCadastroUsuario.xhtml"
+  PATH="/Cadastro/Usuario/CadastroUsuario.xhtml" SHAPE="56,1225,0,0"
+  TYPE="page" model-entity="SeamPagesDiagramItem">
+  <output ID="/Cadastro/Usuario/ControleUsuario.xhtml" NAME="output"
+   PATH="/Cadastro/Usuario/ControleUsuario.xhtml"
+   TARGET="#xCadastro#xUsuario#xControleUsuario.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/Cadastro/Usuario/ControleUsuario.xhtml" NAME="output1"
+   PATH="/Cadastro/Usuario/ControleUsuario.xhtml"
+   TARGET="#xCadastro#xUsuario#xControleUsuario.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/Cadastro/Usuario/ControleUsuario.xhtml" NAME="output2"
+   PATH="/Cadastro/Usuario/ControleUsuario.xhtml"
+   TARGET="#xCadastro#xUsuario#xControleUsuario.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
+ <item ID="org.jboss.seam.framework.EntityNotFoundException"
+  NAME="exception:org.jboss.seam.framework.EntityNotFoundException"
+  PATH="org.jboss.seam.framework.EntityNotFoundException"
+  SHAPE="24,121,0,0" TYPE="exception" model-entity="SeamPagesDiagramItem">
+  <output ID="/error.xhtml" NAME="output" PATH="/error.xhtml"
+   TARGET="#xerror.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
+ <item ID="javax.persistence.EntityNotFoundException"
+  NAME="exception:javax.persistence.EntityNotFoundException"
+  PATH="javax.persistence.EntityNotFoundException" SHAPE="24,225,0,0"
+  TYPE="exception" model-entity="SeamPagesDiagramItem">
+  <output ID="/error.xhtml" NAME="output" PATH="/error.xhtml"
+   TARGET="#xerror.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
+ <item ID="javax.persistence.EntityExistsException"
+  NAME="exception:javax.persistence.EntityExistsException"
+  PATH="javax.persistence.EntityExistsException" SHAPE="24,329,0,0"
+  TYPE="exception" model-entity="SeamPagesDiagramItem">
+  <output ID="/error.xhtml" NAME="output" PATH="/error.xhtml"
+   TARGET="#xerror.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
+ <item ID="javax.persistence.OptimisticLockException"
+  NAME="exception:javax.persistence.OptimisticLockException"
+  PATH="javax.persistence.OptimisticLockException" SHAPE="24,433,0,0"
+  TYPE="exception" model-entity="SeamPagesDiagramItem">
+  <output ID="/error.xhtml" NAME="output" PATH="/error.xhtml"
+   TARGET="#xerror.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
+ <item ID="org.jboss.seam.security.AuthorizationException"
+  NAME="exception:org.jboss.seam.security.AuthorizationException"
+  PATH="org.jboss.seam.security.AuthorizationException"
+  SHAPE="24,537,0,0" TYPE="exception" model-entity="SeamPagesDiagramItem">
+  <output ID="/error.xhtml" NAME="output" PATH="/error.xhtml"
+   TARGET="#xerror.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
+ <item ID="org.jboss.seam.security.NotLoggedInException"
+  NAME="exception:org.jboss.seam.security.NotLoggedInException"
+  PATH="org.jboss.seam.security.NotLoggedInException" SHAPE="24,849,0,0"
+  TYPE="exception" model-entity="SeamPagesDiagramItem">
+  <output ID="/login.xhtml" NAME="output" PATH="/login.xhtml"
+   TARGET="#xlogin.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
+ <item ID="javax.faces.application.ViewExpiredException"
+  NAME="exception:javax.faces.application.ViewExpiredException"
+  PATH="javax.faces.application.ViewExpiredException" SHAPE="24,641,0,0"
+  TYPE="exception" model-entity="SeamPagesDiagramItem">
+  <output ID="/error.xhtml" NAME="output" PATH="/error.xhtml"
+   TARGET="#xerror.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
+ <item ID="org.jboss.seam.ConcurrentRequestTimeoutException"
+  NAME="exception:org.jboss.seam.ConcurrentRequestTimeoutException"
+  PATH="org.jboss.seam.ConcurrentRequestTimeoutException"
+  SHAPE="24,953,0,0" TYPE="exception" model-entity="SeamPagesDiagramItem"/>
+ <item NAME="exception:" SHAPE="24,745,0,0" TYPE="exception" model-entity="SeamPagesDiagramItem">
+  <output ID="/error.xhtml" NAME="output" PATH="/error.xhtml"
+   TARGET="#xerror.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
+ <item NAME="#xhome.xhtml" PATH="/home.xhtml" SHAPE="480,16,130,37"
+  TYPE="page" model-entity="SeamPagesDiagramItem"/>
+ <item NAME="#xlogin.xhtml" PATH="/login.xhtml" SHAPE="344,849,0,0"
+  TYPE="page" model-entity="SeamPagesDiagramItem"/>
+ <item NAME="#xerror.xhtml" PATH="/error.xhtml" SHAPE="472,121,0,0"
+  TYPE="page" model-entity="SeamPagesDiagramItem"/>
+ <item ID="#Cadastro#Produto#ControleProduto.xhtml"
+  NAME="#xCadastro#xProduto#xControleProduto.xhtml"
+  PATH="/Cadastro/Produto/ControleProduto.xhtml" SHAPE="504,497,0,0"
+  TYPE="page" model-entity="SeamPagesDiagramItem">
+  <output ID="/Cadastro/Produto/CadastroProduto.xhtml" NAME="output"
+   PATH="/Cadastro/Produto/CadastroProduto.xhtml"
+   TARGET="#xCadastro#xProduto#xCadastroProduto.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/Cadastro/Produto/CadastroProduto.xhtml" NAME="output1"
+   PATH="/Cadastro/Produto/CadastroProduto.xhtml"
+   TARGET="#xCadastro#xProduto#xCadastroProduto.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
+ <item ID="#Cadastro#Produto#CadastroProduto.xhtml"
+  NAME="#xCadastro#xProduto#xCadastroProduto.xhtml"
+  PATH="/Cadastro/Produto/CadastroProduto.xhtml" SHAPE="56,1273,0,0"
+  TYPE="page" model-entity="SeamPagesDiagramItem">
+  <output ID="/Cadastro/Produto/ControleProduto.xhtml" NAME="output"
+   PATH="/Cadastro/Produto/ControleProduto.xhtml"
+   TARGET="#xCadastro#xProduto#xControleProduto.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/Cadastro/Produto/ControleProduto.xhtml" NAME="output1"
+   PATH="/Cadastro/Produto/ControleProduto.xhtml"
+   TARGET="#xCadastro#xProduto#xControleProduto.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/Cadastro/Produto/ControleProduto.xhtml" NAME="output2"
+   PATH="/Cadastro/Produto/ControleProduto.xhtml"
+   TARGET="#xCadastro#xProduto#xControleProduto.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
+</diagram>

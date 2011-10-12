@@ -1,0 +1,57 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+    <ui:define name="body">
+        <rich:panel>
+            <h:panelGrid columns="2">
+                
+                <h:graphicImage value="/img/geostorelogo.png"/>
+                <s:div styleClass="info">
+                
+ 					<rich:panelBar height="300">
+ 					
+ 					   <rich:panelBarItem label="Sobre GeoStore">
+            				O sistema Geostore é um aplicativo para uso em dispositivos móveis voltado
+							ao comércio de produtos e serviços. Tem como seu principal diferencial a busca de
+							lojas, previamente cadastradas, ao redor do usuário, de acordo com suas
+							coordenadas geográficas. Seu principal objetivo é auxiliar o usuário a encontrar de
+							forma rápida e prática, produtos e serviços na região em que se encontra,
+							diminuindo a necessidade de pesquisa presencial nos estabelecimentos e
+							proporcionando uma maior objetividade e comodidade em sua busca. Para o lojista
+							o sistema permitirá uma maior divulgação, pois terá no sistema uma forma a mais de
+							ofertar seus produtos e serviços. Desenvolvido para a moderna plataforma Android
+							da Google, o sistema fará uso do hardware GPS do aparelho e utilizará um conjunto
+							de bibliotecas para mapas da Google para determinar localização e rotas. O
+							resultado obtido será um serviço de auxilio, moderno e conveniente ao usuário, que
+							lhe proporcionará um ganho de tempo em sua busca e um melhor aproveitamento
+							dos recursos de seu aparelho móvel.
+        				</rich:panelBarItem>
+        				
+        				<rich:panelBarItem label="O que é geolocalização?">
+	      				Quando assistimos a filmes de agentes secretos vemos rastreadores colocados nas pessoas para serem encontradas a distância ao utilizar coordenadas geográficas. Mais incrível que isso é saber que a tecnologia está presente em nosso dia a dia além do que imaginamos.
+						Não temos chips integrados, mas apenas a partir de um computador que esteja conectado à internet é possível dizer o local de origem geográfica. Essa geolocalização geralmente funciona com a identificação do seu IP, que é capaz de informar o país, a cidade e o horário atual de onde você está.
+						A geolocalização também pode ser utilizada com dados a partir de um endereço MAC, RFID (identificação de radiofrequência), conexão sem-fio e coordenadas de um GPS. Vários smartphones utilizam o GPS integrado para enviar as informações de localização. Alguns, como o iPhone, pedem a sua permissão antes.
+						Leia mais em: http://www.tecmundo.com.br/3659-o-que-e-geolocalizacao-.htm#ixzz1ZG15Nkb8
+        				</rich:panelBarItem>
+        				
+
+        				
+        				<rich:panelBarItem label="Android">
+            				Android é um sistema operacional móvel que roda sobre o núcleo Linux, embora por enquanto seja ainda desenvolvido numa estrutura externa ao núcleo Linux[5]. Foi inicialmente desenvolvido pelo Google e posteriormente pela Open Handset Alliance, mas a Google é a responsável pela gerência do produto e engenharia de processos. O Android permite aos desenvolvedores escreverem software na linguagem de programação Java controlando o dispositivo via bibliotecas desenvolvidas pela Google.[6] Existem atualmente mais de 250 mil aplicações disponíveis para Android.[7][8] O sistema operativo Android consiste em 12 milhões de linhas de código, incluindo 3 milhões em XML, 2.8 milhões de linhas de C, 2.1 milhões de linhas de código Java e 1.75 milhões de linhas de código em C++.[9]
+        				</rich:panelBarItem>
+
+
+  	 				 </rich:panelBar>
+                </s:div>
+            </h:panelGrid>
+        </rich:panel>
+
+    </ui:define>
+</ui:composition>
