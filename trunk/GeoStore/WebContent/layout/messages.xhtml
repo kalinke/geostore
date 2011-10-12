@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:acegijsf="http://sourceforge.net/projects/jsf-comp/acegijsf">
+  
+		<rich:modalPanel id="msgsErros" autosized="true" showWhenRendered="#{facesContext.maximumSeverity !=null}"  >
+			<f:facet name="header">Problemas Encontrados</f:facet>
+			
+			<a4j:form>
+				<rich:panel>
+							
+					<rich:messages>
+						<f:facet name="errorMarker">  
+							<h:graphicImage value="../../img/msgerror.png" width="20" height="20" styleClass="pic"/>     
+						</f:facet>  
+						
+						<f:facet name="warnMarker">  
+							<h:graphicImage value="../../img/msgwarn.png" width="20" height="20" styleClass="pic" />     
+						</f:facet>  
+						
+						<f:facet name="infoMarker">  
+							<h:graphicImage value="../../img/msginfo.png" width="20" height="20" styleClass="pic" />     
+						</f:facet>  
+					</rich:messages>
+								
+					<rich:menuItem onclick="Richfaces.hideModalPanel('msgsErros')"  >
+        				<h:graphicImage value="../../img/cancelarIcon.png" styleClass="pic"/>
+	   		 			<h:outputText value="Voltar"/>	   		 	
+	   				</rich:menuItem>
+	   				
+				</rich:panel>
+				
+			 <rich:hotKey key="return" handler="Richfaces.hideModalPanel('msgsErros')"/>
+				
+			</a4j:form>
+
+		</rich:modalPanel>	
+
+
+</ui:composition>

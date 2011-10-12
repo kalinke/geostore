@@ -1,0 +1,18 @@
+#Wed Sep 28 09:37:58 GMT-03:00 2011
+action.package=br.com.geostore.session
+action.sources=/GeoStore-ejb/ejbModule
+eclipse.preferences.version=1
+model.package=br.com.geostore.entity
+model.sources=/GeoStore-ejb/ejbModule
+seam.ear.project=GeoStore-ear
+seam.ejb.project=GeoStore-ejb
+seam.project.connection.profile=GeoStore
+seam.project.deployment.type=ear
+seam.project.settings.version=1.1
+seam.project.web.root.folder=/GeoStore/WebContent
+seam.runtime.name=jboss-seam-2.2.2.Final
+seam.settings.changed.by.user=true
+seam.test.creating=false
+seam.test.project=GeoStore-test
+test.package=org.domain.geostore.test
+test.sources=/GeoStore-test/test-src
