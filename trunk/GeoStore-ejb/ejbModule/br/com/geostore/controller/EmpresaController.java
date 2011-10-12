@@ -62,8 +62,9 @@ public class EmpresaController {
 	public String salvar(){		
 		try{			
 			validar();			
-			
+			System.out.println(gravar + "validação");
 			if (gravar){
+			
 			empresaDAO.salvar(empresa);		
 			return "SALVAR";
 			}
