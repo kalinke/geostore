@@ -19,15 +19,14 @@
 			<rich:panel>
 				<rich:toolBar height="34" itemSeparator="line" >
 				 		
-       		     	<rich:toolBarGroup>
-       		     		<h:commandLink action="#{usuarioController.novo()}" >						
-           	  				<h:graphicImage id="imgNovo" value="../../img/novoIcon.png" styleClass="imgButton" />
-           	  				<rich:spacer width="4" />
-           	  				<h:outputText value="Adicionar" styleClass="txtButton" /> 
-           	  			</h:commandLink>
-           	  			  
-       		     	</rich:toolBarGroup>
-       		    
+				 		
+       		    	<rich:toolBarGroup>
+       		    		<rich:menuItem action="#{usuarioController.novo()}"  >
+        					<h:graphicImage value="../../img/novoIcon.png" styleClass="pic"/>
+	   		 				<h:outputText value="Adicionar" styleClass="txtButton"/>
+	   					</rich:menuItem>
+       		    	</rich:toolBarGroup>
+       		    	       		    
        		    	<rich:toolBarGroup />
        		     	 			
 				</rich:toolBar>
@@ -38,7 +37,11 @@
 
 			<rich:spacer height="10" />
 
-		
+						
+			<rich:panel>
+			  <rich:toolTip followMouse="true" direction="top-right" showDelay="500" styleClass="tooltip">
+            	<span  style="white-space:nowrap">Duplo clique para editar.</span>
+        	  </rich:toolTip>
 		
 				<rich:dataTable id="tabelaUsuarios"  
 					onRowMouseOver="this.style.backgroundColor='#D0D0D0'"
@@ -47,17 +50,22 @@
                     
 					<f:facet name="header">Usuários Cadastrados</f:facet>				
 						
-					<rich:column sortBy="#{u.empresaVinculo.documento}">
+					<rich:column>
 						<f:facet name="header">Empresa Vinculada</f:facet>
 						<h:outputText value="#{u.empresaVinculo.documento}"/>
 					</rich:column>	
+					
+					<rich:column>
+						<f:facet name="header">Status</f:facet>
+						<h:outputText value="#{u.statusUsuario.descricao}"/>
+					</rich:column>
 								
-					<rich:column sortBy="#{u.nome}">
+					<rich:column>
 						<f:facet name="header">Nome</f:facet>
 						<h:outputText value="#{u.nome}"/>
 					</rich:column>
 					
-					<rich:column sortBy="#{u.email}">
+					<rich:column>
 						<f:facet name="header">E-Mail</f:facet>
 						#{u.email}	
 					</rich:column>
@@ -67,14 +75,12 @@
 						<h:outputText value="#{u.telefone}" converter="#{telefoneConverter}"/>	
 					</rich:column>
 									
-					<rich:column>						
-						<h:commandLink value="Editar" action="#{usuarioController.editar()}">
-							<f:setPropertyActionListener target="#{usuarioController.idUsuario}" value="#{u.id}"/>
-						</h:commandLink>	
-					</rich:column>		
+					<a4j:support event="onRowDblClick" action="#{usuarioController.editar()}">
+						<f:setPropertyActionListener target="#{usuarioController.idUsuario}" value="#{u.id}"/>
+					</a4j:support>
 								
 				</rich:dataTable>
-				
+				</rich:panel>
 			</a4j:form>						
 	 	</rich:panel>
 		<rich:spacer height="20"/>	

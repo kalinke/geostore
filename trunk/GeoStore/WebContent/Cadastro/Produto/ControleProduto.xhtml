@@ -17,15 +17,13 @@
 			<a4j:form>
 			<rich:panel>
 				<rich:toolBar height="34" itemSeparator="line" >
-				 		
-       		     	<rich:toolBarGroup>
-       		     		<h:commandLink action="#{produtoController.novo()}" >						
-           	  				<h:graphicImage id="imgNovo" value="../../img/novoIcon.png" styleClass="imgButton" />
-           	  				<rich:spacer width="4" />
-           	  				<h:outputText value="Adicionar" styleClass="txtButton" /> 
-           	  			</h:commandLink>
-           	  			  
-       		     	</rich:toolBarGroup>
+
+       		    	<rich:toolBarGroup>
+       		    		<rich:menuItem action="#{produtoController.novo()}"  >
+        					<h:graphicImage value="../../img/novoIcon.png" styleClass="pic"/>
+	   		 				<h:outputText value="Adicionar" styleClass="txtButton"/>
+	   					</rich:menuItem>
+       		    	</rich:toolBarGroup>
        		    
        		    	<rich:toolBarGroup />
        		     	 			
@@ -37,7 +35,11 @@
 
 			<rich:spacer height="10" />
 
-		
+						
+			<rich:panel>
+			  <rich:toolTip followMouse="true" direction="top-right" showDelay="500" styleClass="tooltip">
+            	<span  style="white-space:nowrap">Duplo clique para editar.</span>
+        	  </rich:toolTip>
 		
 				<rich:dataTable id="tabelaProdutos"  
 					onRowMouseOver="this.style.backgroundColor='#D0D0D0'"
@@ -46,17 +48,22 @@
                     
 					<f:facet name="header">Produtos Cadastrados</f:facet>				
 						
-					<rich:column sortBy="#{p.loja.documento}">
+					<rich:column>
 						<f:facet name="header">Loja Vinculada</f:facet>
 						<h:outputText value="#{p.loja.documento}"/>
 					</rich:column>	
 								
-					<rich:column sortBy="#{p.nome}">
+					<rich:column>
+						<f:facet name="header">Status</f:facet>
+						<h:outputText value="#{p.statusProduto.descricao}"/>
+					</rich:column>	
+					
+					<rich:column>
 						<f:facet name="header">Nome</f:facet>
 						<h:outputText value="#{p.nome}"/>
 					</rich:column>
 					
-					<rich:column sortBy="#{p.descricao}">
+					<rich:column>
 						<f:facet name="header">Descrição</f:facet>
 						#{p.descricao}
 					</rich:column>
@@ -66,14 +73,12 @@
 						#{p.valor}
 					</rich:column>
 									
-					<rich:column>						
-						<h:commandLink value="Editar" action="#{produtoController.editar()}">
-							<f:setPropertyActionListener target="#{produtoController.idProduto}" value="#{p.id}"/>
-						</h:commandLink>	
-					</rich:column>		
+					<a4j:support event="onRowDblClick" action="#{produtoController.editar()}">
+						<f:setPropertyActionListener target="#{produtoController.idProduto}" value="#{p.id}"/>
+					</a4j:support>	
 								
 				</rich:dataTable>
-				
+				</rich:panel>
 			</a4j:form>						
 	 	</rich:panel>
 		<rich:spacer height="20"/>	

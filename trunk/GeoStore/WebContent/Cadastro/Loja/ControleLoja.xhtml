@@ -17,16 +17,14 @@
 			<a4j:form>
 			<rich:panel>
 				<rich:toolBar height="34" itemSeparator="line" >
-				 		
-       		     	<rich:toolBarGroup>
-       		     		<h:commandLink action="#{lojaController.nova()}" >						
-           	  				<h:graphicImage id="imgNovo" value="../../img/novoIcon.png" styleClass="imgButton" />
-           	  				<rich:spacer width="4" />
-           	  				<h:outputText value="Adicionar" styleClass="txtButton" /> 
-           	  			</h:commandLink>
-           	  			  
-       		     	</rich:toolBarGroup>
-       		    
+
+       		    	<rich:toolBarGroup>
+       		    		<rich:menuItem action="#{lojaController.nova()}"  >
+        					<h:graphicImage value="../../img/novoIcon.png" styleClass="pic"/>
+	   		 				<h:outputText value="Adicionar" styleClass="txtButton"/>
+	   					</rich:menuItem>
+       		    	</rich:toolBarGroup>
+       		    	       		    
        		    	<rich:toolBarGroup />
        		     	 			
 				</rich:toolBar>
@@ -37,26 +35,35 @@
 
 			<rich:spacer height="10" />
 
+						
+			<rich:panel>
+			  <rich:toolTip followMouse="true" direction="top-right" showDelay="500" styleClass="tooltip">
+            	<span  style="white-space:nowrap">Duplo clique para editar.</span>
+        	  </rich:toolTip>
 		
-		
-				<rich:dataTable id="tabelaEnderecos"  
+				<rich:dataTable id="tabelaLojas"  
 					onRowMouseOver="this.style.backgroundColor='#D0D0D0'"
                     onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
                     value="#{lojaController.lojas}" var="l">
                     
 					<f:facet name="header">Lojas Cadastradas</f:facet>				
 					
-					<rich:column sortBy="#{l.empresaSuperior.documento}">
+					<rich:column>
 						<f:facet name="header">Empresa Superior</f:facet>
 						<h:outputText value="#{l.empresaSuperior.documento}"/>
 					</rich:column>
-								
-					<rich:column sortBy="#{l.documento}">
+															
+					<rich:column>
 						<f:facet name="header">Documento</f:facet>
 						<h:outputText value="#{l.documento}"/>
 					</rich:column>
 					
-					<rich:column sortBy="#{l.razaoSocial}">
+					<rich:column>
+						<f:facet name="header">Status</f:facet>
+						<h:outputText value="#{l.statusLoja.descricao}"/>
+					</rich:column>
+					
+					<rich:column>
 						<f:facet name="header">Razão Social</f:facet>
 						#{l.razaoSocial}	
 					</rich:column>
@@ -81,14 +88,12 @@
 						#{l.email}	
 					</rich:column>		
 					
-					<rich:column>						
-						<h:commandLink value="Editar" action="#{lojaController.editar()}">
-							<f:setPropertyActionListener target="#{lojaController.idLoja}" value="#{l.id}"/>
-						</h:commandLink>	
-					</rich:column>		
+					<a4j:support event="onRowDblClick" action="#{lojaController.editar()}">
+						<f:setPropertyActionListener target="#{lojaController.idLoja}" value="#{l.id}"/>
+					</a4j:support>
 								
 				</rich:dataTable>
-				
+			</rich:panel>	
 			</a4j:form>						
 	 	</rich:panel>
 		<rich:spacer height="20"/>	

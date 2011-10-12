@@ -13,7 +13,6 @@
 	
 		<ui:define name="body" >
 		
-		<ui:include src="../../layout/messages.xhtml"/>
 		
 		<rich:panel>
 		
@@ -22,31 +21,28 @@
 		<a4j:form id="cadastroLojaForm">
 			<rich:panel>
 				<rich:toolBar height="34"  itemSeparator="line" >					
-					<rich:toolBarGroup >     	         		
-     	         		<h:commandLink action="#{usuarioController.salvar()}" >						
-           	  				<h:graphicImage id="imgSalvar" value="../../img/salvarIcon.png" styleClass="imgButton" />
-           	  				<rich:spacer width="4" />
-           	  				<h:outputText value="Salvar" styleClass="txtButton" /> 
-           	  				
-           	  			</h:commandLink>           	 	
-           	  		</rich:toolBarGroup>
+					
+       		    	<rich:toolBarGroup>
+       		    		<rich:menuItem action="#{usuarioController.salvar()}"  >
+        					<h:graphicImage value="../../img/salvarIcon.png" styleClass="pic"/>
+	   		 				<h:outputText value="Salvar" styleClass="txtButton"/>
+	   					</rich:menuItem>
+       		    	</rich:toolBarGroup>
+					
+       		    	<rich:toolBarGroup>
+       		    		<rich:menuItem action="#{usuarioController.cancelar()}"  >
+        					<h:graphicImage value="../../img/cancelarIcon.png" styleClass="pic"/>
+	   		 				<h:outputText value="Voltar" styleClass="txtButton"/>
+	   					</rich:menuItem>
+       		    	</rich:toolBarGroup>
            	  		
-           	  		<rich:toolBarGroup>     	         		
-     	         		<h:commandLink action="#{usuarioController.cancelar()}" immediate="true">						
-           	  				<h:graphicImage id="imgVoltar" value="../../img/cancelarIcon.png" styleClass="imgButton" />
-           	  				<rich:spacer width="4" />
-           	  				<h:outputText value="Voltar" styleClass="txtButton" /> 
-           	  			</h:commandLink>           	 	
-           	  		</rich:toolBarGroup>
-	
-					<rich:toolBarGroup >     	         		
-     	         		<h:commandLink action="#{usuarioController.remover()}" >						
-           	  				<h:graphicImage id="imgExcluir" value="../../img/excluirIcon.png" styleClass="imgButton" />
-           	  				<rich:spacer width="4" />
-           	  				<h:outputText value="Excluir" styleClass="txtButton" /> 
-           	  			</h:commandLink>           	 	
-           	  		</rich:toolBarGroup>
-	   		     			
+       		    	<rich:toolBarGroup>
+       		    		<rich:menuItem action="#{usuarioController.remover()}"  onclick="javascript:if(!confirm('Deseja realmente excluir o usuário e suas dependências?'))return false;" >
+        					<h:graphicImage value="../../img/excluirIcon.png" styleClass="pic"/>
+	   		 				<h:outputText value="Excluir" styleClass="txtButton"/>
+	   					</rich:menuItem>
+       		    	</rich:toolBarGroup>
+		   		     			
 	   		    	<rich:toolBarGroup/>	   		    			
 				</rich:toolBar>		
 			</rich:panel>	
@@ -57,19 +53,28 @@
 		  	
 		  		<rich:tab label="Dados Cadastrais">	
 					<h:panelGrid >		
-						
+					
 						<s:decorate template="../../layout/edit.xhtml">
+							<ui:define name="label">Tipo Usuário</ui:define>			
+							<h:selectOneMenu value="#{usuarioController.usuario.tipoUsuario}">
+								<s:selectItems value="#{tiposUsuario}" var="tipoUsuario" label="#{tipoUsuario.descricao}" noSelectionLabel="Selecione..."/>
+								<s:convertEntity/>
+								<a4j:support event="onchange" reRender="cadastroLojaForm" />
+							</h:selectOneMenu>
+						</s:decorate>
+						
+						<s:decorate template="../../layout/edit.xhtml" rendered="#{usuarioController.usuario.tipoUsuario.id == 2}">
 							<ui:define name="label">Empresa Vínculo</ui:define>		
 							<h:selectOneMenu value="#{usuarioController.usuario.empresaVinculo}">	
 								<s:selectItems value="#{empresaController.empresas}" var="empresaSuperior" label="#{empresaSuperior.documento} - #{empresaSuperior.razaoSocial}" noSelectionLabel="Selecione..."/>								
 								<s:convertEntity/>
 							</h:selectOneMenu>
-						</s:decorate>
-						
+						</s:decorate>									
+									
 						<s:decorate template="../../layout/edit.xhtml">
-							<ui:define name="label">Tipo Usuário</ui:define>			
-							<h:selectOneMenu value="#{usuarioController.usuario.tipoUsuario}">
-								<s:selectItems value="#{tiposUsuario}" var="tipoUsuario" label="#{tipoUsuario.descricao}" noSelectionLabel="Selecione..."/>
+							<ui:define name="label">Status</ui:define>			
+							<h:selectOneMenu value="#{usuarioController.usuario.statusUsuario}">
+								<s:selectItems value="#{usuarioController.statusUsuarios}" var="s" label="#{s.descricao}" noSelectionLabel="Selecione..."/>
 								<s:convertEntity/>
 							</h:selectOneMenu>
 						</s:decorate>

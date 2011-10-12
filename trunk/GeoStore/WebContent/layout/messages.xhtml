@@ -5,34 +5,36 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:c="http://java.sun.com/jstl/core"
       xmlns:rich="http://richfaces.org/rich"
-      xmlns:a4j="http://richfaces.org/a4j"
-      xmlns:acegijsf="http://sourceforge.net/projects/jsf-comp/acegijsf">
+      xmlns:a4j="http://richfaces.org/a4j">
   
 		<rich:modalPanel id="msgsErros" autosized="true" showWhenRendered="#{facesContext.maximumSeverity !=null}"  >
-			<f:facet name="header">Problemas Encontrados</f:facet>
+			<f:facet name="header">Aviso</f:facet>
 			
 			<a4j:form>
 				<rich:panel>
-							
-					<rich:messages>
-						<f:facet name="errorMarker">  
-							<h:graphicImage value="../../img/msgerror.png" width="20" height="20" styleClass="pic"/>     
-						</f:facet>  
+					<table class="blank" style="font-size: 10pt; white-space: nowrap">    
+            			<nobr>  
+							<rich:messages>
+								<f:facet name="errorMarker">  
+									<h:graphicImage value="/img/msgerror.png" width="20" height="20" styleClass="pic"/>     
+								</f:facet>  
 						
-						<f:facet name="warnMarker">  
-							<h:graphicImage value="../../img/msgwarn.png" width="20" height="20" styleClass="pic" />     
-						</f:facet>  
+								<f:facet name="warnMarker">  
+									<h:graphicImage value="/img/msgwarn.png" width="20" height="20" styleClass="pic" />     
+								</f:facet>  
 						
-						<f:facet name="infoMarker">  
-							<h:graphicImage value="../../img/msginfo.png" width="20" height="20" styleClass="pic" />     
-						</f:facet>  
-					</rich:messages>
-								
+								<f:facet name="infoMarker">  
+									<h:graphicImage value="/img/msginfo.png" width="20" height="20" styleClass="pic" />     
+								</f:facet>  
+							</rich:messages>
+						</nobr>
+					</table>					
+					<center>							
 					<rich:menuItem onclick="Richfaces.hideModalPanel('msgsErros')"  >
-        				<h:graphicImage value="../../img/cancelarIcon.png" styleClass="pic"/>
-	   		 			<h:outputText value="Voltar"/>	   		 	
+        					<h:graphicImage value="/img/okIcon.png" width="20" height="20" styleClass="pic" />
+	   		 				<h:outputText value="OK"/>   		 	
 	   				</rich:menuItem>
-	   				
+	   				</center>
 				</rich:panel>
 				
 			 <rich:hotKey key="return" handler="Richfaces.hideModalPanel('msgsErros')"/>
