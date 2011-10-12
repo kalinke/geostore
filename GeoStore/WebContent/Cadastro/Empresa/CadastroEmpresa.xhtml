@@ -141,7 +141,7 @@
 											
 						<s:decorate template="../../layout/edit.xhtml">
 							<ui:define name="label">Estado</ui:define>
-                            <h:selectOneMenu id="comboEstado" value="#{enderecoController.uf}">
+                            <h:selectOneMenu id="comboEstado" value="#{empresaController.unidadeFederacao}">
                                 <s:selectItems  value="#{unidadesFederacao}" var="uf" label="#{uf.descricao}" noSelectionLabel="Selecione..." />
                                 <a4j:support event="onchange" reRender="comboCidade" />
                                 <s:convertEntity/>                               
@@ -151,7 +151,7 @@
                     	<s:decorate template="../../layout/edit.xhtml" >
                     		<ui:define name="label">Cidade</ui:define>
                             <h:selectOneMenu id="comboCidade" value="#{empresaController.empresa.endereco.cidade}">
-                                <s:selectItems value="#{enderecoController.getCidades(enderecoController.uf)}" var="c" label="#{c.descricao}" noSelectionLabel="Selecione..." />
+                                <s:selectItems value="#{enderecoController.getCidades(empresaController.unidadeFederacao)}" var="c" label="#{c.descricao}" noSelectionLabel="Selecione..." />
                                 <s:convertEntity/>                               
                             </h:selectOneMenu>
                        	</s:decorate>
@@ -166,9 +166,9 @@
 								<h:inputText size="30" value="#{empresaController.empresa.endereco.longitude}" />	
 						</s:decorate>
 						
-						<a4j:commandButton value="Buscar Coordenadas" action="#{empresaController.buscarCoordenadas()}" />
+						<a4j:commandButton value="Buscar Coordenadas" action="#{empresaController.buscarCoordenadas()}" reRender="cadastroEmpresaForm" />
 						
-						<a4j:commandButton value="Validar Coordenadas" action="#{empresaController.validarCoordenadas()}" />
+						<a4j:commandButton value="Validar Coordenadas" action="#{empresaController.validarCoordenadas()}"/>
                     					
 					</h:panelGrid>
 
