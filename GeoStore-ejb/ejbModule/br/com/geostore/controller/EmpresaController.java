@@ -61,10 +61,9 @@ public class EmpresaController {
 	
 	public String salvar(){		
 		try{			
-			validar();			
-			System.out.println(gravar + "validação");
-			if (gravar){
+			validar();	
 			
+			if (gravar){			
 			empresaDAO.salvar(empresa);		
 			return "SALVAR";
 			}
@@ -94,6 +93,8 @@ public class EmpresaController {
 			gravar = false;
 			throw new RuntimeException("Selecione uma Cidade!");
 		}
+		
+		System.out.println(gravar + ": validação");
 					
 	}	
 	
