@@ -90,8 +90,7 @@ public class EmpresaController {
 		
 		
 		if(empresa.getEndereco().getCidade()==null || empresa.getEndereco().getCidade().getDescricao().isEmpty())
-			throw new RuntimeException("Selecione uma Cidade!");
-		
+			throw new RuntimeException("Selecione uma Cidade!");		
 					
 	}	
 	
