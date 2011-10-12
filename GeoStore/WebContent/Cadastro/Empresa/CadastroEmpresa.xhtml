@@ -29,7 +29,7 @@
 
 					
        		    	<rich:toolBarGroup>
-       		    		<rich:menuItem action="#{empresaController.cancelar}" immediate="true" >
+       		    		<rich:menuItem action="#{empresaController.cancelar}">
         					<h:graphicImage value="../../img/cancelarIcon.png" styleClass="pic"/>
 	   		 				<h:outputText value="Voltar" styleClass="txtButton"/>
 	   					</rich:menuItem>
@@ -55,8 +55,8 @@
 											
 						<s:decorate template="../../layout/edit.xhtml">
 							<ui:define name="label">Status</ui:define>			
-							<h:selectOneMenu value="#{empresaController.empresa.statusEmpresa}" >
-								<s:selectItems value="#{empresaController.statusEmpresas}" var="s" label="#{s.descricao}" noSelectionLabel="Selecione..." />
+							<h:selectOneMenu value="#{empresaController.empresa.statusEmpresa}">
+								<s:selectItems value="#{empresaController.statusEmpresas}" var="s" label="#{s.descricao}" noSelectionLabel="Selecione..."/>
 								<s:convertEntity/>
 							</h:selectOneMenu>
 						</s:decorate>											
