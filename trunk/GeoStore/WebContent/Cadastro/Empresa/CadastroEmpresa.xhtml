@@ -156,6 +156,20 @@
                                 <s:convertEntity/>                               
                             </h:selectOneMenu>
                        	</s:decorate>
+                       	
+                       	<s:decorate template="../../layout/edit.xhtml">
+								<ui:define name="label">Latitude:</ui:define>
+								<h:inputText size="30" value="#{empresaController.empresa.endereco.latitude}" required="true" requiredMessage="É necessário consultar as Coordenadas!"/>	
+						</s:decorate>
+						
+                       	<s:decorate template="../../layout/edit.xhtml">
+								<ui:define name="label">Latitude:</ui:define>
+								<h:inputText size="30" value="#{empresaController.empresa.endereco.longitude}" required="true" requiredMessage="É necessário consultar as Coordenadas!"/>	
+						</s:decorate>
+						
+						<a4j:commandButton value="Buscar Coordenadas" action="#{empresaController.buscarCoordenadas()}" />
+						
+						<a4j:commandButton value="Validar Coordenadas" action="#{empresaController.validarCoordenadas()}" />
                     					
 					</h:panelGrid>
 
