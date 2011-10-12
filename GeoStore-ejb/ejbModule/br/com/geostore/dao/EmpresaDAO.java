@@ -111,5 +111,29 @@ public class EmpresaDAO {
 		}
 	}
 	
+	public boolean buscarPorCNPJ(Empresa empresa) throws Exception {
+		try{
+			
+			log.info("Buscando se CNPJ já existe no Banco de Dados: " + empresa.getDocumento());
+			
+			String sQuery;			
+			
+			sQuery = " from Empresa as e ";	
+			sQuery += " where e.documento = :empresaCNPJ ";
+			sQuery += " order by e.id ";			
+			
+			Query query = entityManager.createQuery(sQuery);			
+			query.setParameter("empresaCNPJ", empresa.getDocumento());
+			
+			if(query.getResultList()==null || query.getResultList().isEmpty()){
+				return false;
+			}
+			
+			return true;
+		}catch (Exception e) {
+			throw new Exception(e);
+		}
+	}
+	
 	
 }

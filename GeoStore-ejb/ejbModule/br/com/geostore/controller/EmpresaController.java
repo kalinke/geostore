@@ -28,8 +28,6 @@ public class EmpresaController {
 	@In private FacesMessages facesMessages;
 	private Usuario usuarioLogado;
 	
-	private boolean validaDocumento;
-	
 	private UnidadeFederacao unidadeFederacao = new UnidadeFederacao();	
 	private Empresa empresa = new Empresa();
 	private Long idEmpresa;
@@ -72,18 +70,18 @@ public class EmpresaController {
 		}		
 	}
 	
-	public void validar() throws RuntimeException{
+	public void validar() throws Exception{		
 		
-		validaDocumento = DocumentoValidator.validarCNPJCPF(empresa.getDocumento());		
+		if(!DocumentoValidator.validarCNPJCPF(empresa.getDocumento()))			
+			throw new RuntimeException("CNPJ digitado é inválido!");			
+				
+		if (empresaDAO.buscarPorCNPJ(empresa))				
+			throw new RuntimeException("CNPJ digitado já existe!");			
 
-		if(validaDocumento == false){
-			throw new RuntimeException("CNPJ Digitado é inválido!");
-		}
 			
-		if(empresa.getEndereco().getCidade()==null || empresa.getEndereco().getCidade().getDescricao().isEmpty()){
+		if(empresa.getEndereco().getCidade()==null || empresa.getEndereco().getCidade().getDescricao().isEmpty())
 			throw new RuntimeException("Selecione uma Cidade!");
-		}
-			
+					
 	}	
 	
 	public String remover() throws Exception{		
