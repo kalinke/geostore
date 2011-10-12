@@ -88,6 +88,22 @@ public class UsuarioDAO {
 		}
 	}
 	
-	
+	public Usuario buscarAutenticacao(Usuario usuario) throws Exception {
+		try {
+			
+			Query query = entityManager.createQuery("from Usuario as u "					
+					+ " where u.email = :email "				
+					+ " and   u.senha = :senha" );
+
+			query.setParameter("email", usuario.getEmail());
+			query.setParameter("senha", usuario.getSenha());
+		
+			return (Usuario) (query.getResultList().size() < 1 ? null : query.getResultList().get(0));
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception(e);
+		}
+	}
 	
 }

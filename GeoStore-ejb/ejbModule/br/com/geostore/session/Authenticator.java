@@ -9,65 +9,57 @@ import org.jboss.seam.log.Log;
 import org.jboss.seam.security.Credentials;
 import org.jboss.seam.security.Identity;
 
-import br.com.geostore.entity.Empresa;
-import br.com.geostore.entity.TipoUsuario;
+import br.com.geostore.dao.UsuarioDAO;
 import br.com.geostore.entity.Usuario;
 
 @Name("authenticator")
-public class Authenticator
-{
+public class Authenticator{
     @Logger private Log log;
 
     @In Identity identity;
     @In Credentials credentials;
     @In private FacesMessages facesMessages;
+    @In(create=true) UsuarioDAO usuarioDAO;
     private Usuario usuario;
+    private Usuario usuarioLogado;
     
     
     public boolean authenticate(){
     	try{
     		
+    		usuario = new Usuario();
             log.info("authenticating {0}", credentials.getUsername());
 
-            TipoUsuario tipoUsuario = new TipoUsuario();
+            usuario.setEmail(credentials.getUsername());
+            usuario.setSenha(credentials.getPassword());
+            	
+            usuarioLogado = usuarioDAO.buscarAutenticacao(usuario);            	            	
+            	
+            if(usuarioLogado == null)            	
+            	throw new RuntimeException("Erro na Autenticação! Verifique usuário e senha!");
             
-            if (credentials.getUsername().equals("admin")){  
-            	usuario = new Usuario();
-            	tipoUsuario.setId(1l);
-            	
-            	identity.addRole("admin"); 
-            	usuario.setNome("Admin");
-            	usuario.setEmail("admin@geostore.com");
-            	usuario.setId(1l);    
-            	usuario.setTipoUsuario(tipoUsuario);
-            	
-            	Contexts.getSessionContext().set("usuarioLogado", usuario);
-            	
-            	return true;
-            	
-            }else if(credentials.getUsername().equals("operador")){
-            	usuario = new Usuario();
-            	identity.addRole("loja");
-            	usuario.setNome("Operador de Loja");
-            	usuario.setEmail("operador@loja.com");
-            	usuario.setId(2l);        	
-            	
-            	tipoUsuario.setId(2l);
-            	Empresa empresa = new Empresa();
-            	empresa.setId(1l);        	
-            	usuario.setEmpresaVinculo(empresa);
-            	usuario.setTipoUsuario(tipoUsuario);
-            	
-            	Contexts.getSessionContext().set("usuarioLogado", usuario);		
-            	
-            	return true;
-            }
+            if(usuarioLogado.getStatusUsuario().getId().longValue() != 1)            	
+            	throw new RuntimeException("Usuário inativo ou bloqueado!");
+
+            if(usuarioLogado.getTipoUsuario().getId().longValue() == 3)            	
+            	throw new RuntimeException("Usuário apenas Mobile");
+            
+            if(usuarioLogado.getTipoUsuario().getId().longValue() == 1)
+            	identity.addRole("admin");
+            else if(usuarioLogado.getTipoUsuario().getId().longValue() == 2)
+            	identity.addRole("operador");
+            else
+            	throw new RuntimeException("Perfil de acesso incorreto!");
+            
+            
+            Contexts.getSessionContext().set("usuarioLogado", usuarioLogado);
+            return true;
+
     		
     	}catch (Exception e) {
 			facesMessages.add(e.getMessage());
+			return false;
 		}
-                
-        return false;
     }
     
     public Usuario getUsuario() {

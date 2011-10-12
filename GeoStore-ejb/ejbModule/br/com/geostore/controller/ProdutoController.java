@@ -9,14 +9,17 @@ import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
 
 import br.com.geostore.dao.ProdutoDAO;
+import br.com.geostore.dao.StatusProdutoDAO;
 import br.com.geostore.entity.Produto;
+import br.com.geostore.entity.StatusProduto;
 
 @Name("produtoController")
 @Scope(ScopeType.CONVERSATION)
 public class ProdutoController {
 
 	@In(create=true) private ProdutoDAO produtoDAO;
-
+	@In(create=true) private StatusProdutoDAO statusProdutoDAO;
+	
 //	@In private FacesMessages facesMessages;
 	
 	private Produto produto = new Produto();
@@ -60,6 +63,10 @@ public class ProdutoController {
 		return produtoDAO.buscarTodos();
 	}
 
+	@Factory
+	public List<StatusProduto> getStatusProdutos() throws Exception{		
+		return statusProdutoDAO.buscarTodos();
+	}
 
 	public Produto getProduto() {
 		return produto;

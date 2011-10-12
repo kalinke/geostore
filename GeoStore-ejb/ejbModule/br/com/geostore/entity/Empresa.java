@@ -8,10 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.Pattern;
 import org.jboss.seam.annotations.Name;
 
 @Entity
@@ -34,15 +36,19 @@ public class Empresa {
 	private String nomeFantasia;
 
 	@Column(name = "inscricao_estadual",length=14)
+	@Pattern(regex="^([0-9]{5,14})+$",message="A InscriÁ„o Estadual deve conter apenas n˙meros!")
 	private String inscricaoEstadual;
 	
 	@Column(name = "contato",length=30)
+	@Pattern(regex="^[aA-zZzZ„√ı’Í ‚¬Ù‘Û”˙⁄·¡È…ÌÕ‡¿\\s]+((\\s[aA-zZ„√ı’Í ‚¬Ù‘Û”˙⁄·¡È…ÌÕ‡¿\\s]+)+)?$", message="Nome do contato inv·lido!")
 	private String contato;
 
 	@Column(name = "telefone", length=11)
 	private String telefone;
-
+	
 	@Column(name = "email", length=90)
+	//@Pattern(regex="^([0-9a-zA-Z]+([_.-]?[0-9a-zA-Z]+)*@[0-9a-zA-Z]+[0-9,a-z,A-Z,.,-]*(.){1}[a-zA-Z]{2,4})+$",message="Digite um e-mail v·lido!")
+	@Pattern(regex="^([0-9a-zA-Z]+([_.-]?[0-9a-zA-Z]+)*@[0-9a-zA-Z-]+.[-0-9a-zA-Z]+.[-0-9a-zA-Z]+.[a-zA-Z]{2,3})+$",message="Digite um e-mail v·lido!")
 	private String email;
 	
 	@OneToOne(cascade=CascadeType.ALL)
@@ -54,6 +60,10 @@ public class Empresa {
 	
 	@OneToMany(mappedBy="empresaVinculo", cascade=CascadeType.ALL)
 	private List<Usuario> usuariosVinculados;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_status_empresa")
+	private StatusEmpresa statusEmpresa;
 	
 	public Empresa() {
 		endereco = new Endereco();
@@ -147,6 +157,14 @@ public class Empresa {
 	public void setUsuariosVinculados(List<Usuario> usuariosVinculados) {
 		this.usuariosVinculados = usuariosVinculados;
 	}
+	
+	public StatusEmpresa getStatusEmpresa() {
+		return statusEmpresa;
+	}
+	
+	public void setStatusEmpresa(StatusEmpresa statusEmpresa) {
+		this.statusEmpresa = statusEmpresa;
+	}
 
 
 	@Override
@@ -170,7 +188,13 @@ public class Empresa {
 		result = prime * result
 				+ ((razaoSocial == null) ? 0 : razaoSocial.hashCode());
 		result = prime * result
+				+ ((statusEmpresa == null) ? 0 : statusEmpresa.hashCode());
+		result = prime * result
 				+ ((telefone == null) ? 0 : telefone.hashCode());
+		result = prime
+				* result
+				+ ((usuariosVinculados == null) ? 0 : usuariosVinculados
+						.hashCode());
 		return result;
 	}
 
@@ -229,13 +253,26 @@ public class Empresa {
 				return false;
 		} else if (!razaoSocial.equals(other.razaoSocial))
 			return false;
+		if (statusEmpresa == null) {
+			if (other.statusEmpresa != null)
+				return false;
+		} else if (!statusEmpresa.equals(other.statusEmpresa))
+			return false;
 		if (telefone == null) {
 			if (other.telefone != null)
 				return false;
 		} else if (!telefone.equals(other.telefone))
 			return false;
+		if (usuariosVinculados == null) {
+			if (other.usuariosVinculados != null)
+				return false;
+		} else if (!usuariosVinculados.equals(other.usuariosVinculados))
+			return false;
 		return true;
 	}
+	
+	
+
 	
 	
 }
