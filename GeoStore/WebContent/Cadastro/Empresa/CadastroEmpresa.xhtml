@@ -71,7 +71,7 @@
 						
 						<s:decorate template="../../layout/edit.xhtml">	
 							<ui:define name="label">Razão Social</ui:define>
-							<h:inputText size="100" value="#{empresaController.empresa.razaoSocial}" />
+							<h:inputText size="100" value="#{empresaController.empresa.razaoSocial}" required="true" requiredMessage="É necessário informar a razão social!" />
 						</s:decorate>
 					
 						<s:decorate template="../../layout/edit.xhtml">
