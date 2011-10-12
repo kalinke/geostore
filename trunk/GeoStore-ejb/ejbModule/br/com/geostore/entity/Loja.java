@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.Pattern;
 import org.jboss.seam.annotations.Name;
 
 @Entity
@@ -35,15 +36,19 @@ public class Loja {
 	private String nomeFantasia;
 
 	@Column(name = "inscricao_estadual",length=14)
+	@Pattern(regex="^([0-9]{5,14})+$",message="A InscriÁ„o Estadual deve conter apenas n˙meros!")
 	private String inscricaoEstadual;
 	
 	@Column(name = "contato",length=30)
+	@Pattern(regex="^[aA-zZzZ„√ı’Í ‚¬Ù‘Û”˙⁄·¡È…ÌÕ‡¿\\s]+((\\s[aA-zZ„√ı’Í ‚¬Ù‘Û”˙⁄·¡È…ÌÕ‡¿\\s]+)+)?$", message="Nome do contato inv·lido!")
 	private String contato;
 
 	@Column(name = "telefone", length=11)
 	private String telefone;
 
 	@Column(name = "email", length=90)
+	//@Pattern(regex="^([0-9a-zA-Z]+([_.-]?[0-9a-zA-Z]+)*@[0-9a-zA-Z]+[0-9,a-z,A-Z,.,-]*(.){1}[a-zA-Z]{2,4})+$",message="Digite um e-mail v·lido!")
+	@Pattern(regex="^([0-9a-zA-Z]+([_.-]?[0-9a-zA-Z]+)*@[0-9a-zA-Z]+.[a-zA-Z]{2,3})+$",message="Digite um e-mail v·lido!")
 	private String email;
 	
 	@OneToOne(cascade=CascadeType.ALL)
@@ -56,6 +61,10 @@ public class Loja {
 	
 	@OneToMany(mappedBy="loja", cascade=CascadeType.ALL)
 	private List<Produto> produtos;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_status_loja")
+	private StatusLoja statusLoja;
 	
 	public Loja() {
 		endereco = new Endereco();
@@ -149,6 +158,14 @@ public class Loja {
 		this.produtos = produtos;
 	}
 
+	public StatusLoja getStatusLoja() {
+		return statusLoja;
+	}
+	
+	public void setStatusLoja(StatusLoja statusLoja) {
+		this.statusLoja = statusLoja;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -173,6 +190,8 @@ public class Loja {
 				+ ((produtos == null) ? 0 : produtos.hashCode());
 		result = prime * result
 				+ ((razaoSocial == null) ? 0 : razaoSocial.hashCode());
+		result = prime * result
+				+ ((statusLoja == null) ? 0 : statusLoja.hashCode());
 		result = prime * result
 				+ ((telefone == null) ? 0 : telefone.hashCode());
 		return result;
@@ -238,6 +257,11 @@ public class Loja {
 				return false;
 		} else if (!razaoSocial.equals(other.razaoSocial))
 			return false;
+		if (statusLoja == null) {
+			if (other.statusLoja != null)
+				return false;
+		} else if (!statusLoja.equals(other.statusLoja))
+			return false;
 		if (telefone == null) {
 			if (other.telefone != null)
 				return false;
@@ -245,6 +269,8 @@ public class Loja {
 			return false;
 		return true;
 	}
+	
+	
 	
 	
 }

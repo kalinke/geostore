@@ -33,6 +33,10 @@ public class Produto {
 	@JoinColumn(name = "id_loja")
 	private Loja loja;
 	
+	@ManyToOne
+	@JoinColumn(name = "id_status_produto")
+	private StatusProduto statusProduto;
+	
 	public Produto() {
 	}
 	
@@ -86,6 +90,14 @@ public class Produto {
 		this.loja = loja;
 	}
 
+	public StatusProduto getStatusProduto() {
+		return statusProduto;
+	}
+	
+	public void setStatusProduto(StatusProduto statusProduto) {
+		this.statusProduto = statusProduto;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -96,6 +108,8 @@ public class Produto {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((loja == null) ? 0 : loja.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result
+				+ ((statusProduto == null) ? 0 : statusProduto.hashCode());
 		result = prime * result + ((valor == null) ? 0 : valor.hashCode());
 		return result;
 	}
@@ -130,6 +144,11 @@ public class Produto {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
+		if (statusProduto == null) {
+			if (other.statusProduto != null)
+				return false;
+		} else if (!statusProduto.equals(other.statusProduto))
+			return false;
 		if (valor == null) {
 			if (other.valor != null)
 				return false;
@@ -137,9 +156,10 @@ public class Produto {
 			return false;
 		return true;
 	}
-
 	
-
+	
+	
+	
 	
 	
 	
