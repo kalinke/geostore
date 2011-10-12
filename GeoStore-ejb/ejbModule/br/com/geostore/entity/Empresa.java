@@ -50,6 +50,7 @@ public class Empresa {
 	//@Pattern(regex="^([0-9a-zA-Z]+([_.-]?[0-9a-zA-Z]+)*@[0-9a-zA-Z]+[0-9,a-z,A-Z,.,-]*(.){1}[a-zA-Z]{2,4})+$",message="Digite um e-mail válido!")
 	@Pattern(regex="^([0-9a-zA-Z]+([_.-]?[0-9a-zA-Z]+)*@[0-9a-zA-Z-]+.[-0-9a-zA-Z]+.[-0-9a-zA-Z]+.[a-zA-Z]{2,3})+$",message="Digite um e-mail válido!")
 	private String email;
+
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "id_endereco")
@@ -270,6 +271,15 @@ public class Empresa {
 			return false;
 		return true;
 	}
+	
+	
+
+
+
+	
+	
+
+	
 
 
 	

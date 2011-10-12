@@ -46,8 +46,12 @@ public class Endereco implements Serializable {
 	@JoinColumn(name="id_cidade")
 	private Cidade cidade;
 
-	//s@Column(name="estado",length=40)
-	//private String estado;
+	
+	@Column(name = "latitude", length=20)
+	private String latitude;
+	
+	@Column(name = "longitude", length=20)
+	private String longitude;
 	
 	public Long getId() {
 		return id;
@@ -97,13 +101,6 @@ public class Endereco implements Serializable {
 		this.bairro = bairro;
 	}
 
-	//public String getEstado() {
-		//return estado;
-	//}
-
-	//public void setEstado(String estado) {
-		//this.estado = estado;
-	//}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -115,6 +112,24 @@ public class Endereco implements Serializable {
 	
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
+	}
+	
+	
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
 	}
 
 	@Override
@@ -128,10 +143,13 @@ public class Endereco implements Serializable {
 				* result
 				+ ((complementoLogradouro == null) ? 0 : complementoLogradouro
 						.hashCode());
-		//result = prime * result + ((estado == null) ? 0 : estado.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result
+				+ ((latitude == null) ? 0 : latitude.hashCode());
+		result = prime * result
 				+ ((logradouro == null) ? 0 : logradouro.hashCode());
+		result = prime * result
+				+ ((longitude == null) ? 0 : longitude.hashCode());
 		result = prime
 				* result
 				+ ((numeroLogradouro == null) ? 0 : numeroLogradouro.hashCode());
@@ -167,20 +185,25 @@ public class Endereco implements Serializable {
 				return false;
 		} else if (!complementoLogradouro.equals(other.complementoLogradouro))
 			return false;
-		//if (estado == null) {
-		//	if (other.estado != null)
-		//		return false;
-		//} else if (!estado.equals(other.estado))
-		//	return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (latitude == null) {
+			if (other.latitude != null)
+				return false;
+		} else if (!latitude.equals(other.latitude))
+			return false;
 		if (logradouro == null) {
 			if (other.logradouro != null)
 				return false;
 		} else if (!logradouro.equals(other.logradouro))
+			return false;
+		if (longitude == null) {
+			if (other.longitude != null)
+				return false;
+		} else if (!longitude.equals(other.longitude))
 			return false;
 		if (numeroLogradouro == null) {
 			if (other.numeroLogradouro != null)
@@ -189,6 +212,7 @@ public class Endereco implements Serializable {
 			return false;
 		return true;
 	}
+
 	
 	
 
