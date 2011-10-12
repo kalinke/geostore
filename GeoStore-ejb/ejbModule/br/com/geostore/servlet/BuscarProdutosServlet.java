@@ -47,7 +47,7 @@ public class BuscarProdutosServlet extends HttpServlet {
 	}
 	
 	private void processRequest(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		Buscar b = null;
+		Buscar b = null;		
 		
 		//Recebe o objeto 
 		ObjectInputStream ois = new ObjectInputStream(req.getInputStream());

@@ -3,6 +3,10 @@ package br.com.geostore.entity;
 import java.io.Serializable;
 
 public class Buscar implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String texto;
 	private Double lat;
 	private Double log;
