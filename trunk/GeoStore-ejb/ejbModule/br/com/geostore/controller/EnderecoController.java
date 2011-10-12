@@ -18,6 +18,8 @@ public class EnderecoController {
 	@In(create=true) private UnidadeFederacaoDAO unidadeFederacaoDAO;
 	@In(create=true) private CidadeDAO cidadeDAO;
 	
+	UnidadeFederacao uf = new UnidadeFederacao();
+	
 	@Factory(value="unidadesFederacao", scope=ScopeType.APPLICATION)
 	public List<UnidadeFederacao> populaUnidadesFederacao() throws Exception{		
 		return unidadeFederacaoDAO.buscarTodos();
@@ -29,6 +31,14 @@ public class EnderecoController {
 			return cidadeDAO.buscarPorUnidadeFederacao(unidadeFederacao);
 		else
 			return null;
+	}
+	
+	public UnidadeFederacao getUf() {
+		return uf;
+	}
+	
+	public void setUf(UnidadeFederacao uf) {
+		this.uf = uf;
 	}
 	
 }

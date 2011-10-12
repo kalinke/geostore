@@ -30,6 +30,7 @@ public class CidadeDAO {
 		}
 	}
 		
+	
 	@SuppressWarnings("unchecked")
 	public List<Cidade> buscarPorUnidadeFederacao(UnidadeFederacao unidadeFederacao) throws Exception {
 		try{
