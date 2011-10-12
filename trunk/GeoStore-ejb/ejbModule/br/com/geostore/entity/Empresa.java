@@ -270,9 +270,7 @@ public class Empresa {
 			return false;
 		return true;
 	}
-	
-	
 
-	
+
 	
 }
