@@ -1,5 +1,6 @@
 package br.com.geostore.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -19,7 +20,12 @@ import org.jboss.seam.annotations.Name;
 @Entity
 @Name("empresa")
 @Table(name = "GS_EMPRESA")
-public class Empresa {
+public class Empresa implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
