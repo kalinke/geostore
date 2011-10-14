@@ -25,6 +25,7 @@ public class UsuarioDAO {
 		try{
 			log.info("Incluir Usuario: #0", usuario.getId());
 			entityManager.persist(usuario);
+			entityManager.flush();
 		}catch (Exception e) {
 			throw new Exception(e);
 		}
@@ -32,10 +33,9 @@ public class UsuarioDAO {
 	
 	public void alterar(Usuario usuario) throws Exception {
 		try{
-			log.info("Alterar Usuario: #0", usuario.getId());
-			
+			log.info("Alterar Usuario: #0", usuario.getId());			
 			entityManager.merge(usuario);
-			
+			entityManager.flush();			
 			
 		}catch (Exception e) {
 			throw new Exception(e);
@@ -46,7 +46,8 @@ public class UsuarioDAO {
 	public void salvar(Usuario usuario) throws Exception {
 		try{
 			log.info("Persistir usuario: #0", usuario.getId());
-			entityManager.persist(usuario);			
+			entityManager.persist(usuario);		
+			entityManager.flush();
 			
 		}catch (Exception e) {
 			throw new Exception(e);
@@ -61,6 +62,7 @@ public class UsuarioDAO {
 			
 			log.info("Remover Empresa: #0", usuario.getId());
 			entityManager.remove(usuario);
+			entityManager.flush();
 			
 		}catch (Exception e) {
 			throw new Exception(e);

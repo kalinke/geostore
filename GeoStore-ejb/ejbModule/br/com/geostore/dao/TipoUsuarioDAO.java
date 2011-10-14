@@ -25,6 +25,7 @@ public class TipoUsuarioDAO {
 		try{
 			log.info("Incluir TipoUsuario: #0", tipoUsuario.getId());
 			entityManager.persist(tipoUsuario);
+			entityManager.flush();
 		}catch (Exception e) {
 			throw new Exception(e);
 		}
@@ -32,10 +33,9 @@ public class TipoUsuarioDAO {
 	
 	public void alterar(TipoUsuario tipoUsuario) throws Exception {
 		try{
-			log.info("Alterar tipoEmpresa: #0", tipoUsuario.getId());
-			
+			log.info("Alterar tipoEmpresa: #0", tipoUsuario.getId());			
 			entityManager.merge(tipoUsuario);
-			
+			entityManager.flush();			
 		}catch (Exception e) {
 			throw new Exception(e);
 		}
@@ -45,7 +45,8 @@ public class TipoUsuarioDAO {
 	public void salvar(TipoUsuario tipoUsuario) throws Exception {
 		try{
 			log.info("Persistir tipoUsuario: #0", tipoUsuario.getId());
-			entityManager.persist(tipoUsuario);			
+			entityManager.persist(tipoUsuario);	
+			entityManager.flush();
 			
 		}catch (Exception e) {
 			throw new Exception(e);
@@ -60,6 +61,7 @@ public class TipoUsuarioDAO {
 			
 			log.info("Remover TipoEmpresa: #0", tipoUsuario.getId());
 			entityManager.remove(tipoUsuario);
+			entityManager.flush();
 			
 		}catch (Exception e) {
 			throw new Exception(e);
