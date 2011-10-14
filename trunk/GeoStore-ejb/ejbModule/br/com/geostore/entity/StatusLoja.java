@@ -1,5 +1,7 @@
 package br.com.geostore.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +13,12 @@ import org.jboss.seam.annotations.Name;
 @Entity
 @Name("statusUsuario")
 @Table(name = "GS_STATUS_USUARIO")
-public class StatusLoja {
+public class StatusLoja implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
