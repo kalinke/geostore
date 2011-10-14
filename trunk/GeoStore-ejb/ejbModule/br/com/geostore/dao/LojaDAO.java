@@ -25,6 +25,7 @@ public class LojaDAO {
 		try{
 			log.info("Incluir Loja: #0", loja.getId());
 			entityManager.persist(loja);
+			entityManager.flush();
 		}catch (Exception e) {
 			throw new Exception(e);
 		}
@@ -36,6 +37,7 @@ public class LojaDAO {
 			
 			entityManager.merge(loja);
 			entityManager.merge(loja.getEndereco());
+			entityManager.flush();
 			
 		}catch (Exception e) {
 			throw new Exception(e);
@@ -46,7 +48,8 @@ public class LojaDAO {
 	public void salvar(Loja loja) throws Exception {
 		try{
 			log.info("Persistir loja: #0", loja.getDocumento());
-			entityManager.persist(loja);			
+			entityManager.persist(loja);
+			entityManager.flush();
 			
 		}catch (Exception e) {
 			throw new Exception(e);
@@ -61,6 +64,7 @@ public class LojaDAO {
 			
 			log.info("Remover Empresa: #0", loja.getId());
 			entityManager.remove(loja);
+			entityManager.flush();
 			
 		}catch (Exception e) {
 			throw new Exception(e);

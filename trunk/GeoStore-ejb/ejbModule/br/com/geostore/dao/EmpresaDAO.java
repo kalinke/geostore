@@ -26,6 +26,7 @@ public class EmpresaDAO {
 		try{
 			log.info("Incluir Empresa: #0", empresa.getId());
 			entityManager.persist(empresa);
+			entityManager.flush();
 		}catch (Exception e) {
 			throw new Exception(e);
 		}
@@ -37,6 +38,7 @@ public class EmpresaDAO {
 			
 			entityManager.merge(empresa);
 			entityManager.merge(empresa.getEndereco());
+			entityManager.flush();
 			
 		}catch (Exception e) {
 			throw new Exception(e);
@@ -47,7 +49,8 @@ public class EmpresaDAO {
 	public void salvar(Empresa empresa) throws Exception {
 		try{
 			log.info("Persistir Empresa: #0", empresa.getDocumento());
-			entityManager.persist(empresa);			
+			entityManager.persist(empresa);	
+			entityManager.flush();
 			
 		}catch (Exception e) {
 			throw new Exception(e);
@@ -62,6 +65,7 @@ public class EmpresaDAO {
 			
 			log.info("Remover Empresa: #0", empresa.getId());
 			entityManager.remove(empresa);
+			entityManager.flush();
 			
 		}catch (Exception e) {
 			throw new Exception(e);
@@ -121,10 +125,12 @@ public class EmpresaDAO {
 			
 			sQuery = " from Empresa as e ";	
 			sQuery += " where e.documento = :empresaCNPJ ";
+			sQuery += " and e.id <> :empresaId ";
 			sQuery += " order by e.id ";			
 			
 			Query query = entityManager.createQuery(sQuery);			
 			query.setParameter("empresaCNPJ", empresa.getDocumento());
+			query.setParameter("empresaId", empresa.getId());
 			
 			if(query.getResultList()==null || query.getResultList().isEmpty()){
 				return false;

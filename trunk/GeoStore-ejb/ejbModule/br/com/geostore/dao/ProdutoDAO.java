@@ -25,6 +25,7 @@ public class ProdutoDAO {
 		try{
 			log.info("Incluir Produto: #0", produto.getId());
 			entityManager.persist(produto);
+			entityManager.flush();
 		}catch (Exception e) {
 			throw new Exception(e);
 		}
@@ -32,10 +33,9 @@ public class ProdutoDAO {
 	
 	public void alterar(Produto produto) throws Exception {
 		try{
-			log.info("Alterar produto: #0", produto.getId());
-			
+			log.info("Alterar produto: #0", produto.getId());			
 			entityManager.merge(produto);
-			
+			entityManager.flush();			
 			
 		}catch (Exception e) {
 			throw new Exception(e);
@@ -46,7 +46,8 @@ public class ProdutoDAO {
 	public void salvar(Produto produto) throws Exception {
 		try{
 			log.info("Persistir Produto: #0", produto.getId());
-			entityManager.persist(produto);			
+			entityManager.persist(produto);	
+			entityManager.flush();
 			
 		}catch (Exception e) {
 			throw new Exception(e);
@@ -61,6 +62,7 @@ public class ProdutoDAO {
 			
 			log.info("Remover Produto: #0", produto.getId());
 			entityManager.remove(produto);
+			entityManager.flush();
 			
 		}catch (Exception e) {
 			throw new Exception(e);

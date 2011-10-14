@@ -26,6 +26,9 @@ import br.com.geostore.entity.StatusEmpresa;
 import br.com.geostore.entity.UnidadeFederacao;
 import br.com.geostore.entity.Usuario;
 import br.com.geostore.validator.DocumentoValidator;
+import br.com.geostore.validator.EmailValidator;
+import br.com.geostore.validator.NomeValidator;
+import br.com.geostore.validator.NumeroValidator;
 
 @Name("empresaController")
 @Scope(ScopeType.CONVERSATION)
@@ -79,57 +82,75 @@ public class EmpresaController {
 		}		
 	}
 	
-	public void validar() throws Exception{		
-		
-		if(empresa.getStatusEmpresa()==null || empresa.getStatusEmpresa().getDescricao().isEmpty())
-			throw new RuntimeException("É necessário selecionar o status!");
-		
-		if(empresa.getDocumento().isEmpty())
-			throw new RuntimeException("É necessário preencher o CNPJ!");	
-		
-		if(!DocumentoValidator.validarCNPJCPF(empresa.getDocumento()))
-			throw new RuntimeException("CNPJ digitado é inválido!");	
-			
-		//if (empresaDAO.buscarPorCNPJ(empresa))
-			//throw new RuntimeException("CNPJ digitado já existe!");
-		
-		if(empresa.getRazaoSocial().isEmpty())
-			throw new RuntimeException("É necessário preencher a razão social!");
-		
-		if(empresa.getNomeFantasia().isEmpty())
-			throw new RuntimeException("É necessário preencher o nome fantasia!");
-		
-		if(empresa.getInscricaoEstadual().isEmpty())
-			throw new RuntimeException("É necessário preencher a inscrição estadual!");
-		
-		if(empresa.getContato().isEmpty())
-			throw new RuntimeException("É necessário preencher o contato!");
-		
-		if(empresa.getTelefone().isEmpty())
-			throw new RuntimeException("É necessário preencher o telefone!");
-		
-		if(empresa.getEmail().isEmpty())
-			throw new RuntimeException("É necessário preencher o email!");
-		
-		if(empresa.getEndereco().getCEP().isEmpty())
-			throw new RuntimeException("É necessário preencher o cep!");
-		
-		if(empresa.getEndereco().getLogradouro().isEmpty())
-			throw new RuntimeException("É necessário preencher o nome da rua!");
-		
-		if(empresa.getEndereco().getNumeroLogradouro().isEmpty())
-			throw new RuntimeException("É necessário preencher o número da rua!");
-		
-		if(empresa.getEndereco().getBairro().isEmpty())
-			throw new RuntimeException("É necessário preencher o bairro!");
-		
-		if(empresa.getEndereco().getCidade()==null || empresa.getEndereco().getCidade().getDescricao().isEmpty())
-			throw new RuntimeException("Selecione uma Cidade!");
-		
-		if(empresa.getEndereco().getLatitude().isEmpty() || empresa.getEndereco().getLongitude().isEmpty())
-			throw new RuntimeException("É necessário buscar as coordenadas!");			
-					
-	}	
+	public void validar() throws Exception{              
+
+        NomeValidator nomeValidator = new NomeValidator();
+        EmailValidator emailValidator = new EmailValidator();
+        NumeroValidator numertoValidator = new NumeroValidator();
+       
+
+        if(empresa.getStatusEmpresa()==null || empresa.getStatusEmpresa().getDescricao().isEmpty())
+                throw new RuntimeException("É necessário selecionar o status!");      
+
+        if(empresa.getDocumento().isEmpty())
+                throw new RuntimeException("É necessário preencher o CNPJ!");        
+
+        if(!DocumentoValidator.validarCNPJCPF(empresa.getDocumento()))
+                throw new RuntimeException("CNPJ digitado é inválido!");               
+
+        if (empresaDAO.buscarPorCNPJ(empresa))
+                throw new RuntimeException("CNPJ digitado já existe!");       
+
+        if(empresa.getRazaoSocial().isEmpty())
+                throw new RuntimeException("É necessário preencher a razão social!");       
+
+        if(empresa.getNomeFantasia().isEmpty())
+                throw new RuntimeException("É necessário preencher o nome fantasia!");       
+
+        if(empresa.getInscricaoEstadual().isEmpty())
+                throw new RuntimeException("É necessário preencher a inscrição estadual!");       
+
+        if(empresa.getContato().isEmpty())
+                throw new RuntimeException("É necessário preencher o contato!");       
+
+        if(!nomeValidator.validarNome(empresa.getContato()))
+                throw new RuntimeException("Nome do contato inválido!");       
+
+        if(empresa.getTelefone().isEmpty())
+                throw new RuntimeException("É necessário preencher o telefone!");       
+
+        if(empresa.getEmail().isEmpty())
+                throw new RuntimeException("É necessário preencher o email!");       
+
+        if(!emailValidator.validarEmail(empresa.getEmail()))
+                throw new RuntimeException("Email inválido!");       
+
+        if(empresa.getEndereco().getCEP().isEmpty())
+                throw new RuntimeException("É necessário preencher o cep!");       
+
+        if(empresa.getEndereco().getLogradouro().isEmpty())
+                throw new RuntimeException("É necessário preencher o nome da rua!");       
+
+        if(empresa.getEndereco().getNumeroLogradouro().isEmpty())
+                throw new RuntimeException("É necessário preencher o número da rua!");       
+
+        if(!numertoValidator.validarNumeroLogradouro(empresa.getEndereco().getNumeroLogradouro()))
+                throw new RuntimeException("Número da rua inválido!");       
+
+        if(empresa.getEndereco().getBairro().isEmpty())
+                throw new RuntimeException("É necessário preencher o bairro!");       
+
+        if(!nomeValidator.validarNome(empresa.getEndereco().getBairro()))
+                throw new RuntimeException("Nome do bairro inválido!");
+       
+
+        if(empresa.getEndereco().getCidade()==null || empresa.getEndereco().getCidade().getDescricao().isEmpty())
+                throw new RuntimeException("Selecione uma Cidade!");
+  
+        if(empresa.getEndereco().getLatitude().isEmpty() || empresa.getEndereco().getLongitude().isEmpty())
+                throw new RuntimeException("É necessário buscar as coordenadas!");              
+                              
+}      
 	
 	
 	
