@@ -64,15 +64,5 @@
   <auth-constraint/>
  </security-constraint>
  
-  <servlet>
-    <description></description>
-    <display-name>BuscarProdutosServlet</display-name>
-    <servlet-name>BuscarProdutosServlet</servlet-name>
-    <servlet-class>br.com.geostore.servlet.BuscarProdutosServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>BuscarProdutosServlet</servlet-name>
-    <url-pattern>/BuscarProdutosServlet</url-pattern>
-  </servlet-mapping>
   
 </web-app>
