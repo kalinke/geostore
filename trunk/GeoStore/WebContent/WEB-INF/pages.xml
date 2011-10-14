@@ -52,7 +52,7 @@
 	<!-- FLUXO CADASTRO EMPRESAS -->
 	<page login-required="true" view-id="/Cadastro/Empresa/CadastroEmpresa.xhtml">
 		<restrict>#{s:hasRole('admin')}</restrict>
-		<begin-conversation flush-mode="auto" join="true" />
+		<begin-conversation flush-mode="manual" join="true" />
 		<navigation>
 			<rule if-outcome="SALVAR">
 				<end-conversation />
@@ -81,7 +81,7 @@
 	</page>
 	<!-- FLUXO CADASTRO LOJAS -->
 	<page login-required="true" view-id="/Cadastro/Loja/CadastroLoja.xhtml">
-		<begin-conversation flush-mode="auto" join="true" />
+		<begin-conversation flush-mode="manual" join="true" />
 		<navigation>
 			<rule if-outcome="SALVAR">
 				<end-conversation />
@@ -112,7 +112,7 @@
 	<!-- FLUXO CADASTRO USUARIO -->
 	<page login-required="true" view-id="/Cadastro/Usuario/CadastroUsuario.xhtml">
 		<restrict>#{s:hasRole('admin')}</restrict>
-		<begin-conversation flush-mode="auto" join="true" />
+		<begin-conversation flush-mode="manual" join="true" />
 		<navigation>
 			<rule if-outcome="SALVAR">
 				<end-conversation />
@@ -141,7 +141,7 @@
 	</page>
 	<!-- FLUXO CADASTRO PRODUTO -->
 	<page login-required="true" view-id="/Cadastro/Produto/CadastroProduto.xhtml">
-		<begin-conversation flush-mode="auto" join="true" />
+		<begin-conversation flush-mode="manual" join="true" />
 		<navigation>
 			<rule if-outcome="SALVAR">
 				<end-conversation />
