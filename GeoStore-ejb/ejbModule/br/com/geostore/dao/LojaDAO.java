@@ -92,6 +92,32 @@ public class LojaDAO {
 		}
 	}
 	
+	public boolean buscarPorCNPJ(Loja loja) throws Exception {
+		try{
+			
+			log.info("Buscando se CNPJ já existe no Banco de Dados: " + loja.getDocumento());
+			
+			String sQuery;			
+			
+			sQuery = " from Loja as l ";	
+			sQuery += " where l.documento = :lojaCNPJ ";
+			sQuery += " and l.id <> :lojaId ";
+			sQuery += " order by l.id ";			
+			
+			Query query = entityManager.createQuery(sQuery);			
+			query.setParameter("lojaCNPJ", loja.getDocumento());
+			query.setParameter("lojaId", loja.getId());
+			
+			if(query.getResultList()==null || query.getResultList().isEmpty()){
+				return false;
+			}
+			
+			return true;
+		}catch (Exception e) {
+			throw new Exception(e);
+		}
+	}
+	
 	
 	
 }

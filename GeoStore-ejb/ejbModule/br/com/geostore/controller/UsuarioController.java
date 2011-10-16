@@ -7,6 +7,7 @@ import org.jboss.seam.annotations.Factory;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
+import org.jboss.seam.faces.FacesMessages;
 
 import br.com.geostore.dao.StatusUsuarioDAO;
 import br.com.geostore.dao.UsuarioDAO;
@@ -22,13 +23,7 @@ public class UsuarioController {
 	@In(create=true) private UsuarioDAO usuarioDAO;
 	@In(create=true) private StatusUsuarioDAO statusUsuarioDAO;
 
-//	@In private FacesMessages facesMessages;
-	
-	EmailValidator emailValidator = new EmailValidator();
-	private boolean validaEmail;
-	
-	NomeValidator nomeValidator = new NomeValidator();
-	private boolean validaNome;
+	@In private FacesMessages facesMessages;
 	
 	private Usuario usuario = new Usuario();
 	private Long idUsuario;
@@ -52,25 +47,48 @@ public class UsuarioController {
 	
 	
 	public String salvar() throws Exception{
-		validar();
+		try{			
+			validar();	
+					
+			usuarioDAO.salvar(usuario);		
+			return "SALVAR";
+
+		}catch (Exception e) {
+			facesMessages.add(e.getMessage());
+			return null;
+		}
 		
-		usuarioDAO.salvar(usuario);		
-		return "SALVAR";
 	}
 	
 	public void validar() throws RuntimeException{
 		
-		validaEmail = emailValidator.validarEmail(usuario.getEmail());
-		validaNome = nomeValidator.validarNome(usuario.getNome());
+		EmailValidator emailValidator = new EmailValidator();		
+		NomeValidator nomeValidator = new NomeValidator();
 		
-		if(validaEmail == false){
-			throw new RuntimeException("Email inválido!");
-		}
+		if(usuario.getTipoUsuario()==null || usuario.getTipoUsuario().getDescricao().isEmpty())
+			throw new RuntimeException("É necessário selecionar o tipo de usuário!");
 		
-		if(validaNome == false){
-			throw new RuntimeException("Nome inválido!");
-		}
+		if(usuario.getStatusUsuario()==null || usuario.getStatusUsuario().getDescricao().isEmpty())
+	        throw new RuntimeException("É necessário selecionar o status!"); 
+		 
+		if(usuario.getNome().isEmpty())
+            throw new RuntimeException("É necessário preencher o nome!");       
 
+		if(!nomeValidator.validarNome(usuario.getNome()))
+            throw new RuntimeException("Nome inválido!");          
+
+		if(usuario.getEmail().isEmpty())
+            throw new RuntimeException("É necessário preencher o email!");       
+
+        if(!emailValidator.validarEmail(usuario.getEmail()))
+            throw new RuntimeException("Email inválido!");        
+        
+        if(usuario.getSenha().isEmpty())
+            throw new RuntimeException("É necessário preencher a senha!");     
+
+		if(usuario.getTelefone().isEmpty())
+            throw new RuntimeException("É necessário preencher o telefone!");    
+       
 	}	
 
 
