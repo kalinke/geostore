@@ -161,6 +161,21 @@
                                 <s:convertEntity/>                               
                             </h:selectOneMenu>
                        	</s:decorate>
+                       	
+                       	<s:decorate template="../../layout/edit.xhtml">
+								<ui:define name="label">Latitude:</ui:define>
+								<h:inputText size="30" value="#{lojaController.loja.endereco.latitude}" />	
+						</s:decorate>
+						
+                       	<s:decorate template="../../layout/edit.xhtml">
+								<ui:define name="label">Latitude:</ui:define>
+								<h:inputText size="30" value="#{lojaController.loja.endereco.longitude}" />	
+						</s:decorate>
+						
+						<a4j:commandButton value="Buscar Coordenadas" action="#{lojaController.buscarCoordenadas()}" reRender="cadastroLojaForm" />
+						
+						<a4j:commandButton value="Validar Coordenadas" action="#{lojaController.validarCoordenadas()}"/>
+                    					
 						
 					</h:panelGrid>
 
