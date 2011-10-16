@@ -56,7 +56,7 @@
 						<s:decorate template="../../layout/edit.xhtml">
 							<ui:define name="label">Loja Vínculo</ui:define>		
 							<h:selectOneMenu value="#{produtoController.produto.loja}">	
-								<s:selectItems value="#{lojaController.lojas}" var="loja" label="#{loja.documento}" noSelectionLabel="Selecione..."/>								
+								<s:selectItems value="#{lojaController.lojas}" var="loja" label="#{loja.documento} - #{loja.razaoSocial}" noSelectionLabel="Selecione..."/>								
 								<s:convertEntity/>
 							</h:selectOneMenu>
 						</s:decorate>
