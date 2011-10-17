@@ -9,8 +9,12 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.net.URI;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
 
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.Factory;
 import org.jboss.seam.annotations.In;
@@ -19,8 +23,10 @@ import org.jboss.seam.annotations.Scope;
 import org.jboss.seam.contexts.Contexts;
 import org.jboss.seam.faces.FacesMessages;
 
+import br.com.geostore.dao.CidadeDAO;
 import br.com.geostore.dao.EmpresaDAO;
 import br.com.geostore.dao.StatusEmpresaDAO;
+import br.com.geostore.entity.Cidade;
 import br.com.geostore.entity.Empresa;
 import br.com.geostore.entity.StatusEmpresa;
 import br.com.geostore.entity.UnidadeFederacao;
@@ -36,6 +42,7 @@ public class EmpresaController {
 
 	@In(create=true) private EmpresaDAO empresaDAO;
 	@In(create=true) private StatusEmpresaDAO statusEmpresaDAO;
+	@In(create=true) private CidadeDAO cidadeDAO;
 	
 	@In private FacesMessages facesMessages;
 	private Usuario usuarioLogado;
@@ -159,8 +166,47 @@ public class EmpresaController {
 		return "EXCLUIR";
 	}
 
-	
-public void buscarCoordenadas() throws Exception{
+	public void populaEndereco() throws Exception{
+		
+		if(this.empresa.getEndereco().getCEP()!=null || !this.empresa.getEndereco().getCEP().isEmpty()){
+			URL url = new URL("http://cep.republicavirtual.com.br/web_cep.php?cep=" + this.empresa.getEndereco().getCEP() + "&formato=xml");
+
+			SAXReader reader = new SAXReader();
+			
+	        Document document = reader.read(url);
+	        Element root = document.getRootElement();
+	        
+	        String tipoLogradouro ="";
+	        String cidade ="";
+	        String uf ="";
+	        
+	        for ( Iterator<?> i = root.elementIterator(); i.hasNext(); ) {
+	        	Element element = (Element) i.next();                
+	                
+	            if (element.getQualifiedName().equals("bairro"))
+	            	this.empresa.getEndereco().setBairro(element.getText());                              
+	            
+	            if (element.getQualifiedName().equals("tipo_logradouro"))
+	            	tipoLogradouro = element.getText() + " ";
+	            
+	            if (element.getQualifiedName().equals("logradouro"))
+	            	this.empresa.getEndereco().setLogradouro(tipoLogradouro + element.getText());
+	            
+	            if (element.getQualifiedName().equals("cidade"))
+	            	cidade = element.getText();
+	            
+	            if (element.getQualifiedName().equals("uf"))
+	            	uf = element.getText();
+	            
+	            Cidade cidadeConsulta = cidadeDAO.buscarPorCidadeEstado(cidade, uf);
+	        
+	            this.empresa.getEndereco().setCidade(cidadeConsulta);
+	            
+	        }
+		}
+	}
+
+	public void buscarCoordenadas() throws Exception{
 		
 		String status = "";
         String latitude = "";           
