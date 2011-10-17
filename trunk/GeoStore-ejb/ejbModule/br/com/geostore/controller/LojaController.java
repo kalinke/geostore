@@ -11,6 +11,8 @@ import java.net.URI;
 import java.net.URL;
 import java.util.List;
 
+import org.dom4j.Document;
+import org.dom4j.io.SAXReader;
 import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.Factory;
 import org.jboss.seam.annotations.In;
@@ -143,7 +145,7 @@ public class LojaController {
         if(loja.getEndereco().getCidade()==null || loja.getEndereco().getCidade().getDescricao().isEmpty())
                 throw new RuntimeException("Selecione uma Cidade!");
   
-        if(loja.getEndereco().getLatitude().isEmpty() || loja.getEndereco().getLongitude().isEmpty())
+        if(loja.getEndereco().getLatitude() == null || loja.getEndereco().getLongitude() == null )
                 throw new RuntimeException("É necessário buscar as coordenadas!");              
                               
 }      	
@@ -156,10 +158,10 @@ public class LojaController {
 	
 public void buscarCoordenadas() throws Exception{
 		
-		String status = "";
-        String latitude = "";           
-        String longitude = "";
-         
+		this.loja.getEndereco().setLatitude(null);
+		this.loja.getEndereco().setLongitude(null);
+		
+		String status = "";         
         String endereco = "";
         String sURL = "";
  
@@ -169,54 +171,27 @@ public void buscarCoordenadas() throws Exception{
         if(loja.getEndereco().getCEP() != null)	endereco += " " + loja.getEndereco().getCEP();
         if(loja.getEndereco().getCidade() != null )	endereco += " " + loja.getEndereco().getCidade().getDescricao() + " " + loja.getEndereco().getCidade().getUnidadeFederacao().getDescricao();
 
-        
-        
-        
-        endereco = java.net.URLEncoder.encode(endereco, "UTF-8");
-        
+                
+        endereco = java.net.URLEncoder.encode(endereco, "UTF-8");        
         sURL = "http://maps.google.com/maps/api/geocode/xml?address=" + endereco + "&language=pt-BR&sensor=false";         
-        
+        		
 		URL url = new URL(sURL);
-		InputStream inputXML = url.openStream();			
-		
-		String xml = "";
-		
-		if (inputXML != null) {
-			Writer writer = new StringWriter();
 
-            char[] buffer = new char[1024];
-            
-            Reader reader = new BufferedReader(new InputStreamReader(inputXML, "UTF-8"));
-            int n;
-            
-            while ((n = reader.read(buffer)) != -1) {
-            	writer.write(buffer, 0, n);
-            }            
-         
-            inputXML.close();          
-            xml =  writer.toString();
-            
-
-            
-            int statusInicio = xml.indexOf("<status>");
-            int statusFim = xml.indexOf("</status>");
-            
-            int latInicio = xml.indexOf("<lat>");
-            int latFim = xml.indexOf("</lat>");
-            
-            int lngInicio = xml.indexOf("<lng>");
-            int lngFim = xml.indexOf("</lng>");
-            
-            status = xml.substring(statusInicio + 8, statusFim);
-            latitude = xml.substring(latInicio + 5, latFim);            
-            longitude = xml.substring(lngInicio  + 5, lngFim);
+		SAXReader reader = new SAXReader();		
+        Document document = reader.read(url);
+                       
+        status = document.selectSingleNode("//GeocodeResponse/status").getText();
+        
+               
+        if(status.equals("OK")){
+        	loja.getEndereco().setLatitude(Double.valueOf(document.selectSingleNode("//GeocodeResponse/result/geometry/location/lat").getText()));				
+        	loja.getEndereco().setLongitude(Double.valueOf(document.selectSingleNode("//GeocodeResponse/result/geometry/location/lng").getText()));
+        }else if(status.equals("ZERO_RESULTS")){
+        	facesMessages.add("Nenhuma coordenada encontrada no endereço informado!");
+        }
 		
-		}
-         
-		loja.getEndereco().setLatitude(latitude);
-		loja.getEndereco().setLongitude(longitude);
 		
-	}
+	}	
 	
 	public void validarCoordenadas() throws Exception{
 		

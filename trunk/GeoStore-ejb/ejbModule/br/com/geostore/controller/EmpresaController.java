@@ -146,7 +146,7 @@ public class EmpresaController {
         if(empresa.getEndereco().getCidade()==null || empresa.getEndereco().getCidade().getDescricao().isEmpty())
                 throw new RuntimeException("Selecione uma Cidade!");
   
-        if(empresa.getEndereco().getLatitude().isEmpty() || empresa.getEndereco().getLongitude().isEmpty())
+        if(empresa.getEndereco().getLatitude() == null || empresa.getEndereco().getLongitude() == null)
                 throw new RuntimeException("É necessário buscar as coordenadas!");              
                               
 }      
@@ -232,8 +232,8 @@ public class EmpresaController {
         
                
         if(status.equals("OK")){
-        	empresa.getEndereco().setLatitude(document.selectSingleNode("//GeocodeResponse/result/geometry/location/lat").getText());				
-    		empresa.getEndereco().setLongitude(document.selectSingleNode("//GeocodeResponse/result/geometry/location/lng").getText());
+        	empresa.getEndereco().setLatitude(Double.valueOf(document.selectSingleNode("//GeocodeResponse/result/geometry/location/lat").getText()));				
+    		empresa.getEndereco().setLongitude(Double.valueOf(document.selectSingleNode("//GeocodeResponse/result/geometry/location/lng").getText()));
         }else if(status.equals("ZERO_RESULTS")){
         	facesMessages.add("Nenhuma coordenada encontrada no endereço informado!");
         }
