@@ -1,14 +1,11 @@
 package br.com.geostore.controller;
 
-import java.awt.Desktop;
-import java.net.URI;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
-import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.Factory;
@@ -209,6 +206,9 @@ public class EmpresaController {
 
 	public void buscarCoordenadas() throws Exception{
 		
+		this.empresa.getEndereco().setLatitude(null);
+		this.empresa.getEndereco().setLongitude(null);
+		
 		String status = "";         
         String endereco = "";
         String sURL = "";
@@ -234,6 +234,8 @@ public class EmpresaController {
         if(status.equals("OK")){
         	empresa.getEndereco().setLatitude(document.selectSingleNode("//GeocodeResponse/result/geometry/location/lat").getText());				
     		empresa.getEndereco().setLongitude(document.selectSingleNode("//GeocodeResponse/result/geometry/location/lng").getText());
+        }else if(status.equals("ZERO_RESULTS")){
+        	facesMessages.add("Nenhuma coordenada encontrada no endereço informado!");
         }
 		
 		
