@@ -197,12 +197,15 @@ public class EmpresaController {
 	            
 	            if (element.getQualifiedName().equals("uf"))
 	            	uf = element.getText();
-	            
-	            Cidade cidadeConsulta = cidadeDAO.buscarPorCidadeEstado(cidade, uf);
 	        
-	            this.empresa.getEndereco().setCidade(cidadeConsulta);
-	            
-	        }
+	        }	        
+	            Cidade cidadeConsulta = cidadeDAO.buscarPorCidadeEstado(cidade, uf);        
+	           
+	            if(cidadeConsulta != null){
+	            	this.unidadeFederacao = cidadeConsulta.getUnidadeFederacao();
+		            this.empresa.getEndereco().setCidade(cidadeConsulta);
+	            }	            	           
+	         
 		}
 	}
 
