@@ -7,7 +7,6 @@ import org.jboss.seam.annotations.Factory;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
-import org.jboss.seam.faces.FacesMessages;
 
 import br.com.geostore.dao.ProdutoDAO;
 import br.com.geostore.dao.StatusProdutoDAO;
