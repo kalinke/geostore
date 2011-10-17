@@ -17,7 +17,7 @@ public class EnderecoController {
 	
 	@In(create=true) private UnidadeFederacaoDAO unidadeFederacaoDAO;
 	@In(create=true) private CidadeDAO cidadeDAO;
-	
+		
 	UnidadeFederacao uf = new UnidadeFederacao();
 	
 	@Factory(value="unidadesFederacao", scope=ScopeType.APPLICATION)

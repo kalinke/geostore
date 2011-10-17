@@ -66,8 +66,6 @@ public class CidadeDAO {
 													" and upper(c.unidadeFederacao.sigla) = upper(:unidadeFederacao) " +
 													" order by c.id");
 			
-	
-			
 			query.setParameter("cidade", cidade);
 			query.setParameter("unidadeFederacao", uf);
 			
