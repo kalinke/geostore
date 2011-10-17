@@ -58,5 +58,28 @@ public class CidadeDAO {
 	}
 	
 	
+	public Cidade buscarPorCidadeEstado(String cidade, String uf) throws Exception {
+		try{
+			
+			Query query = entityManager.createQuery("from Cidade as c " +
+													" where upper(c.descricao) = upper(:cidade) " +
+													" and upper(c.unidadeFederacao.sigla) = upper(:unidadeFederacao) " +
+													" order by c.id");
+			
+	
+			
+			query.setParameter("cidade", cidade);
+			query.setParameter("unidadeFederacao", uf);
+			
+			if(query.getResultList().size()>0)
+				return (Cidade) query.getResultList().get(0);
+			else				
+				return null;
+		}catch (Exception e) {
+			throw new Exception(e);
+		}
+	}
+	
+	
 	
 }
