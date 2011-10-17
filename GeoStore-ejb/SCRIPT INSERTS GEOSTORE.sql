@@ -65,7 +65,23 @@ INSERT INTO `gs_unidades_federacao` (`id_unidade_federacao`,`descricao`,`sigla`)
   (3,'Rio de Janeiro','RJ');
 INSERT INTO `gs_usuarios` (`id`,`email`,`senha`,`id_status_usuario`,`id_tipo_usuario`) VALUES 
   (1,'admin','a',1,1);
+  
+--
+-- Definition of function `calcDistCoord`
+--
 
+DROP FUNCTION IF EXISTS `calcDistCoord`;
+
+DELIMITER $$
+
+/*!50003 SET @TEMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ $$
+CREATE DEFINER=`root`@`localhost` FUNCTION `calcDistCoord`(latIni FLOAT, lonIni FLOAT, latFim FLOAT, lonFim FLOAT) RETURNS float
+BEGIN
+   RETURN (SQRT(((latIni - latFim)*(latIni - latFim) + (lonIni - lonFim)*(lonIni - lonFim))) * 111.18) * 1000;
+END $$
+/*!50003 SET SESSION SQL_MODE=@TEMP_SQL_MODE */  $$
+
+DELIMITER ;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
