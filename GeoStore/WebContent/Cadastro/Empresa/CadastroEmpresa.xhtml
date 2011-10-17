@@ -114,13 +114,14 @@
 						<s:decorate id="txtCep" template="../../layout/edit.xhtml">											
 							<ui:define name="label">CEP</ui:define>
 							<h:inputText id="cep" value="#{empresaController.empresa.endereco.CEP}" converter="cepConverter" >
-								<rich:jQuery selector="#cep" query="mask('99.999-999')" timing="onload"/>												
+								<rich:jQuery selector="#cep" query="mask('99.999-999')" timing="onload"/>
+								<a4j:support event="onblur" action="#{empresaController.populaEndereco}"  reRender="logradouro,bairro,comboEstado,comboCidade"/>												
 							</h:inputText>
 						</s:decorate>
 						
 						<s:decorate template="../../layout/edit.xhtml">
 								<ui:define name="label">Rua</ui:define>
-								<h:inputText size="100" value="#{empresaController.empresa.endereco.logradouro}" />	
+								<h:inputText id="logradouro" size="100" value="#{empresaController.empresa.endereco.logradouro}" />	
 						</s:decorate>
 
 						<s:decorate template="../../layout/edit.xhtml">	
@@ -136,7 +137,7 @@
 							
 						<s:decorate template="../../layout/edit.xhtml">
 								<ui:define name="label">Bairro</ui:define>
-								<h:inputText size="60" value="#{empresaController.empresa.endereco.bairro}"/>	
+								<h:inputText id="bairro" size="60" value="#{empresaController.empresa.endereco.bairro}"/>	
 						</s:decorate>
 											
 						<s:decorate template="../../layout/edit.xhtml">
