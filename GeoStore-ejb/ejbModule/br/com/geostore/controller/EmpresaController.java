@@ -134,7 +134,7 @@ public class EmpresaController {
                 throw new RuntimeException("É necessário preencher o número da rua!");       
 
         if(!numertoValidator.validarNumeroLogradouro(empresa.getEndereco().getNumeroLogradouro()))
-                throw new RuntimeException("Número da rua inválido!");       
+                throw new RuntimeException("Número da rua inválido!");      
 
         if(empresa.getEndereco().getBairro().isEmpty())
                 throw new RuntimeException("É necessário preencher o bairro!");       
@@ -142,13 +142,17 @@ public class EmpresaController {
         if(!nomeValidator.validarNome(empresa.getEndereco().getBairro()))
                 throw new RuntimeException("Nome do bairro inválido!");
        
-
         if(empresa.getEndereco().getCidade()==null || empresa.getEndereco().getCidade().getDescricao().isEmpty())
                 throw new RuntimeException("Selecione uma Cidade!");
   
         if(empresa.getEndereco().getLatitude() == null || empresa.getEndereco().getLongitude() == null)
-                throw new RuntimeException("É necessário buscar as coordenadas!");              
-                              
+                throw new RuntimeException("É necessário buscar as coordenadas!");    
+        
+        if(!numertoValidator.validarCoordenadas(empresa.getEndereco().getLatitude()))
+        	throw new RuntimeException("Número da rua inválido!");   
+        
+        if(!numertoValidator.validarCoordenadas(empresa.getEndereco().getLongitude()))
+        	throw new RuntimeException("Número da rua inválido!");    
 }      
 	
 	
