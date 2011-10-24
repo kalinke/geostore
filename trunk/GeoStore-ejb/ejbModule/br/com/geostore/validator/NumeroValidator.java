@@ -17,5 +17,20 @@ public class NumeroValidator {
 			 }
 
 	}
+	
+	public boolean validarCoordenadas(double numero){
+		 
+		 String coordenada = String.valueOf(numero);
+		 Pattern p = Pattern.compile("[^a-ZA-Z][\\.\\-[0-9]]"); 
+		 Matcher m = p.matcher(coordenada);
+		 
+		 if (m.matches()==true){			 
+			 return true;  
+		 }else{	    	  
+		     return false; 
+		 }
+
+}
+	
 
 }
