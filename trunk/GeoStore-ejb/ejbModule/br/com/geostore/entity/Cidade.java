@@ -14,7 +14,7 @@ import org.jboss.seam.annotations.Name;
 
 @Entity
 @Name("cidade")
-@Table(name="GS_CIDADES")
+@Table(name="gs_cidades")
 public class Cidade implements Serializable{
 	private static final long serialVersionUID = 1L;
 

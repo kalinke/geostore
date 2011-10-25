@@ -14,7 +14,7 @@ import org.jboss.seam.annotations.Name;
 
 @Entity
 @Name("endereco")
-@Table(name="GS_ENDERECOS")
+@Table(name="gs_enderecos")
 public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

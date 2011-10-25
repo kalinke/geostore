@@ -12,7 +12,7 @@ import org.jboss.seam.annotations.Name;
 
 @Entity
 @Name("unidadeFederacao")
-@Table(name="GS_UNIDADES_FEDERACAO")
+@Table(name="gs_unidades_federacao")
 public class UnidadeFederacao implements Serializable{
 	private static final long serialVersionUID = 1L;
 
