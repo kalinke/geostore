@@ -12,7 +12,7 @@ import org.jboss.seam.annotations.Name;
 
 @Entity
 @Name("statusEmpresa")
-@Table(name = "GS_STATUS_EMPRESA")
+@Table(name = "gs_status_empresa")
 public class StatusEmpresa implements Serializable {
 
 	/**
