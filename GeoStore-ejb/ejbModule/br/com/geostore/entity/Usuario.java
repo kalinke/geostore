@@ -1,13 +1,16 @@
 package br.com.geostore.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.jboss.seam.annotations.Name;
@@ -51,6 +54,9 @@ public class Usuario implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "id_empresa_vinculo")
 	private Empresa empresaVinculo;
+	
+	@OneToMany(mappedBy="voucher", cascade=CascadeType.ALL)
+	private List<Voucher> vouchers;
 	
 	public Usuario() {
 	}
@@ -124,6 +130,15 @@ public class Usuario implements Serializable{
 		this.statusUsuario = statusUsuario;
 	}
 
+	public List<Voucher> getVouchers() {
+		return vouchers;
+	}
+
+
+	public void setVouchers(List<Voucher> vouchers) {
+		this.vouchers = vouchers;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -141,6 +156,8 @@ public class Usuario implements Serializable{
 				+ ((telefone == null) ? 0 : telefone.hashCode());
 		result = prime * result
 				+ ((tipoUsuario == null) ? 0 : tipoUsuario.hashCode());
+		result = prime * result
+				+ ((vouchers == null) ? 0 : vouchers.hashCode());
 		return result;
 	}
 
@@ -194,9 +211,12 @@ public class Usuario implements Serializable{
 				return false;
 		} else if (!tipoUsuario.equals(other.tipoUsuario))
 			return false;
+		if (vouchers == null) {
+			if (other.vouchers != null)
+				return false;
+		} else if (!vouchers.equals(other.vouchers))
+			return false;
 		return true;
 	}
-	
-	
-	
+
 }

@@ -1,13 +1,16 @@
 package br.com.geostore.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.jboss.seam.annotations.Name;
@@ -44,10 +47,12 @@ public class Produto implements Serializable{
 	@JoinColumn(name = "id_status_produto")
 	private StatusProduto statusProduto;
 	
+	@OneToMany(mappedBy="promocao", cascade=CascadeType.ALL)
+	private List<Promocao> promocoes;
+	
 	public Produto() {
 	}
-	
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -55,43 +60,34 @@ public class Produto implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
 
 	public String getNome() {
 		return nome;
 	}
 
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	
 
 	public String getDescricao() {
 		return descricao;
 	}
 
-
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
 
 	public Double getValor() {
 		return valor;
 	}
 
-
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
 
-
 	public Loja getLoja() {
 		return loja;
 	}
-
 
 	public void setLoja(Loja loja) {
 		this.loja = loja;
@@ -100,11 +96,18 @@ public class Produto implements Serializable{
 	public StatusProduto getStatusProduto() {
 		return statusProduto;
 	}
-	
+
 	public void setStatusProduto(StatusProduto statusProduto) {
 		this.statusProduto = statusProduto;
 	}
 
+	public List<Promocao> getPromocoes() {
+		return promocoes;
+	}
+
+	public void setPromocoes(List<Promocao> promocoes) {
+		this.promocoes = promocoes;
+	}
 
 	@Override
 	public int hashCode() {
@@ -116,11 +119,12 @@ public class Produto implements Serializable{
 		result = prime * result + ((loja == null) ? 0 : loja.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result
+				+ ((promocoes == null) ? 0 : promocoes.hashCode());
+		result = prime * result
 				+ ((statusProduto == null) ? 0 : statusProduto.hashCode());
 		result = prime * result + ((valor == null) ? 0 : valor.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -151,6 +155,11 @@ public class Produto implements Serializable{
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
+		if (promocoes == null) {
+			if (other.promocoes != null)
+				return false;
+		} else if (!promocoes.equals(other.promocoes))
+			return false;
 		if (statusProduto == null) {
 			if (other.statusProduto != null)
 				return false;
@@ -163,11 +172,5 @@ public class Produto implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
 	
 }
