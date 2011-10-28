@@ -7,7 +7,7 @@ public class NumeroValidator {
 	
 	public boolean validarNumeroLogradouro(String numero){
 	
-			 Pattern p = Pattern.compile("^[0-9]{1,40}"); 
+			 Pattern p = Pattern.compile("[0-9]{1,40}"); 
 			 Matcher m = p.matcher(numero);
 			 
 			 if (m.matches()==true){			 
@@ -21,7 +21,7 @@ public class NumeroValidator {
 	public boolean validarCoordenadas(double numero){
 		 
 		 String coordenada = String.valueOf(numero);
-		 Pattern p = Pattern.compile("[^a-ZA-Z][\\.\\-[0-9]]"); 
+		 Pattern p = Pattern.compile("^([\\.\\-[0-9]])$"); 
 		 Matcher m = p.matcher(coordenada);
 		 
 		 if (m.matches()==true){			 

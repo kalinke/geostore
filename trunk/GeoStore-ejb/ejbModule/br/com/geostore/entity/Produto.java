@@ -47,7 +47,7 @@ public class Produto implements Serializable{
 	@JoinColumn(name = "id_status_produto")
 	private StatusProduto statusProduto;
 	
-	@OneToMany(mappedBy="promocao", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="produto", cascade=CascadeType.ALL)
 	private List<Promocao> promocoes;
 	
 	public Produto() {

@@ -148,11 +148,11 @@ public class EmpresaController {
         if(empresa.getEndereco().getLatitude() == null || empresa.getEndereco().getLongitude() == null)
                 throw new RuntimeException("É necessário buscar as coordenadas!");    
         
-        if(!numertoValidator.validarCoordenadas(empresa.getEndereco().getLatitude()))
-        	throw new RuntimeException("Número da rua inválido!");   
+       // if(!numertoValidator.validarCoordenadas(empresa.getEndereco().getLatitude()))
+        	//throw new RuntimeException("Latitude inválida!");   
         
-        if(!numertoValidator.validarCoordenadas(empresa.getEndereco().getLongitude()))
-        	throw new RuntimeException("Número da rua inválido!");    
+       // if(!numertoValidator.validarCoordenadas(empresa.getEndereco().getLongitude()))
+        	//throw new RuntimeException("Longitude inválido!");    
 }      
 	
 	

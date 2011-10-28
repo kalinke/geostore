@@ -7,6 +7,7 @@ import org.jboss.seam.annotations.Factory;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
+import org.jboss.seam.faces.FacesMessages;
 
 import br.com.geostore.dao.ProdutoDAO;
 import br.com.geostore.dao.StatusProdutoDAO;
@@ -20,7 +21,7 @@ public class ProdutoController {
 	@In(create=true) private ProdutoDAO produtoDAO;
 	@In(create=true) private StatusProdutoDAO statusProdutoDAO;
 	
-	//@In private FacesMessages facesMessages;
+	@In private FacesMessages facesMessages;
 	
 	private Produto produto = new Produto();
 	private Long idProduto;
@@ -48,18 +49,18 @@ public class ProdutoController {
 		try{
 			
 			validar();
-			produtoDAO.salvar(produto);		
+			produtoDAO.salvar(produto);	
 			return "SALVAR";	
 			
 		}catch(Exception e){
 			
-			//facesMessages.add(e.getMessage());
+			facesMessages.add(e.getMessage());
 			return null;
 		}
 		
 	}
-
-public void validar() throws RuntimeException{
+	
+	public void validar() throws RuntimeException{
 
 		
 		if(produto.getLoja()==null || produto.getLoja().getDocumento().isEmpty())
