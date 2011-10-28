@@ -62,9 +62,20 @@
    				<rich:menuItem value="Controle" action="controle.produto" /> 
    		 	</rich:dropDownMenu>
    		 	
+   		 	<rich:dropDownMenu submitMode="ajax" rendered="#{s:hasRole('admin') || s:hasRole('operador')}">
+   		 		<f:facet name="label">
+   		 			<h:panelGroup>
+   		 				<h:graphicImage value="/img/produtoIcon.png" styleClass="pic"/>
+	   		 			<h:outputText value="Promoções" />
+	   		 		</h:panelGroup> 		 		
+   		 		</f:facet>
+   		 		<rich:menuItem value="Cadastro" action="cadastro.promocao" /> 
+   				<rich:menuItem value="Controle" action="controle.promocao" /> 
+   		 	</rich:dropDownMenu>
    		 	
    		 	
-    		<rich:dropDownMenu showDelay="250" hideDelay="0" submitMode="ajax">        
+   		 	
+    		<rich:dropDownMenu showDelay="250" hideDelay="0" submitMode="ajax" rendered="#{s:hasRole('admin') || s:hasRole('operador')}">        
    		 		<f:facet name="label">
    		 			<h:panelGroup>
    		 				<h:graphicImage value="/img/reportIcon.png" styleClass="pic"/>

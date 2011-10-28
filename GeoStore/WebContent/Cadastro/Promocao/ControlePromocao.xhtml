@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:richfaces="http://richfaces.ajax4jsf.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ajax="https://ajax4jsf.dev.java.net/ajax">
+	
+	<ui:composition template="../../layout/template.xhtml">
+	<ui:define name="body" >
+		
+		<rich:panel>
+		
+		<f:facet name="header">Controle de Promoções</f:facet>
+			<a4j:form>
+			<rich:panel>
+				<rich:toolBar height="34" itemSeparator="line" >
+
+       		    	<rich:toolBarGroup>
+       		    		<rich:menuItem action="#{promocaoController.novo()}"  >
+        					<h:graphicImage value="../../img/novoIcon.png" styleClass="pic"/>
+	   		 				<h:outputText value="Adicionar" styleClass="txtButton"/>
+	   					</rich:menuItem>
+       		    	</rich:toolBarGroup>
+       		    
+       		    	<rich:toolBarGroup />
+       		     	 			
+				</rich:toolBar>
+				
+				
+						
+			</rich:panel>	
+
+			<rich:spacer height="10" />
+
+						
+			<rich:panel>
+			  <rich:toolTip followMouse="true" direction="top-right" showDelay="500" styleClass="tooltip">
+            	<span  style="white-space:nowrap">Duplo clique para editar.</span>
+        	  </rich:toolTip>
+		
+				<rich:dataTable id="tabelaPromocoes"  
+					onRowMouseOver="this.style.backgroundColor='#D0D0D0'"
+                    onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
+                    value="#{promocaoController.promocoes}" var="p">
+                    
+					<f:facet name="header">Promocões Cadastradas</f:facet>				
+						
+					<rich:column>
+						<f:facet name="header">Loja Vinculada</f:facet>
+						<h:outputText value="#{p.produto.loja.documento}"/>
+					</rich:column>	
+								
+					<rich:column>
+						<f:facet name="header">Status Promoção</f:facet>
+						<h:outputText value="#{p.statusPromocao.descricao}"/>
+					</rich:column>	
+					
+					<rich:column>
+						<f:facet name="header">Produto</f:facet>
+						<h:outputText value="#{p.produto.nome}"/>
+					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">Quantidade Total de Voucher</f:facet>
+						#{p.qde_voucher}	
+					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">Quantidade de Voucher Gerada</f:facet>
+						#{p.qde_solicitada}	
+					</rich:column>
+									
+					<a4j:support event="onRowDblClick" action="#{promocaoController.editar()}">
+						<f:setPropertyActionListener target="#{promocaoController.idPromocao}" value="#{p.id}"/>
+					</a4j:support>	
+								
+				</rich:dataTable>
+				</rich:panel>
+			</a4j:form>						
+	 	</rich:panel>
+		<rich:spacer height="20"/>	
+			
+	</ui:define>
+</ui:composition>
+	
+</html>

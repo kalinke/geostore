@@ -1,13 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:richfaces="http://richfaces.ajax4jsf.org/rich"
       xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j"
       xmlns:s="http://jboss.com/products/seam/taglib"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:x="http://www.xseam.org"
-      > 
+      xmlns:ajax="https://ajax4jsf.dev.java.net/ajax">
+
 <ui:composition template="../../layout/template.xhtml">
 	
 		<ui:define name="body" >
@@ -15,28 +16,28 @@
 		
 		<rich:panel>
 		
-		<f:facet name="header">Editar Produto</f:facet>
+		<f:facet name="header">Editar Promocao</f:facet>
 		
-		<a4j:form id="cadastroProdutoForm">
+		<a4j:form id="cadastroPromocaoForm">
 			<rich:panel>
 				<rich:toolBar height="34"  itemSeparator="line" >					
 					
        		    	<rich:toolBarGroup>
-       		    		<rich:menuItem action="#{produtoController.salvar()}">
+       		    		<rich:menuItem action="#{promocaoController.salvar()}">
         					<h:graphicImage value="../../img/salvarIcon.png" styleClass="pic"/>
 	   		 				<h:outputText value="Salvar" styleClass="txtButton"/>
 	   					</rich:menuItem>
        		    	</rich:toolBarGroup>     		    		
 					
        		    	<rich:toolBarGroup>
-       		    		<rich:menuItem action="#{produtoController.cancelar()}"  >
+       		    		<rich:menuItem action="#{promocaoController.cancelar()}"  >
         					<h:graphicImage value="../../img/cancelarIcon.png" styleClass="pic"/>
 	   		 				<h:outputText value="Voltar" styleClass="txtButton"/>
 	   					</rich:menuItem>
        		    	</rich:toolBarGroup>
            	  		
        		    	<rich:toolBarGroup>
-       		    		<rich:menuItem action="#{produtoController.remover()}"  onclick="javascript:if(!confirm('Deseja realmente excluir o produto e suas dependências?'))return false;" >
+       		    		<rich:menuItem action="#{promocaoController.remover()}"  onclick="javascript:if(!confirm('Deseja realmente excluir a promoção e suas dependências?'))return false;" >
         					<h:graphicImage value="../../img/excluirIcon.png" styleClass="pic"/>
 	   		 				<h:outputText value="Excluir" styleClass="txtButton"/>
 	   					</rich:menuItem>
@@ -53,47 +54,41 @@
 		  		<rich:tab label="Dados Cadastrais">	
 					<h:panelGrid>		
 						
-						<s:decorate template="../../layout/edit.xhtml">
+						<!--  <s:decorate template="../../layout/edit.xhtml">
 							<ui:define name="label">Loja Vínculo</ui:define>		
-							<h:selectOneMenu value="#{produtoController.produto.loja}">	
+							<h:selectOneMenu value="#{promocaoController.produto.loja}">	
 								<s:selectItems value="#{lojaController.lojas}" var="loja" label="#{loja.documento} - #{loja.razaoSocial}" noSelectionLabel="Selecione..."/>								
+								<s:convertEntity/>
+							</h:selectOneMenu>
+						</s:decorate> -->
+						
+						<s:decorate template="../../layout/edit.xhtml">
+							<ui:define name="label">Produto Vínculo</ui:define>		
+							<h:selectOneMenu value="#{promocaoController.promocao.produto}">	
+								<s:selectItems value="#{produtoController.produtos}" var="produto" label="#{produto.nome}" noSelectionLabel="Selecione..."/>								
 								<s:convertEntity/>
 							</h:selectOneMenu>
 						</s:decorate>
 						
 						<s:decorate template="../../layout/edit.xhtml">
-							<ui:define name="label">Status</ui:define>			
-							<h:selectOneMenu value="#{produtoController.produto.statusProduto}">
-								<s:selectItems value="#{produtoController.statusProdutos}" var="s" label="#{s.descricao}" noSelectionLabel="Selecione..."/>
+							<ui:define name="label">Status Promoção</ui:define>			
+							<h:selectOneMenu value="#{promocaoController.promocao.statusPromocao}">
+								<s:selectItems value="#{promocaoController.statusPromocoes}" var="p" label="#{p.descricao}" noSelectionLabel="Selecione..."/>
 								<s:convertEntity/>
 							</h:selectOneMenu>
 						</s:decorate>
 															
 						<s:decorate template="../../layout/edit.xhtml">
-							<ui:define name="label">Nome</ui:define>
-							<h:inputText size="100" value="#{produtoController.produto.nome}" />	
+							<ui:define name="label">Quantidade de Voucher</ui:define>
+							<h:inputText size="100" value="#{promocaoController.promocao.qde_voucher}" />	
 						</s:decorate>
-
-						<s:decorate template="../../layout/edit.xhtml">
-							<ui:define name="label">Descrição</ui:define>
-							<h:inputTextarea value="#{produtoController.produto.descricao}" />							
-						</s:decorate>
-						
-						<s:decorate template="../../layout/edit.xhtml">
-							<ui:define name="label">Valor</ui:define>
-							<h:inputText value="#{produtoController.produto.valor}" />	
-						</s:decorate>		
+	
 					</h:panelGrid>
 										
 				</rich:tab>		
-			</rich:tabPanel>				
-		
-		</a4j:form>	
-	 				
-	 	</rich:panel>
-		<rich:spacer height="20"/>	
-			
-	</ui:define>
-</ui:composition>
-
+			</rich:tabPanel>
+		</a4j:form>
+		</rich:panel>
+		</ui:define>
+	</ui:composition>
 </html>
