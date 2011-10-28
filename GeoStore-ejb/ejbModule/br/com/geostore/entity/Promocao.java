@@ -38,12 +38,15 @@ public class Promocao implements Serializable{
 	@JoinColumn(name = "id_produto")
 	private Produto produto;
 	
-	@OneToMany(mappedBy="voucher", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="promocao", cascade=CascadeType.ALL)
 	private List<Voucher> vouchers;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_status_promocao")
 	private StatusPromocao statusPromocao;
+	
+	public Promocao(){
+	}
 
 	public Long getId() {
 		return id;

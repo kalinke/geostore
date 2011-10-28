@@ -55,7 +55,7 @@ public class Usuario implements Serializable{
 	@JoinColumn(name = "id_empresa_vinculo")
 	private Empresa empresaVinculo;
 	
-	@OneToMany(mappedBy="voucher", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="usuario", cascade=CascadeType.ALL)
 	private List<Voucher> vouchers;
 	
 	public Usuario() {

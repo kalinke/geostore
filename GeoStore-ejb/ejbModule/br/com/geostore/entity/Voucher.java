@@ -28,7 +28,7 @@ public class Voucher implements Serializable{
 	private String codigo_voucher;
 	
 	@Column(name="num_gerado", length=100)
-	private int num_gerado;
+	private int num_gerado; //NUMERO SOLICITADO DO VOUCHER
 	
 	@ManyToOne
 	@JoinColumn(name = "id_promocao")
