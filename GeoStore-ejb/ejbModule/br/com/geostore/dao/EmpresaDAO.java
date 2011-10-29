@@ -133,7 +133,16 @@ public class EmpresaDAO {
 			query.setParameter("empresaId", empresa.getId());
 			
 			if(query.getResultList()==null || query.getResultList().isEmpty()){
-				return false;
+				
+				sQuery = " from Empresa as e ";	
+				sQuery += " where e.documento = :empresaCNPJ ";
+				sQuery += " order by e.id ";			
+				
+				query = entityManager.createQuery(sQuery);
+				query.setParameter("empresaCNPJ", empresa.getDocumento());
+				
+				if(query.getResultList()==null || query.getResultList().isEmpty())				
+					return false;	
 			}
 			
 			return true;
