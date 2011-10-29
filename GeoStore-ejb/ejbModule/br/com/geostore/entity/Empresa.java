@@ -40,7 +40,7 @@ public class Empresa implements Serializable {
 	@Column(name = "nome_fantasia",length=200)
 	private String nomeFantasia;
 
-	@Column(name = "inscricao_estadual",length=14)
+	@Column(name = "inscricao_estadual",length=20)
 	private String inscricaoEstadual;
 	
 	@Column(name = "contato",length=30)

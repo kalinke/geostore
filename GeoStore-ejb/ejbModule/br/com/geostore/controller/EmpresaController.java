@@ -109,11 +109,11 @@ public class EmpresaController {
         if(empresa.getInscricaoEstadual().isEmpty())
                 throw new RuntimeException("É necessário preencher a inscrição estadual!");       
 
-        if(empresa.getContato().isEmpty())
-                throw new RuntimeException("É necessário preencher o contato!");       
+        //if(empresa.getContato().isEmpty())
+               // throw new RuntimeException("É necessário preencher o contato!");       
 
-        if(!nomeValidator.validarNome(empresa.getContato()))
-                throw new RuntimeException("Nome do contato inválido!");       
+        //if(!nomeValidator.validarNome(empresa.getContato()))
+                //throw new RuntimeException("Nome do contato inválido!");       
 
         if(empresa.getTelefone().isEmpty())
                 throw new RuntimeException("É necessário preencher o telefone!");       
@@ -148,14 +148,13 @@ public class EmpresaController {
         if(empresa.getEndereco().getLatitude() == null || empresa.getEndereco().getLongitude() == null)
                 throw new RuntimeException("É necessário buscar as coordenadas!");    
         
-       // if(!numertoValidator.validarCoordenadas(empresa.getEndereco().getLatitude()))
-        	//throw new RuntimeException("Latitude inválida!");   
+        if(!numertoValidator.validarCoordenadas(empresa.getEndereco().getLatitude()))
+        	throw new RuntimeException("Latitude inválida!");   
         
-       // if(!numertoValidator.validarCoordenadas(empresa.getEndereco().getLongitude()))
-        	//throw new RuntimeException("Longitude inválido!");    
+        if(!numertoValidator.validarCoordenadas(empresa.getEndereco().getLongitude()))
+        	throw new RuntimeException("Longitude inválido!");    
 }      
-	
-	
+
 	
 	public String remover() throws Exception{		
 		empresaDAO.excluir(empresa);
@@ -238,7 +237,7 @@ public class EmpresaController {
         if(status.equals("OK")){
         	empresa.getEndereco().setLatitude(Double.valueOf(document.selectSingleNode("//GeocodeResponse/result/geometry/location/lat").getText()));				
     		empresa.getEndereco().setLongitude(Double.valueOf(document.selectSingleNode("//GeocodeResponse/result/geometry/location/lng").getText()));
-        }else if(status.equals("ZERO_RESULTS")){
+        }else if(status.equals("ZERO_RESULTS") || status.isEmpty() || status==null){
         	facesMessages.add("Nenhuma coordenada encontrada no endereço informado!");
         }
 		
