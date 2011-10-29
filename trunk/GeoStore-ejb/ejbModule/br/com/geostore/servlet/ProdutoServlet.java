@@ -2,20 +2,28 @@ package br.com.geostore.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONObject;
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONObject;
 
+import org.jboss.seam.Component;
 import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
 import org.jboss.seam.annotations.intercept.BypassInterceptors;
 import org.jboss.seam.servlet.ContextualHttpServletRequest;
 import org.jboss.seam.web.AbstractResource;
+
+import br.com.geostore.dao.ProdutoDAO;
+import br.com.geostore.entity.Endereco;
+import br.com.geostore.entity.Loja;
+import br.com.geostore.entity.Produto;
+import br.com.geostore.entity.Promocao;
 
 
 @Scope(ScopeType.APPLICATION)
@@ -31,72 +39,65 @@ public class ProdutoServlet extends AbstractResource {
         	@Override
             public void process(){       		
         		
-        		HashMap<String,String> hm = new HashMap<String,String>();
-        		hm.put("message","My first JSON application");
+        		String texto = request.getParameter("texto");
+        		String log   = request.getParameter("log");
+        		String lat   = request.getParameter("lat");
         		
-        		//Cada chave do HashMap vira uma Chave do JSON        		
-        		JSONObject json = JSONObject.fromObject(hm);        	        		
-        		response.setContentType("application/json");        		 
+        		System.out.println("Parametro 'texto': " + texto);
+        		System.out.println("Parametro 'log'  : " + log);
+        		System.out.println("Parametro 'lat'  : " + lat);
         		
-        		PrintWriter out;
-				try {
-					out = response.getWriter();
-					// Pega a Stream de Saída do servidor que sera utilizada para enviar a resposta JSON        		
-	        		out.print(json);//Escreve a resposta no formato JSON na Stream de saída que será recebida pela aplicação cliente        		
-	        		out.flush();
-
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-        		
-        		
-        		
-        		/*JSONObject jObj = null;
-            	JSONArray jArray = new JSONArray();
-            	try {
-            		//Cria uma lista para retornar pela request
-        			List<Produto> l = null; 
+        		if (texto != null){
         			
-        			//Recebe os parametros da request
-        			String texto = request.getParameter("texto");
-        			//Double log = request.getParameter("log");
-        			//Double lat = request.getParameter("lat");
-        			
-        			//Instancia a classe produtoDAO
-        			ProdutoDAO produtoDAO = (ProdutoDAO) Component.getInstance(ProdutoDAO.class);		
-        			
-        		  	l = produtoDAO.buscarPorDescricao(texto);
-        			
-            		for (Produto produto : l) {
-            			jObj = new JSONObject();
-            			jObj.put("descricao", produto.getDescricao());
-            			jArray.put(jObj);
-        			};
-        			
-        			jObj = new JSONObject();
-        			jObj.put("produtos", jArray);
-        		
-        		} catch (JSONException e) {
-        			e.printStackTrace();
-        		} catch (Exception e) {
-        			e.printStackTrace();
+        			org.jboss.seam.contexts.Lifecycle.beginCall();
+        			ProdutoDAO pDao = (ProdutoDAO) Component.getInstance(ProdutoDAO.class);		
+        			org.jboss.seam.contexts.Lifecycle.endCall();
+        			try {
+						List<Produto> p = pDao.buscarPorDescricao(texto);
+						System.out.println("Numero de produtos encontratos: " + p.size());
+						
+						if (p != null){
+							JSONArray jArray = new JSONArray();
+							
+							for (Produto produto : p) {
+								
+								Loja loja = produto.getLoja();
+								Endereco end = loja.getEndereco();
+								List<Promocao> promo = produto.getPromocoes();
+								
+								int existPromo = 0;
+								if (promo!=null && promo.size()>0){
+									existPromo = 1;
+									System.out.println("Numero de promocoes para o produto: " + produto.getId() + "/" + existPromo);
+								}
+																
+								jArray.put(new JSONObject().put("idProd",    produto.getId()));
+								jArray.put(new JSONObject().put("nomeProd",  produto.getNome()));
+								jArray.put(new JSONObject().put("idLoja",    loja.getId()));
+								jArray.put(new JSONObject().put("nomeLoja",  loja.getNomeFantasia()));
+								jArray.put(new JSONObject().put("endLoja",   end.getLogradouro()));
+								jArray.put(new JSONObject().put("bairroLoja",end.getBairro()));
+								jArray.put(new JSONObject().put("prcProd",   produto.getValor()));
+								jArray.put(new JSONObject().put("promo",     existPromo));
+								
+							}
+							
+							JSONObject j = new JSONObject();
+							j.put("produtos", jArray);
+							response.setContentType("application/json");
+							PrintWriter out = response.getWriter();
+							out.print(j);
+							out.flush();
+							
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}        			
         		}
-        		
-            	PrintWriter out;
-				try {
-					out = response.getWriter();
-					out.print(jObj);
-	            	out.flush();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}*/            	
         	}
         }.run();
     }		    	
-  
-    
-
+      
     @Override
     public String getResourcePath() {
         return "/produtoServlet";
