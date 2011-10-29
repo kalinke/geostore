@@ -29,10 +29,10 @@ public class Promocao implements Serializable{
 	private Long id;
 	
 	@Column(name="qde_voucher", length=100)
-	private String qde_voucher;
+	private Long qde_voucher;
 	
 	@Column(name="qde_solicitada", length=100)
-	private String qde_solicitada;
+	private Long qde_solicitada;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_produto")
@@ -55,20 +55,20 @@ public class Promocao implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public String getQde_voucher() {
+	
+	public Long getQde_voucher() {
 		return qde_voucher;
 	}
 
-	public void setQde_voucher(String qde_voucher) {
+	public void setQde_voucher(Long qde_voucher) {
 		this.qde_voucher = qde_voucher;
 	}
 
-	public String getQde_solicitada() {
+	public Long getQde_solicitada() {
 		return qde_solicitada;
 	}
 
-	public void setQde_solicitada(String qde_solicitada) {
+	public void setQde_solicitada(Long qde_solicitada) {
 		this.qde_solicitada = qde_solicitada;
 	}
 
@@ -154,4 +154,5 @@ public class Promocao implements Serializable{
 			return false;
 		return true;
 	}
+	
 }

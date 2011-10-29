@@ -7,7 +7,7 @@ public class NomeValidator {
 	
 	public boolean validarNome(String nome){
 		
-		 Pattern p = Pattern.compile("^[aA-zZzZãÃõÕêÊâÂôÔóÓúÚáÁéÉíÍàÀ\\s]+((\\s[aA-zZãÃõÕêÊâÂôÔóÓúÚáÁéÉíÍàÀ\\s]+)+)?$"); 
+		 Pattern p = Pattern.compile("^[aA-zZzZãÃõÕêÊâÂôÔóÓúÚáÁéÉíÍàÀçÇ\\s]+((\\s[aA-zZãÃõÕêÊâÂôÔóÓúÚáÁéÉíÍàÀçÇ\\s]+)+)?$"); 
 		 Matcher m = p.matcher(nome);
 		 
 		 if (m.matches()==true){			 
