@@ -29,10 +29,10 @@ public class Promocao implements Serializable{
 	private Long id;
 	
 	@Column(name="qde_voucher", length=100)
-	private int qde_voucher;
+	private String qde_voucher;
 	
 	@Column(name="qde_solicitada", length=100)
-	private int qde_solicitada;
+	private String qde_solicitada;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_produto")
@@ -56,19 +56,19 @@ public class Promocao implements Serializable{
 		this.id = id;
 	}
 
-	public int getQde_voucher() {
+	public String getQde_voucher() {
 		return qde_voucher;
 	}
 
-	public void setQde_voucher(int qde_voucher) {
+	public void setQde_voucher(String qde_voucher) {
 		this.qde_voucher = qde_voucher;
 	}
 
-	public int getQde_solicitada() {
+	public String getQde_solicitada() {
 		return qde_solicitada;
 	}
 
-	public void setQde_solicitada(int qde_solicitada) {
+	public void setQde_solicitada(String qde_solicitada) {
 		this.qde_solicitada = qde_solicitada;
 	}
 
@@ -102,8 +102,10 @@ public class Promocao implements Serializable{
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((produto == null) ? 0 : produto.hashCode());
-		result = prime * result + qde_solicitada;
-		result = prime * result + qde_voucher;
+		result = prime * result
+				+ ((qde_solicitada == null) ? 0 : qde_solicitada.hashCode());
+		result = prime * result
+				+ ((qde_voucher == null) ? 0 : qde_voucher.hashCode());
 		result = prime * result
 				+ ((statusPromocao == null) ? 0 : statusPromocao.hashCode());
 		result = prime * result
@@ -130,9 +132,15 @@ public class Promocao implements Serializable{
 				return false;
 		} else if (!produto.equals(other.produto))
 			return false;
-		if (qde_solicitada != other.qde_solicitada)
+		if (qde_solicitada == null) {
+			if (other.qde_solicitada != null)
+				return false;
+		} else if (!qde_solicitada.equals(other.qde_solicitada))
 			return false;
-		if (qde_voucher != other.qde_voucher)
+		if (qde_voucher == null) {
+			if (other.qde_voucher != null)
+				return false;
+		} else if (!qde_voucher.equals(other.qde_voucher))
 			return false;
 		if (statusPromocao == null) {
 			if (other.statusPromocao != null)
@@ -146,5 +154,4 @@ public class Promocao implements Serializable{
 			return false;
 		return true;
 	}
-
 }

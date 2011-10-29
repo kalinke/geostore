@@ -3,9 +3,11 @@ package br.com.geostore.controller;
 import java.awt.Desktop;
 import java.net.URI;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
 
 import org.dom4j.Document;
+import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.Factory;
@@ -14,8 +16,10 @@ import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
 import org.jboss.seam.faces.FacesMessages;
 
+import br.com.geostore.dao.CidadeDAO;
 import br.com.geostore.dao.LojaDAO;
 import br.com.geostore.dao.StatusLojaDAO;
+import br.com.geostore.entity.Cidade;
 import br.com.geostore.entity.Loja;
 import br.com.geostore.entity.StatusLoja;
 import br.com.geostore.entity.UnidadeFederacao;
@@ -30,6 +34,7 @@ public class LojaController {
 
 	@In(create=true) private LojaDAO lojaDAO;
 	@In(create=true) private StatusLojaDAO statusLojaDAO;
+	@In(create=true) private CidadeDAO cidadeDAO;
 	
 	@In private FacesMessages facesMessages;
 	
@@ -79,11 +84,11 @@ public class LojaController {
         EmailValidator emailValidator = new EmailValidator();
         NumeroValidator numertoValidator = new NumeroValidator();    
         
-        //if(loja.getEmpresaSuperior().getDocumento()==null || loja.getEmpresaSuperior().getDocumento().isEmpty())
-          // throw new RuntimeException("É necessário selecionar a empresa superior!");  
+        if( loja.getEmpresaSuperior()==null)
+            	throw new RuntimeException("É necessário selecionar a empresa superior!");  
         
         if(loja.getStatusLoja()==null || loja.getStatusLoja().getDescricao().isEmpty())
-            throw new RuntimeException("É necessário selecionar o status!"); 
+            	throw new RuntimeException("É necessário selecionar o status!"); 
         
         if(loja.getDocumento().isEmpty())
                 throw new RuntimeException("É necessário preencher o CNPJ!");        
@@ -103,11 +108,11 @@ public class LojaController {
         if(loja.getInscricaoEstadual().isEmpty())
                 throw new RuntimeException("É necessário preencher a inscrição estadual!");       
 
-        if(loja.getContato().isEmpty())
-                throw new RuntimeException("É necessário preencher o contato!");       
+        //if(loja.getContato().isEmpty())
+                //throw new RuntimeException("É necessário preencher o contato!");       
 
-        if(!nomeValidator.validarNome(loja.getContato()))
-                throw new RuntimeException("Nome do contato inválido!");       
+       // if(!nomeValidator.validarNome(loja.getContato()))
+               // throw new RuntimeException("Nome do contato inválido!");       
 
         if(loja.getTelefone().isEmpty())
                 throw new RuntimeException("É necessário preencher o telefone!");       
@@ -139,8 +144,14 @@ public class LojaController {
         if(loja.getEndereco().getCidade()==null || loja.getEndereco().getCidade().getDescricao().isEmpty())
                 throw new RuntimeException("Selecione uma Cidade!");
   
-        if(loja.getEndereco().getLatitude() == null || loja.getEndereco().getLongitude() == null )
-                throw new RuntimeException("É necessário buscar as coordenadas!");              
+        if(loja.getEndereco().getLatitude() == null || loja.getEndereco().getLongitude() == null)
+            throw new RuntimeException("É necessário buscar as coordenadas!");    
+    
+        if(!numertoValidator.validarCoordenadas(loja.getEndereco().getLatitude()))
+        	throw new RuntimeException("Latitude inválida!");   
+    
+        if(!numertoValidator.validarCoordenadas(loja.getEndereco().getLongitude()))
+    		throw new RuntimeException("Longitude inválido!");          
                               
 }      	
 
@@ -148,6 +159,52 @@ public class LojaController {
 		
 		lojaDAO.excluir(loja);
 		return "EXCLUIR";
+	}
+	
+public void populaEndereco() throws Exception{
+		
+		if(this.loja.getEndereco().getCEP()!=null || !this.loja.getEndereco().getCEP().isEmpty()){
+			URL url = new URL("http://cep.republicavirtual.com.br/web_cep.php?cep=" + this.loja.getEndereco().getCEP() + "&formato=xml");
+
+			SAXReader reader = new SAXReader();
+			
+	        Document document = reader.read(url);
+	        Element root = document.getRootElement();
+	        
+	        String tipoLogradouro ="";
+	        String cidade ="";
+	        String uf ="";
+	        
+	        for ( Iterator<?> i = root.elementIterator(); i.hasNext(); ) {
+	        	Element element = (Element) i.next();                
+	                
+	            if (element.getQualifiedName().equals("bairro"))
+	            	this.loja.getEndereco().setBairro(element.getText());                              
+	            
+	            if (element.getQualifiedName().equals("tipo_logradouro"))
+	            	tipoLogradouro = element.getText() + " ";
+	            
+	            if (element.getQualifiedName().equals("logradouro"))
+	            	this.loja.getEndereco().setLogradouro(tipoLogradouro + element.getText());
+	            
+	            if (element.getQualifiedName().equals("cidade"))
+	            	cidade = element.getText();
+	            
+	            if (element.getQualifiedName().equals("uf"))
+	            	uf = element.getText();
+	        
+	        }	        
+	            Cidade cidadeConsulta = cidadeDAO.buscarPorCidadeEstado(cidade, uf);        
+	           
+	            if(cidadeConsulta != null){
+	            	this.unidadeFederacao = cidadeConsulta.getUnidadeFederacao();
+		            this.loja.getEndereco().setCidade(cidadeConsulta);
+	            }else{
+	            	this.unidadeFederacao = null;
+		            this.loja.getEndereco().setCidade(null);
+	            }
+	         
+		}
 	}
 	
 public void buscarCoordenadas() throws Exception{
@@ -180,7 +237,7 @@ public void buscarCoordenadas() throws Exception{
         if(status.equals("OK")){
         	loja.getEndereco().setLatitude(Double.valueOf(document.selectSingleNode("//GeocodeResponse/result/geometry/location/lat").getText()));				
         	loja.getEndereco().setLongitude(Double.valueOf(document.selectSingleNode("//GeocodeResponse/result/geometry/location/lng").getText()));
-        }else if(status.equals("ZERO_RESULTS")){
+        }else if(status.equals("ZERO_RESULTS") || status.isEmpty() || status==null){
         	facesMessages.add("Nenhuma coordenada encontrada no endereço informado!");
         }
 		

@@ -68,6 +68,9 @@ public class UsuarioController {
 		if(usuario.getTipoUsuario()==null || usuario.getTipoUsuario().getDescricao().isEmpty())
 			throw new RuntimeException("É necessário selecionar o tipo de usuário!");
 		
+		if(usuario.getTipoUsuario().getId()==2 && usuario.getEmpresaVinculo()==null)
+			throw new RuntimeException("É necessário selecionar a empresa!");
+		
 		if(usuario.getStatusUsuario()==null || usuario.getStatusUsuario().getDescricao().isEmpty())
 	        throw new RuntimeException("É necessário selecionar o status!"); 
 		 
@@ -84,10 +87,7 @@ public class UsuarioController {
             throw new RuntimeException("Email inválido!");        
         
         if(usuario.getSenha().isEmpty())
-            throw new RuntimeException("É necessário preencher a senha!");     
-
-		if(usuario.getTelefone().isEmpty())
-            throw new RuntimeException("É necessário preencher o telefone!");    
+            throw new RuntimeException("É necessário preencher a senha!");         
        
 	}	
 
