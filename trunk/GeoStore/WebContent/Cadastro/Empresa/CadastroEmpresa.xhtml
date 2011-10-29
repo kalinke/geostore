@@ -80,7 +80,7 @@
 						
 						<s:decorate id="txtInscricaoEstadual" template="../../layout/edit.xhtml">											
 							<ui:define name="label">Inscrição Estadual</ui:define>
-							<h:inputText id="ie" maxlength="14" value="#{empresaController.empresa.inscricaoEstadual}" />
+							<h:inputText id="ie" maxlength="20" value="#{empresaController.empresa.inscricaoEstadual}" />
 						</s:decorate>
 
 						<s:decorate id="txtContato" template="../../layout/edit.xhtml" >
@@ -113,7 +113,7 @@
 						
 						<s:decorate id="txtCep" template="../../layout/edit.xhtml">											
 							<ui:define name="label">CEP</ui:define>
-							<h:inputText id="cep" value="#{empresaController.empresa.endereco.CEP}" converter="cepConverter" >
+							<h:inputText id="cep" value="#{empresaController.empresa.endereco.CEP}" converter="cepConverter">
 								<rich:jQuery selector="#cep" query="mask('99.999-999')" timing="onload"/>
 								<a4j:support event="onblur" action="#{empresaController.populaEndereco}"  reRender="logradouro,bairro,comboEstado,comboCidade"/>												
 							</h:inputText>
@@ -121,12 +121,12 @@
 						
 						<s:decorate template="../../layout/edit.xhtml">
 								<ui:define name="label">Rua</ui:define>
-								<h:inputText id="logradouro" size="100" value="#{empresaController.empresa.endereco.logradouro}" />	
+								<h:inputText id="logradouro" size="100" value="#{empresaController.empresa.endereco.logradouro}"/>	
 						</s:decorate>
 
 						<s:decorate template="../../layout/edit.xhtml">	
 								<ui:define name="label">Nº</ui:define>
-								<h:inputText size="20" value="#{empresaController.empresa.endereco.numeroLogradouro}" >
+								<h:inputText size="20" value="#{empresaController.empresa.endereco.numeroLogradouro}">
 								</h:inputText>
 						</s:decorate>
 							
@@ -164,7 +164,7 @@
 						
                        	<s:decorate template="../../layout/edit.xhtml">
 								<ui:define name="label">Longitude:</ui:define>
-								<h:inputText size="30" value="#{empresaController.empresa.endereco.longitude}" />	
+								<h:inputText size="30" value="#{empresaController.empresa.endereco.longitude}"/>	
 						</s:decorate>
 						
 						<a4j:commandButton value="Buscar Coordenadas" action="#{empresaController.buscarCoordenadas()}" reRender="cadastroEmpresaForm" />

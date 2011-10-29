@@ -71,13 +71,13 @@
 							</h:selectOneMenu>
 						</s:decorate>
 						
-						<s:decorate template="../../layout/edit.xhtml" rendered="#{usuarioController.usuario.tipoUsuario.id == 2}">
+						<!--<s:decorate template="../../layout/edit.xhtml" rendered="#{usuarioController.usuario.tipoUsuario.id == 2}">
 							<ui:define name="label">Empresa Vínculo</ui:define>		
 							<h:selectOneMenu value="#{usuarioController.usuario.empresaVinculo}">	
 								<s:selectItems value="#{empresaController.empresas}" var="empresaSuperior" label="#{empresaSuperior.documento} - #{empresaSuperior.razaoSocial}" noSelectionLabel="Selecione..."/>								
 								<s:convertEntity/>
 							</h:selectOneMenu>
-						</s:decorate>									
+						</s:decorate>	-->								
 									
 						<s:decorate template="../../layout/edit.xhtml">
 							<ui:define name="label">Status</ui:define>			

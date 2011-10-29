@@ -88,7 +88,7 @@
 						
 						<s:decorate id="txtInscricaoEstadual" template="../../layout/edit.xhtml">											
 							<ui:define name="label">Inscrição Estadual</ui:define>
-							<h:inputText id="ie" maxlength="14" value="#{lojaController.loja.inscricaoEstadual}"/>
+							<h:inputText id="ie" maxlength="20" value="#{lojaController.loja.inscricaoEstadual}"/>
 						</s:decorate>
 
 						<s:decorate id="txtContato" template="../../layout/edit.xhtml" >
@@ -121,18 +121,19 @@
 						<s:decorate id="txtCep" template="../../layout/edit.xhtml">											
 							<ui:define name="label">CEP</ui:define>
 							<h:inputText id="cep" value="#{lojaController.loja.endereco.CEP}" converter="cepConverter">
-								<rich:jQuery selector="#cep" query="mask('99.999-999')" timing="onload"/>												
+								<rich:jQuery selector="#cep" query="mask('99.999-999')" timing="onload"/>	
+								<a4j:support event="onblur" action="#{lojaController.populaEndereco}"  reRender="logradouro,bairro,comboEstado,comboCidade"/>											
 							</h:inputText>
 						</s:decorate>
 						
 						<s:decorate template="../../layout/edit.xhtml">
 								<ui:define name="label">Rua</ui:define>
-								<h:inputText size="100" value="#{lojaController.loja.endereco.logradouro}" />	
+								<h:inputText id="logradouro" size="100" value="#{lojaController.loja.endereco.logradouro}"/>	
 						</s:decorate>
 
 						<s:decorate template="../../layout/edit.xhtml">
 								<ui:define name="label">Nº</ui:define>
-								<h:inputText size="20" value="#{lojaController.loja.endereco.numeroLogradouro}" />	
+								<h:inputText size="20" value="#{lojaController.loja.endereco.numeroLogradouro}"/>	
 						</s:decorate>
 							
 						<s:decorate template="../../layout/edit.xhtml">
@@ -142,7 +143,7 @@
 							
 						<s:decorate template="../../layout/edit.xhtml">
 								<ui:define name="label">Bairro</ui:define>
-								<h:inputText size="60" value="#{lojaController.loja.endereco.bairro}"/>	
+								<h:inputText id="bairro" size="60" value="#{lojaController.loja.endereco.bairro}"/>	
 						</s:decorate>
 						
 						<s:decorate template="../../layout/edit.xhtml">
@@ -164,18 +165,15 @@
                        	
                        	<s:decorate template="../../layout/edit.xhtml">
 								<ui:define name="label">Latitude:</ui:define>
-								<h:inputText size="30" value="#{lojaController.loja.endereco.latitude}" />	
+								<h:inputText size="30" value="#{lojaController.loja.endereco.latitude}"/>	
 						</s:decorate>
 						
                        	<s:decorate template="../../layout/edit.xhtml">
 								<ui:define name="label">Latitude:</ui:define>
-								<h:inputText size="30" value="#{lojaController.loja.endereco.longitude}" />	
+								<h:inputText size="30" value="#{lojaController.loja.endereco.longitude}"/>	
 						</s:decorate>
 						
 						<a4j:commandButton value="Buscar Coordenadas" action="#{lojaController.buscarCoordenadas()}" reRender="cadastroLojaForm" />
-						
-						<a4j:commandButton value="Validar Coordenadas" action="#{lojaController.validarCoordenadas()}"/>
-                    					
 						
 					</h:panelGrid>
 
