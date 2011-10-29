@@ -18,6 +18,7 @@ import org.jboss.seam.annotations.Scope;
 import org.jboss.seam.annotations.intercept.BypassInterceptors;
 import org.jboss.seam.servlet.ContextualHttpServletRequest;
 import org.jboss.seam.web.AbstractResource;
+import org.jfree.util.Log;
 
 import br.com.geostore.dao.ProdutoDAO;
 import br.com.geostore.entity.Endereco;
@@ -43,18 +44,16 @@ public class ProdutoServlet extends AbstractResource {
         		String log   = request.getParameter("log");
         		String lat   = request.getParameter("lat");
         		
-        		System.out.println("Parametro 'texto': " + texto);
-        		System.out.println("Parametro 'log'  : " + log);
-        		System.out.println("Parametro 'lat'  : " + lat);
+        		Log.info("Parametro 'texto': " + texto);
+        		Log.info("Parametro 'log'  : " + log);
+        		Log.info("Parametro 'lat'  : " + lat);
         		
         		if (texto != null){
-        			
-        			org.jboss.seam.contexts.Lifecycle.beginCall();
-        			ProdutoDAO pDao = (ProdutoDAO) Component.getInstance(ProdutoDAO.class);		
-        			org.jboss.seam.contexts.Lifecycle.endCall();
+        			        			
+        			ProdutoDAO pDao = (ProdutoDAO) Component.getInstance(ProdutoDAO.class);		        			
         			try {
 						List<Produto> p = pDao.buscarPorDescricao(texto);
-						System.out.println("Numero de produtos encontratos: " + p.size());
+						Log.info("Numero de produtos encontratos: " + p.size());
 						
 						if (p != null){
 							JSONArray jArray = new JSONArray();
@@ -68,7 +67,7 @@ public class ProdutoServlet extends AbstractResource {
 								int existPromo = 0;
 								if (promo!=null && promo.size()>0){
 									existPromo = 1;
-									System.out.println("Numero de promocoes para o produto: " + produto.getId() + "/" + existPromo);
+									Log.info("Numero de promocoes para o produto: " + produto.getId() + "/" + existPromo);
 								}
 																
 								jArray.put(new JSONObject().put("idProd",    produto.getId()));
