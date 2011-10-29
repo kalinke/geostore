@@ -89,5 +89,19 @@ public class ProdutoDAO {
 			throw new Exception(e);
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Produto> buscarPorDescricao(String desc) throws Exception {
+		try{
+						
+			Query query = entityManager.createQuery("from Produto as p " +
+													" where p.descricao = :desc" + 
+													" order by p.id");
+			query.setParameter("desc", desc);
+			return query.getResultList();
+		}catch (Exception e) {
+			throw new Exception(e);
+		}
+	}
 
 }
