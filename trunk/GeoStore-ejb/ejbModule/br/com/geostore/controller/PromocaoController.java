@@ -14,7 +14,6 @@ import br.com.geostore.dao.StatusPromocaoDAO;
 import br.com.geostore.entity.Produto;
 import br.com.geostore.entity.Promocao;
 import br.com.geostore.entity.StatusPromocao;
-import br.com.geostore.validator.NumeroValidator;
 
 @Name("promocaoController")
 @Scope(ScopeType.CONVERSATION)
@@ -62,19 +61,18 @@ public class PromocaoController {
 	
 	public void validar() throws RuntimeException{  
 		
-		NumeroValidator numeroValidator = new NumeroValidator();
-		
 		if(promocao.getProduto()==null)
 			throw new RuntimeException("É necessário selecionar o produto!");		
 
 		if(promocao.getStatusPromocao()==null || promocao.getStatusPromocao().getDescricao().isEmpty())
 	        throw new RuntimeException("É necessário selecionar o status!"); 		
 		
-		if(promocao.getQde_voucher()==null || promocao.getQde_voucher().isEmpty())
-            throw new RuntimeException("é necessário informar o número de vouchers!");  
+		if(promocao.getQde_voucher()==null)
+            throw new RuntimeException("Necessário informar a quantidade de voucher!");
 		
-		//if(numeroValidator.validarNumero(promocao.getQde_voucher()))
-			//throw new RuntimeException("Número de vouchers inválido!");
+		if(promocao.getQde_voucher()==0)
+            throw new RuntimeException("A quantidade deve ser maior do que zero!");  
+
 	}	
 	
 	public String remover() throws Exception{		
