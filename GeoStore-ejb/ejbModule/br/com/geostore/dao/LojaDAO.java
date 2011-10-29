@@ -109,7 +109,16 @@ public class LojaDAO {
 			query.setParameter("lojaId", loja.getId());
 			
 			if(query.getResultList()==null || query.getResultList().isEmpty()){
-				return false;
+				
+				sQuery = " from Empresa as l ";	
+				sQuery += " where l.documento = :lojaCNPJ ";
+				sQuery += " order by l.id ";			
+				
+				query = entityManager.createQuery(sQuery);
+				query.setParameter("lojaCNPJ", loja.getDocumento());
+				
+				if(query.getResultList()==null || query.getResultList().isEmpty())				
+					return false;	
 			}
 			
 			return true;
