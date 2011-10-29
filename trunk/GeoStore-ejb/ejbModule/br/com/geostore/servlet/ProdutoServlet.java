@@ -41,18 +41,20 @@ public class ProdutoServlet extends AbstractResource {
             public void process(){       		
         		
         		String texto = request.getParameter("texto");
-        		String log   = request.getParameter("log");
-        		String lat   = request.getParameter("lat");
+        		double lat   = Double.parseDouble(request.getParameter("lat"));
+        		double log   = Double.parseDouble(request.getParameter("log"));        		
+        		double raio  = Double.parseDouble(request.getParameter("raio"));
         		
         		Log.info("Parametro 'texto': " + texto);
-        		Log.info("Parametro 'log'  : " + log);
         		Log.info("Parametro 'lat'  : " + lat);
+        		Log.info("Parametro 'log'  : " + log);        		
+        		Log.info("Parametro 'raio' : " + raio);
         		
         		if (texto != null){
         			        			
         			ProdutoDAO pDao = (ProdutoDAO) Component.getInstance(ProdutoDAO.class);		        			
         			try {
-						List<Produto> p = pDao.buscarPorDescricao(texto);
+						List<Produto> p = pDao.buscarPorProximidade(texto, lat, log, raio);
 						Log.info("Numero de produtos encontratos: " + p.size());
 						
 						if (p != null){
