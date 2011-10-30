@@ -15,6 +15,7 @@ public class ListaDeProdutosActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		
 		//recuperando os parametros
+		@SuppressWarnings("unchecked")
 		List<Produto> prods = (ArrayList<Produto>) getIntent().getSerializableExtra("produtos");
 		
 		ListaDeProdutosAdapter adapter = new ListaDeProdutosAdapter(this, prods);  
