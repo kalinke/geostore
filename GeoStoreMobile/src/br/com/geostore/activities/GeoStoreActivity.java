@@ -18,8 +18,8 @@ public class GeoStoreActivity extends Activity implements OnClickListener{
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);        
-        Button btnBuscar = (Button) findViewById(R.id.btnBuscar);        
+        setContentView(R.layout.main_busca_tela);        
+        Button btnBuscar = (Button) findViewById(R.id.btBuscarMainBusca);        
         btnBuscar.setOnClickListener(this);
                  
         }
@@ -28,7 +28,7 @@ public class GeoStoreActivity extends Activity implements OnClickListener{
 	@Override
 	public void onClick(View v) {			
 				
-		EditText edtBuscar = (EditText) findViewById(R.id.edtBuscar);
+		EditText edtBuscar = (EditText) findViewById(R.id.etItemMainBusca);
 		double log = 0;
 		double lat = 0;
 		double raio = 1000;
