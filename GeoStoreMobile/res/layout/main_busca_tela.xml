@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/branco" 
+    android:gravity="center_vertical">
+    
+    <ImageView 
+		android:layout_height="139dp" 
+		android:src="@drawable/gslogo" 
+		android:layout_width="139dp" 
+		android:id="@+id/logoMainBusca" 
+		android:layout_alignParentTop="true" 
+		android:layout_centerHorizontal="true">
+	</ImageView>
+    
+	<TextView  
+    	android:layout_width="fill_parent" 
+    	android:layout_height="wrap_content"     
+    	android:id="@+id/textView1"/>
+	<EditText android:layout_height="wrap_content" android:layout_width="276dp" android:hint="Digite o produto desejado:" android:id="@+id/etItemMainBusca" android:layout_below="@+id/logoMainBusca" android:layout_centerHorizontal="true" android:layout_marginTop="30dp"></EditText>
+	<EditText android:layout_height="wrap_content" android:layout_width="wrap_content" android:hint="Raio da busca em metros:" android:id="@+id/etRaioMainBusca" android:layout_above="@+id/btBuscarMainBusca" android:layout_centerHorizontal="true" android:layout_marginBottom="34dp"></EditText>
+	<Button android:layout_height="wrap_content" android:layout_width="72dp" android:id="@+id/btLoginMainBusca" android:text="Login" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" android:layout_marginBottom="15dp"></Button>
+	<Button android:layout_height="wrap_content" android:layout_width="114dp" android:id="@+id/btBuscarMainBusca" android:text="Buscar" android:layout_above="@+id/btLoginMainBusca" android:layout_centerHorizontal="true" android:layout_marginBottom="30dp"></Button>
+	
+	
+</RelativeLayout>
