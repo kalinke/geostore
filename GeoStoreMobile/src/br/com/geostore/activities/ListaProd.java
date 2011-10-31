@@ -77,7 +77,7 @@ private String[] Produtos;
 	    	Log.i(CATEGORIA,"Discar Loja");
 	    	//final Intent it3 = new Intent(ListaProd.this, DiscarLoja.class);
 	    	
-	    	String fone = "88064406";
+	    	String fone = "98746783";
 			Uri foneloja = Uri.parse("tel:" + fone);
 			Intent discar = new Intent(Intent.ACTION_CALL,foneloja);
 			startActivity(discar);	    	
