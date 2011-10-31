@@ -2,4 +2,23 @@
 <resources>
     <string name="hello">Hello World, GeoStoreActivity!</string>
     <string name="app_name">GeoStoreMobile</string>
+    
+    <string name="footer">
+    	This is a demo of the ListView. Click and hold on to one of the items above to show the context menu.
+    </string>
+   
+	<string-array name="produtos">
+		<item>Item 1</item>
+		<item>Item 2</item>
+		<item>Item 3</item>
+		<item>Item 4</item>
+		
+	</string-array>
+	
+	<string-array name="menu">
+		<item>Gerar Voucher</item>
+		<item>Traçar Rota</item>
+		<item>Discar Loja</item>
+	</string-array>
+    
 </resources>
