@@ -1,6 +1,5 @@
 package br.com.geostore.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -12,6 +11,7 @@ import org.jboss.seam.annotations.Name;
 import org.jboss.seam.log.Log;
 
 import br.com.geostore.entity.Produto;
+import br.com.geostore.entity.Usuario;
 
 @Name("produtoDAO")
 public class ProdutoDAO {
@@ -79,12 +79,19 @@ public class ProdutoDAO {
 	}
 		
 	@SuppressWarnings("unchecked")
-	public List<Produto> buscarTodos() throws Exception {
+	public List<Produto> buscarTodos(Usuario usuarioLogado) throws Exception {
 		try{
 			
+			String sQuery;
 			log.info("Buscando Lista de Produto do Banco de Dados");
-			Query query = entityManager.createQuery("from Produto as u " +
-													"order by u.id");
+			
+			sQuery = " from Produto p ";			
+			if(usuarioLogado.getTipoUsuario().getId().longValue() != 1) sQuery += " where p.loja.empresaSuperior.id = :idEmpresaUsuario ";						
+			sQuery += " order by p.id ";
+			
+			Query query = entityManager.createQuery(sQuery);
+			if(usuarioLogado.getTipoUsuario().getId().longValue() != 1) query.setParameter("idEmpresaUsuario", usuarioLogado.getEmpresaVinculo().getId());
+													
 			return query.getResultList();
 		}catch (Exception e) {
 			throw new Exception(e);
