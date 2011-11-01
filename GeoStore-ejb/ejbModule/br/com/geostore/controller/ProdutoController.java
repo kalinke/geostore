@@ -13,6 +13,7 @@ import br.com.geostore.dao.ProdutoDAO;
 import br.com.geostore.dao.StatusProdutoDAO;
 import br.com.geostore.entity.Produto;
 import br.com.geostore.entity.StatusProduto;
+import br.com.geostore.entity.Usuario;
 
 @Name("produtoController")
 @Scope(ScopeType.CONVERSATION)
@@ -22,6 +23,7 @@ public class ProdutoController {
 	@In(create=true) private StatusProdutoDAO statusProdutoDAO;
 	
 	@In private FacesMessages facesMessages;
+	private Usuario usuarioLogado;
 	
 	private Produto produto = new Produto();
 	private Long idProduto;
@@ -86,7 +88,7 @@ public class ProdutoController {
 		
 	@Factory
 	public List<Produto> getProdutos() throws Exception{		
-		return produtoDAO.buscarTodos();
+		return produtoDAO.buscarTodos(usuarioLogado);
 	}
 
 	@Factory
