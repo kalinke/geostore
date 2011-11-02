@@ -14,6 +14,7 @@ import org.jboss.seam.annotations.Factory;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
+import org.jboss.seam.contexts.Contexts;
 import org.jboss.seam.faces.FacesMessages;
 
 import br.com.geostore.dao.CidadeDAO;
@@ -23,6 +24,7 @@ import br.com.geostore.entity.Cidade;
 import br.com.geostore.entity.Loja;
 import br.com.geostore.entity.StatusLoja;
 import br.com.geostore.entity.UnidadeFederacao;
+import br.com.geostore.entity.Usuario;
 import br.com.geostore.validator.DocumentoValidator;
 import br.com.geostore.validator.EmailValidator;
 import br.com.geostore.validator.NomeValidator;
@@ -37,10 +39,15 @@ public class LojaController {
 	@In(create=true) private CidadeDAO cidadeDAO;
 	
 	@In private FacesMessages facesMessages;
+	private Usuario usuarioLogado;
 	
 	private Loja loja = new Loja();
 	private UnidadeFederacao unidadeFederacao = new UnidadeFederacao();	
 	private Long idLoja;
+	
+	public LojaController(){
+		this.usuarioLogado = (Usuario) Contexts.getSessionContext().get("usuarioLogado");
+	}
 	
 			
 	public String nova(){
@@ -94,7 +101,7 @@ public class LojaController {
                 throw new RuntimeException("É necessário preencher o CNPJ!");        
 
         if(!DocumentoValidator.validarCNPJCPF(loja.getDocumento()))
-                throw new RuntimeException("CNPJ digitado é inválido!");               
+                throw new RuntimeException("CNPJ digitado é inválido!");  
 
         if (lojaDAO.buscarPorCNPJ(loja))
                 throw new RuntimeException("CNPJ digitado já existe!");       
@@ -262,7 +269,7 @@ public void buscarCoordenadas() throws Exception{
 	
 	@Factory
 	public List<Loja> getLojas() throws Exception{		
-		return lojaDAO.buscarTodos();
+		return lojaDAO.buscarTodos(usuarioLogado);
 	}
 	
 	@Factory

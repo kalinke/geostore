@@ -85,7 +85,7 @@ public class ProdutoDAO {
 			String sQuery;
 			log.info("Buscando Lista de Produto do Banco de Dados");
 			
-			sQuery = " from Produto p ";			
+			sQuery = " from Produto as p ";			
 			if(usuarioLogado.getTipoUsuario().getId().longValue() != 1) sQuery += " where p.loja.empresaSuperior.id = :idEmpresaUsuario ";						
 			sQuery += " order by p.id ";
 			

@@ -7,6 +7,7 @@ import org.jboss.seam.annotations.Factory;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
+import org.jboss.seam.contexts.Contexts;
 import org.jboss.seam.faces.FacesMessages;
 
 import br.com.geostore.dao.PromocaoDAO;
@@ -14,6 +15,7 @@ import br.com.geostore.dao.StatusPromocaoDAO;
 import br.com.geostore.entity.Produto;
 import br.com.geostore.entity.Promocao;
 import br.com.geostore.entity.StatusPromocao;
+import br.com.geostore.entity.Usuario;
 
 @Name("promocaoController")
 @Scope(ScopeType.CONVERSATION)
@@ -23,10 +25,15 @@ public class PromocaoController {
 	@In(create=true) private StatusPromocaoDAO statusPromocaoDAO;
 	
 	@In private FacesMessages facesMessages;
+	private Usuario usuarioLogado;
 	
 	private Promocao promocao = new Promocao();
 	private Long idPromocao;
 	private Produto produto;
+	
+	public PromocaoController(){
+		this.usuarioLogado = (Usuario) Contexts.getSessionContext().get("usuarioLogado");
+	}
 
 	public String novo(){
 		this.promocao = new Promocao();	
@@ -83,7 +90,7 @@ public class PromocaoController {
 	
 	@Factory
 	public List<Promocao> getPromocoes() throws Exception{		
-		return promocaoDAO.buscarTodos();
+		return promocaoDAO.buscarTodos(usuarioLogado);
 	}
 	
 	@Factory
