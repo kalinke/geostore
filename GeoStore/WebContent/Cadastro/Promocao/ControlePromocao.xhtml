@@ -59,8 +59,13 @@
 					</rich:column>	
 					
 					<rich:column>
-						<f:facet name="header">Produto</f:facet>
+						<f:facet name="header">Tipo</f:facet>
 						<h:outputText value="#{p.produto.nome}"/>
+					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">Produto</f:facet>
+						<h:outputText value="#{p.produto.descricao}"/>
 					</rich:column>
 					
 					<rich:column>
