@@ -14,6 +14,7 @@ import java.util.Map;
 import javax.faces.context.FacesContext;
 import javax.imageio.ImageIO;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,11 +27,18 @@ import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
+import org.jboss.seam.contexts.Contexts;
 import org.jboss.seam.faces.FacesMessages;
 
+import br.com.geostore.dao.EmpresaDAO;
+import br.com.geostore.dao.LojaDAO;
+import br.com.geostore.dao.ProdutoDAO;
+import br.com.geostore.dao.PromocaoDAO;
+import br.com.geostore.dao.UsuarioDAO;
 import br.com.geostore.entity.Empresa;
 import br.com.geostore.entity.Loja;
 import br.com.geostore.entity.Produto;
+import br.com.geostore.entity.Promocao;
 import br.com.geostore.entity.Usuario;
 
 /**Entidade responsável por gerenciar todas as funcionalidades relacionadas aos relatórios do sistemas
@@ -46,17 +54,39 @@ public class RelatorioManager {
 	
 	@In	FacesMessages facesMessages;
 	@In EntityManager entityManager;
-
+	@In (create=true) EmpresaDAO empresaDAO;
+	@In (create=true) ProdutoDAO produtoDAO;
+	@In (create=true) UsuarioDAO usuarioDAO;
+	@In (create=true) PromocaoDAO promocaoDAO;
+	@In (create=true) LojaDAO lojaDAO;
+	
+	private Usuario usuarioLogado;
 	/**
 	 *	Método responsável por gerar os relatórios da empresa
 	 *
 	 */
-	public void geraRelatorioListaEmpresas(){
+	
+	public RelatorioManager(){
+		this.usuarioLogado = (Usuario) Contexts.getSessionContext().get("usuarioLogado");
+	}
+	
+	public void geraRelatorioListaEmpresas() throws Exception{
         
 		List<Empresa> list = new ArrayList<Empresa>();
 		
-		list = entityManager.createQuery(" from Empresa ").getResultList();
-			
+		list = empresaDAO.buscarPorUsuarioLogado(usuarioLogado);
+		
+//		String sQuery;
+//		
+//		sQuery = " from Empresa as e ";			
+//		if(usuarioLogado.getTipoUsuario().getId().longValue() != 1) sQuery += " where e.id = :idEmpresaUsuario ";						
+//		sQuery += " order by e.id ";			
+//		
+//		Query query = entityManager.createQuery(sQuery);			
+//		if(usuarioLogado.getTipoUsuario().getId().longValue() != 1) query.setParameter("idEmpresaUsuario", usuarioLogado.getEmpresaVinculo().getId());
+//
+//		list = entityManager.createQuery(sQuery).getResultList();
+//			
         if (list.isEmpty()) {
             facesMessages.add("Não existem demandas cadastradas");
             return;
@@ -105,12 +135,13 @@ public class RelatorioManager {
 
 	}
 
-	public void geraRelatorioListaLojas(){
+	public void geraRelatorioListaLojas() throws Exception{
         
 		List<Loja> list = new ArrayList<Loja>();
 		
 		list = entityManager.createQuery(" from Loja ").getResultList();
-			
+		list = lojaDAO.buscarTodos(usuarioLogado);
+		
         if (list.isEmpty()) {
             facesMessages.add("Não existem dados cadastrados");
             return;
@@ -159,12 +190,23 @@ public class RelatorioManager {
 
 	}
 	
-	public void geraRelatorioListaProdutos(){
+	public void geraRelatorioListaProdutos() throws Exception{
         
 		List<Produto> list = new ArrayList<Produto>();
+		list = produtoDAO.buscarTodos(usuarioLogado);
+		//list = entityManager.createQuery(" from Produto ").getResultList();
 		
-		list = entityManager.createQuery(" from Produto ").getResultList();
-			
+//		String sQuery;
+//		
+//		sQuery = " from Produto as p ";			
+//		if(usuarioLogado.getTipoUsuario().getId().longValue() != 1) sQuery += " where p.loja.empresaSuperior.id = :idEmpresaUsuario ";						
+//		sQuery += " order by p.id ";			
+//		
+//		Query query = entityManager.createQuery(sQuery);			
+//		if(usuarioLogado.getTipoUsuario().getId().longValue() != 1) query.setParameter("idEmpresaUsuario", usuarioLogado.getEmpresaVinculo().getId());
+//
+//		list = query.getResultList();
+		
         if (list.isEmpty()) {
             facesMessages.add("Não existem dados cadastrados");
             return;
@@ -213,11 +255,23 @@ public class RelatorioManager {
 
 	}
 	
-	public void geraRelatorioListaUsuarios(){
+	public void geraRelatorioListaUsuarios() throws Exception{
         
 		List<Usuario> list = new ArrayList<Usuario>();
+		list = usuarioDAO.buscarTodos(usuarioLogado);
+		//list = entityManager.createQuery(" from Usuario ").getResultList();
 		
-		list = entityManager.createQuery(" from Usuario ").getResultList();
+//		String sQuery;
+//		
+//		sQuery = " from Usuario as u ";			
+//		if(usuarioLogado.getTipoUsuario().getId().longValue() != 1) sQuery += " where u.empresaVinculo.id = :idEmpresaUsuario ";						
+//		sQuery += " order by u.id ";			
+//		
+//		Query query = entityManager.createQuery(sQuery);			
+//		if(usuarioLogado.getTipoUsuario().getId().longValue() != 1) query.setParameter("idEmpresaUsuario", usuarioLogado.getEmpresaVinculo().getId());
+//
+//		list = query.getResultList();
+	
 			
         if (list.isEmpty()) {
             facesMessages.add("Não existem dados cadastrados");
@@ -252,6 +306,73 @@ public class RelatorioManager {
             JasperExportManager.exportReportToPdfStream(impressao, pdfStream);
             response.setContentType("application/pdf");
             response.setHeader("Content-Disposition", "attachment; filename=\"relatorio_lista_usuarios.pdf\"");
+            response.setHeader("Cache-Control", "no-cache");
+//            JasperViewer.viewReport(impressao,false);
+            ServletOutputStream flusher = response.getOutputStream();
+            pdfStream.writeTo(flusher);
+            flusher.flush();
+            flusher.close();
+            FacesContext.getCurrentInstance().responseComplete();
+            pdfStream.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+	}
+	
+	public void geraRelatorioListaPromocoes() throws Exception{
+        
+		List<Promocao> list = new ArrayList<Promocao>();
+		
+		//list = entityManager.createQuery(" from Usuario ").getResultList();
+		list = promocaoDAO.buscarTodos(usuarioLogado);
+		
+//		String sQuery;
+//		
+//		sQuery = " from Promocao as p ";			
+//		if(usuarioLogado.getTipoUsuario().getId().longValue() != 1) sQuery += " where p.produto.loja.empresaSuperior.id = :idEmpresaUsuario ";						
+//		sQuery += " order by p.id ";			
+//		
+//		Query query = entityManager.createQuery(sQuery);			
+//		if(usuarioLogado.getTipoUsuario().getId().longValue() != 1) query.setParameter("idEmpresaUsuario", usuarioLogado.getEmpresaVinculo().getId());
+//
+//		list = query.getResultList();
+	
+			
+        if (list.isEmpty()) {
+            facesMessages.add("Não existem dados cadastrados");
+            return;
+        }
+
+        JasperPrint impressao = null;
+        Map<String, Object> param = new HashMap<String, Object>();
+       
+        // Gerando as imagens do relatório
+        InputStream cabecalho = this.getClass().getResourceAsStream("/br/com/geostore/report/logoGeostore.png");
+        Image imgCabecalho = null;
+		try {
+			imgCabecalho = ImageIO.read(cabecalho);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+        imgCabecalho = gerarImagem(imgCabecalho);
+        
+        param.put("cabecalho", imgCabecalho);
+        try {
+            
+            InputStream pathJasper;
+ 	        pathJasper = this.getClass().getResourceAsStream("/br/com/geostore/report/relatorio_lista_promocoes.jasper");
+            impressao = JasperFillManager.fillReport(pathJasper, param , new JRBeanCollectionDataSource(list) );
+            
+          //disponibilizar o pdf para download
+            HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            
+            JasperExportManager.exportReportToPdfStream(impressao, pdfStream);
+            response.setContentType("application/pdf");
+            response.setHeader("Content-Disposition", "attachment; filename=\"relatorio_lista_promocoes.pdf\"");
             response.setHeader("Cache-Control", "no-cache");
 //            JasperViewer.viewReport(impressao,false);
             ServletOutputStream flusher = response.getOutputStream();
