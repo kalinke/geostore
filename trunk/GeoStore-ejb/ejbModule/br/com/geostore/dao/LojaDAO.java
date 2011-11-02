@@ -11,6 +11,7 @@ import org.jboss.seam.annotations.Name;
 import org.jboss.seam.log.Log;
 
 import br.com.geostore.entity.Loja;
+import br.com.geostore.entity.Usuario;
 
 @Name("lojaDAO")
 public class LojaDAO {
@@ -80,12 +81,19 @@ public class LojaDAO {
 	}
 		
 	@SuppressWarnings("unchecked")
-	public List<Loja> buscarTodos() throws Exception {
-		try{
+	public List<Loja> buscarTodos(Usuario usuarioLogado) throws Exception {
+try{
 			
-			log.info("Buscando Lista de Loja do Banco de Dados");
-			Query query = entityManager.createQuery("from Loja as l " +
-													"order by l.id");
+			String sQuery;
+			log.info("Buscando Lista de Lojas do Banco de Dados");
+			
+			sQuery = " from Loja as l ";			
+			if(usuarioLogado.getTipoUsuario().getId().longValue() != 1) sQuery += " where l.empresaSuperior.id = :idEmpresaUsuario ";						
+			sQuery += " order by l.id ";
+			
+			Query query = entityManager.createQuery(sQuery);
+			if(usuarioLogado.getTipoUsuario().getId().longValue() != 1) query.setParameter("idEmpresaUsuario", usuarioLogado.getEmpresaVinculo().getId());
+													
 			return query.getResultList();
 		}catch (Exception e) {
 			throw new Exception(e);
@@ -110,7 +118,7 @@ public class LojaDAO {
 			
 			if(query.getResultList()==null || query.getResultList().isEmpty()){
 				
-				sQuery = " from Empresa as l ";	
+				sQuery = " from Loja as l ";	
 				sQuery += " where l.documento = :lojaCNPJ ";
 				sQuery += " order by l.id ";			
 				

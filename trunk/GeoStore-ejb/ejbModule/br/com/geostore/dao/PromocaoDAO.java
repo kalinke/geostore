@@ -11,6 +11,7 @@ import org.jboss.seam.annotations.Name;
 import org.jboss.seam.log.Log;
 
 import br.com.geostore.entity.Promocao;
+import br.com.geostore.entity.Usuario;
 
 @Name("promocaoDAO")
 public class PromocaoDAO {
@@ -76,16 +77,24 @@ public class PromocaoDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Promocao> buscarTodos() throws Exception {
+	public List<Promocao> buscarTodos(Usuario usuarioLogado) throws Exception {
 		try{
 			
-			log.info("Buscando Lista de Promocoes do Banco de Dados");
-			Query query = entityManager.createQuery("from Promocao as u " +
-													"order by u.id");
+			String sQuery;
+			log.info("Buscando Lista de Promoções do Banco de Dados");
+			
+			sQuery = " from Promocao as p ";			
+			if(usuarioLogado.getTipoUsuario().getId().longValue() != 1) sQuery += " where p.produto.loja.empresaSuperior.id = :idEmpresaUsuario ";						
+			sQuery += " order by p.id ";
+			
+			Query query = entityManager.createQuery(sQuery);
+			if(usuarioLogado.getTipoUsuario().getId().longValue() != 1) query.setParameter("idEmpresaUsuario", usuarioLogado.getEmpresaVinculo().getId());
+													
 			return query.getResultList();
 		}catch (Exception e) {
 			throw new Exception(e);
 		}
 	}
+
 
 }
