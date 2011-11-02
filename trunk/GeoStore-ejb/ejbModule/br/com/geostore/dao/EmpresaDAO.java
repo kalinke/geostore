@@ -81,7 +81,7 @@ public class EmpresaDAO {
 	}
 		
 	@SuppressWarnings("unchecked")
-	public List<Empresa> buscarTodos() throws Exception {
+	public List<Empresa> buscarTodos(Usuario usuarioLogado) throws Exception {
 		try{
 			
 			log.info("Buscando Lista de Empresas do Banco de Dados");

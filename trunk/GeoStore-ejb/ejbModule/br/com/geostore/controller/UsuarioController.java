@@ -24,6 +24,7 @@ public class UsuarioController {
 	@In(create=true) private StatusUsuarioDAO statusUsuarioDAO;
 
 	@In private FacesMessages facesMessages;
+	private Usuario usuarioLogado;
 	
 	private Usuario usuario = new Usuario();
 	private Long idUsuario;
@@ -100,7 +101,7 @@ public class UsuarioController {
 		
 	@Factory
 	public List<Usuario> getUsuarios() throws Exception{		
-		return usuarioDAO.buscarTodos();
+		return usuarioDAO.buscarTodos(usuarioLogado);
 	}
 
 	@Factory

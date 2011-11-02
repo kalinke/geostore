@@ -78,12 +78,20 @@ public class UsuarioDAO {
 	}
 		
 	@SuppressWarnings("unchecked")
-	public List<Usuario> buscarTodos() throws Exception {
+	public List<Usuario> buscarTodos(Usuario usuarioLogado) throws Exception {
 		try{
 			
 			log.info("Buscando Lista de Usuarios do Banco de Dados");
-			Query query = entityManager.createQuery("from Usuario as u " +
-													"order by u.id");
+			
+			String sQuery;
+			
+			sQuery = " from Usuario as u ";			
+			if(usuarioLogado.getTipoUsuario().getId().longValue() != 1) sQuery += " where u.empresaVinculo.id = :idEmpresaUsuario ";						
+			sQuery += " order by u.id ";
+			
+			Query query = entityManager.createQuery(sQuery);
+			if(usuarioLogado.getTipoUsuario().getId().longValue() != 1) query.setParameter("idEmpresaUsuario", usuarioLogado.getEmpresaVinculo().getId());
+													
 			return query.getResultList();
 		}catch (Exception e) {
 			throw new Exception(e);
