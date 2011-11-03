@@ -1,14 +1,9 @@
 package br.com.geostore.activities;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -17,49 +12,37 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import br.com.geostore.entity.Empresa;
 import br.com.geostore.entity.Produto;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
-import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 public class Rota extends MapActivity {
-	//variavel de controle para debbug LogCat
-	private static final String CATEGORIA = "livro";
-	
-	private static final String URL_SERVLET = "http://192.168.0.104:8080/GeoStore/BuscarCoord";
 	
 	private static final long dist_atualiz = 5; // em metros
 	private static final long tempo_atualiz = 10000; // em milisegundos
 	protected LocationManager locationManager;
-	private MapController controlador;
 	protected Button atualizaposicao;	
-	//double latcouto = -25.421028;
-	//double longcouto = -49.259616;
+	private Produto p = null;
 	MapView mapa;
 	
 	public void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState); 
 		setContentView(R.layout.mapa_tela); 
 
+		this.p = (Produto) getIntent().getSerializableExtra("produto");
+		
 		mapa = (MapView) findViewById(R.id.myMapView1);
 		atualizaposicao = (Button) findViewById(R.id.pos_atual);		
 		locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
@@ -67,21 +50,8 @@ public class Rota extends MapActivity {
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, tempo_atualiz, dist_atualiz, new MyLocationListener());
 		//local pela rede de dados
 		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, tempo_atualiz, dist_atualiz, new MyLocationListener());
-
-		atualizaposicao.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				GeoPoint aqui = mostraPosicaoAtual();								
-				GeoPoint GeoPoint_dest = mostraCoordDestFixa();												
-				RotaDraw(aqui, GeoPoint_dest, Color.BLUE, mapa); 
-				mapa.getController().animateTo(aqui); 
-				mapa.getController().setZoom(15); 
-				mapa.getController().setCenter(aqui);        
-				mapa.setBuiltInZoomControls(true);
-				mapa.invalidate();
-			}			
-		});	
 		
-		GeoPoint GeoPoint_orig = mostraCoordOrigFixa(); 		
+		GeoPoint GeoPoint_orig = mostraPosicaoAtual(); 		
 		GeoPoint GeoPoint_dest = mostraCoordDestFixa();
 		
 		RotaDraw(GeoPoint_orig, GeoPoint_dest, Color.GREEN, mapa); 
@@ -98,66 +68,21 @@ public class Rota extends MapActivity {
 			String message = String.format("Posicao Atual \n Longitude: %1$s \n Latitude: %2$s", location.getLongitude(), location.getLatitude());
 			Toast.makeText(Rota.this, message, Toast.LENGTH_LONG).show();
 		}
-		else{
-			Log.i(CATEGORIA,"mostraposicao GPS retornou location null");
+		else{		
 			location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 		}	
 		GeoPoint atual = new GeoPoint((int) (location.getLatitude() * 1E6),(int) (location.getLongitude() * 1E6));		
 		return atual;
 	}
-	
-	private GeoPoint mostraDestino() {
-		Log.i(CATEGORIA,"entrou no mostraDestino");
-		double lat_dest = -25.495890; // Rua General Potiguara, 200 
-		double long_dest = -49.308829;
-		GeoPoint destino = new GeoPoint((int) (lat_dest * 1E6),(int) (long_dest * 1E6));
-		return destino;
-	}
-	
-	private GeoPoint mostraCoordOrigFixa() {
-		//Log.i(CATEGORIA,"entrou no mostraDestino");
-		double lat_orig = -25.472878; // Rua Alfredo José Pinto, 1640 
-		double long_orig = -49.326038;;
-		GeoPoint coordfixorig = new GeoPoint((int) (lat_orig * 1E6),(int) (long_orig * 1E6));
-		return coordfixorig;
-	}
+
 	
 	private GeoPoint mostraCoordDestFixa() {
-		//Log.i(CATEGORIA,"entrou no mostraDestino");
-		
-		//parte nova
-		
-		//conectando ao servlet
-		URL url;
-		try {
-			url = new URL(URL_SERVLET);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			ObjectInputStream ois = new ObjectInputStream(conn.getInputStream());					
-			Empresa e = (Empresa) ois.readObject();
-			ois.close();
 			
-			double lat = e.getEndereco().getLatitude();
-			double longt = e.getEndereco().getLongitude();
-			
-			GeoPoint coordfixdest = new GeoPoint((int) (lat * 1E6),(int) (longt * 1E6));
+			int latitudeE6  = ((int) (this.p.getLoja().getEndereco().getLatitude() * 1E6));
+			int longitudeE6 = ((int) (this.p.getLoja().getEndereco().getLongitude() * 1E6));
+			GeoPoint coordfixdest = new GeoPoint(latitudeE6, longitudeE6);
 			return coordfixdest;
-		} catch (MalformedURLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-		
-		
-		
-		
-		
-		
+			
 	}
 
 	protected boolean isRouteDisplayed() { 	 
@@ -245,7 +170,6 @@ public class Rota extends MapActivity {
 
 			GeoPoint point = new Coordenada(location);
 
-			Log.i(CATEGORIA,"coordenadas= "+ point);
 			//parte nova
 			String message = String.format(
 					"Novo Local \n Longitude: %1$s \n Latitude: %2$s", location.getLongitude(), location.getLatitude());

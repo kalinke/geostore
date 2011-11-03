@@ -38,9 +38,15 @@ public class ListaDeProdutosAdapter extends BaseAdapter {
 		
 		View v = LayoutInflater.from(ctx).inflate(R.layout.lista, null);		
 
-		TextView txtProduto = (TextView) v.findViewById(R.id.txtProduto);   
+		TextView txtId = (TextView) v.findViewById(R.id.txtId);   
+		TextView txtNome = (TextView) v.findViewById(R.id.txtNome);
+		TextView txtDesc = (TextView) v.findViewById(R.id.txtDesc);
+		TextView txtPrc = (TextView) v.findViewById(R.id.txtPrc);
 		  
-		txtProduto.setText(p.getDescricao());  
+		txtId.setText(Long.toString(p.getId()));
+		txtNome.setText(p.getNome());
+		txtDesc.setText(p.getDescricao());
+		txtPrc.setText(Double.toString(p.getValor()));
 		  
 		return v;
 		      	
