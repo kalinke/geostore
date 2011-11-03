@@ -2,118 +2,71 @@ package br.com.geostore.http;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.protocol.HTTP;
-import org.json.JSONObject;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.util.EntityUtils;
+
+import android.util.Log;
 
 
 public class HttpGS {
 
-	private static final String URL_SERVER = "http://10.0.2.2:8080/GeoStore/seam/resource/";
-	private String servlet = null;
+	//private static final String URL_SERVER = "http://10.0.2.2:8080/GeoStore/seam/resource/";
+	private static final String URL_SERVER = "http://192.168.1.15:8080/GeoStore/seam/resource/";
+	private DefaultHttpClient httpClient = null;
 	
-	public HttpGS(String servlet){
-		this.servlet = URL_SERVER.concat(servlet);
+	public HttpGS(){
+		HttpParams myParams = new BasicHttpParams();
+		HttpConnectionParams.setConnectionTimeout(myParams, 15000);
+		HttpConnectionParams.setSoTimeout(myParams, 15000);
+		httpClient = new DefaultHttpClient(myParams);	
 	}
 	
-	@SuppressWarnings("rawtypes")
-	public String getQueryString(Map params){
-		if (params == null || params.size()==0){
-			return "";
-		}
-		String queryString = null;
-		Iterator e = (Iterator) params.keySet().iterator();
-		while (e.hasNext()){
-			String chave = (String) e.next();
-			Object objValor = params.get(chave);
-			String valor = objValor.toString();
-			queryString = queryString == null ? "" : queryString + "&";
-			queryString += chave + "=" + valor;
-		}
-		return queryString;
+	public String buscarProdutos(String texto, String log, String lat, String raio){		
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("texto", texto));
+		params.add(new BasicNameValuePair("log", log));
+		params.add(new BasicNameValuePair("lat", lat));
+		params.add(new BasicNameValuePair("raio", raio));
+		return doPost("produtoServlet",params);
 	}
 	
-	@SuppressWarnings("rawtypes")
-	public HttpResponse doPost(Map params){
+	public String efetuarLogin(String user, String pass){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("user", user));
+		params.add(new BasicNameValuePair("pass", pass));
+		return doPost("loginServlet",params);
+	}
+	
+	public String doPost(String servlet, List<NameValuePair> params){
 		
-		HttpClient client = new DefaultHttpClient();
-		String urlParams = getQueryString(params);		
-		HttpGet get = new HttpGet(this.servlet + "?" + urlParams);
-		try {
-			HttpResponse resp = client.execute(get);
-			return resp;
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;		
-	}
-	
-	public HttpResponse getResponse(List<NameValuePair> params){
-		
-		DefaultHttpClient client = new DefaultHttpClient();
+		String result = null;		
+		HttpResponse res = null;		
+		HttpPost post = new HttpPost(URL_SERVER.concat(servlet));
 		
 		try {
-			
-			HttpPost post = new HttpPost(this.servlet);
 			post.setEntity(new UrlEncodedFormEntity(params));
-			HttpResponse response = client.execute(post);
-			return response;
-			
+			res = httpClient.execute(post);
+			result = EntityUtils.toString(res.getEntity());
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			Log.e("HttpGS","UnsupportedEncodingException: " + e.getMessage());
 		} catch (ClientProtocolException e) {
-			e.printStackTrace();
+			Log.e("HttpGS","ClientProtocolException: " + e.getMessage());
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e("HttpGS","IOException: " + e.getMessage());
 		}
-		return null;
 		
-	}
-	
-	public HttpResponse sendJObj(JSONObject j){
-		
-		HttpClient client = new DefaultHttpClient();
-		HttpPost post = new HttpPost(this.servlet);
-
-		
-		try {
-			StringEntity str = new StringEntity(j.toString());
-			
-			str.setContentType("application/json; charset=utf-8");
-			str.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE,"application/json; charset=utf-8"));
-			
-			post.setEntity(str);		
-			
-			HttpResponse response = client.execute(post);
-			
-			return response;
-						
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-		
-		
-	}
-	
+		return result;
+	}		
 }
