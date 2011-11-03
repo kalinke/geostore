@@ -18,7 +18,6 @@ import org.jboss.seam.annotations.Scope;
 import org.jboss.seam.annotations.intercept.BypassInterceptors;
 import org.jboss.seam.servlet.ContextualHttpServletRequest;
 import org.jboss.seam.web.AbstractResource;
-import org.jfree.util.Log;
 
 import br.com.geostore.dao.ProdutoDAO;
 import br.com.geostore.entity.Endereco;
@@ -45,19 +44,20 @@ public class ProdutoServlet extends AbstractResource {
         		double log   = Double.parseDouble(request.getParameter("log"));        		
         		double raio  = Double.parseDouble(request.getParameter("raio"));
         		
-        		Log.info("Parametro 'texto': " + texto);
-        		Log.info("Parametro 'lat'  : " + lat);
-        		Log.info("Parametro 'log'  : " + log);        		
-        		Log.info("Parametro 'raio' : " + raio);
+        		System.out.println("Parametro 'texto': " + texto);
+        		System.out.println("Parametro 'lat'  : " + lat);
+        		System.out.println("Parametro 'log'  : " + log);        		
+        		System.out.println("Parametro 'raio' : " + raio);
         		
         		if (texto != null){
         			        			
         			ProdutoDAO pDao = (ProdutoDAO) Component.getInstance(ProdutoDAO.class);		        			
         			try {
 						List<Produto> p = pDao.buscarPorProximidade(texto, lat, log, raio);
-						Log.info("Numero de produtos encontratos: " + p.size());
+						System.out.println("Numero de produtos encontratos: " + p.size());
 						
 						if (p != null){
+							
 							JSONArray jArray = new JSONArray();
 							
 							for (Produto produto : p) {
@@ -69,18 +69,27 @@ public class ProdutoServlet extends AbstractResource {
 								int existPromo = 0;
 								if (promo!=null && promo.size()>0){
 									existPromo = 1;
-									Log.info("Numero de promocoes para o produto: " + produto.getId() + "/" + existPromo);
+									System.out.println("Numero de promocoes para o produto: " + produto.getId() + "/" + existPromo);
 								}
 																
-								jArray.put(new JSONObject().put("idProd",    produto.getId()));
-								jArray.put(new JSONObject().put("nomeProd",  produto.getNome()));
-								jArray.put(new JSONObject().put("idLoja",    loja.getId()));
-								jArray.put(new JSONObject().put("nomeLoja",  loja.getNomeFantasia()));
-								jArray.put(new JSONObject().put("endLoja",   end.getLogradouro()));
-								jArray.put(new JSONObject().put("bairroLoja",end.getBairro()));
-								jArray.put(new JSONObject().put("prcProd",   produto.getValor()));
-								jArray.put(new JSONObject().put("promo",     existPromo));
+								JSONObject j = new JSONObject();
 								
+								j.put("idProd",    produto.getId());
+								j.put("nomeProd",  produto.getNome());
+								j.put("descProd",  produto.getDescricao());
+								j.put("prcProd",   produto.getValor());								
+								j.put("idLoja",    loja.getId());
+								j.put("nomeLoja",  loja.getNomeFantasia());
+								j.put("foneLoja",  loja.getTelefone());
+								j.put("endLoja",   end.getLogradouro());								
+								j.put("bairroLoja",end.getBairro());
+								j.put("logLoja",   end.getLongitude());
+								j.put("latLoja",   end.getLatitude());
+								j.put("promo",     existPromo);
+															
+								JSONObject jObj = new JSONObject();
+								jObj.put("produto", j);
+								jArray.put(jObj);
 							}
 							
 							JSONObject j = new JSONObject();
@@ -102,7 +111,5 @@ public class ProdutoServlet extends AbstractResource {
     @Override
     public String getResourcePath() {
         return "/produtoServlet";
-    }
-    
-    
+    }    
 }
