@@ -21,9 +21,14 @@ import android.util.Log;
 
 
 public class HttpGS {
-
-	private static final String URL_SERVER = "http://10.0.2.2:8080/GeoStore/seam/resource/";
+	//LOCAL
+	//private static final String URL_SERVER = "http://10.0.2.2:8080/GeoStore/seam/resource/";
+	
+	//PRODIET
 	//private static final String URL_SERVER = "http://172.16.1.104:8080/GeoStore/seam/resource/";
+
+	//ALISSON
+	private static final String URL_SERVER = "http://192.168.1.15:8080/GeoStore/seam/resource/";
 	private DefaultHttpClient httpClient = null;
 	
 	public HttpGS(){
