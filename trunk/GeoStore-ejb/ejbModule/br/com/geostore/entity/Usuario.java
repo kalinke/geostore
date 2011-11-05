@@ -62,6 +62,8 @@ public class Usuario implements Serializable{
 	@OneToMany(mappedBy="usuario", cascade=CascadeType.ALL)
 	private List<Voucher> vouchers;
 	
+	private int flag;
+	
 	public Usuario() {
 	}
 	
@@ -149,6 +151,16 @@ public class Usuario implements Serializable{
 	
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+
+
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
+
+
+	public int getFlag() {
+		return flag;
 	}
 
 
