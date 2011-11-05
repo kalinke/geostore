@@ -18,6 +18,9 @@ import android.location.LocationManager;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -146,6 +149,25 @@ public class GeoStoreActivity extends Activity implements Button.OnClickListener
 		}
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.menu_tela_busca, menu);
+	    return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	        case R.id.icontext: Toast.makeText(this, "Finalizando GeoStore.", Toast.LENGTH_LONG).show();
+	        					finish();
+	                            break;
+	    }
+	    return true;
+	}
+	
+	
+	
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
 		
