@@ -2,6 +2,7 @@
 <resources>
     <string name="hello">Hello World, GeoStoreActivity!</string>
     <string name="app_name">GeoStoreMobile</string>
+    <string name="raio_prompt">Escolha o raio</string>
     
     <string name="footer">
     	This is a demo of the ListView. Click and hold on to one of the items above to show the context menu.
@@ -20,5 +21,7 @@
 		<item>Traçar Rota</item>
 		<item>Discar Loja</item>
 	</string-array>
+	
+	
     
 </resources>
