@@ -44,17 +44,17 @@ public class ProdutoServlet extends AbstractResource {
         		double log   = Double.parseDouble(request.getParameter("log"));        		
         		double raio  = Double.parseDouble(request.getParameter("raio"));
         		
-        		System.out.println("Parametro 'texto': " + texto);
-        		System.out.println("Parametro 'lat'  : " + lat);
-        		System.out.println("Parametro 'log'  : " + log);        		
-        		System.out.println("Parametro 'raio' : " + raio);
+        		//System.out.println("Parametro 'texto': " + texto);
+        		//System.out.println("Parametro 'lat'  : " + lat);
+        		//System.out.println("Parametro 'log'  : " + log);        		
+        		//System.out.println("Parametro 'raio' : " + raio);
         		
         		if (texto != null){
         			        			
         			ProdutoDAO pDao = (ProdutoDAO) Component.getInstance(ProdutoDAO.class);		        			
         			try {
 						List<Produto> p = pDao.buscarPorProximidade(texto, lat, log, raio);
-						System.out.println("Numero de produtos encontratos: " + p.size());
+						//System.out.println("Numero de produtos encontratos: " + p.size());
 						
 						if (p != null){
 							
@@ -69,7 +69,7 @@ public class ProdutoServlet extends AbstractResource {
 								int existPromo = 0;
 								if (promo!=null && promo.size()>0){
 									existPromo = 1;
-									System.out.println("Numero de promocoes para o produto: " + produto.getId() + "/" + existPromo);
+									//System.out.println("Numero de promocoes para o produto: " + produto.getId() + "/" + existPromo);
 								}
 																
 								JSONObject j = new JSONObject();
