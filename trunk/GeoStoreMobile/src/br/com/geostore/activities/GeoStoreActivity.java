@@ -19,15 +19,15 @@ import android.os.Bundle;
 
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class GeoStoreActivity extends Activity implements OnClickListener, Spinner.OnItemSelectedListener{    	
+public class GeoStoreActivity extends Activity implements Button.OnClickListener, Spinner.OnItemSelectedListener{    	
 		
 	protected static final int RAIO_ILIMITADO = 0;
 	protected static final int RAIO_100       = 1; 
@@ -44,7 +44,7 @@ public class GeoStoreActivity extends Activity implements OnClickListener, Spinn
         setContentView(R.layout.main_busca_tela);        
 
         Button btnBuscar = (Button) findViewById(R.id.btBuscarMainBusca);        
-        btnBuscar.setOnClickListener(this);
+        btnBuscar.setOnClickListener(this);               
         
         Spinner sp = (Spinner)findViewById(R.id.spRaio);			    
 		ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.raio, android.R.layout.simple_spinner_item);
@@ -52,6 +52,13 @@ public class GeoStoreActivity extends Activity implements OnClickListener, Spinn
 	    sp.setAdapter(adapter);
 	    sp.setOnItemSelectedListener(this);
 	    
+	    TextView txtLogin = (TextView) findViewById(R.id.tvLoginMainBuscaclick);
+        txtLogin.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Intent i = new Intent(GeoStoreActivity.this, Login.class);
+	            startActivity(i);
+			}
+		});	   
 	}
 
 	@Override
@@ -101,19 +108,17 @@ public class GeoStoreActivity extends Activity implements OnClickListener, Spinn
 					i.putExtra("produtos", pList);										
 					startActivity(i);
 				}else{
-					Toast.makeText(this, "Nenhum produto encontrato...", Toast.LENGTH_SHORT).show();
+					Toast.makeText(this, "Nenhum produto encontrato...", Toast.LENGTH_LONG).show();
 				}
 					
 			} catch (JSONException e) {
 				Log.e("GeoStoreActivity","JSONException: " + e.getMessage());
 			}			
 		}else{
-			Toast.makeText(this, "O servidor pode estar fora do ar, tente novamente mais tarde...", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "O servidor pode estar fora do ar, tente novamente mais tarde...", Toast.LENGTH_LONG).show();
 		}
 	}
-
 	
-
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View v, int pos, long id) {
 		 
