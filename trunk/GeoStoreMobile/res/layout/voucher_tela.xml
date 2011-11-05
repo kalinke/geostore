@@ -5,6 +5,16 @@
   android:layout_width="fill_parent"
   android:layout_height="fill_parent"
   android:background="@color/branco">
+  
+  	<ImageView 
+		android:layout_height="wrap_content" 
+    	android:id="@+id/img_logo" 
+    	android:layout_width="wrap_content" 
+    	android:src="@drawable/gs_logomaior_70" 
+    	android:layout_gravity="center_horizontal"
+    	android:layout_marginTop="30dp">
+	</ImageView>
+  
 	<TextView 
 		android:layout_width="wrap_content" 
 		android:text="TextView" 
@@ -15,16 +25,20 @@
 	
     <EditText 
     	android:text="Número do Voucher"
-    	android:layout_width="fill_parent" 
+    	android:layout_width="wrap_content" 
     	android:id="@+id/editText1" 
-    	android:layout_height="wrap_content">
+    	android:layout_height="wrap_content"
+    	android:layout_gravity="center_horizontal"
+    	android:layout_marginTop="10dp">
         <requestFocus></requestFocus>
     </EditText>
     <Button 
     	android:id="@+id/btVoltarVoucher" 
     	android:text="Início" 
     	android:layout_height="wrap_content" 
-    	android:layout_width="120dp">
+    	android:layout_width="120dp"
+    	android:layout_gravity="center_horizontal"
+    	android:layout_marginTop="10dp">
     </Button>
     
 </LinearLayout>
