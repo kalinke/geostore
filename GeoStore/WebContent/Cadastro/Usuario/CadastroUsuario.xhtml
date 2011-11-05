@@ -92,6 +92,13 @@
 							<h:inputText size="70" value="#{usuarioController.usuario.nome}" />	
 						</s:decorate>
 
+						<s:decorate template="../../layout/edit.xhtml">						 
+							<ui:define name="label">CPF</ui:define>
+							<h:inputText id="cpf" value="#{usuarioController.usuario.cpf}" converter="#{cpfConverter}"  >
+								<rich:jQuery selector="#cpf" query="mask('999.999.999-99')" timing="onload" />												
+							</h:inputText>
+						</s:decorate>
+						
 						<s:decorate template="../../layout/edit.xhtml">
 							<ui:define name="label">E-Mail</ui:define>
 							<h:inputText size="60" value="#{usuarioController.usuario.email}"/>	
