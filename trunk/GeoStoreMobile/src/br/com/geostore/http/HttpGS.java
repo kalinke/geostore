@@ -22,43 +22,35 @@ import android.util.Log;
 
 public class HttpGS {
 
-	//private static final String URL_SERVER = "http://10.0.2.2:8080/GeoStore/seam/resource/";
-	private static final String URL_SERVER = "http://172.16.1.104:8080/GeoStore/seam/resource/";
+	private static final String URL_SERVER = "http://10.0.2.2:8080/GeoStore/seam/resource/";
+	//private static final String URL_SERVER = "http://172.16.1.104:8080/GeoStore/seam/resource/";
 	private DefaultHttpClient httpClient = null;
 	
 	public HttpGS(){
-		HttpParams myParams = new BasicHttpParams();
-		HttpConnectionParams.setConnectionTimeout(myParams, 15000);
-		HttpConnectionParams.setSoTimeout(myParams, 15000);
-		httpClient = new DefaultHttpClient(myParams);	
+		HttpParams params = new BasicHttpParams();
+		HttpConnectionParams.setConnectionTimeout(params, 15000);
+		HttpConnectionParams.setSoTimeout(params, 15000);
+		httpClient = new DefaultHttpClient(params);	
 	}
 	
 	public String buscarProdutos(String texto, String log, String lat, String raio){		
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("texto", texto));
-		params.add(new BasicNameValuePair("log", log));
-		params.add(new BasicNameValuePair("lat", lat));
-		params.add(new BasicNameValuePair("raio", raio));
+		params.add(new BasicNameValuePair("log",   log));
+		params.add(new BasicNameValuePair("lat",   lat));
+		params.add(new BasicNameValuePair("raio",  raio));
 		return doPost("produtoServlet",params);
-	}
-	
-	public String efetuarLogin(String user, String pass){
-		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("user", user));
-		params.add(new BasicNameValuePair("pass", pass));
-		return doPost("loginServlet",params);
 	}
 	
 	public String doPost(String servlet, List<NameValuePair> params){
 		
-		String result = null;		
 		HttpResponse res = null;		
 		HttpPost post = new HttpPost(URL_SERVER.concat(servlet));
 		
 		try {
 			post.setEntity(new UrlEncodedFormEntity(params));
 			res = httpClient.execute(post);
-			result = EntityUtils.toString(res.getEntity());
+			return EntityUtils.toString(res.getEntity());			
 		} catch (UnsupportedEncodingException e) {
 			Log.e("HttpGS","UnsupportedEncodingException: " + e.getMessage());
 		} catch (ClientProtocolException e) {
@@ -67,6 +59,6 @@ public class HttpGS {
 			Log.e("HttpGS","IOException: " + e.getMessage());
 		}
 		
-		return result;
+		return null;
 	}		
 }

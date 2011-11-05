@@ -43,8 +43,7 @@ public class Rota extends MapActivity {
 
 		this.p = (Produto) getIntent().getSerializableExtra("produto");
 		
-		mapa = (MapView) findViewById(R.id.myMapView1);
-		atualizaposicao = (Button) findViewById(R.id.pos_atual);		
+		mapa = (MapView) findViewById(R.id.myMapView1);			
 		locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 		//local pelo GPS
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, tempo_atualiz, dist_atualiz, new MyLocationListener());

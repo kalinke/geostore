@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class GeoStoreActivity extends Activity implements OnClickListener{    	
@@ -41,13 +42,13 @@ public class GeoStoreActivity extends Activity implements OnClickListener{
 	public void onClick(View v) {			
 				
 		EditText edtBuscar = (EditText) findViewById(R.id.etItemMainBusca);
-		EditText edtRaio = (EditText) findViewById(R.id.etRaioMainBusca);
-		String log = "0";
-		String lat = "0";
+		String raio = "0";
+		String log  = "0";
+		String lat  = "0";
 		
 		LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-		String locationProvider = LocationManager.GPS_PROVIDER;
-		Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
+		String locationProvider         = LocationManager.GPS_PROVIDER;
+		Location lastKnownLocation      = locationManager.getLastKnownLocation(locationProvider);
 		
 		if (lastKnownLocation != null){
 			log = Double.toString(lastKnownLocation.getLongitude());
@@ -55,7 +56,7 @@ public class GeoStoreActivity extends Activity implements OnClickListener{
 		}
 		
 		HttpGS h = new HttpGS();
-		String s = h.buscarProdutos(edtBuscar.getText().toString(), log, lat, edtRaio.getText().toString());
+		String s = h.buscarProdutos(edtBuscar.getText().toString(), log, lat, raio);
 		
 		Log.i("Retorno", s);
 		

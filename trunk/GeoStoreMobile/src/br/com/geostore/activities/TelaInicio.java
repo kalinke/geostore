@@ -26,7 +26,7 @@ public class TelaInicio extends Activity implements Runnable{
 
 		public void run() {
 			// Abre o menu principal
-			startActivity(new Intent(TelaInicio.this, MainBusca.class));
+			startActivity(new Intent(TelaInicio.this, GeoStoreActivity.class));
 
 			// Finaliza esta activity
 			finish();
