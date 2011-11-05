@@ -99,6 +99,26 @@ public class ProdutoDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<Produto> buscarProdutosParaPromocao(Usuario usuarioLogado) throws Exception {
+		try{
+			
+			String sQuery;
+			log.info("Buscando Lista de Produto do Banco de Dados");
+			
+			sQuery = " from Produto as p ";			
+			if(usuarioLogado.getTipoUsuario().getId().longValue() != 1) sQuery += " where p.loja.empresaSuperior.id = :idEmpresaUsuario and p.statusProduto = 1 ";						
+			sQuery += " order by p.id ";
+			
+			Query query = entityManager.createQuery(sQuery);
+			if(usuarioLogado.getTipoUsuario().getId().longValue() != 1) query.setParameter("idEmpresaUsuario", usuarioLogado.getEmpresaVinculo().getId());
+													
+			return query.getResultList();
+		}catch (Exception e) {
+			throw new Exception(e);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Produto> buscarPorProximidade(String texto, double lat, double log, double raio) throws Exception {
 		try{
 						

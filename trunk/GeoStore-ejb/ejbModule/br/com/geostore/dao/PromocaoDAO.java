@@ -83,7 +83,7 @@ public class PromocaoDAO {
 			String sQuery;
 			log.info("Buscando Lista de Promoções do Banco de Dados");
 			
-			sQuery = " from Promocao as p ";			
+			sQuery = " from Promocao as p ";	
 			if(usuarioLogado.getTipoUsuario().getId().longValue() != 1) sQuery += " where p.produto.loja.empresaSuperior.id = :idEmpresaUsuario ";						
 			sQuery += " order by p.id ";
 			
