@@ -15,17 +15,17 @@
     	<uses-library android:name="com.google.android.maps"/>
     	
     	<activity 
-        	android:name="TelaInicio">        	
+        	android:name="TelaInicio" android:screenOrientation="portrait">        	
         	<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />               
             </intent-filter>
         </activity>                         	 
-        <activity android:name="GeoStoreActivity"/>
-        <activity android:name="ListaDeProdutosActivity"/>                             
-        <activity android:name="Rota"/>                        
-        <activity android:name="Voucher"/>          
-		<activity android:name="Login"/> 
-        <activity android:name="Cadastro"/>       	                                           
+        <activity android:name="GeoStoreActivity" android:screenOrientation="portrait"/>
+        <activity android:name="ListaDeProdutosActivity" android:screenOrientation="portrait"/>                             
+        <activity android:name="Rota" android:screenOrientation="portrait"/>                        
+        <activity android:name="Voucher" android:screenOrientation="portrait"/>          
+		<activity android:name="Login" android:screenOrientation="portrait"/> 
+        <activity android:name="Cadastro" android:screenOrientation="portrait"/>       	                                           
     </application>
 </manifest>
