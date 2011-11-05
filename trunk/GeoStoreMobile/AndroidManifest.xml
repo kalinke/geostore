@@ -17,8 +17,7 @@
     	<activity 
         	android:name="TelaInicio">        	
         	<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />               
             </intent-filter>
         </activity>
         
@@ -26,16 +25,14 @@
         	android:name="Main"
         	android:label="@string/app_name">
         	<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />                
             </intent-filter>
         </activity>
         
         <activity 
         	android:name="Login">        	
         	<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />                
             </intent-filter>
         </activity>
     
@@ -51,10 +48,7 @@
         	android:name="Rota"
         	android:label="Rota">
             <intent-filter>
-                <action 
-                	android:name="android.intent.action.MAIN" />
-                <category 
-                	android:name="android.intent.category.LAUNCHER" />
+                <action	android:name="android.intent.action.MAIN" />                
             </intent-filter>
         </activity>
         
@@ -65,7 +59,6 @@
         	android:name="Cadastro">        	
         	<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         
@@ -73,7 +66,6 @@
         	android:name="MainBusca">        	
         	<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>        	
         </activity>
         
@@ -81,7 +73,6 @@
         	android:name="ListaProd">        	
         	<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>        	
         </activity>
         
@@ -89,7 +80,6 @@
         	android:name="Voucher">        	
         	<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>        	
         </activity>        
         
