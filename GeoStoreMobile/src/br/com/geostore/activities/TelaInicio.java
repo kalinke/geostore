@@ -17,7 +17,7 @@ public class TelaInicio extends Activity implements Runnable{
 			// Exibe o layout com a imagem...
 			setContentView(R.layout.telainicio_bd);
 
-			Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "Iniciando", Toast.LENGTH_SHORT).show();
 
 			// Solicita para o Handler executar o Runnable (this), fechando a SplashScreen depois de alguns segundos
 			Handler h = new Handler();
