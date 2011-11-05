@@ -28,7 +28,7 @@ public class Login extends Activity{
 		
 		Button btLogin = (Button)findViewById(R.id.btLoginLog);
 		Button btCadastro = (Button)findViewById(R.id.btCadastrarLog);
-		Button btSair = (Button)findViewById(R.id.btSairLog);
+		//Button btSair = (Button)findViewById(R.id.btSairLog);
 						
 		btLogin.setOnClickListener(new View.OnClickListener() {			
 			@Override
@@ -72,12 +72,12 @@ public class Login extends Activity{
                 startActivity(i);
 			}
 		});
-		//sai da aplicação
+		/*sai da aplicação
 		btSair.setOnClickListener(new View.OnClickListener() {			
 			@Override
 			public void onClick(View v) {
 				finish();				
 			}
-		});
+		});*/
 	}	
 }
