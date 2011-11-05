@@ -53,26 +53,8 @@ public class Cadastro extends Activity {
 			}
 		});*/
 	}
-		
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-	    MenuInflater inflater = getMenuInflater();
-	    inflater.inflate(R.menu.menu_opt1, menu);
-	    return true;
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    switch (item.getItemId()) {
-	        case R.id.icon:     Toast.makeText(this, "You pressed the icon!", Toast.LENGTH_LONG).show();
-	                            break;
-	        case R.id.text:     Toast.makeText(this, "You pressed the text!", Toast.LENGTH_LONG).show();
-	                            break;
-	        case R.id.icontext: Toast.makeText(this, "You pressed the icon and text!", Toast.LENGTH_LONG).show();
-	                            break;
-	    }
-	    return true;
-	}
+			
+
 	
 	
 	public void mostraMsg(String titulo, String texto){		
