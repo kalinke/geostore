@@ -33,7 +33,7 @@ public class ListaDeProdutosActivity extends ListActivity {
 	}
 	
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-		menu.setHeaderTitle("Escolha a opção...");
+		menu.setHeaderTitle("Escolha uma opção...");
 		menu.add(0,CONTEXTMENU_ROTA,   0,"Traçar Rota");
 		menu.add(0,CONTEXTMENU_DISCAR, 0,"Discar Loja");
 		menu.add(0,CONTEXTMENU_VOUCHER,0,"Promoções");
@@ -45,23 +45,18 @@ public class ListaDeProdutosActivity extends ListActivity {
 	    int i   = item.getItemId();
 	    Produto p = prods.get(info.position);
 	    switch (i) {
-	    	case CONTEXTMENU_ROTA:
-    		
+	    	case CONTEXTMENU_ROTA:    		
 	    		Intent in = new Intent(ListaDeProdutosActivity.this, Rota.class);
 				in.putExtra("produto", p);										
-				startActivity(in);
-	    		
+				startActivity(in);	    		
 	    		return true;
-	    	case CONTEXTMENU_DISCAR:
-	    		
+	    	case CONTEXTMENU_DISCAR:	    		
 	    		Uri fone = Uri.parse("tel:" + p.getLoja().getTelefone());
 	    		Intent discar = new Intent(Intent.ACTION_CALL,fone);
 	    		startActivity(discar);
-	    		return true;
-	    	
+	    		return true;	    	
 	    	case CONTEXTMENU_VOUCHER:	    		    			    			    		    	
-	    		return true;
-	    	
+	    		return true;	    	
 	    	default:
 	    		return super.onContextItemSelected(item);
 	    }

@@ -37,24 +37,23 @@ public class ListaDeProdutosAdapter extends BaseAdapter {
 		Produto p = produtos.get(position);
 		
 		View v = LayoutInflater.from(ctx).inflate(R.layout.lista, null);		
-
-		TextView txtId = (TextView) v.findViewById(R.id.txtId);   
+   
 		TextView txtNome = (TextView) v.findViewById(R.id.txtNome);
 		TextView txtDesc = (TextView) v.findViewById(R.id.txtDesc);
 		TextView txtPrc = (TextView) v.findViewById(R.id.txtPrc);
+		TextView txtLoja = (TextView) v.findViewById(R.id.txtLoja);
 		  
-		txtId.setText(Long.toString(p.getId()));
-		txtNome.setText(p.getNome());
-		txtDesc.setText(p.getDescricao());
-		txtPrc.setText(Double.toString(p.getValor()));
-		  
+		txtNome.setText("Nome: ".concat(p.getNome().toUpperCase()));
+		txtDesc.setText("Descrição: ".concat(p.getDescricao().toUpperCase()));
+		txtPrc.setText("Preço Unt.: ".concat(Double.toString(p.getValor()).toUpperCase()));
+		txtLoja.setText("Loja: ".concat(p.getLoja().getNomeFantasia().toUpperCase()));
+
 		return v;
 		      	
 	}
 
 	@Override
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
 		return 0;
 	}  
 	  
