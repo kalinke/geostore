@@ -67,7 +67,7 @@ public class UsuarioController {
 		
 	}
 	
-	public void validar() throws RuntimeException{
+	public void validar() throws Exception{
 		
 		EmailValidator emailValidator = new EmailValidator();		
 		NomeValidator nomeValidator = new NomeValidator();
@@ -93,9 +93,15 @@ public class UsuarioController {
 		if(!DocumentoValidator.validarCNPJCPF(usuario.getCpf()))
 			throw new RuntimeException("CPF Inválido!");       
 		
+		if(usuarioDAO.buscarPorCPF(usuario))
+			throw new RuntimeException("CPF já existe!");       
+		
 		if(usuario.getEmail().isEmpty())
             throw new RuntimeException("É necessário preencher o email!");       
 
+		if(usuarioDAO.buscarPorEmail(usuario))
+			throw new RuntimeException("E-Mail já existe!");
+		
         if(!emailValidator.validarEmail(usuario.getEmail()))
             throw new RuntimeException("Email inválido!");        
         
