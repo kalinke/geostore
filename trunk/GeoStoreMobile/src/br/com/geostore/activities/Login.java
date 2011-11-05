@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Login extends Activity{
 	
@@ -79,5 +80,12 @@ public class Login extends Activity{
 				finish();				
 			}
 		});*/
-	}	
+	}
+	
+	 @Override
+	 protected void onStop() {
+	  // TODO Auto-generated method stub
+	  super.onStop();
+	  Toast.makeText(this, "onStop()", Toast.LENGTH_LONG).show();
+	 }
 }
