@@ -23,7 +23,7 @@ public class Cadastro extends Activity {
 		final int BUSCAR = 2;
 		
 		Button btRegistrar = (Button)findViewById(R.id.btRegCad);
-		Button btSair = (Button)findViewById(R.id.btSairCad);
+		//Button btSair = (Button)findViewById(R.id.btSairCad);
 		
 		final EditText etNome = (EditText)findViewById(R.id.etNomeCad);
 		final EditText etCPF = (EditText)findViewById(R.id.etCPFCad);
@@ -45,13 +45,13 @@ public class Cadastro extends Activity {
 				}				
 			}
 		});   	 
-    	
+    	/*
 		btSair.setOnClickListener(new View.OnClickListener() {			
 			@Override
 			public void onClick(View v) {
 				finish();				
 			}
-		});
+		});*/
 	}
 		
 	@Override
