@@ -14,7 +14,6 @@ import java.util.Map;
 import javax.faces.context.FacesContext;
 import javax.imageio.ImageIO;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
