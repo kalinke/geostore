@@ -7,12 +7,14 @@ import org.jboss.seam.annotations.Factory;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
+import org.jboss.seam.contexts.Contexts;
 import org.jboss.seam.faces.FacesMessages;
 
 import br.com.geostore.dao.StatusUsuarioDAO;
 import br.com.geostore.dao.UsuarioDAO;
 import br.com.geostore.entity.StatusUsuario;
 import br.com.geostore.entity.Usuario;
+import br.com.geostore.validator.DocumentoValidator;
 import br.com.geostore.validator.EmailValidator;
 import br.com.geostore.validator.NomeValidator;
 
@@ -29,6 +31,10 @@ public class UsuarioController {
 	private Usuario usuario = new Usuario();
 	private Long idUsuario;
 			
+	public UsuarioController() {
+		this.usuarioLogado = (Usuario) Contexts.getSessionContext().get("usuarioLogado");
+	}
+	
 	public String novo(){
 		this.usuario = new Usuario();
 		
@@ -81,15 +87,25 @@ public class UsuarioController {
 		if(!nomeValidator.validarNome(usuario.getNome()))
             throw new RuntimeException("Nome inválido!");          
 
+		if(usuario.getCpf().isEmpty())
+			throw new RuntimeException("Digite um CPF!");        
+		
+		if(!DocumentoValidator.validarCNPJCPF(usuario.getCpf()))
+			throw new RuntimeException("CPF Inválido!");       
+		
 		if(usuario.getEmail().isEmpty())
             throw new RuntimeException("É necessário preencher o email!");       
 
         if(!emailValidator.validarEmail(usuario.getEmail()))
             throw new RuntimeException("Email inválido!");        
         
+        
         if(usuario.getSenha().isEmpty())
             throw new RuntimeException("É necessário preencher a senha!");         
-       
+        
+        if(usuario.getSenha().length() < 6)
+        	throw new RuntimeException("A senha deve conter no mínimo 6 caracteres!");
+        
 	}	
 
 

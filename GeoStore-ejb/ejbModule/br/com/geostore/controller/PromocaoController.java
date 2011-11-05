@@ -10,6 +10,7 @@ import org.jboss.seam.annotations.Scope;
 import org.jboss.seam.contexts.Contexts;
 import org.jboss.seam.faces.FacesMessages;
 
+import br.com.geostore.dao.ProdutoDAO;
 import br.com.geostore.dao.PromocaoDAO;
 import br.com.geostore.dao.StatusPromocaoDAO;
 import br.com.geostore.entity.Produto;
@@ -22,6 +23,7 @@ import br.com.geostore.entity.Usuario;
 public class PromocaoController {
 	
 	@In(create=true) private PromocaoDAO promocaoDAO;
+	@In(create=true) private ProdutoDAO produtoDAO;
 	@In(create=true) private StatusPromocaoDAO statusPromocaoDAO;
 	
 	@In private FacesMessages facesMessages;
@@ -98,6 +100,11 @@ public class PromocaoController {
 		return statusPromocaoDAO.buscarTodos();
 	}
 
+	@Factory
+	public List<Produto> getProdutosParaPromocao()throws Exception{		
+		return produtoDAO.buscarProdutosParaPromocao(usuarioLogado);
+	}
+	
 	public Promocao getPromocao() {
 		return promocao;
 	}
