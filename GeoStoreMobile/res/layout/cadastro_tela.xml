@@ -1,103 +1,61 @@
 <?xml version="1.0" encoding="utf-8" ?> 
- <AbsoluteLayout 
- 	android:id="@+id/widget0" 
- 	android:layout_width="fill_parent" 
- 	android:layout_height="fill_parent" 
- 	android:background="@color/branco"
- 	xmlns:android="http://schemas.android.com/apk/res/android">
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:background="@color/branco"
+	android:id="@+id/widget0"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent" 
+	android:orientation="vertical">
+ 	
+ 	<ImageView 
+        	android:layout_height="wrap_content" 
+        	android:id="@+id/img_logo" 
+        	android:layout_width="wrap_content" 
+        	android:src="@drawable/gs_logomaior_70" 
+        	android:layout_gravity="center_horizontal"
+        	android:layout_marginTop="10dp">
+        </ImageView>
+ 	
+ 	<EditText 
+ 		android:hint="Nome"
+ 		android:textSize="18sp" 
+ 		android:layout_height="wrap_content" 
+ 		android:layout_width="276dp" 
+ 		android:id="@+id/etNomeCad"
+ 		android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp">
+ 		<requestFocus></requestFocus>
+ 	</EditText>
+ 	  	
   	<EditText 
-  		android:id="@+id/etNomeCad" 
-  		android:textSize="18sp" 
-  		android:layout_x="74dp" 
-  		android:layout_y="104dp" 
-  		android:layout_width="218dp" 
-  		android:layout_height="wrap_content">
-  	</EditText>
-  	
-  	<ImageView 
-  		android:id="@+id/widget39" 
-  		android:src="@drawable/gslogo" 
-  		android:layout_height="80dp" 
-  		android:layout_y="12dp" 
-  		android:layout_width="130dp" 
-  		android:layout_x="99dp">
-  	</ImageView>
-  	
-  	<EditText 
-  		android:id="@+id/etSenhaCad" 
-  		android:hint="Senha"
-		android:password="true"
-  		android:textSize="18sp" 
-  		android:layout_x="71dp" 
-  		android:layout_height="wrap_content" 
-  		android:layout_y="290dp" 
-  		android:layout_width="224dp">
-  	</EditText>
-  	
-  	<EditText 
+  		android:hint="CPF"
   		android:layout_height="wrap_content" 
   		android:id="@+id/etCPFCad" 
-  		android:layout_width="225dp" 
+  		android:layout_width="276dp" 
   		android:textSize="18sp" 
-  		android:layout_x="75dp" 
-  		android:layout_y="166dp">
+  		android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp">
+  	</EditText>
+  	  	
+  	<EditText 
+  		android:hint="Email"
+  		android:layout_height="wrap_content" 
+  		android:id="@+id/etEmailCad" 
+  		android:layout_width="276dp" 
+  		android:textSize="18sp" 
+  		android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp">
   	</EditText>
   	
   	<EditText 
-  		android:layout_height="wrap_content" 
-  		android:id="@+id/etEmailCad" 
-  		android:layout_width="224dp" 
   		android:textSize="18sp" 
-  		android:layout_x="75dp" 
-  		android:layout_y="229dp">
+  		android:layout_height="wrap_content" 
+  		android:hint="Senha" 
+  		android:password="true" 
+  		android:layout_width="276dp" 
+  		android:id="@+id/etSenhaCad"
+  		android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp">
   	</EditText>
-  	
-  	<Button 
-		android:text="Sair" 
-		android:layout_height="wrap_content" 
-		android:textStyle="bold" 
-		android:layout_width="wrap_content" 
-		android:textSize="20sp" 
-		android:id="@+id/btSairCad" 
-		android:layout_x="16dp" 
-		android:layout_y="416dp">
-	</Button>
-	
-  	<TextView 
-  		android:layout_height="wrap_content" 
-  		android:layout_width="wrap_content" 
-  		android:text="CPF:" 
-  		android:id="@+id/lbl_cpf" 
-  		android:layout_x="12dp" 
-  		android:layout_y="180dp">
-  	</TextView>
-  	
-  	<TextView 
-  		android:layout_height="wrap_content" 
-  		android:layout_width="wrap_content" 
-  		android:text="Email:" 
-  		android:id="@+id/lbl_email" 
-  		android:layout_x="11dp" 
-  		android:layout_y="243dp">
-  	</TextView>
-  	
-  	<TextView 
-  		android:layout_height="wrap_content" 
-  		android:layout_width="wrap_content" 
-  		android:text="Senha:" 
-  		android:id="@+id/lbl_senha" 
-  		android:layout_x="10dp" 
-  		android:layout_y="306dp">
-  	</TextView>
-  	
-  	<TextView 
-  		android:layout_height="wrap_content" 
-  		android:layout_width="wrap_content" 
-  		android:text="Nome:" 
-  		android:id="@+id/nome" 
-  		android:layout_x="8dp" 
-  		android:layout_y="118dp">
-  	</TextView>
   	
   	<Button 
   		android:text="Registrar" 
@@ -105,7 +63,7 @@
   		android:textStyle="bold" 
   		android:layout_width="119dp" 
   		android:id="@+id/btRegCad" 
-  		android:layout_x="104dp" 
-  		android:layout_y="369dp">
+  		android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp">
   	</Button> 
-  </AbsoluteLayout>
+  </LinearLayout>
