@@ -6,7 +6,7 @@ import com.google.android.maps.GeoPoint;
 
 public class Coordenada extends GeoPoint{
 	
-	//valores em graus * 1E6 (microdegrees)
+		//valores em graus * 1E6 (microdegrees)
 		public Coordenada(int latitudeE6, int longitudeE6) {
 			super(latitudeE6, longitudeE6);
 		}

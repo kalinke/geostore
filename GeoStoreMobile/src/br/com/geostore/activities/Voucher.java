@@ -18,7 +18,7 @@ public class Voucher extends Activity{
 		btTeste.setOnClickListener(new View.OnClickListener() {			
 			@Override
 			public void onClick(View v) {
-				final Intent i = new Intent(Voucher.this, MainBusca.class);
+				final Intent i = new Intent(Voucher.this, GeoStoreActivity.class);
                 startActivity(i);
 			}
 		});
