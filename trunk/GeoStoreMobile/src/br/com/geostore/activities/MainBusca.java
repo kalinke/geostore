@@ -5,34 +5,40 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 public class MainBusca extends Activity {
 	
 	public void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState); 
-		setContentView(R.layout.main_busca_tela);
+		setContentView(R.layout.main_busca_tela);		
 		
-		Button btLogin = (Button)findViewById(R.id.btLoginMainBusca);
+		TextView tvLogin = (TextView)findViewById(R.id.tvLoginMainBuscaclick);
 		Button btBusca = (Button)findViewById(R.id.btBuscarMainBusca);
-		
-		btLogin.setOnClickListener(new View.OnClickListener() {			
+				
+		tvLogin.setOnClickListener(new View.OnClickListener() {			
 			@Override
 			public void onClick(View v) {
 				final Intent i = new Intent(MainBusca.this, Login.class);  //error on this line
                 startActivity(i);
 			}
-		});
+		});		
 		
 		btBusca.setOnClickListener(new View.OnClickListener() {			
 			@Override
 			public void onClick(View v) {
 				final Intent i = new Intent(MainBusca.this, ListaProd.class);  //error on this line
                 startActivity(i);
-				//mostraMsg("Em Desenvolvimento", "Em Desenvolvimento");
 			}
 		});
 		
+		Spinner sp = (Spinner)findViewById(R.id.spinner1);
+	    ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.raio, android.R.layout.simple_spinner_item);
+	    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+	    sp.setAdapter(adapter);		
 	}
 	
 	public void mostraMsg(String titulo, String texto){		
@@ -42,5 +48,4 @@ public class MainBusca extends Activity {
 		message.setNeutralButton("OK", null);
 		message.show();		
 	}
-
 }
