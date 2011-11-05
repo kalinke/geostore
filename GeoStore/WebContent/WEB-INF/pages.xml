@@ -227,7 +227,7 @@
  </exception>
  <exception class="javax.faces.application.ViewExpiredException">
   <redirect view-id="/error.xhtml">
-   <message severity="warn">Your session has timed out, please try again</message>
+   <message severity="warn">Sessão expirada, faça login novamente.</message>
   </redirect>
  </exception>
  <exception class="org.jboss.seam.ConcurrentRequestTimeoutException" log-level="trace">
@@ -235,7 +235,7 @@
  </exception>
  <exception>
   <redirect view-id="/error.xhtml">
-   <message severity="error">Unexpected error, please try again</message>
+   <message severity="error">Erro Inesperado.</message>
   </redirect>
  </exception>
 </pages>
