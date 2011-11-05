@@ -107,6 +107,7 @@ public class ProdutoDAO {
 			sQry += " from gs_produtos as p, gs_lojas as l, gs_enderecos as e ";
 			sQry += " where p.id_loja = l.id ";
 			sQry += " and l.id_endereco = e.id_endereco ";
+			sQry += " and p.id_status_produto = 1 ";
 			sQry += " and (p.descricao = :texto or p.nome = :texto) ";
 			
 			if (raio!=0 && lat!=0 && log!=0){
