@@ -159,7 +159,7 @@ public class GeoStoreActivity extends Activity implements Button.OnClickListener
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    switch (item.getItemId()) {
-	        case R.id.icontext: Toast.makeText(this, "Finalizando GeoStore.", Toast.LENGTH_LONG).show();
+	        case R.id.icontext: Toast.makeText(this, "Finalizando GeoStore", Toast.LENGTH_LONG).show();
 	        					finish();
 	                            break;
 	    }
