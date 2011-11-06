@@ -8,11 +8,13 @@ import javax.persistence.Query;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
+import org.jboss.seam.annotations.Transactional;
 import org.jboss.seam.log.Log;
 
 import br.com.geostore.entity.Usuario;
 
 @Name("usuarioDAO")
+@Transactional
 public class UsuarioDAO {
 
 	@In
