@@ -1,69 +1,77 @@
 <?xml version="1.0" encoding="utf-8" ?> 
- <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 	android:background="@color/branco"
-	android:id="@+id/widget0"
 	android:layout_width="fill_parent"
-	android:layout_height="fill_parent" 
-	android:orientation="vertical">
- 	
- 	<ImageView 
-        	android:layout_height="wrap_content" 
-        	android:id="@+id/img_logo" 
-        	android:layout_width="wrap_content" 
-        	android:src="@drawable/gs_logomaior_70" 
-        	android:layout_gravity="center_horizontal"
-        	android:layout_marginTop="10dp">
-        </ImageView>
- 	
- 	<EditText 
- 		android:hint="Nome"
- 		android:textSize="18sp" 
- 		android:layout_height="wrap_content" 
- 		android:layout_width="276dp" 
- 		android:id="@+id/etNomeCad"
- 		android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp">
- 		<requestFocus></requestFocus>
- 	</EditText>
- 	  	
-  	<EditText 
-  		android:hint="CPF"
-  		android:layout_height="wrap_content" 
-  		android:id="@+id/etCPFCad" 
-  		android:layout_width="276dp" 
-  		android:textSize="18sp" 
-  		android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp">
-  	</EditText>
-  	  	
-  	<EditText 
-  		android:hint="Email"
-  		android:layout_height="wrap_content" 
-  		android:id="@+id/etEmailCad" 
-  		android:layout_width="276dp" 
-  		android:textSize="18sp" 
-  		android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp">
-  	</EditText>
-  	
-  	<EditText 
-  		android:textSize="18sp" 
-  		android:layout_height="wrap_content" 
-  		android:hint="Senha" 
-  		android:password="true" 
-  		android:layout_width="276dp" 
-  		android:id="@+id/etSenhaCad"
-  		android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp">
-  	</EditText>
-  	
-  	<Button 
-  		android:text="Registrar" 
-  		android:layout_height="wrap_content" 
-  		android:textStyle="bold" 
-  		android:layout_width="119dp" 
-  		android:id="@+id/btRegCad" 
-  		android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp">
-  	</Button> 
-  </LinearLayout>
+	android:layout_height="fill_parent">
+	 <LinearLayout 
+		android:background="@color/branco"
+		android:id="@+id/widget0"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent" 
+		android:orientation="vertical">
+	 	
+	 	<ImageView 
+	        	android:layout_height="wrap_content" 
+	        	android:id="@+id/img_logo" 
+	        	android:layout_width="wrap_content" 
+	        	android:src="@drawable/gs_logomaior_70" 
+	        	android:layout_gravity="center_horizontal"
+	        	android:layout_marginTop="10dp">
+	        </ImageView>
+	 	
+	 	<EditText 
+	 		android:hint="Nome"
+	 		android:textSize="18sp" 
+	 		android:layout_height="wrap_content" 
+	 		android:layout_width="276dp" 
+	 		android:id="@+id/etNomeCad"
+	 		android:layout_gravity="center_horizontal"
+	        android:layout_marginTop="10dp">
+	 		<requestFocus></requestFocus>
+	 	</EditText>
+	 	  	
+	  	<EditText 
+	  		android:hint="CPF"
+	  		android:maxLength="11"
+	  		android:numeric="integer"
+	  		android:layout_height="wrap_content" 
+	  		android:id="@+id/etCPFCad" 
+	  		android:layout_width="276dp" 
+	  		android:textSize="18sp" 
+	  		android:layout_gravity="center_horizontal"
+	        android:layout_marginTop="15dp">
+	  	</EditText>
+	  	  	
+	  	<EditText 
+	  		android:hint="Email"
+	  		android:inputType="textEmailAddress"
+	  		android:layout_height="wrap_content" 
+	  		android:id="@+id/etEmailCad" 
+	  		android:layout_width="276dp" 
+	  		android:textSize="18sp" 
+	  		android:layout_gravity="center_horizontal"
+	        android:layout_marginTop="15dp">
+	  	</EditText>
+	  	
+	  	<EditText 
+	  		android:textSize="18sp" 
+	  		android:layout_height="wrap_content" 
+	  		android:hint="Senha" 
+	  		android:password="true" 
+	  		android:layout_width="276dp" 
+	  		android:id="@+id/etSenhaCad"
+	  		android:layout_gravity="center_horizontal"
+	        android:layout_marginTop="15dp">
+	  	</EditText>
+	  	
+	  	<Button 
+	  		android:text="Registrar" 
+	  		android:layout_height="wrap_content" 
+	  		android:textStyle="bold" 
+	  		android:layout_width="119dp" 
+	  		android:id="@+id/btRegCad" 
+	  		android:layout_gravity="center_horizontal"
+	        android:layout_marginTop="15dp">
+	  	</Button> 
+	  </LinearLayout>
+</ScrollView>
