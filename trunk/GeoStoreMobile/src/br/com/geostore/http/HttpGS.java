@@ -17,6 +17,8 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
+import br.com.geostore.entity.Usuario;
+
 import android.util.Log;
 
 
@@ -45,6 +47,22 @@ public class HttpGS {
 		params.add(new BasicNameValuePair("lat",   lat));
 		params.add(new BasicNameValuePair("raio",  raio));
 		return doPost("produtoServlet",params);
+	}
+	
+	public String efetuarLogin(String email, String senha){		
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("email", email));
+		params.add(new BasicNameValuePair("senha", senha));
+		return doPost("loginServlet",params);
+	}
+	
+	public String novoUsuario(Usuario usuario){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("nome",  usuario.getNome()));
+		params.add(new BasicNameValuePair("cpf",   usuario.getCpf()));
+		params.add(new BasicNameValuePair("email", usuario.getEmail()));
+		params.add(new BasicNameValuePair("senha", usuario.getSenha()));
+		return doPost("novoUsuarioServlet",params);
 	}
 	
 	public String doPost(String servlet, List<NameValuePair> params){
