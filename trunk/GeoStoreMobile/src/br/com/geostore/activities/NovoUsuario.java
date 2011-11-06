@@ -34,10 +34,10 @@ public class NovoUsuario extends Activity {
 			@Override
 			public void onClick(View v) {
 				
-				EditText edtNome  = (EditText)findViewById(R.id.edtNomeCad);
-				EditText edtCPF   = (EditText)findViewById(R.id.edtCPFCad);
-				EditText edtEmail = (EditText)findViewById(R.id.edtEmailCad);
-				EditText edtSenha = (EditText)findViewById(R.id.edtSenhaCad);
+				EditText edtNome  = (EditText)findViewById(R.id.etNomeCad);
+				EditText edtCPF   = (EditText)findViewById(R.id.etCPFCad);
+				EditText edtEmail = (EditText)findViewById(R.id.etEmailCad);
+				EditText edtSenha = (EditText)findViewById(R.id.etSenhaCad);
 				
 				nome  = edtNome.getText().toString();
 				cpf   = edtCPF.getText().toString();
