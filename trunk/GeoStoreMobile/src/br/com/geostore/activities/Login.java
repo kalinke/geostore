@@ -1,22 +1,12 @@
 package br.com.geostore.activities;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.ajax4jsf.javascript.JSObject;
-import org.json.JSONObject;
-import org.json.JSONTokener;
-
+import br.com.geostore.entity.Usuario;
+import br.com.geostore.http.HttpGS;
+import br.com.geostore.json.JsonGS;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -29,63 +19,45 @@ public class Login extends Activity{
 		
 		Button btLogin = (Button)findViewById(R.id.btLoginLog);
 		Button btCadastro = (Button)findViewById(R.id.btCadastrarLog);
-		//Button btSair = (Button)findViewById(R.id.btSairLog);
-						
+		
+				
 		btLogin.setOnClickListener(new View.OnClickListener() {			
 			@Override
-			public void onClick(View v) {				
-				//String emailLog,senhaLog;				
-				EditText emailLog = (EditText)findViewById(R.id.etEmailLog);
-				EditText senhaLog = (EditText)findViewById(R.id.etSenhaLogin);				
-				String url = "http://10.0.2.2:8080/GeoStore/LoginServlet?login="+emailLog.getText().toString()+"&senha="+senhaLog.getText().toString();								
-				try {
-					//URL u = new URL(url);
-					GetHttp gh = new GetHttp(url);
-					String st = gh.page;					
-					JSONObject js = (JSONObject)new JSONTokener(st).nextValue();
-					Log.d("retorno" , js.getString("Logado"));
-					//HttpURLConnection conn = (HttpURLConnection) u.openConnection();					
-					/*
-					Map params = new HashMap();
-					params.put("login", emailLog.getText().toString());
-					params.put("senha", senhaLog.getText().toString());
-					*/					
-					
-				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}				
+			public void onClick(View v) {										
 				
-				//mostraMsg("Dados Login","Login: " + emailLog + " Senha: " + senhaLog);				
+				EditText email = (EditText)findViewById(R.id.etEmailLog);
+				EditText senha = (EditText)findViewById(R.id.etSenhaLogin);
+				Usuario usuario = efetuarLogin(email.getText().toString(),senha.getText().toString());
+				
+				if (usuario != null){
+					Toast.makeText(Login.this, "Login efetuado com sucesso!", Toast.LENGTH_SHORT).show();
+					
+					Bundle params = new Bundle();
+					params.putBoolean("logado", true);					
+					Intent it = new Intent(Login.this, GeoStoreActivity.class);
+					it.putExtras(params);
+					startActivity(it);
+					
+				}else{
+					Toast.makeText(Login.this, "Usuário ou senha inválidos", Toast.LENGTH_SHORT).show();
+				}
 			}
 		}); 
-		//chama o cadastro
+
 		btCadastro.setOnClickListener(new View.OnClickListener() {			
 			@Override
 			public void onClick(View v) {
-				final Intent i = new Intent(Login.this, Cadastro.class);
+				Intent i = new Intent(Login.this, NovoUsuario.class);
                 startActivity(i);
 			}
 		});
-		/*sai da aplicação
-		btSair.setOnClickListener(new View.OnClickListener() {			
-			@Override
-			public void onClick(View v) {
-				finish();				
-			}
-		});*/
 	}
 	
-	 @Override
-	 protected void onStop() {
-	  // TODO Auto-generated method stub
-	  super.onStop();
-	  Toast.makeText(this, "onStop()", Toast.LENGTH_LONG).show();
-	 }
+	public Usuario efetuarLogin(String email, String senha){
+		HttpGS http = new HttpGS();
+		String response = http.efetuarLogin(email, senha);
+		JsonGS json = new JsonGS();
+		Usuario usuario = json.JSonObjectToUsuario(response);
+		return usuario;
+	}
 }

@@ -39,13 +39,22 @@ public class GeoStoreActivity extends Activity implements Button.OnClickListener
     protected static final int RAIO_10000     = 4;
     	
     private int raio;
+    private boolean logado;
     
     @Override
 	@SuppressWarnings("rawtypes")
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_busca_tela);        
-
+        
+        Intent it = getIntent();
+        if (it != null){
+        	Bundle params =  it.getExtras();
+        	if (params != null){
+        		logado = params.getBoolean("logado");
+        	}
+        }
+        
         Button btnBuscar = (Button) findViewById(R.id.btBuscarMainBusca);        
         btnBuscar.setOnClickListener(this);               
         
@@ -56,6 +65,10 @@ public class GeoStoreActivity extends Activity implements Button.OnClickListener
 	    sp.setOnItemSelectedListener(this);
 	    
 	    TextView txtLogin = (TextView) findViewById(R.id.tvLoginMainBuscaclick);
+	    if(logado){
+	    	TextView textViewToChange = (TextView) findViewById(R.id.tvLoginMainBuscaclick);
+	    	textViewToChange.setText("Logout");
+	    }
         txtLogin.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(GeoStoreActivity.this, Login.class);
@@ -160,14 +173,12 @@ public class GeoStoreActivity extends Activity implements Button.OnClickListener
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    switch (item.getItemId()) {
 	        case R.id.icontext: Toast.makeText(this, "Finalizando GeoStore", Toast.LENGTH_LONG).show();
-	        					finish();
-	                            break;
+	        	finish();
+	        	break;
 	    }
 	    return true;
 	}
-	
-	
-	
+		
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
 		
