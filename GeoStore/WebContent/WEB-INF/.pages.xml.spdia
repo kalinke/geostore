@@ -5,34 +5,36 @@
    TARGET="#xlogin.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
   <output ID="/home.xhtml" NAME="output1" PATH="/home.xhtml"
    TARGET="#xhome.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
-  <output ID="/Cadastro/Empresa/CadastroEmpresa.xhtml" NAME="output2"
+  <output ID="/Email/ReenvioSenha.xhtml" NAME="output2"
+   PATH="/Email/ReenvioSenha.xhtml" TARGET="#xEmail#xReenvioSenha.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/Cadastro/Empresa/CadastroEmpresa.xhtml" NAME="output3"
    PATH="/Cadastro/Empresa/CadastroEmpresa.xhtml"
    TARGET="#xCadastro#xEmpresa#xCadastroEmpresa.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
-  <output ID="/Cadastro/Empresa/ControleEmpresa.xhtml" NAME="output3"
+  <output ID="/Cadastro/Empresa/ControleEmpresa.xhtml" NAME="output4"
    PATH="/Cadastro/Empresa/ControleEmpresa.xhtml"
    TARGET="#xCadastro#xEmpresa#xControleEmpresa.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
-  <output ID="/Cadastro/Loja/CadastroLoja.xhtml" NAME="output4"
+  <output ID="/Cadastro/Loja/CadastroLoja.xhtml" NAME="output5"
    PATH="/Cadastro/Loja/CadastroLoja.xhtml"
    TARGET="#xCadastro#xLoja#xCadastroLoja.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
-  <output ID="/Cadastro/Loja/ControleLoja.xhtml" NAME="output5"
+  <output ID="/Cadastro/Loja/ControleLoja.xhtml" NAME="output6"
    PATH="/Cadastro/Loja/ControleLoja.xhtml"
    TARGET="#xCadastro#xLoja#xControleLoja.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
-  <output ID="/Cadastro/Usuario/CadastroUsuario.xhtml" NAME="output6"
+  <output ID="/Cadastro/Usuario/CadastroUsuario.xhtml" NAME="output7"
    PATH="/Cadastro/Usuario/CadastroUsuario.xhtml"
    TARGET="#xCadastro#xUsuario#xCadastroUsuario.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
-  <output ID="/Cadastro/Usuario/ControleUsuario.xhtml" NAME="output7"
+  <output ID="/Cadastro/Usuario/ControleUsuario.xhtml" NAME="output8"
    PATH="/Cadastro/Usuario/ControleUsuario.xhtml"
    TARGET="#xCadastro#xUsuario#xControleUsuario.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
-  <output ID="/Cadastro/Produto/CadastroProduto.xhtml" NAME="output8"
+  <output ID="/Cadastro/Produto/CadastroProduto.xhtml" NAME="output9"
    PATH="/Cadastro/Produto/CadastroProduto.xhtml"
    TARGET="#xCadastro#xProduto#xCadastroProduto.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
-  <output ID="/Cadastro/Produto/ControleProduto.xhtml" NAME="output9"
+  <output ID="/Cadastro/Produto/ControleProduto.xhtml" NAME="output10"
    PATH="/Cadastro/Produto/ControleProduto.xhtml"
    TARGET="#xCadastro#xProduto#xControleProduto.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
-  <output ID="/Cadastro/Promocao/CadastroPromocao.xhtml" NAME="output10"
+  <output ID="/Cadastro/Promocao/CadastroPromocao.xhtml" NAME="output11"
    PATH="/Cadastro/Promocao/CadastroPromocao.xhtml"
    TARGET="#xCadastro#xPromocao#xCadastroPromocao.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
-  <output ID="/Cadastro/Promocao/ControlePromocao.xhtml" NAME="output11"
+  <output ID="/Cadastro/Promocao/ControlePromocao.xhtml" NAME="output12"
    PATH="/Cadastro/Promocao/ControlePromocao.xhtml"
    TARGET="#xCadastro#xPromocao#xControlePromocao.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
  </item>
@@ -199,6 +201,17 @@
  </item>
  <item NAME="#xlogin.xhtml" PATH="/login.xhtml" SHAPE="536,593,0,0"
   TYPE="page" model-entity="SeamPagesDiagramItem"/>
+ <item ID="#Cadastro#Promocao#ControlePromocao.xhtml"
+  NAME="#xCadastro#xPromocao#xControlePromocao.xhtml"
+  PATH="/Cadastro/Promocao/ControlePromocao.xhtml" SHAPE="536,641,0,0"
+  TYPE="page" model-entity="SeamPagesDiagramItem">
+  <output ID="/Cadastro/Promocao/CadastroPromocao.xhtml" NAME="output"
+   PATH="/Cadastro/Promocao/CadastroPromocao.xhtml"
+   TARGET="#xCadastro#xPromocao#xCadastroPromocao.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/Cadastro/Promocao/CadastroPromocao.xhtml" NAME="output1"
+   PATH="/Cadastro/Promocao/CadastroPromocao.xhtml"
+   TARGET="#xCadastro#xPromocao#xCadastroPromocao.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
  <item ID="#Cadastro#Promocao#CadastroPromocao.xhtml"
   NAME="#xCadastro#xPromocao#xCadastroPromocao.xhtml"
   PATH="/Cadastro/Promocao/CadastroPromocao.xhtml" SHAPE="536,617,0,0"
@@ -213,15 +226,6 @@
    PATH="/Cadastro/Promocao/ControlePromocao.xhtml"
    TARGET="#xCadastro#xPromocao#xControlePromocao.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
  </item>
- <item ID="#Cadastro#Promocao#ControlePromocao.xhtml"
-  NAME="#xCadastro#xPromocao#xControlePromocao.xhtml"
-  PATH="/Cadastro/Promocao/ControlePromocao.xhtml" SHAPE="536,641,0,0"
-  TYPE="page" model-entity="SeamPagesDiagramItem">
-  <output ID="/Cadastro/Promocao/CadastroPromocao.xhtml" NAME="output"
-   PATH="/Cadastro/Promocao/CadastroPromocao.xhtml"
-   TARGET="#xCadastro#xPromocao#xCadastroPromocao.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
-  <output ID="/Cadastro/Promocao/CadastroPromocao.xhtml" NAME="output1"
-   PATH="/Cadastro/Promocao/CadastroPromocao.xhtml"
-   TARGET="#xCadastro#xPromocao#xCadastroPromocao.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
- </item>
+ <item NAME="#xEmail#xReenvioSenha.xhtml"
+  PATH="/Email/ReenvioSenha.xhtml" SHAPE="536,665,0,0" TYPE="page" model-entity="SeamPagesDiagramItem"/>
 </diagram>
