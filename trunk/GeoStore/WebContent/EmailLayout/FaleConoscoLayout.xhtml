@@ -1,0 +1,14 @@
+<m:message xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:m="http://jboss.com/products/seam/mail"
+    xmlns:h="http://java.sun.com/jsf/html">
+  
+    <m:from name="GeoStore App" address="geostoreapp@gmail.com" />
+    <m:to name="GeoStore App" address="geostoreapp@gmail.com"></m:to>
+    <m:subject>Contato de usuário: #{faleConoscoController.assunto}</m:subject>
+    
+    <m:body>
+        <p><h:outputText value="Contato de  #{faleConoscoController.usuario.nome} - #{faleConoscoController.usuario.email} " /></p>
+        <p>#{faleConoscoController.mensagem}</p>
+    </m:body>
+    
+</m:message>
