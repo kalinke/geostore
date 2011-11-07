@@ -17,6 +17,11 @@
    <rule if-outcome="reenvio.senha">
     <redirect view-id="/Email/ReenvioSenha.xhtml"/>
    </rule>
+   
+   <rule if-outcome="fale.conosco">
+    <redirect view-id="/Email/FaleConosco.xhtml"/>
+   </rule>
+   
   
    <rule if-outcome="cadastro.empresa">
     <redirect view-id="/Cadastro/Empresa/CadastroEmpresa.xhtml"/>
