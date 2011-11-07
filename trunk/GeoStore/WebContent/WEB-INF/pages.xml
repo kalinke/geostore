@@ -8,10 +8,16 @@
   <navigation from-action="#{identity.logout()}">
    <redirect view-id="/login.xhtml"/>
   </navigation>
+  
   <navigation>
    <rule if-outcome="home">
     <redirect view-id="/home.xhtml"/>
    </rule>
+   
+   <rule if-outcome="reenvio.senha">
+    <redirect view-id="/Email/ReenvioSenha.xhtml"/>
+   </rule>
+  
    <rule if-outcome="cadastro.empresa">
     <redirect view-id="/Cadastro/Empresa/CadastroEmpresa.xhtml"/>
    </rule>
