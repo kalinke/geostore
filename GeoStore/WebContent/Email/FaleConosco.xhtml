@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:s="http://jboss.com/products/seam/taglib"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:x="http://www.xseam.org"
+      > 
+<ui:composition template="../layout/template.xhtml">
+	
+		<ui:define name="body" >
+	
+		<rich:panel>
+		
+		<f:facet name="header">Fale Conosco</f:facet>
+		
+		<a4j:form id="faleConosco">
+
+			<rich:spacer height="10" />		
+				<rich:panel>	
+					<h:panelGrid >		
+
+						<s:decorate template="../layout/edit.xhtml" rendered="#{!identity.loggedIn}">
+							<ui:define name="label">Seu Nome:</ui:define>
+							<h:inputText size="60" value="#{faleConoscoController.usuario.nome}"  />
+						</s:decorate>
+
+						<s:decorate template="../layout/edit.xhtml" rendered="#{!identity.loggedIn}">
+							<ui:define name="label">Seu e-mail:</ui:define>
+							<h:inputText size="60" value="#{faleConoscoController.usuario.email}"/>
+						</s:decorate>
+												
+						<s:decorate template="../layout/edit.xhtml">
+							<ui:define name="label">Assunto:</ui:define>
+							<h:inputText size="60" value="#{faleConoscoController.assunto}" />
+						</s:decorate>
+					
+						<s:decorate template="../layout/edit.xhtml">
+							<ui:define name="label">Sua Mensagem:</ui:define>
+							<h:inputTextarea value="#{faleConoscoController.mensagem}" style="width:200px;" />
+							
+
+						</s:decorate>
+						
+					</h:panelGrid>				
+				</rich:panel>	
+				
+							<rich:panel>
+				<rich:toolBar height="34"  itemSeparator="line" >					
+					
+       		    	<rich:toolBarGroup>
+       		    		<rich:menuItem action="#{faleConoscoController.send()}"  >
+        					<h:graphicImage value="../img/emailIcon.png" styleClass="pic"/>
+	   		 				<h:outputText value="Enviar" styleClass="txtButton"/>
+	   					</rich:menuItem>
+       		    	</rich:toolBarGroup>     		    
+		   		     			
+	   		    	<rich:toolBarGroup/>	
+	   		    	   		    			
+				</rich:toolBar>		
+				
+			</rich:panel>	
+		
+	</a4j:form>	
+		 				
+	 		</rich:panel>
+	 	
+		<rich:spacer height="20"/>	
+			
+	</ui:define>
+</ui:composition>
+
+</html>
