@@ -1,0 +1,17 @@
+<m:message xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:m="http://jboss.com/products/seam/mail"
+    xmlns:h="http://java.sun.com/jsf/html">
+  
+    <m:from name="GeoStore App" address="geostoreapp@gmail.com" />
+    <m:to name="#{reenvioSenhaController.usuario.nome}" address="#{reenvioSenhaController.usuario.email}"></m:to>
+    <m:subject>Solicitação de reenvio de Senha!</m:subject>
+    
+    <m:body>
+        <p><h:outputText value="Caro #{reenvioSenhaController.usuario.nome}" />,</p>
+        <p>Recebemos sua solicitação de reenvio de senha. </p>
+       	<br/> Sua senha é: #{reenvioSenhaController.usuario.senha}
+        <p><br/>Atenciosamente,</p>
+        <p><br/>GeoStore</p>
+    </m:body>
+    
+</m:message>
