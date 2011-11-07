@@ -17,6 +17,7 @@ import org.jboss.seam.servlet.ContextualHttpServletRequest;
 import org.jboss.seam.web.AbstractResource;
 
 import br.com.geostore.dao.UsuarioDAO;
+import br.com.geostore.entity.StatusUsuario;
 import br.com.geostore.entity.TipoUsuario;
 import br.com.geostore.entity.Usuario;
 
@@ -38,9 +39,14 @@ public class NovoUsuarioServlet extends AbstractResource {
 				u.setCpf(request.getParameter("cpf"));
 				u.setEmail(request.getParameter("email"));
 				u.setSenha(request.getParameter("senha"));
+				
 				TipoUsuario t = new TipoUsuario();
-				t.setId(3L);
+				t.setId(3l);
 				u.setTipoUsuario(t);
+				
+				StatusUsuario s = new StatusUsuario();
+				s.setId(1l);
+				u.setStatusUsuario(s);
 				
 				int incluiu = 0;
 
