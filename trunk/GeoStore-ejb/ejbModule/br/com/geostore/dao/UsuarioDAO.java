@@ -188,4 +188,27 @@ public class UsuarioDAO {
 		}
 	}
 	
+	
+	@SuppressWarnings("unchecked")
+	public List<Usuario> buscarReenvio(String email) throws Exception {
+		try{
+			
+			log.info("Buscando se Email para reenvio de senha: " + email);
+			
+			String sQuery;			
+			
+			sQuery = " from Usuario as u ";	
+			sQuery += " where u.email = :email ";
+			sQuery += " order by u.id ";			
+			
+			Query query = entityManager.createQuery(sQuery);			
+			query.setParameter("email", email);
+			
+			return query.getResultList();
+			
+		}catch (Exception e) {
+			throw new Exception(e);
+		}
+	}
+	
 }
