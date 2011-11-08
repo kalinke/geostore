@@ -54,7 +54,7 @@ public class Login extends Activity{
 	}
 	
 	public Usuario efetuarLogin(String email, String senha){
-		HttpGS http = new HttpGS();
+		HttpGS http = new HttpGS(this);
 		String response = http.efetuarLogin(email, senha);
 		JsonGS json = new JsonGS();
 		Usuario usuario = json.JSonObjectToUsuario(response);
