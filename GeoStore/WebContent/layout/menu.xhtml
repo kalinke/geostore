@@ -25,20 +25,12 @@
 	   		 			<h:outputText value="Empresas" />
 	   		 		</h:panelGroup> 		 		
    		 		</f:facet>
-   		 		<rich:menuItem value="Cadastro" action="cadastro.empresa" />
-   		 		<rich:menuItem value="Controle" action="controle.empresa" />
+   		 		<rich:menuItem value="Cadastro Empresas" action="cadastro.empresa" icon="/img/empresaIcon.png" />
+   		 		<rich:menuItem value="Controle Empresas" action="controle.empresa" icon="/img/empresaIcon.png" />
+   		 		<rich:menuItem value="Cadastro Lojas" action="cadastro.loja" icon="/img/lojaIcon.gif" />   
+   				<rich:menuItem value="Controle Lojas" action="controle.loja" icon="/img/lojaIcon.gif" />   
    		 	</rich:dropDownMenu>
         	
-        	<rich:dropDownMenu submitMode="ajax" rendered="#{s:hasRole('admin') || s:hasRole('operador') }">
-   		 		<f:facet name="label">
-   		 			<h:panelGroup>
-   		 				<h:graphicImage value="/img/lojaIcon.gif" styleClass="pic"/>
-	   		 			<h:outputText value="Lojas" />
-	   		 		</h:panelGroup> 		 		
-   		 		</f:facet>
-   		 		<rich:menuItem value="Cadastro" action="cadastro.loja" />   
-   				<rich:menuItem value="Controle" action="controle.loja" />   
-   		 	</rich:dropDownMenu>
    		 	
    		 	<rich:dropDownMenu submitMode="ajax" rendered="#{s:hasRole('admin')}">
    		 		<f:facet name="label">
@@ -47,8 +39,8 @@
 	   		 			<h:outputText value="Usuários" />
 	   		 		</h:panelGroup> 		 		
    		 		</f:facet>
-   		 		<rich:menuItem value="Cadastro" action="cadastro.usuario" /> 
-   				<rich:menuItem value="Controle" action="controle.usuario" />
+   		 		<rich:menuItem value="Cadastro" action="cadastro.usuario" icon="/img/usuarioIcon.png" /> 
+   				<rich:menuItem value="Controle" action="controle.usuario" icon="/img/usuarioIcon.png"/>
    		 	</rich:dropDownMenu>
    		 	
    		 	<rich:dropDownMenu submitMode="ajax" rendered="#{s:hasRole('admin') || s:hasRole('operador')}">
@@ -58,22 +50,11 @@
 	   		 			<h:outputText value="Produtos" />
 	   		 		</h:panelGroup> 		 		
    		 		</f:facet>
-   		 		<rich:menuItem value="Cadastro" action="cadastro.produto" /> 
-   				<rich:menuItem value="Controle" action="controle.produto" /> 
+   		 		<rich:menuItem value="Cadastro Produtos" action="cadastro.produto" icon="/img/produtoIcon.png"/> 
+   				<rich:menuItem value="Controle Produtos" action="controle.produto" icon="/img/produtoIcon.png"/>
+   				<rich:menuItem value="Cadastro Promoções" action="cadastro.promocao"  icon="/img/promocaoIcon.png"/> 
+   				<rich:menuItem value="Controle Promoções" action="controle.promocao"  icon="/img/promocaoIcon.png"/>  
    		 	</rich:dropDownMenu>
-   		 	
-   		 	<rich:dropDownMenu submitMode="ajax" rendered="#{s:hasRole('admin') || s:hasRole('operador')}">
-   		 		<f:facet name="label">
-   		 			<h:panelGroup>
-   		 				<h:graphicImage value="/img/produtoIcon.png" styleClass="pic"/>
-	   		 			<h:outputText value="Promoções" />
-	   		 		</h:panelGroup> 		 		
-   		 		</f:facet>
-   		 		<rich:menuItem value="Cadastro" action="cadastro.promocao" /> 
-   				<rich:menuItem value="Controle" action="controle.promocao" /> 
-   		 	</rich:dropDownMenu>
-   		 	
-   		 	
    		 	
     		<rich:dropDownMenu showDelay="250" hideDelay="0" submitMode="ajax" rendered="#{s:hasRole('admin') || s:hasRole('operador')}">        
    		 		<f:facet name="label">
@@ -104,10 +85,15 @@
      			     		
     		</rich:dropDownMenu>
     		
-    		<rich:menuItem action="fale.conosco">
-        		<h:graphicImage value="/img/emailIcon.png" styleClass="pic"/>
-	   		 	<h:outputText value="Fale Conosco" styleClass="txtButtonMenu"/>
-	   		</rich:menuItem>
+   		 	<rich:dropDownMenu submitMode="ajax">
+   		 		<f:facet name="label">
+   		 			<h:panelGroup>
+   		 				<h:graphicImage value="/img/ajudaIcon.png" styleClass="pic"/>
+	   		 			<h:outputText value="Ajuda" />
+	   		 		</h:panelGroup> 		 		
+   		 		</f:facet>
+   		 		<rich:menuItem value="Fale Conosco" action="fale.conosco" icon="/img/emailIcon.png"/> 
+   		 	</rich:dropDownMenu>
     
 	    </rich:toolBarGroup>
 
