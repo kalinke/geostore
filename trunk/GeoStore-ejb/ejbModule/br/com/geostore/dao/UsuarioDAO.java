@@ -134,18 +134,9 @@ public class UsuarioDAO {
 			query.setParameter("usuarioCPF", usuario.getCpf());
 			query.setParameter("usuarioID", usuario.getId());
 			
-			if(query.getResultList()==null || query.getResultList().isEmpty()){
-				
-				sQuery = " from Usuario as u ";	
-				sQuery += " where u.cpf = :usuarioCPF  ";
-				sQuery += " order by u.id ";			
-				
-				query = entityManager.createQuery(sQuery);
-				query.setParameter("usuarioCPF", usuario.getCpf());
-				
 				if(query.getResultList()==null || query.getResultList().isEmpty())				
 					return false;	
-			}
+
 			
 			return true;
 		}catch (Exception e) {
@@ -168,19 +159,10 @@ public class UsuarioDAO {
 			Query query = entityManager.createQuery(sQuery);			
 			query.setParameter("usuarioEmail", usuario.getEmail());
 			query.setParameter("usuarioID", usuario.getId());
-			
-			if(query.getResultList()==null || query.getResultList().isEmpty()){
-				
-				sQuery = " from Usuario as u ";	
-				sQuery += " where u.email = :usuarioEmail  ";
-				sQuery += " order by u.id ";			
-				
-				query = entityManager.createQuery(sQuery);
-				query.setParameter("usuarioEmail", usuario.getEmail());
 				
 				if(query.getResultList()==null || query.getResultList().isEmpty())				
 					return false;	
-			}
+			
 			
 			return true;
 		}catch (Exception e) {
