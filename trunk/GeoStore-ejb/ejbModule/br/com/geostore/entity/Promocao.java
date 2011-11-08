@@ -37,8 +37,6 @@ public class Promocao implements Serializable{
 	@Column(name="descricao")
 	private String descricao;
 	
-	
-	
 	@ManyToOne
 	@JoinColumn(name = "id_produto")
 	private Produto produto;
