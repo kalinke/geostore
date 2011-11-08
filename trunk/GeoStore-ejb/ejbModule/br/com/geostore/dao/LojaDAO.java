@@ -100,33 +100,41 @@ try{
 		}
 	}
 	
-	public boolean buscarPorCNPJ(Loja loja) throws Exception {
+	public boolean buscarPorCNPJ(Loja loja, String acao) throws Exception {
 		try{
 			
 			log.info("Buscando se CNPJ já existe no Banco de Dados: " + loja.getDocumento());
 			
 			String sQuery;			
 			
-			sQuery = " from Loja as l ";	
-			sQuery += " where l.documento = :lojaCNPJ ";
-			sQuery += " and l.id <> :lojaId ";
-			sQuery += " order by l.id ";			
-			
-			Query query = entityManager.createQuery(sQuery);			
-			query.setParameter("lojaCNPJ", loja.getDocumento());
-			query.setParameter("lojaId", loja.getId());
-			
-			if(query.getResultList()==null || query.getResultList().isEmpty()){
+			if(acao=="NOVA"){
 				
 				sQuery = " from Loja as l ";	
-				sQuery += " where l.documento = :lojaCNPJ ";
+				sQuery += " where l.documento = :empresaCNPJ ";
 				sQuery += " order by l.id ";			
 				
-				query = entityManager.createQuery(sQuery);
-				query.setParameter("lojaCNPJ", loja.getDocumento());
+				Query query = entityManager.createQuery(sQuery);
+				query.setParameter("empresaCNPJ", loja.getDocumento());
 				
 				if(query.getResultList()==null || query.getResultList().isEmpty())				
 					return false;	
+					
+			}
+			
+			if(acao=="EDITAR"){
+				
+				sQuery = " from Loja as l ";	
+				sQuery += " where l.documento = :empresaCNPJ ";
+				sQuery += " and l.id <> :empresaId ";
+				sQuery += " order by l.id ";					
+				
+				Query query = entityManager.createQuery(sQuery);
+				query.setParameter("empresaCNPJ", loja.getDocumento());
+				query.setParameter("empresaId", loja.getId());
+				
+				if(query.getResultList()==null || query.getResultList().isEmpty())				
+					return false;	
+			
 			}
 			
 			return true;

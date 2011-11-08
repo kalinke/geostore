@@ -45,6 +45,8 @@ public class LojaController {
 	private UnidadeFederacao unidadeFederacao = new UnidadeFederacao();	
 	private Long idLoja;
 	
+	String acao = null;
+	
 	public LojaController(){
 		this.usuarioLogado = (Usuario) Contexts.getSessionContext().get("usuarioLogado");
 	}
@@ -53,7 +55,7 @@ public class LojaController {
 	public String nova(){
 		this.loja = new Loja();
 		this.unidadeFederacao = new UnidadeFederacao();	
-		
+		acao = "NOVA";
 		return "ADICIONAR";
 	}
 	
@@ -61,6 +63,7 @@ public class LojaController {
 	public String editar() throws Exception{
 		this.loja = lojaDAO.buscarPorId(idLoja);
 		this.unidadeFederacao = this.loja.getEndereco().getCidade().getUnidadeFederacao();
+		acao = "EDITAR";
 		return "EDITAR";
 	}
 
@@ -103,7 +106,7 @@ public class LojaController {
         if(!DocumentoValidator.validarCNPJCPF(loja.getDocumento()))
                 throw new RuntimeException("CNPJ digitado é inválido!");  
 
-        if (lojaDAO.buscarPorCNPJ(loja))
+        if (lojaDAO.buscarPorCNPJ(loja, acao))
                 throw new RuntimeException("CNPJ digitado já existe!");       
 
         if(loja.getRazaoSocial().isEmpty())

@@ -116,33 +116,41 @@ public class EmpresaDAO {
 	}
 	
 
-	public boolean buscarPorCNPJ(Empresa empresa) throws Exception {
+	public boolean buscarPorCNPJ(Empresa empresa, String acao) throws Exception {
 		try{
 			
 			log.info("Buscando se CNPJ já existe no Banco de Dados: " + empresa.getDocumento());
 			
 			String sQuery;			
 			
-			sQuery = " from Empresa as e ";	
-			sQuery += " where e.documento = :empresaCNPJ ";
-			sQuery += " and e.id <> :empresaId ";
-			sQuery += " order by e.id ";			
-			
-			Query query = entityManager.createQuery(sQuery);			
-			query.setParameter("empresaCNPJ", empresa.getDocumento());
-			query.setParameter("empresaId", empresa.getId());
-			
-			if(query.getResultList()==null || query.getResultList().isEmpty()){
+			if(acao=="NOVA"){
 				
 				sQuery = " from Empresa as e ";	
 				sQuery += " where e.documento = :empresaCNPJ ";
 				sQuery += " order by e.id ";			
 				
-				query = entityManager.createQuery(sQuery);
+				Query query = entityManager.createQuery(sQuery);
 				query.setParameter("empresaCNPJ", empresa.getDocumento());
 				
 				if(query.getResultList()==null || query.getResultList().isEmpty())				
 					return false;	
+					
+			}
+			
+			if(acao=="EDITAR"){
+				
+				sQuery = " from Empresa as e ";	
+				sQuery += " where e.documento = :empresaCNPJ ";
+				sQuery += " and e.id <> :empresaId ";
+				sQuery += " order by e.id ";					
+				
+				Query query = entityManager.createQuery(sQuery);
+				query.setParameter("empresaCNPJ", empresa.getDocumento());
+				query.setParameter("empresaId", empresa.getId());
+				
+				if(query.getResultList()==null || query.getResultList().isEmpty())				
+					return false;	
+			
 			}
 			
 			return true;
