@@ -79,8 +79,13 @@
 						</s:decorate>
 															
 						<s:decorate template="../../layout/edit.xhtml">
-							<ui:define name="label">Quantidade de Voucher</ui:define>
+							<ui:define name="label">Quantidade de Vouchers</ui:define>
 							<h:inputText value="#{promocaoController.promocao.qde_voucher}" />	
+						</s:decorate>
+						
+						<s:decorate template="../../layout/edit.xhtml">
+							<ui:define name="label">Descrição</ui:define>
+							<h:inputTextarea value="#{promocaoController.promocao.descricao}" />							
 						</s:decorate>
 	
 					</h:panelGrid>
