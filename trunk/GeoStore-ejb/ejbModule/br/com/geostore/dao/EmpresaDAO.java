@@ -20,6 +20,7 @@ public class EmpresaDAO {
 	private EntityManager entityManager;
 	
 	@Logger
+	
 	private Log log;
 
 	public void incluir(Empresa empresa) throws Exception {
