@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World, GeoStoreActivity!</string>
-    <string name="app_name">GeoStoreMobile</string>
+    <string name="app_name">GeoStore</string>
     <string name="raio_prompt">Escolha o raio</string>
     
     <string name="footer">
