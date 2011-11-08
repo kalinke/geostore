@@ -37,6 +37,7 @@ public class GeoStoreActivity extends Activity implements Button.OnClickListener
     protected static final int RAIO_500       = 2;
     protected static final int RAIO_1000      = 3;
     protected static final int RAIO_10000     = 4;
+    protected static final String TAG = "HttpGS";
     	
     private int raio;
     private boolean logado;
@@ -69,6 +70,7 @@ public class GeoStoreActivity extends Activity implements Button.OnClickListener
 	    	TextView textViewToChange = (TextView) findViewById(R.id.tvLoginMainBuscaclick);
 	    	textViewToChange.setText("Logout");
 	    }
+	    
         txtLogin.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(GeoStoreActivity.this, Login.class);
@@ -89,11 +91,9 @@ public class GeoStoreActivity extends Activity implements Button.OnClickListener
 		lat = Double.toString(g.getLastLatitude());
 		log = Double.toString(g.getLastLongitude());		
 		
-		HttpGS h = new HttpGS();
+		HttpGS h = new HttpGS(this);
 		String s = h.buscarProdutos(edtBuscar.getText().toString(), log, lat, String.valueOf(raio));
-		
-		Log.i("Retorno", s);
-		
+			
 		if (s != null){			
 			try {
 				JSONObject jObj = new JSONObject(s);
@@ -128,10 +128,10 @@ public class GeoStoreActivity extends Activity implements Button.OnClickListener
 				}
 					
 			} catch (JSONException e) {
-				Log.e("GeoStoreActivity","JSONException: " + e.getMessage());
-			}			
-		}else{
-			Toast.makeText(this, "O servidor pode estar fora do ar, tente novamente mais tarde...", Toast.LENGTH_LONG).show();
+				
+				Toast.makeText(this, "O servidor retornou dados inesperados.", Toast.LENGTH_LONG).show();
+				Log.e(TAG,"JSONException: " + e.getMessage());
+			}								
 		}
 	}
 	
