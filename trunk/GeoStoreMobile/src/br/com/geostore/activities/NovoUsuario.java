@@ -82,7 +82,7 @@ public class NovoUsuario extends Activity {
 		usuario.setEmail(email);				
 		usuario.setSenha(senha);
 		
-		HttpGS http = new HttpGS();
+		HttpGS http = new HttpGS(this);
 		String response = http.novoUsuario(usuario);
 		try {
 			
