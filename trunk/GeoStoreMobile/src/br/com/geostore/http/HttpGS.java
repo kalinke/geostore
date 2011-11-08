@@ -22,6 +22,7 @@ import br.com.geostore.entity.Usuario;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.util.Log;
+import android.widget.Toast;
 
 
 public class HttpGS {
@@ -32,7 +33,7 @@ public class HttpGS {
 	//private static final String URL_SERVER = "http://172.16.1.104:8080/GeoStore/seam/resource/";
 
 	//ALISSON
-	private static final String URL_SERVER = "http://192.168.1.15:8080/GeoStore/seam/resource/";	
+	private static final String URL_SERVER = "http://192.168.1.14:8080/GeoStore/seam/resource/";	
 	protected static final String TAG = "HttpGS";
 	private DefaultHttpClient httpClient = null;
 	private Context ctx = null;
@@ -76,31 +77,29 @@ public class HttpGS {
 		return doPost("recuperaSenha",params);
 	}
 	
-	public String doPost(String servlet, List<NameValuePair> params){
-		
+	public String doPost(String servlet, List<NameValuePair> params){		
 		HttpResponse res = null;		
-		HttpPost post = new HttpPost(URL_SERVER.concat(servlet));
-		
-		try {
-			post.setEntity(new UrlEncodedFormEntity(params));
-			res = httpClient.execute(post);
-			return EntityUtils.toString(res.getEntity());			
-		} catch (UnsupportedEncodingException e) {
-			Log.e("HttpGS","UnsupportedEncodingException: " + e.getMessage());
-		} catch (ClientProtocolException e) {
-			Log.e("HttpGS","ClientProtocolException: " + e.getMessage());
-		} catch (IOException e) {
-			Log.e("HttpGS","IOException: " + e.getMessage());
-		}
-		
+		if (this.checkInternetConnection()){			
+			HttpPost post = new HttpPost(URL_SERVER.concat(servlet));			
+			try {				
+				post.setEntity(new UrlEncodedFormEntity(params));
+				res = httpClient.execute(post);
+				return EntityUtils.toString(res.getEntity());						
+			} catch (UnsupportedEncodingException e) {				
+				Log.e(TAG,"UnsupportedEncodingException: " + e.getMessage());			
+			} catch (ClientProtocolException e) {				
+				Log.e(TAG,"ClientProtocolException: " + e.getMessage());			
+			} catch (IOException e) {				
+				Log.e(TAG,"IOException: " + e.getMessage());			
+			}			
+		}				
+		Toast.makeText(this.ctx, "O servidor não pode retornar os dados ou você está sem conexão com a internet.", Toast.LENGTH_LONG).show();		
 		return null;
 	}
 	
 	private boolean checkInternetConnection() {
 	    ConnectivityManager cm = (ConnectivityManager) this.ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
-	    if (cm.getActiveNetworkInfo() != null
-	            && cm.getActiveNetworkInfo().isAvailable()
-	            && cm.getActiveNetworkInfo().isConnected()) {
+	    if (cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isAvailable() && cm.getActiveNetworkInfo().isConnected()) {
 	        return true;
 	    } else {
 	        Log.v(TAG, "Internet Connection Not Present");
