@@ -132,6 +132,8 @@ try{
 				query.setParameter("empresaCNPJ", loja.getDocumento());
 				query.setParameter("empresaId", loja.getId());
 				
+				
+				
 				if(query.getResultList()==null || query.getResultList().isEmpty())				
 					return false;	
 			
