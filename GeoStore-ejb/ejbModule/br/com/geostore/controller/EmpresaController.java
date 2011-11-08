@@ -43,6 +43,8 @@ public class EmpresaController {
 	private Empresa empresa = new Empresa();
 	private Long idEmpresa;
 	
+	String acao = null;
+	
 	public EmpresaController() {
 		this.usuarioLogado = (Usuario) Contexts.getSessionContext().get("usuarioLogado");
 	}
@@ -50,7 +52,7 @@ public class EmpresaController {
 	public String nova(){
 		this.empresa = new Empresa();
 		this.unidadeFederacao = new UnidadeFederacao();	
-		
+		acao = "NOVA";
 		return "ADICIONAR";
 	}
 	
@@ -58,7 +60,7 @@ public class EmpresaController {
 	public String editar() throws Exception{
 		this.empresa = empresaDAO.buscarPorId(idEmpresa);
 		this.unidadeFederacao = this.empresa.getEndereco().getCidade().getUnidadeFederacao();
-		
+		acao = "EDITAR";
 		return "EDITAR";
 	}
 
@@ -97,7 +99,7 @@ public class EmpresaController {
         if(!DocumentoValidator.validarCNPJCPF(empresa.getDocumento()))
                 throw new RuntimeException("CNPJ digitado é inválido!");               
 
-        if (empresaDAO.buscarPorCNPJ(empresa))
+        if (empresaDAO.buscarPorCNPJ(empresa, acao))
                 throw new RuntimeException("CNPJ digitado já existe!");       
 
         if(empresa.getRazaoSocial().isEmpty())
@@ -106,8 +108,8 @@ public class EmpresaController {
         if(empresa.getNomeFantasia().isEmpty())
                 throw new RuntimeException("É necessário preencher o nome fantasia!");       
 
-        if(empresa.getInscricaoEstadual().isEmpty())
-                throw new RuntimeException("É necessário preencher a inscrição estadual!");       
+        //if(empresa.getInscricaoEstadual().isEmpty())
+                //throw new RuntimeException("É necessário preencher a inscrição estadual!");       
 
         //if(empresa.getContato().isEmpty())
                // throw new RuntimeException("É necessário preencher o contato!");       
