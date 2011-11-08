@@ -30,7 +30,11 @@ public class HttpGS {
 	//private static final String URL_SERVER = "http://172.16.1.104:8080/GeoStore/seam/resource/";
 
 	//ALISSON
-	private static final String URL_SERVER = "http://192.168.1.15:8080/GeoStore/seam/resource/";
+	//private static final String URL_SERVER = "http://192.168.1.15:8080/GeoStore/seam/resource/";
+	
+	//HAGY
+	private static final String URL_SERVER = "http://192.168.1.13:8080/GeoStore/seam/resource/";
+	
 	private DefaultHttpClient httpClient = null;
 	
 	public HttpGS(){
