@@ -18,17 +18,17 @@
 	   		</rich:menuItem>
 		
    		 			 	
-   		 	<rich:dropDownMenu submitMode="ajax" rendered="#{s:hasRole('admin')}">
+   		 	<rich:dropDownMenu submitMode="ajax">
    		 		<f:facet name="label">
    		 			<h:panelGroup>
    		 				<h:graphicImage value="/img/empresaIcon.png" styleClass="pic"/>
 	   		 			<h:outputText value="Empresas" />
 	   		 		</h:panelGroup> 		 		
    		 		</f:facet>
-   		 		<rich:menuItem value="Cadastro Empresas" action="cadastro.empresa" icon="/img/empresaIcon.png" />
-   		 		<rich:menuItem value="Controle Empresas" action="controle.empresa" icon="/img/empresaIcon.png" />
-   		 		<rich:menuItem value="Cadastro Lojas" action="cadastro.loja" icon="/img/lojaIcon.gif" />   
-   				<rich:menuItem value="Controle Lojas" action="controle.loja" icon="/img/lojaIcon.gif" />   
+   		 		<rich:menuItem rendered="#{s:hasRole('admin')}" value="Cadastro Empresas" action="cadastro.empresa" icon="/img/empresaIcon.png" />
+   		 		<rich:menuItem rendered="#{s:hasRole('admin')}" value="Controle Empresas" action="controle.empresa" icon="/img/empresaIcon.png" />
+   		 		<rich:menuItem rendered="#{s:hasRole('admin') || s:hasRole('operador')}" value="Cadastro Lojas" action="cadastro.loja" icon="/img/lojaIcon.gif" />   
+   				<rich:menuItem rendered="#{s:hasRole('admin') || s:hasRole('operador')}" value="Controle Lojas" action="controle.loja" icon="/img/lojaIcon.gif" />   
    		 	</rich:dropDownMenu>
         	
    		 	
