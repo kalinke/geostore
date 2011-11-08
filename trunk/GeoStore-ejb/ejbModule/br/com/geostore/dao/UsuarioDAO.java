@@ -36,10 +36,12 @@ public class UsuarioDAO {
 	
 	public void alterar(Usuario usuario) throws Exception {
 		try{
-			log.info("Alterar Usuario: #0", usuario.getId());			
+      
+			log.info("Alterarando Usuario: #0", usuario.getId());			
 			entityManager.merge(usuario);
 			entityManager.flush();			
 			
+         
 		}catch (Exception e) {
 			throw new Exception(e);
 		}
@@ -122,7 +124,7 @@ public class UsuarioDAO {
 	public boolean buscarPorCPF(Usuario usuario) throws Exception {
 		try{
 			
-			log.info("Buscando se CPF j· existe no Banco de Dados: " + usuario.getCpf());
+			log.info("Buscando se CPF j√° existe no Banco de Dados: " + usuario.getCpf());
 			
 			String sQuery;			
 			
@@ -148,7 +150,7 @@ public class UsuarioDAO {
 	public boolean buscarPorEmail(Usuario usuario) throws Exception {
 		try{
 			
-			log.info("Buscando se Email j· existe no Banco de Dados: " + usuario.getEmail());
+			log.info("Buscando se Email j√° existe no Banco de Dados: " + usuario.getEmail());
 			
 			String sQuery;			
 			
