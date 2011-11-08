@@ -19,6 +19,8 @@ import org.apache.http.util.EntityUtils;
 
 import br.com.geostore.entity.Usuario;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.util.Log;
 
 
@@ -30,14 +32,13 @@ public class HttpGS {
 	//private static final String URL_SERVER = "http://172.16.1.104:8080/GeoStore/seam/resource/";
 
 	//ALISSON
-	//private static final String URL_SERVER = "http://192.168.1.15:8080/GeoStore/seam/resource/";
-	
-	//HAGY
-	private static final String URL_SERVER = "http://192.168.1.13:8080/GeoStore/seam/resource/";
-	
+	private static final String URL_SERVER = "http://192.168.1.15:8080/GeoStore/seam/resource/";	
+	protected static final String TAG = "HttpGS";
 	private DefaultHttpClient httpClient = null;
+	private Context ctx = null;
 	
-	public HttpGS(){
+	public HttpGS(Context ctx){
+		this.ctx = ctx;
 		HttpParams params = new BasicHttpParams();
 		HttpConnectionParams.setConnectionTimeout(params, 15000);
 		HttpConnectionParams.setSoTimeout(params, 15000);
@@ -69,6 +70,12 @@ public class HttpGS {
 		return doPost("novoUsuarioServlet",params);
 	}
 	
+	public String recuperaSenha(String email){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("email",  email));		
+		return doPost("recuperaSenha",params);
+	}
+	
 	public String doPost(String servlet, List<NameValuePair> params){
 		
 		HttpResponse res = null;		
@@ -87,5 +94,17 @@ public class HttpGS {
 		}
 		
 		return null;
-	}		
+	}
+	
+	private boolean checkInternetConnection() {
+	    ConnectivityManager cm = (ConnectivityManager) this.ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+	    if (cm.getActiveNetworkInfo() != null
+	            && cm.getActiveNetworkInfo().isAvailable()
+	            && cm.getActiveNetworkInfo().isConnected()) {
+	        return true;
+	    } else {
+	        Log.v(TAG, "Internet Connection Not Present");
+	        return false;
+	    }
+	}
 }
