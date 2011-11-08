@@ -22,6 +22,7 @@ public class UsuarioDAO {
 	
 	@Logger
 	private Log log;
+	
 
 	public void incluir(Usuario usuario) throws Exception {
 		try{
