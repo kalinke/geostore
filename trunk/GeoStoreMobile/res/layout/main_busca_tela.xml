@@ -12,10 +12,9 @@
     	android:layout_width="wrap_content" 
     	android:clickable="true" 
     	android:text="Login  "
-    	android:textSize="20dp"
-    	
+    	android:textSize="20dp"    	
     	android:layout_gravity="right"
-    	android:layout_marginTop="1dp">
+    	android:layout_marginTop="0dp">
     </TextView>   
     
     <ImageView 
