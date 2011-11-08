@@ -84,8 +84,8 @@ public class UsuarioController {
 		if(usuario.getNome().isEmpty())
             throw new RuntimeException("É necessário preencher o nome!");       
 
-		if(!nomeValidator.validarNome(usuario.getNome()))
-            throw new RuntimeException("Nome inválido!");          
+		//if(!nomeValidator.validarNome(usuario.getNome()))
+           // new RuntimeException("Nome inválido!");          
 
 		if(usuario.getCpf().isEmpty())
 			throw new RuntimeException("Digite um CPF!");        
