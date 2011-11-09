@@ -10,7 +10,7 @@ import br.com.geostore.entity.Usuario;
 
 
 @Name("reenvioSenhaController")
-public class ReenvioSenhaController {
+public class ReenvioSenhaController  {
 
 	@In(create=true) private Renderer renderer;
 	@In(create=true) private FacesMessages facesMessages;
@@ -18,7 +18,7 @@ public class ReenvioSenhaController {
 	private String email;	
 	private Usuario usuario = new Usuario();
 	   
-	public void send() {
+	public String send() {
 	    try {
 	    	
 	    	if(usuarioDAO.buscarReenvio(email).size() < 1)
@@ -29,11 +29,17 @@ public class ReenvioSenhaController {
 	    		    	
 	       renderer.render("/EmailLayout/ReenvioSenhaLayout.xhtml");
 	       facesMessages.add("Senha reenviada com sucesso!");
+	       
+	       return "ENVIADO";
+	       
 	   }catch(RuntimeException e){
-		   facesMessages.add(e.getMessage());		   
+		   facesMessages.add(e.getMessage());
+		   return null;
 	   }catch (Exception e) {
 	       facesMessages.add("Erro ao enviar: " + e.getMessage());
+	       return null;
 	   }
+	 
 	}
 	
 	public String getEmail() {
