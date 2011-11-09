@@ -36,8 +36,7 @@ public class UsuarioDAO {
 	
 	public void alterar(Usuario usuario) throws Exception {
 		try{
-      
-			log.info("Alterarando Usuario: #0", usuario.getId());			
+			log.info("Alterando Usuario: #0", usuario.getId());			
 			entityManager.merge(usuario);
 			entityManager.flush();			
 			
@@ -45,8 +44,7 @@ public class UsuarioDAO {
 		}catch (Exception e) {
 			throw new Exception(e);
 		}
-	}
-	
+	}	
 	
 	public void salvar(Usuario usuario) throws Exception {
 		try{
@@ -194,6 +192,32 @@ public class UsuarioDAO {
 		}catch (Exception e) {
 			throw new Exception(e);
 		}
+	}
+	
+	public boolean validaSenhaAtual(Usuario usuarioLogado, String senha) throws Exception{
+		try{
+			
+			log.info("Buscando se senha atual é valida: " +  usuarioLogado.getEmail());
+			
+			String sQuery;			
+			
+			sQuery = " from Usuario as u ";	
+			sQuery += " where u.senha = :usuarioSenha ";
+			sQuery += " and u.id = :usuarioId ";
+			sQuery += " order by u.id ";			
+			
+			Query query = entityManager.createQuery(sQuery);			
+			query.setParameter("usuarioSenha", senha);
+			query.setParameter("usuarioId", usuarioLogado.getId());
+			
+			if(query.getResultList()==null || query.getResultList().isEmpty())				
+				return false;	
+			
+			return true;
+			
+		}catch (Exception e) {
+			throw new Exception(e);
+		}	
 	}
 	
 }
