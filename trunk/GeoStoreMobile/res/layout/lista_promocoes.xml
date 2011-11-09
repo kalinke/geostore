@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:background="@color/preto"
+  android:stretchColumns="1">    
+    <TableRow>
+	    <TextView 
+		    android:text="txtDesc" 
+		    android:id="@+id/txtDesc" 
+		    android:layout_width="wrap_content" 
+		    android:layout_height="wrap_content"
+		    android:textColor="@color/branco"
+		    android:textSize="16dp">
+	    </TextView>
+	    <TextView
+	    	android:layout_gravity="right" 
+		    android:text="txtQtde" 
+		    android:id="@+id/txtQtde" 
+		    android:layout_width="wrap_content" 
+		    android:layout_height="wrap_content"
+		    android:textColor="@color/branco"
+		    android:textSize="16dp">
+	    </TextView>			    	   
+    </TableRow>                   
+</TableLayout>
