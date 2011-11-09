@@ -19,8 +19,7 @@ public class EmpresaDAO {
 	@In
 	private EntityManager entityManager;
 	
-	@Logger
-	
+	@Logger	
 	private Log log;
 
 	public void incluir(Empresa empresa) throws Exception {
