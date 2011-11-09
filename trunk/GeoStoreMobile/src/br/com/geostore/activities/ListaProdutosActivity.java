@@ -3,7 +3,7 @@ package br.com.geostore.activities;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.geostore.adapters.ListaDeProdutosAdapter;
+import br.com.geostore.adapters.ListaProdutosAdapter;
 import br.com.geostore.entity.Produto;
 
 import android.app.ListActivity;
@@ -16,7 +16,7 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View;
 import android.widget.AdapterView;
 
-public class ListaDeProdutosActivity extends ListActivity {
+public class ListaProdutosActivity extends ListActivity {
 
 	protected static final int CONTEXTMENU_ROTA    = 1; 
 	protected static final int CONTEXTMENU_DISCAR  = 2; 
@@ -27,7 +27,7 @@ public class ListaDeProdutosActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.prods = (ArrayList<Produto>) getIntent().getSerializableExtra("produtos");		
-		ListaDeProdutosAdapter adapter = new ListaDeProdutosAdapter(this, prods);  
+		ListaProdutosAdapter adapter = new ListaProdutosAdapter(this, prods);  
 		setListAdapter(adapter);
 		registerForContextMenu(getListView());
 	}
@@ -46,7 +46,7 @@ public class ListaDeProdutosActivity extends ListActivity {
 	    Produto p = prods.get(info.position);
 	    switch (i) {
 	    	case CONTEXTMENU_ROTA:    		
-	    		Intent in = new Intent(ListaDeProdutosActivity.this, Rota.class);
+	    		Intent in = new Intent(ListaProdutosActivity.this, Rota.class);
 				in.putExtra("produto", p);										
 				startActivity(in);	    		
 	    		return true;
