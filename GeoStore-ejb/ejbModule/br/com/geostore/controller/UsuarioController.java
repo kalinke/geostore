@@ -16,7 +16,6 @@ import br.com.geostore.entity.StatusUsuario;
 import br.com.geostore.entity.Usuario;
 import br.com.geostore.validator.DocumentoValidator;
 import br.com.geostore.validator.EmailValidator;
-import br.com.geostore.validator.NomeValidator;
 
 @Name("usuarioController")
 @Scope(ScopeType.CONVERSATION)
@@ -30,6 +29,10 @@ public class UsuarioController {
 	
 	private Usuario usuario = new Usuario();
 	private Long idUsuario;
+	
+	private String senhaAtual;
+	private String novaSenha;
+	private String confirmaNovaSenha;
 			
 	public UsuarioController() {
 		this.usuarioLogado = (Usuario) Contexts.getSessionContext().get("usuarioLogado");
@@ -67,10 +70,40 @@ public class UsuarioController {
 		
 	}
 	
+	public String alterarSenha() throws Exception{
+		try{	
+			
+			if(!senhaAtual.equals(usuarioLogado.getSenha()))
+				throw new RuntimeException("A senha atual está incorreta!");
+			
+			if(novaSenha.isEmpty() || confirmaNovaSenha.isEmpty())
+				throw new RuntimeException("É necessário preencher todos os campos!");
+			
+	        if(novaSenha.length() < 6)
+	        	throw new RuntimeException("A senha deve conter no mínimo 6 caracteres!");
+			
+			if(!novaSenha.equals(confirmaNovaSenha))
+				throw new RuntimeException("Os campos 'Nova senha' e 'Confirmar nova senha' devem ser iguais!");
+			
+			usuario = usuarioLogado;
+			usuario.setSenha(novaSenha);
+				
+			usuarioDAO.alterar(usuario);
+			Contexts.getSessionContext().set("usuarioLogado", usuario);
+
+			return "SALVAR";
+
+		}catch (Exception e) {
+			facesMessages.add(e.getMessage());
+			return null;
+		}
+		
+	}
+	
 	public void validar() throws Exception{
 		
 		EmailValidator emailValidator = new EmailValidator();		
-		NomeValidator nomeValidator = new NomeValidator();
+		//NomeValidator nomeValidator = new NomeValidator();
 		
 		if(usuario.getTipoUsuario()==null || usuario.getTipoUsuario().getDescricao().isEmpty())
 			throw new RuntimeException("É necessário selecionar o tipo de usuário!");
@@ -149,7 +182,29 @@ public class UsuarioController {
 	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
-	
-		
+
+	public String getNovaSenha() {
+		return novaSenha;
+	}
+
+	public void setNovaSenha(String novaSenha) {
+		this.novaSenha = novaSenha;
+	}
+
+	public String getConfirmaNovaSenha() {
+		return confirmaNovaSenha;
+	}
+
+	public void setConfirmaNovaSenha(String confirmaNovaSenha) {
+		this.confirmaNovaSenha = confirmaNovaSenha;
+	}
+
+	public String getSenhaAtual() {
+		return senhaAtual;
+	}
+
+	public void setSenhaAtual(String senhaAtual) {
+		this.senhaAtual = senhaAtual;
+	}	
 	
 }
