@@ -1,6 +1,7 @@
 package br.com.geostore.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +39,18 @@ public class RecuperaSenhaServlet extends AbstractResource {
 					
 				ReenvioSenhaController r = (ReenvioSenhaController) Component.getInstance(ReenvioSenhaController.class);	
 				r.setEmail(email);
-				r.send();
+				String retorno = r.send();
+				
+				try{
+					
+					PrintWriter out = response.getWriter();
+					out.print(retorno);
+					out.flush();
+					
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				
 				
 			}
 
