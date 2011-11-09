@@ -18,7 +18,7 @@
 	   		</rich:menuItem>
 		
    		 			 	
-   		 	<rich:dropDownMenu submitMode="ajax">
+   		 	<rich:dropDownMenu submitMode="ajax" rendered="#{s:hasRole('admin') || s:hasRole('operador')}">
    		 		<f:facet name="label">
    		 			<h:panelGroup>
    		 				<h:graphicImage value="/img/empresaIcon.png" styleClass="pic"/>
@@ -32,15 +32,16 @@
    		 	</rich:dropDownMenu>
         	
    		 	
-   		 	<rich:dropDownMenu submitMode="ajax" rendered="#{s:hasRole('admin')}">
+   		 	<rich:dropDownMenu submitMode="ajax" rendered="#{s:hasRole('admin') || s:hasRole('operador')}">
    		 		<f:facet name="label">
    		 			<h:panelGroup>
    		 				<h:graphicImage value="/img/usuarioIcon.png" styleClass="pic"/>
 	   		 			<h:outputText value="Usuários" />
 	   		 		</h:panelGroup> 		 		
    		 		</f:facet>
-   		 		<rich:menuItem value="Cadastro" action="cadastro.usuario" icon="/img/usuarioIcon.png" /> 
-   				<rich:menuItem value="Controle" action="controle.usuario" icon="/img/usuarioIcon.png"/>
+   		 		<rich:menuItem rendered="#{s:hasRole('admin')}" value="Cadastro" action="cadastro.usuario" icon="/img/usuarioIcon.png" /> 
+   				<rich:menuItem rendered="#{s:hasRole('admin')}" value="Controle" action="controle.usuario" icon="/img/usuarioIcon.png"/>
+   				<rich:menuItem rendered="#{s:hasRole('admin') || s:hasRole('operador')}" value="Alterar Senha" action="alterarSenha.usuario" icon="/img/usuarioIcon.png"/>
    		 	</rich:dropDownMenu>
    		 	
    		 	<rich:dropDownMenu submitMode="ajax" rendered="#{s:hasRole('admin') || s:hasRole('operador')}">
