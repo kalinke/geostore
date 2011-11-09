@@ -1,30 +1,76 @@
 package br.com.geostore.gps;
 
-import android.app.Activity;
+import android.content.Context;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Bundle;
 
 import com.google.android.maps.GeoPoint;
 
-public class GpsGS extends Activity{
+public class GpsGS{
 	
-	private LocationManager lm;
+	private Context ctx = null;
+	private Location l = null;
 	
-	public GpsGS(LocationManager lm){
-		this.lm = lm;
+	public GpsGS(Context ctx){
+		this.ctx = ctx;		
 	}
+	
+	
+	
+	public Location getLastLocation(){		
+		LocationManager lm  = (LocationManager) ctx.getSystemService(Context.LOCATION_SERVICE);		
+		String provider =  LocationManager.GPS_PROVIDER;
+		int minTime = 10000;
+		int minDistance = 10;
+			
+		if(lm.isProviderEnabled(provider)){
+			
+			l = lm.getLastKnownLocation(provider);			
 		
-	
-	public Location getLastLocation(){
-		Location l = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-		if (l == null) {			
-			l = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+		}else{ 
+			provider = LocationManager.NETWORK_PROVIDER;
+			
+			if (lm.isProviderEnabled(provider)){
+				
+				l = lm.getLastKnownLocation(provider);
+				
+			}
 		}
+		
+		lm.requestLocationUpdates(provider, minTime, minDistance, new LocationListener() {
+			
+			@Override
+			public void onStatusChanged(String provider, int status, Bundle extras) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onProviderEnabled(String provider) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onProviderDisabled(String provider) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onLocationChanged(Location location) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
 		return l;
-	}
+	}		
 	
 	public double getLastLatitude(){
-		Location l = this.getLastLocation();
+		this.getLastLocation();
 		if (l!=null){
 			return l.getLatitude();
 		}
@@ -32,7 +78,7 @@ public class GpsGS extends Activity{
 	}
 	
 	public double getLastLongitude(){
-		Location l = this.getLastLocation();
+		this.getLastLocation();
 		if (l!=null){
 			return l.getLongitude();
 		}
@@ -40,7 +86,7 @@ public class GpsGS extends Activity{
 	}
 	
 	public GeoPoint getLastPosition() {
-		Location l = this.getLastLocation();
+		this.getLastLocation();
 		if (l!=null){
 			return DoubleToGeoPoint(l.getLatitude(), l.getLongitude());
 		}
