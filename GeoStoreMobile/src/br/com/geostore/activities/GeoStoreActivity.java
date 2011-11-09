@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import br.com.geostore.entity.Endereco;
 import br.com.geostore.entity.Loja;
 import br.com.geostore.entity.Produto;
+import br.com.geostore.entity.Promocao;
 import br.com.geostore.gps.GpsGS;
 import br.com.geostore.http.HttpGS;
 import android.app.Activity;
@@ -87,7 +88,7 @@ public class GeoStoreActivity extends Activity implements Button.OnClickListener
 		String lat  = "0";
 		
 		LocationManager lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-		GpsGS g = new GpsGS(lm);
+		GpsGS g = new GpsGS(this);
 		lat = Double.toString(g.getLastLatitude());
 		log = Double.toString(g.getLastLongitude());		
 		
@@ -102,9 +103,31 @@ public class GeoStoreActivity extends Activity implements Button.OnClickListener
 				
 				for (int i=0;i<jArray.length();i++){
 					JSONObject j = jArray.getJSONObject(i).getJSONObject("produto");
+					
+					JSONArray jArrayPromo = j.getJSONArray("promocoes");
+					ArrayList<Promocao> promoList = new ArrayList<Promocao>();
+					Produto prod = null;
+					
+					for (int x=0;x<jArrayPromo.length();x++){
+						
+						JSONObject jPromo = jArrayPromo.getJSONObject(i).getJSONObject("promocao");
+						Promocao promo = new Promocao();
+						promo.setId(jPromo.getLong("idPromo"));
+						promo.setDescricao(jPromo.getString("descPromo"));						
+						promo.setQde_solicitada(jPromo.getLong("qtdeSolic"));
+						promo.setQde_voucher(jPromo.getLong("qtdeVouch"));
+						prod = new Produto();
+						prod.setId(jPromo.getLong("idProduto"));
+						promo.setProduto(prod);
+						promoList.add(promo);
+						
+					}
+					
+					
 					Loja l = new Loja();
 					Endereco e = new Endereco();					
 					Produto p = new Produto();					
+					
 					p.setId(j.getLong("idProd"));
 					p.setNome(j.getString("nomeProd"));
 					p.setDescricao(j.getString("descProd"));
@@ -116,15 +139,17 @@ public class GeoStoreActivity extends Activity implements Button.OnClickListener
 					e.setLatitude(j.getDouble("latLoja"));
 					l.setEndereco(e);
 					p.setLoja(l);
+					p.setPromocoes(promoList);
+					
 					pList.add(p);					
 				}
 				
 				if (pList.size() > 0){
-					Intent i = new Intent(GeoStoreActivity.this, ListaDeProdutosActivity.class);
+					Intent i = new Intent(GeoStoreActivity.this, ListaProdutosActivity.class);
 					i.putExtra("produtos", pList);										
 					startActivity(i);
 				}else{
-					Toast.makeText(this, "Nenhum produto encontrato...", Toast.LENGTH_LONG).show();
+					Toast.makeText(this, "Nenhum produto encontrado.", Toast.LENGTH_LONG).show();
 				}
 					
 			} catch (JSONException e) {

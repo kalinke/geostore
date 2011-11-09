@@ -19,41 +19,51 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
 
-import android.content.Context;
 import android.graphics.Color;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 public class Rota extends MapActivity {
-		
+	
 	public void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState); 
 		setContentView(R.layout.mapa_tela); 
 
-		 Produto p = (Produto) getIntent().getSerializableExtra("produto");
-				
-		if (p!=null){			
-			
-			LocationManager lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-			GpsGS g = new GpsGS(lm);
-			GeoPoint origem  = g.getLastPosition();
-			GeoPoint destino = g.DoubleToGeoPoint(p.getLoja().getEndereco().getLatitude(),p.getLoja().getEndereco().getLongitude());
-			
+		Produto p = (Produto) getIntent().getSerializableExtra("produto");
+								
+		GpsGS g = new GpsGS(this);
+		GeoPoint origem  = g.getLastPosition();
+		GeoPoint destino = g.DoubleToGeoPoint(p.getLoja().getEndereco().getLatitude(),p.getLoja().getEndereco().getLongitude());
+		
+		if (origem!=null && destino!=null){
+		
 			MapView mapa = (MapView) findViewById(R.id.mapa);
+			
 			RotaDraw(origem, destino, Color.GREEN, mapa); 
 			mapa.getController().animateTo(origem); 
 			mapa.getController().setZoom(15); 
 			mapa.getController().setCenter(destino);        
 			mapa.setBuiltInZoomControls(true);
 			mapa.invalidate();			
-						
-		}else{
-			Toast.makeText(Rota.this, "Não foi possível determinar a rota para este produto...", Toast.LENGTH_LONG).show();
-		}			
-	} 
 
+		}else{
+			
+			if (origem==null){
+				
+				Toast.makeText(this, "Não foi possível identificar as coordenadas de origem, por favor, verifique seu " +
+						"GPS está ligado ou se você tem acesso a uma rede de dados.", Toast.LENGTH_LONG).show();
+				
+			}else if (destino==null){
+				
+				Toast.makeText(this, "Não foi possível determinar a localização deste produto.", Toast.LENGTH_LONG).show();
+				
+			}
+							
+		}
+					
+	} 
+	
 	protected boolean isRouteDisplayed() { 	 
 		return false; 
 	} 
