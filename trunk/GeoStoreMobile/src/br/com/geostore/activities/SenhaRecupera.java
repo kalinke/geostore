@@ -33,12 +33,17 @@ public class SenhaRecupera extends Activity{
 				
 				HttpGS hgs = new HttpGS(SenhaRecupera.this);
 				
-				String flag = hgs.recuperaSenha(email);
+				String response = hgs.recuperaSenha(email);
 				
-				if(flag != null){
-					Alertas msg = new Alertas();
-					msg.mostraMsg("Recupera senha", "Senha enviada!", SenhaRecupera.this);
-				}				
+								
+				Alertas msg = new Alertas();
+				
+				if(response.equals("ENVIADO")){					
+					msg.mostraMsg("Recupera senha", "Senha enviada com sucesso.", SenhaRecupera.this);
+				}else{
+					msg.mostraMsg("Recupera senha", "Erro, verifique o e-mail e tente novamente.", SenhaRecupera.this);
+				}
+					
 			}		
 			
 		});
