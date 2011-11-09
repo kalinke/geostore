@@ -52,44 +52,60 @@ public class ProdutoServlet extends AbstractResource {
 						
 						if (p != null){
 							
-							JSONArray jArray = new JSONArray();
+							JSONArray  jArrayProdutos = new JSONArray();
+							JSONArray  jArrayPromos   = null;							
+							JSONObject jObjeto        = null;
+							JSONObject jAtributos     = null;							
 							
 							for (Produto produto : p) {
 								
 								Loja loja = produto.getLoja();
-								Endereco end = loja.getEndereco();
+								Endereco end = loja.getEndereco();								
 								List<Promocao> promo = produto.getPromocoes();
 								
-								int existPromo = 0;
-								if (promo!=null && promo.size()>0){
-									existPromo = 1;
+								jArrayPromos = new JSONArray();
+																
+								for (Promocao promocao : promo) {
+									
+									jAtributos = new JSONObject();									
+									jAtributos.put("idPromo", promocao.getId());
+									jAtributos.put("descPromo", promocao.getDescricao());
+									jAtributos.put("idProduto", promocao.getProduto());
+									jAtributos.put("qtdeSolic", promocao.getQde_solicitada());
+									jAtributos.put("qtdeVouch", promocao.getQde_voucher());
+									
+									jObjeto = new JSONObject();
+									jObjeto.put("promocao", jAtributos);
+									
+									jArrayPromos.put(jObjeto);
+									
 								}
 																
-								JSONObject j = new JSONObject();
+								jAtributos = new JSONObject();
 								
-								j.put("idProd",    produto.getId());
-								j.put("nomeProd",  produto.getNome());
-								j.put("descProd",  produto.getDescricao());
-								j.put("prcProd",   produto.getValor());								
-								j.put("idLoja",    loja.getId());
-								j.put("nomeLoja",  loja.getNomeFantasia());
-								j.put("foneLoja",  loja.getTelefone());
-								j.put("endLoja",   end.getLogradouro());								
-								j.put("bairroLoja",end.getBairro());
-								j.put("logLoja",   end.getLongitude());
-								j.put("latLoja",   end.getLatitude());
-								j.put("promo",     existPromo);
+								jAtributos.put("idProd",    produto.getId());
+								jAtributos.put("nomeProd",  produto.getNome());
+								jAtributos.put("descProd",  produto.getDescricao());
+								jAtributos.put("prcProd",   produto.getValor());								
+								jAtributos.put("idLoja",    loja.getId());
+								jAtributos.put("nomeLoja",  loja.getNomeFantasia());
+								jAtributos.put("foneLoja",  loja.getTelefone());
+								jAtributos.put("endLoja",   end.getLogradouro());								
+								jAtributos.put("bairroLoja",end.getBairro());
+								jAtributos.put("logLoja",   end.getLongitude());
+								jAtributos.put("latLoja",   end.getLatitude());
+								jAtributos.put("promocoes", jArrayPromos);
 															
-								JSONObject jObj = new JSONObject();
-								jObj.put("produto", j);
-								jArray.put(jObj);
+								jObjeto = new JSONObject();
+								jObjeto.put("produto", jAtributos);
+								jArrayProdutos.put(jObjeto);
 							}
 							
-							JSONObject j = new JSONObject();
-							j.put("produtos", jArray);
+							JSONObject jResultado = new JSONObject();
+							jResultado.put("produtos", jArrayProdutos);
 							response.setContentType("application/json");
 							PrintWriter out = response.getWriter();
-							out.print(j);
+							out.print(jResultado);
 							out.flush();
 							
 						}
