@@ -25,17 +25,17 @@
 
 						<s:decorate template="../../layout/edit.xhtml">
 							<ui:define name="label">Senha atual:</ui:define>
-							<h:inputText size="60" value="#{usuarioController.senhaAtual}"  />
+							<h:inputSecret size="60" value="#{usuarioController.senhaAtual}"  />
 						</s:decorate>
 
 						<s:decorate template="../../layout/edit.xhtml">
 							<ui:define name="label">Nova Senha:</ui:define>
-							<h:inputText size="60" value="#{usuarioController.novaSenha}"/>
+							<h:inputSecret size="60" value="#{usuarioController.novaSenha}"/>
 						</s:decorate>
 												
 						<s:decorate template="../../layout/edit.xhtml">
 							<ui:define name="label">Confirmar nova senha:</ui:define>
-							<h:inputText size="60" value="#{usuarioController.confirmaNovaSenha}" />
+							<h:inputSecret size="60" value="#{usuarioController.confirmaNovaSenha}" />
 						</s:decorate>
 						
 					</h:panelGrid>				
