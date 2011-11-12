@@ -13,8 +13,7 @@ public class Voucher extends Activity{
 		setContentView(R.layout.voucher_tela);
 		
 		Button btTeste = (Button)findViewById(R.id.btVoltarVoucher);
-		
-						
+								
 		btTeste.setOnClickListener(new View.OnClickListener() {			
 			@Override
 			public void onClick(View v) {
