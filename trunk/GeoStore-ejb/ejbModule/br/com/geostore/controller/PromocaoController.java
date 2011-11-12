@@ -76,10 +76,7 @@ public class PromocaoController {
 		if(promocao.getStatusPromocao()==null || promocao.getStatusPromocao().getDescricao().isEmpty())
 	        throw new RuntimeException("É necessário selecionar o status!"); 		
 		
-		if(promocao.getQde_voucher()==null)
-            throw new RuntimeException("Necessário informar a quantidade de voucher!");
-		
-		if(promocao.getQde_voucher()==0)
+		if(promocao.getQdeVoucher()==0)
             throw new RuntimeException("A quantidade deve ser maior do que zero!");  
 
 	}	
