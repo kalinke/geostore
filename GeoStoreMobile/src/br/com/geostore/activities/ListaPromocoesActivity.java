@@ -25,6 +25,7 @@ public class ListaPromocoesActivity extends ListActivity {
 	protected static final String TAG = "ListaPromocoes";
 	
 	private List<Promocao> promocoes = null;
+	private String MsgServidor = "";
 	
 	@SuppressWarnings("unchecked")
 	public void onCreate(Bundle savedInstanceState) {
@@ -44,18 +45,21 @@ public class ListaPromocoesActivity extends ListActivity {
 	    
     	AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();	    
 	    int i   = item.getItemId();
-	    Promocao p = promocoes.get(info.position);
+	    Promocao promocao = promocoes.get(info.position);
 	    switch (i) {
 	    	case CONTEXTMENU_VOUCHER:    		
 	    		Long idUsuario = BuscarActivity.getIdUsuario();
 	    		if (idUsuario!=null){
-	    			String voucher = GerarVoucher(p.getId(), p.getProduto().getId(), idUsuario);
+	    			String voucher = GerarVoucher(promocao.getId(), idUsuario);
 	    			if (voucher!=null){
-	    				Toast.makeText(ListaPromocoesActivity.this, "Número do voucher gerado: " + voucher, Toast.LENGTH_SHORT).show();
+	    				if (voucher.equals("0")){
+	    					Toast.makeText(ListaPromocoesActivity.this, MsgServidor, Toast.LENGTH_SHORT).show();	    					
+	    				}else{
+	    					Toast.makeText(ListaPromocoesActivity.this, "Número do voucher gerado: " + voucher, Toast.LENGTH_SHORT).show();
+	    				}
 	    			}else{
-	    				Toast.makeText(ListaPromocoesActivity.this, "Não foi possível gerar o voucher.", Toast.LENGTH_SHORT).show();
-	    			}
-	    			
+	    				Toast.makeText(ListaPromocoesActivity.this, "Não foi possível gerar o voucher, por favor, tente mais tarde.", Toast.LENGTH_SHORT).show();
+	    			}	    			
 	    		}else{
 	    			Toast.makeText(ListaPromocoesActivity.this, "Para gerar o voucher é necessário efetuar o login!", Toast.LENGTH_SHORT).show();
 	    		}
@@ -65,13 +69,16 @@ public class ListaPromocoesActivity extends ListActivity {
 	    }
     }
     
-    public String GerarVoucher(Long idPromocao, Long idProduto, Long idUsuario){
+    public String GerarVoucher(Long idPromocao, Long idUsuario){
     	
     	HttpGS h = new HttpGS(this);
-    	String s = h.gerarVoucher(Long.toString(idPromocao), Long.toString(idProduto), Long.toString(idUsuario));
+    	String s = h.gerarVoucher(Long.toString(idPromocao), Long.toString(idUsuario));
     	
     	try{    		
+    		
     		JSONObject jVoucher = new JSONObject(s);
+    		this.MsgServidor = jVoucher.getString("mensagem");
+    		
     		return jVoucher.getString("voucher");
     		
     	}catch (Exception e) {

@@ -43,7 +43,7 @@ public class ListaPromocoesAdapter extends BaseAdapter {
 		TextView txtQtde  = (TextView) v.findViewById(R.id.txtQtde);
 				  
 		txtDesc.setText(p.getDescricao());
-		txtQtde.setText("Disponível: ".concat(Double.toString(p.getQde_voucher()-p.getQde_solicitada())));		
+		txtQtde.setText("Disponível: ".concat(Double.toString(p.getQdeVoucher()-p.getQdeSolicitada())));		
 
 		return v;
 		      	

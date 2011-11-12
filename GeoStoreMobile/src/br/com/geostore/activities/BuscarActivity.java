@@ -122,8 +122,8 @@ public class BuscarActivity extends Activity implements Button.OnClickListener, 
 						Promocao promo = new Promocao();
 						promo.setId(jPromo.getLong("idPromo"));
 						promo.setDescricao(jPromo.getString("descPromo"));						
-						promo.setQde_solicitada(jPromo.getLong("qtdeSolic"));
-						promo.setQde_voucher(jPromo.getLong("qtdeVouch"));
+						promo.setQdeSolicitada(jPromo.getInt("qtdeSolic"));
+						promo.setQdeVoucher(jPromo.getInt("qtdeVouch"));
 						prod = new Produto();
 						prod.setId(jPromo.getLong("idProduto"));
 						promo.setProduto(prod);
