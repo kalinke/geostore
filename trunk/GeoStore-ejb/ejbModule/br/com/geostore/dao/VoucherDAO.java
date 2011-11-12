@@ -117,5 +117,20 @@ public class VoucherDAO {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Voucher> buscarPorUsuario(Long idPromocao, Long idUsuario) throws Exception {
+		try{
+			
+			log.info("Buscando Voucher do Banco de Dados");
+			Query query = entityManager.createQuery("from Voucher as v " +
+													"where id_promocao = :promocao " +
+													"and id_usuario = :usuario");
+			query.setParameter("promocao", idPromocao);
+			query.setParameter("usuario", idUsuario);
+			return query.getResultList();
+		}catch (Exception e) {
+			throw new Exception(e);
+		}
+	}
 	 
 }
