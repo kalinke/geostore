@@ -71,13 +71,9 @@ public class ProdutoServlet extends AbstractResource {
 									jAtributos.put("idPromo", promocao.getId());
 									jAtributos.put("descPromo", promocao.getDescricao());
 									jAtributos.put("idProduto", promocao.getProduto().getId());
-									
-									Long qtdeSolic = promocao.getQde_solicitada();  
-									if (qtdeSolic==null){
-										qtdeSolic = (long) 0;
-									}
-									jAtributos.put("qtdeSolic", qtdeSolic);									
-									jAtributos.put("qtdeVouch", promocao.getQde_voucher());
+																		
+									jAtributos.put("qtdeSolic", promocao.getQdeSolicitada());									
+									jAtributos.put("qtdeVouch", promocao.getQdeVoucher());
 									
 									jObjeto = new JSONObject();
 									jObjeto.put("promocao", jAtributos);
