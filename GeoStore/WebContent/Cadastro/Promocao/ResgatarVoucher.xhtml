@@ -24,31 +24,25 @@
 					
        		    	<rich:toolBarGroup>
        		    		<rich:menuItem action="#{voucherController.buscarVoucher()}">
-        					<h:graphicImage value="../../img/salvarIcon.png" styleClass="pic"/>
+        					<h:graphicImage value="../../img/searchIcon.png" styleClass="pic"/>
 	   		 				<h:outputText value="Buscar" styleClass="txtButton" />
 	   		 				<a4j:support event="onclick" reRender="resgateVoucherForm" />
 	   					</rich:menuItem>
        		    	</rich:toolBarGroup>     		    		
 					
        		    	<rich:toolBarGroup>
-       		    		<rich:menuItem action="#{promocaoController.cancelar()}"  >
+       		    		<rich:menuItem action="#{voucherController.cancelar()}"  >
         					<h:graphicImage value="../../img/cancelarIcon.png" styleClass="pic"/>
 	   		 				<h:outputText value="Voltar" styleClass="txtButton"/>
 	   					</rich:menuItem>
        		    	</rich:toolBarGroup>
 		   		    
-
-		   		    
-		   		     			
 	   		    	<rich:toolBarGroup/>	   		    			
 				</rich:toolBar>		
 			</rich:panel>	
 
 			<rich:spacer height="10" />		
-		 	<a4j:loadScript src="../../js/jquery.maskedinput-1.1.4.pack.js" />
-		 	<rich:tabPanel switchType="client">
-		  	
-		  		<rich:tab label="Dados Cadastrais" >	
+	
 					<h:panelGrid>		
 						
 						<s:decorate template="../../layout/edit.xhtml">
@@ -71,26 +65,24 @@
 							
 							<rich:column>
 								<f:facet name="header">Documento</f:facet>
-								<h:outputLabel value="#{voucherController.voucher.usuario.cpf}" converter="#{cpfConverter}" />	
+								#{voucherController.voucher.usuario.cpf}
 							</rich:column>
 							
 							<rich:column>
 								<f:facet name="header">E-mail</f:facet>
-								<h:outputLabel value="#{voucherController.voucher.usuario.email}" converter="#{cpfConverter}" />	
+								#{voucherController.voucher.usuario.email}	
 							</rich:column>
 							
 						</rich:dataTable>
 		   		    	
 		   		    	
 		   		    	
-		   		    	<h:commandButton action="#{voucherController.buscarVoucher()}" value="Confirmar Resgate" />
+		   		    	<h:commandButton action="#{voucherController.resgatarVoucher()}" value="Confirmar Resgate" />
 		   		    </rich:panel>
 					
 															
 					</h:panelGrid>
-										
-				</rich:tab>		
-			</rich:tabPanel>
+
 		</a4j:form>
 		</rich:panel>
 		</ui:define>
