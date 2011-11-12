@@ -70,9 +70,7 @@ public class PromocaoServlet extends AbstractResource {
 							voucher.setPromocao(promocao);
 							voucher.setUsuario(usuario);
 							
-							String numVoucher = String.valueOf(idPromocao);
-							numVoucher.concat(String.valueOf(idUsuario));
-							numVoucher.concat(String.valueOf(promocao.getProduto().getId()));							
+							String numVoucher = String.valueOf(idPromocao) + String.valueOf(idUsuario ) + String.valueOf(promocao.getProduto().getId());							
 							voucher.setCodigoVoucher(numVoucher);
 						
 							StatusVoucher status = new StatusVoucher();
