@@ -235,6 +235,10 @@
    <rule if-outcome="RESGATAR">
     <redirect view-id="/Cadastro/Promocao/ControlePromocao.xhtml"/>
    </rule>
+   <rule if-outcome="CANCELAR">
+   	<end-conversation/>
+    <redirect view-id="/Cadastro/Promocao/ControlePromocao.xhtml"/>
+   </rule>
   </navigation>
  </page>
  <!-- EXCEPTION -->
