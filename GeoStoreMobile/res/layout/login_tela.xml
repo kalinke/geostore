@@ -50,8 +50,8 @@
 	</Button>
 	
 	<TextView 
-		android:lines="2"
-		
+		android:clickable="true"
+		android:lines="2"		
 		android:id="@+id/tvCadLoginClick" 
 		android:textSize="16px"
 		android:textColor="@color/azul"
@@ -63,13 +63,12 @@
 	</TextView>
 		
 	<TextView 
+		android:clickable="true"
 		android:id="@+id/tvRecSenhaLoginClick" 
-		android:textSize="16px"
-		
+		android:textSize="16px"		
 		android:layout_height="wrap_content" 
 		android:layout_width="wrap_content" 
-		android:text="Recuperar Senha"
-		
+		android:text="Recuperar Senha"		
 		android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp">
 	</TextView> 	
