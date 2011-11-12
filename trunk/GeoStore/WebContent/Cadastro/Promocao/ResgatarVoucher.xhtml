@@ -52,30 +52,21 @@
 					
 					<rich:panel rendered="#{voucherController.voucher.id != null}" >
 
-						<rich:dataTable id="tabelaVouchers"  
-						onRowMouseOver="this.style.backgroundColor='#D0D0D0'"
-	                    onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'">
+						<rich:dataTable id="tabelaVouchers" value="#{voucherController.voucher}" var="v">
 	                    
 							<f:facet name="header">Confirmação de dados para resgate</f:facet>				
 				
 							<rich:column>
 								<f:facet name="header">Nome</f:facet>
-								#{voucherController.voucher.usuario.nome}
+								#{v.usuario.nome}
 							</rich:column>
 							
 							<rich:column>
 								<f:facet name="header">Documento</f:facet>
-								#{voucherController.voucher.usuario.cpf}
-							</rich:column>
-							
-							<rich:column>
-								<f:facet name="header">E-mail</f:facet>
-								#{voucherController.voucher.usuario.email}	
+								#{v.usuario.cpf}
 							</rich:column>
 							
 						</rich:dataTable>
-		   		    	
-		   		    	
 		   		    	
 		   		    	<h:commandButton action="#{voucherController.resgatarVoucher()}" value="Confirmar Resgate" />
 		   		    </rich:panel>
