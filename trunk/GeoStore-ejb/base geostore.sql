@@ -225,18 +225,21 @@ CREATE TABLE `gs_promocao` (
   `qde_voucher` varchar(100) DEFAULT NULL,
   `id_produto` bigint(20) DEFAULT NULL,
   `id_status_promocao` bigint(20) DEFAULT NULL,
+  `descricao` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK6F0ED655E1689F16` (`id_produto`),
   KEY `FK6F0ED6559CAFF817` (`id_status_promocao`),
   CONSTRAINT `FK6F0ED6559CAFF817` FOREIGN KEY (`id_status_promocao`) REFERENCES `gs_status_promocao` (`id`),
   CONSTRAINT `FK6F0ED655E1689F16` FOREIGN KEY (`id_produto`) REFERENCES `gs_produtos` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `gs_promocao`
 --
 
 /*!40000 ALTER TABLE `gs_promocao` DISABLE KEYS */;
+INSERT INTO `gs_promocao` (`id`,`qde_solicitada`,`qde_voucher`,`id_produto`,`id_status_promocao`,`descricao`) VALUES 
+ (1,NULL,'100',1,1,'50% de desconto...');
 /*!40000 ALTER TABLE `gs_promocao` ENABLE KEYS */;
 
 
@@ -318,13 +321,16 @@ CREATE TABLE `gs_status_promocao` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `descricao` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `gs_status_promocao`
 --
 
 /*!40000 ALTER TABLE `gs_status_promocao` DISABLE KEYS */;
+INSERT INTO `gs_status_promocao` (`id`,`descricao`) VALUES 
+ (1,'Ativo'),
+ (2,'Inativo');
 /*!40000 ALTER TABLE `gs_status_promocao` ENABLE KEYS */;
 
 
@@ -412,6 +418,8 @@ CREATE TABLE `gs_usuarios` (
   `id_empresa_vinculo` bigint(20) DEFAULT NULL,
   `id_status_usuario` bigint(20) DEFAULT NULL,
   `id_tipo_usuario` bigint(20) DEFAULT NULL,
+  `cpf` varchar(11) DEFAULT NULL,
+  `flag` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FKB4F060F88A16FC07` (`id_empresa_vinculo`),
   KEY `FKB4F060F8406D6369` (`id_tipo_usuario`),
@@ -419,15 +427,16 @@ CREATE TABLE `gs_usuarios` (
   CONSTRAINT `FKB4F060F814E08A9` FOREIGN KEY (`id_status_usuario`) REFERENCES `gs_status_loja` (`id`),
   CONSTRAINT `FKB4F060F8406D6369` FOREIGN KEY (`id_tipo_usuario`) REFERENCES `gs_tipo_usuario` (`id`),
   CONSTRAINT `FKB4F060F88A16FC07` FOREIGN KEY (`id_empresa_vinculo`) REFERENCES `gs_empresa` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `gs_usuarios`
 --
 
 /*!40000 ALTER TABLE `gs_usuarios` DISABLE KEYS */;
-INSERT INTO `gs_usuarios` (`id`,`email`,`nome`,`senha`,`telefone`,`id_empresa_vinculo`,`id_status_usuario`,`id_tipo_usuario`) VALUES 
- (1,'admin',NULL,'a',NULL,NULL,1,1);
+INSERT INTO `gs_usuarios` (`id`,`email`,`nome`,`senha`,`telefone`,`id_empresa_vinculo`,`id_status_usuario`,`id_tipo_usuario`,`cpf`,`flag`) VALUES 
+ (1,'admin',NULL,'a',NULL,NULL,1,1,NULL,0),
+ (6,'jonascarig@gmail.com','Jonas Carignano','aml7080',NULL,NULL,NULL,3,'04696097960',0);
 /*!40000 ALTER TABLE `gs_usuarios` ENABLE KEYS */;
 
 
@@ -447,13 +456,15 @@ CREATE TABLE `gs_voucher` (
   KEY `FK9702965B4CA2F420` (`id_promocao`),
   CONSTRAINT `FK9702965B4CA2F420` FOREIGN KEY (`id_promocao`) REFERENCES `gs_promocao` (`id`),
   CONSTRAINT `FK9702965BF676E780` FOREIGN KEY (`id_usuario`) REFERENCES `gs_usuarios` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `gs_voucher`
 --
 
 /*!40000 ALTER TABLE `gs_voucher` DISABLE KEYS */;
+INSERT INTO `gs_voucher` (`id`,`codigo_voucher`,`num_gerado`,`id_promocao`,`id_usuario`) VALUES 
+ (3,'116',0,1,6);
 /*!40000 ALTER TABLE `gs_voucher` ENABLE KEYS */;
 
 
