@@ -11,6 +11,7 @@ import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Transactional;
 import org.jboss.seam.log.Log;
 
+import br.com.geostore.entity.Usuario;
 import br.com.geostore.entity.Voucher;
 
 @Name("voucherDAO")
@@ -74,6 +75,30 @@ public class VoucherDAO {
 	public Voucher buscarPorId(Long id) throws Exception {
 		try{
 			return entityManager.find(Voucher.class, id);
+		}catch (Exception e) {
+			throw new Exception(e);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Voucher> buscarPorCodigo(Usuario usuarioLogado, String codigoVoucher) throws Exception {
+		try{
+			boolean usuarioAdministrador = (usuarioLogado.getTipoUsuario().getId()==1?true:false);
+			log.info("Buscando Lista de Voucher para Resgate do Banco de Dados");
+			
+			String sQuery = "from Voucher as v " +
+				" where v.codigoVoucher = :codigoVoucher ";
+			if(!usuarioAdministrador) sQuery += " and v.promocao.produto.loja.empresaSuperior.id = :idEmpresaUsuarioLogado ";	
+			
+			sQuery += "order by v.id";
+				
+			Query query = entityManager.createQuery(sQuery);
+			
+			query.setParameter("codigoVoucher", codigoVoucher);
+			
+			if(!usuarioAdministrador) query.setParameter("idEmpresaUsuarioLogado", usuarioLogado.getEmpresaVinculo().getId());
+			
+			return query.getResultList();
 		}catch (Exception e) {
 			throw new Exception(e);
 		}
