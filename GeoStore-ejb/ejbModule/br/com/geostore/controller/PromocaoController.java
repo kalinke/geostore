@@ -85,7 +85,8 @@ public class PromocaoController {
 	}	
 	
 	public String remover() throws Exception{		
-	
+		if(promocao.getId()==null)
+			facesMessages.add("Não existem dados para excluir, voltando a tela de controle.");
 		promocaoDAO.excluir(promocao);
 		return "EXCLUIR";
 	}

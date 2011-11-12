@@ -149,7 +149,8 @@ public class UsuarioController {
 
 
 	public String remover() throws Exception{		
-		
+		if(usuario.getId()==null)
+			facesMessages.add("Não existem dados para excluir, voltando a tela de controle.");
 		usuarioDAO.excluir(usuario);
 		return "EXCLUIR";
 	}

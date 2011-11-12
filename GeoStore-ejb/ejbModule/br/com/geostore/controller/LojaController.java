@@ -166,7 +166,8 @@ public class LojaController {
 }      	
 
 	public String remover() throws Exception{		
-		
+		if(loja.getId()==null)
+			facesMessages.add("Não existem dados para excluir, voltando a tela de controle.");
 		lojaDAO.excluir(loja);
 		return "EXCLUIR";
 	}
