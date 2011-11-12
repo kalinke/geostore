@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class NovoUsuario extends Activity {
+public class NovoUsuarioActivity extends Activity {
 	
 	protected static final int INCLUIU    = 0; 
 	protected static final int CPFEXIST   = 1; 
@@ -46,12 +46,12 @@ public class NovoUsuario extends Activity {
 				
 				if (validaDados()){
 					if (novoUsuario()){
-						Toast.makeText(NovoUsuario.this, msg, Toast.LENGTH_SHORT).show();
+						Toast.makeText(NovoUsuarioActivity.this, msg, Toast.LENGTH_SHORT).show();
 					}else{
-						Toast.makeText(NovoUsuario.this, "Ocorreu um erro, por favor, tente mais tarde!", Toast.LENGTH_SHORT).show();
+						Toast.makeText(NovoUsuarioActivity.this, "Ocorreu um erro, por favor, tente mais tarde!", Toast.LENGTH_SHORT).show();
 					}
 				}else{
-					Toast.makeText(NovoUsuario.this, "Dados inválidos para criação do usuário...", Toast.LENGTH_SHORT).show();
+					Toast.makeText(NovoUsuarioActivity.this, "Dados inválidos para criação do usuário...", Toast.LENGTH_SHORT).show();
 				}
 			}
 		});

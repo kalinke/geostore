@@ -13,9 +13,7 @@ import br.com.geostore.entity.Promocao;
 import br.com.geostore.gps.GpsGS;
 import br.com.geostore.http.HttpGS;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.location.LocationManager;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -31,7 +29,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class GeoStoreActivity extends Activity implements Button.OnClickListener, Spinner.OnItemSelectedListener{    	
+public class BuscarActivity extends Activity implements Button.OnClickListener, Spinner.OnItemSelectedListener{    	
 		
 	protected static final int RAIO_ILIMITADO = 0;
 	protected static final int RAIO_100       = 1; 
@@ -82,9 +80,9 @@ public class GeoStoreActivity extends Activity implements Button.OnClickListener
 					idUsuario = null;
 					TextView textViewToChange = (TextView) findViewById(R.id.tvLoginMainBuscaclick);
 			    	textViewToChange.setText("Login");
-					Toast.makeText(GeoStoreActivity.this, "Logoff efetuado com sucesso!", Toast.LENGTH_SHORT).show();
+					Toast.makeText(BuscarActivity.this, "Logoff efetuado com sucesso!", Toast.LENGTH_SHORT).show();
 				}else{
-					Intent i = new Intent(GeoStoreActivity.this, Login.class);
+					Intent i = new Intent(BuscarActivity.this, LoginActivity.class);
 					startActivity(i);
 				}
 			}
@@ -155,7 +153,7 @@ public class GeoStoreActivity extends Activity implements Button.OnClickListener
 				}
 				
 				if (pList.size() > 0){
-					Intent i = new Intent(GeoStoreActivity.this, ListaProdutosActivity.class);
+					Intent i = new Intent(BuscarActivity.this, ListaProdutosActivity.class);
 					i.putExtra("produtos", pList);										
 					startActivity(i);
 				}else{
@@ -221,7 +219,7 @@ public class GeoStoreActivity extends Activity implements Button.OnClickListener
 	}
 
 	public static void setIdUsuario(Long idUsuario) {
-		GeoStoreActivity.idUsuario = idUsuario;
+		BuscarActivity.idUsuario = idUsuario;
 	}
 
 	public static Long getIdUsuario() {

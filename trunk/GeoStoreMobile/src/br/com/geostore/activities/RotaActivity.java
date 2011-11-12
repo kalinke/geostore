@@ -14,6 +14,7 @@ import org.xml.sax.SAXException;
 
 import br.com.geostore.entity.Produto;
 import br.com.geostore.gps.GpsGS;
+import br.com.geostore.map.CamadaGS;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
@@ -24,7 +25,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-public class Rota extends MapActivity {
+public class RotaActivity extends MapActivity {
 	
 	public void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState); 
@@ -107,7 +108,7 @@ public class Rota extends MapActivity {
 				String [] pairs = path.split(" "); 
 				String[] lngLat = pairs[0].split(","); 
 				GeoPoint startGP = new GeoPoint((int)(Double.parseDouble(lngLat[1])*1E6),(int)(Double.parseDouble(lngLat[0])*1E6)); 
-				mapa.getOverlays().add(new Camada(startGP,startGP,1)); 
+				mapa.getOverlays().add(new CamadaGS(startGP,startGP,1)); 
 				GeoPoint gp1; 
 				GeoPoint gp2 = startGP; 
 				for(int i=1;i<pairs.length;i++)
@@ -115,10 +116,10 @@ public class Rota extends MapActivity {
 					lngLat = pairs[i].split(","); 
 					gp1 = gp2; 
 					gp2 = new GeoPoint((int)(Double.parseDouble(lngLat[1])*1E6),(int)(Double.parseDouble(lngLat[0])*1E6)); 
-					mapa.getOverlays().add(new Camada(gp1,gp2,2,color)); 
+					mapa.getOverlays().add(new CamadaGS(gp1,gp2,2,color)); 
 					Log.d("xxx","pair:" + pairs[i]); 
 				} 
-				mapa.getOverlays().add(new Camada(dest,dest, 3));  
+				mapa.getOverlays().add(new CamadaGS(dest,dest, 3));  
 			} 
 		} 
 		catch (MalformedURLException e) 

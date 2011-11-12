@@ -95,5 +95,5 @@ public class GpsGS{
 	
 	public GeoPoint DoubleToGeoPoint(double lat, double log){			
 		return new GeoPoint((int) (lat * 1E6), (int) (log * 1E6));
-	}
+	}	
 }

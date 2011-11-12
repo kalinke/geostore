@@ -3,19 +3,19 @@ package br.com.geostore.activities;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.geostore.adapters.ListaProdutosAdapter;
-import br.com.geostore.entity.Produto;
-
 import android.app.ListActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
-import android.view.MenuItem;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
+import br.com.geostore.adapters.ListaProdutosAdapter;
+import br.com.geostore.entity.Produto;
+import br.com.geostore.entity.Promocao;
 
 public class ListaProdutosActivity extends ListActivity {
 
@@ -48,7 +48,7 @@ public class ListaProdutosActivity extends ListActivity {
 	    Intent in;
 	    switch (i) {
 	    	case CONTEXTMENU_ROTA:    		
-	    		in = new Intent(ListaProdutosActivity.this, Rota.class);
+	    		in = new Intent(ListaProdutosActivity.this, RotaActivity.class);
 				in.putExtra("produto", p);										
 				startActivity(in);	    		
 	    		return true;
@@ -59,8 +59,8 @@ public class ListaProdutosActivity extends ListActivity {
 	    		return true;	    	
 	    	case CONTEXTMENU_PROMO:	    		    			    			    		    	
 	    		if (p.getPromocoes().size()>0){
-		    		in = new Intent(ListaProdutosActivity.this, ListaPromocoes.class);
-					in.putExtra("promocoes", (ArrayList) p.getPromocoes());										
+		    		in = new Intent(ListaProdutosActivity.this, ListaPromocoesActivity.class);
+					in.putExtra("promocoes", (ArrayList<Promocao>) p.getPromocoes());										
 					startActivity(in);
 	    		}else{
 	    			Toast.makeText(ListaProdutosActivity.this, "Não existe nenhuma promoção cadastrada para este produto...", Toast.LENGTH_SHORT).show();
