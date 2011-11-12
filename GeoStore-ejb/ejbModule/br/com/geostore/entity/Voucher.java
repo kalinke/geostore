@@ -35,6 +35,10 @@ public class Voucher implements Serializable{
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
+	@ManyToOne
+	@JoinColumn(name = "id_status_voucher")
+	private StatusVoucher statusVoucher;
+	
 	public Long getId() {
 		return id;
 	}
@@ -66,6 +70,14 @@ public class Voucher implements Serializable{
 	public void setCodigoVoucher(String codigoVoucher) {
 		this.codigoVoucher = codigoVoucher;
 	}
+	
+	public StatusVoucher getStatusVoucher() {
+		return statusVoucher;
+	}
+	
+	public void setStatusVoucher(StatusVoucher statusVoucher) {
+		this.statusVoucher = statusVoucher;
+	}
 
 	@Override
 	public int hashCode() {
@@ -76,6 +88,8 @@ public class Voucher implements Serializable{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result
 				+ ((promocao == null) ? 0 : promocao.hashCode());
+		result = prime * result
+				+ ((statusVoucher == null) ? 0 : statusVoucher.hashCode());
 		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
@@ -104,6 +118,11 @@ public class Voucher implements Serializable{
 				return false;
 		} else if (!promocao.equals(other.promocao))
 			return false;
+		if (statusVoucher == null) {
+			if (other.statusVoucher != null)
+				return false;
+		} else if (!statusVoucher.equals(other.statusVoucher))
+			return false;
 		if (usuario == null) {
 			if (other.usuario != null)
 				return false;
@@ -111,7 +130,6 @@ public class Voucher implements Serializable{
 			return false;
 		return true;
 	}
-	
 	
 	
 }
