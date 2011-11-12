@@ -87,7 +87,8 @@ public class VoucherDAO {
 			log.info("Buscando Lista de Voucher para Resgate do Banco de Dados");
 			
 			String sQuery = "from Voucher as v " +
-				" where v.codigoVoucher = :codigoVoucher ";
+				" where v.codigoVoucher = :codigoVoucher " +
+				" and v.statusVoucher.id = 1";
 			if(!usuarioAdministrador) sQuery += " and v.promocao.produto.loja.empresaSuperior.id = :idEmpresaUsuarioLogado ";	
 			
 			sQuery += "order by v.id";
