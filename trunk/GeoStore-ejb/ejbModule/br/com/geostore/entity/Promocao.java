@@ -32,7 +32,7 @@ public class Promocao implements Serializable{
 	private int qdeVoucher;
 	
 	@Column(name="qde_solicitada")
-	private int qdeSolicitada = 0;
+	private int qdeSolicitada;
 	
 	@Column(name="descricao")
 	private String descricao;
