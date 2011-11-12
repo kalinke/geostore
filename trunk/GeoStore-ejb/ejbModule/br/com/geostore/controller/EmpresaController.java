@@ -159,6 +159,9 @@ public class EmpresaController {
 
 	
 	public String remover() throws Exception{		
+		if(empresa.getId()==null)
+			facesMessages.add("Não existem dados para excluir, voltando a tela de controle.");
+		
 		empresaDAO.excluir(empresa);
 		return "EXCLUIR";
 	}
