@@ -31,7 +31,7 @@ public class Promocao implements Serializable{
 	@Column(name="qde_voucher")
 	private int qdeVoucher;
 	
-	@Column(name="qde_solicitada", columnDefinition = "bigint(20) default 0")
+	@Column(name="qde_solicitada", columnDefinition = "default 0")
 	private int qdeSolicitada;
 	
 	@Column(name="descricao")
