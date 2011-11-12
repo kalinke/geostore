@@ -62,7 +62,9 @@ public class VoucherController {
 			voucher.setStatusVoucher(statusVoucher);			
 			voucherDAO.alterar(voucher);
 			
+			voucher = new Voucher();
 			facesMessages.add("Voucher resgatado com sucesso!");
+			
 						
 			
 				
