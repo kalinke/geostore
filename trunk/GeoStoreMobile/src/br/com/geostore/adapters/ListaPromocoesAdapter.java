@@ -34,6 +34,7 @@ public class ListaPromocoesAdapter extends BaseAdapter {
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+		
 		Promocao p = promocoes.get(position);
 		
 		View v = LayoutInflater.from(ctx).inflate(R.layout.lista_promocoes, null);		
@@ -41,8 +42,8 @@ public class ListaPromocoesAdapter extends BaseAdapter {
 		TextView txtDesc  = (TextView) v.findViewById(R.id.txtDesc);
 		TextView txtQtde  = (TextView) v.findViewById(R.id.txtQtde);
 				  
-		txtDesc.setText("Nome: ".concat(p.getDescricao()));
-		txtQtde.setText("Descrição: ".concat(Double.toString(p.getQde_voucher()-p.getQde_solicitada())));		
+		txtDesc.setText(p.getDescricao());
+		txtQtde.setText("Disponível: ".concat(Double.toString(p.getQde_voucher()-p.getQde_solicitada())));		
 
 		return v;
 		      	

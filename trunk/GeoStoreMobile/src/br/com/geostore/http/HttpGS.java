@@ -27,13 +27,13 @@ import android.widget.Toast;
 
 public class HttpGS {
 	//LOCAL
-	private static final String URL_SERVER = "http://10.0.2.2:8080/GeoStore/seam/resource/";
+	//private static final String URL_SERVER = "http://10.0.2.2:8080/GeoStore/seam/resource/";
 	
 	//PRODIET
 	//private static final String URL_SERVER = "http://172.16.1.104:8080/GeoStore/seam/resource/";
 
 	//ALISSON
-	//private static final String URL_SERVER = "http://192.168.1.14:8080/GeoStore/seam/resource/";	
+	private static final String URL_SERVER = "http://192.168.1.16:8080/GeoStore/seam/resource/";	
 	protected static final String TAG = "HttpGS";
 	private DefaultHttpClient httpClient = null;
 	private Context ctx = null;
@@ -82,7 +82,7 @@ public class HttpGS {
 		params.add(new BasicNameValuePair("idPromocao", idPromocao));
 		params.add(new BasicNameValuePair("idProduto",  idProduto));
 		params.add(new BasicNameValuePair("idUsuario",  idUsuario));
-		return doPost("PromocaoServlet",params);
+		return doPost("promocaoServlet",params);
 	}
 	
 	public String doPost(String servlet, List<NameValuePair> params){		

@@ -32,10 +32,11 @@ public class Login extends Activity{
 				if (usuario != null){
 					Toast.makeText(Login.this, "Login efetuado com sucesso!", Toast.LENGTH_SHORT).show();
 					
-					Bundle params = new Bundle();
-					params.putBoolean("logado", true);					
+					/*Bundle params = new Bundle();
+					params.putBoolean("logado", true);*/
+					GeoStoreActivity.setIdUsuario(usuario.getId());
 					Intent it = new Intent(Login.this, GeoStoreActivity.class);
-					it.putExtras(params);
+					//it.putExtras(params);
 					startActivity(it);
 					
 				}else{
