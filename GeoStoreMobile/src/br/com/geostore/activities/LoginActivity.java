@@ -60,7 +60,6 @@ public class LoginActivity extends Activity{
 				
 			}
 		});
-
 	}
 	
 	public Usuario efetuarLogin(String email, String senha){
