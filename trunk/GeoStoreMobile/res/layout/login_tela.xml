@@ -7,13 +7,13 @@
 	android:orientation="vertical">
 	
 	 <ImageView 
-        	android:layout_height="wrap_content" 
-        	android:id="@+id/img_logo" 
-        	android:layout_width="wrap_content" 
-        	android:src="@drawable/gs_logomaior_70" 
-        	android:layout_gravity="center_horizontal"
-        	android:layout_marginTop="30dp">
-        </ImageView>
+        android:layout_height="wrap_content" 
+       	android:id="@+id/img_logo" 
+        android:layout_width="wrap_content" 
+        android:src="@drawable/gs_logomaior_70" 
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp">
+	</ImageView>
      	 
 	 <EditText 
 	 	android:textSize="18sp" 
@@ -23,8 +23,7 @@
 	 	android:layout_width="276dp" 
 	 	android:id="@+id/etEmailLog"
 	 	android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
-        android:text="jonascarig@gmail.com">
+        android:layout_marginTop="15dp">
 	     <requestFocus></requestFocus>
 	 </EditText>
 	 	
@@ -36,8 +35,7 @@
 		android:layout_height="wrap_content"
 		android:layout_width="276dp" 			
 		android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
-        android:text="aml7080">
+        android:layout_marginTop="15dp">
 	</EditText>
 		
 	<Button 
@@ -52,23 +50,28 @@
 	</Button>
 	
 	<TextView 
-		android:id="@+id/lbl_cadastrar" 
+		android:lines="2"
+		
+		android:id="@+id/tvCadLoginClick" 
+		android:textSize="16px"
+		android:textColor="@color/azul"
 		android:layout_height="wrap_content" 
 		android:layout_width="wrap_content" 
-		android:text="Não é cadastrado?"
-		android:textColor="@color/preto"
+		android:text="Não é cadastrado? Clique Aqui"		
+		android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp">
+	</TextView>
+		
+	<TextView 
+		android:id="@+id/tvRecSenhaLoginClick" 
+		android:textSize="16px"
+		
+		android:layout_height="wrap_content" 
+		android:layout_width="wrap_content" 
+		android:text="Recuperar Senha"
+		
 		android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp">
-	</TextView>
-	
-	<Button 
-		android:id="@+id/btCadastrarLog" 
-		android:layout_height="wrap_content" 
-		android:text="Cadastrar" 
-		android:textStyle="bold" 		
-		android:layout_width="114dp"
-		android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp">
-	</Button>
+	</TextView> 	
 </LinearLayout>
 
