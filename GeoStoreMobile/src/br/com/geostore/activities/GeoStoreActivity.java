@@ -38,10 +38,11 @@ public class GeoStoreActivity extends Activity implements Button.OnClickListener
     protected static final int RAIO_500       = 2;
     protected static final int RAIO_1000      = 3;
     protected static final int RAIO_10000     = 4;
-    protected static final String TAG = "HttpGS";
+    protected static final String TAG = "GeoStoreActivity";
     	
     private int raio;
-    private boolean logado;
+    //private boolean logado;
+    private static Long idUsuario = null; 
     
     @Override
 	@SuppressWarnings("rawtypes")
@@ -49,13 +50,13 @@ public class GeoStoreActivity extends Activity implements Button.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_busca_tela);        
         
-        Intent it = getIntent();
+        /*Intent it = getIntent();
         if (it != null){
         	Bundle params =  it.getExtras();
         	if (params != null){
         		logado = params.getBoolean("logado");
         	}
-        }
+        }*/
         
         Button btnBuscar = (Button) findViewById(R.id.btBuscarMainBusca);        
         btnBuscar.setOnClickListener(this);               
@@ -65,17 +66,27 @@ public class GeoStoreActivity extends Activity implements Button.OnClickListener
 	    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	    sp.setAdapter(adapter);
 	    sp.setOnItemSelectedListener(this);
-	    
-	    TextView txtLogin = (TextView) findViewById(R.id.tvLoginMainBuscaclick);
-	    if(logado){
-	    	TextView textViewToChange = (TextView) findViewById(R.id.tvLoginMainBuscaclick);
-	    	textViewToChange.setText("Logout");
+	    	    
+	    String txt = null;
+	    if(idUsuario!=null){
+	    	txt = "Logout";	    	
+	    }else{	    	
+	    	txt = "Login";	    	
 	    }
-	    
+	    TextView txtLogin = (TextView) findViewById(R.id.tvLoginMainBuscaclick);
+	    TextView textViewToChange = (TextView) findViewById(R.id.tvLoginMainBuscaclick);
+    	textViewToChange.setText(txt);    	
         txtLogin.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				Intent i = new Intent(GeoStoreActivity.this, Login.class);
-	            startActivity(i);
+				if (idUsuario!=null){
+					idUsuario = null;
+					TextView textViewToChange = (TextView) findViewById(R.id.tvLoginMainBuscaclick);
+			    	textViewToChange.setText("Login");
+					Toast.makeText(GeoStoreActivity.this, "Logoff efetuado com sucesso!", Toast.LENGTH_SHORT).show();
+				}else{
+					Intent i = new Intent(GeoStoreActivity.this, Login.class);
+					startActivity(i);
+				}
 			}
 		});	   
 	}
@@ -87,7 +98,6 @@ public class GeoStoreActivity extends Activity implements Button.OnClickListener
 		String log  = "0";
 		String lat  = "0";
 		
-		LocationManager lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 		GpsGS g = new GpsGS(this);
 		lat = Double.toString(g.getLastLatitude());
 		log = Double.toString(g.getLastLongitude());		
@@ -208,5 +218,13 @@ public class GeoStoreActivity extends Activity implements Button.OnClickListener
 	public void onNothingSelected(AdapterView<?> arg0) {
 		
 		
+	}
+
+	public static void setIdUsuario(Long idUsuario) {
+		GeoStoreActivity.idUsuario = idUsuario;
+	}
+
+	public static Long getIdUsuario() {
+		return idUsuario;
 	}
 }
