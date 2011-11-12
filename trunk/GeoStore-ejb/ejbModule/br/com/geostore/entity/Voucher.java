@@ -25,10 +25,7 @@ public class Voucher implements Serializable{
 	private Long id;
 	
 	@Column(name="codigo_voucher", length=100)
-	private String codigo_voucher;
-	
-	@Column(name="num_gerado", length=100)
-	private int num_gerado; //NUMERO SOLICITADO DO VOUCHER
+	private String codigoVoucher;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_promocao")
@@ -44,22 +41,6 @@ public class Voucher implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getCodigo_voucher() {
-		return codigo_voucher;
-	}
-
-	public void setCodigo_voucher(String codigo_voucher) {
-		this.codigo_voucher = codigo_voucher;
-	}
-
-	public int getNum_gerado() {
-		return num_gerado;
-	}
-
-	public void setNum_gerado(int num_gerado) {
-		this.num_gerado = num_gerado;
 	}
 
 	public Promocao getPromocao() {
@@ -78,14 +59,21 @@ public class Voucher implements Serializable{
 		this.usuario = usuario;
 	}
 
+	public String getCodigoVoucher() {
+		return codigoVoucher;
+	}
+
+	public void setCodigoVoucher(String codigoVoucher) {
+		this.codigoVoucher = codigoVoucher;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((codigo_voucher == null) ? 0 : codigo_voucher.hashCode());
+				+ ((codigoVoucher == null) ? 0 : codigoVoucher.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + num_gerado;
 		result = prime * result
 				+ ((promocao == null) ? 0 : promocao.hashCode());
 		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
@@ -101,17 +89,15 @@ public class Voucher implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Voucher other = (Voucher) obj;
-		if (codigo_voucher == null) {
-			if (other.codigo_voucher != null)
+		if (codigoVoucher == null) {
+			if (other.codigoVoucher != null)
 				return false;
-		} else if (!codigo_voucher.equals(other.codigo_voucher))
+		} else if (!codigoVoucher.equals(other.codigoVoucher))
 			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (num_gerado != other.num_gerado)
 			return false;
 		if (promocao == null) {
 			if (other.promocao != null)
@@ -125,5 +111,7 @@ public class Voucher implements Serializable{
 			return false;
 		return true;
 	}
-
+	
+	
+	
 }
