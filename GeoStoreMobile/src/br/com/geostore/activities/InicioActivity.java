@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
 
-public class TelaInicio extends Activity implements Runnable{
+public class InicioActivity extends Activity implements Runnable{
 	
 		private final int DELAY = 2000;
 
@@ -20,7 +20,7 @@ public class TelaInicio extends Activity implements Runnable{
 		}
 
 		public void run() {
-			startActivity(new Intent(TelaInicio.this, GeoStoreActivity.class));
+			startActivity(new Intent(InicioActivity.this, BuscarActivity.class));
 			finish();
 		}
 }

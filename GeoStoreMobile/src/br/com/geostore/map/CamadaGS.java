@@ -1,4 +1,4 @@
-package br.com.geostore.activities;
+package br.com.geostore.map;
 
 import android.graphics.Bitmap; 
 import android.graphics.Canvas; 
@@ -10,8 +10,8 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView; 
 import com.google.android.maps.Overlay; 
 import com.google.android.maps.Projection;
-
-public class Camada extends Overlay{
+@SuppressWarnings("unused")
+public class CamadaGS extends Overlay{
 	
 	private GeoPoint gp1; 
 	private GeoPoint gp2; 
@@ -21,7 +21,7 @@ public class Camada extends Overlay{
 	private String text=""; 
 	private Bitmap img = null; 
 
-	public Camada(GeoPoint gp1,GeoPoint gp2,int mode) 
+	public CamadaGS(GeoPoint gp1,GeoPoint gp2,int mode) 
 	// GeoPoint is a int. (6E) 
 	{ 
 		this.gp1 = gp1; 
@@ -31,7 +31,7 @@ public class Camada extends Overlay{
 		// no defaultColor 
 	} 
 
-	public Camada(GeoPoint gp1,GeoPoint gp2,int mode, int defaultColor) 
+	public CamadaGS(GeoPoint gp1,GeoPoint gp2,int mode, int defaultColor) 
 	{ 
 		this.gp1 = gp1; 
 		this.gp2 = gp2; 

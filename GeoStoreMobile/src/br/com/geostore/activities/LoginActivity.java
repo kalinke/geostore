@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class Login extends Activity{
+public class LoginActivity extends Activity{
 	
 	public void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState); 
@@ -30,17 +30,17 @@ public class Login extends Activity{
 				Usuario usuario = efetuarLogin(email.getText().toString(),senha.getText().toString());
 				
 				if (usuario != null){
-					Toast.makeText(Login.this, "Login efetuado com sucesso!", Toast.LENGTH_SHORT).show();
+					Toast.makeText(LoginActivity.this, "Login efetuado com sucesso!", Toast.LENGTH_SHORT).show();
 					
 					/*Bundle params = new Bundle();
 					params.putBoolean("logado", true);*/
-					GeoStoreActivity.setIdUsuario(usuario.getId());
-					Intent it = new Intent(Login.this, GeoStoreActivity.class);
+					BuscarActivity.setIdUsuario(usuario.getId());
+					Intent it = new Intent(LoginActivity.this, BuscarActivity.class);
 					//it.putExtras(params);
 					startActivity(it);
 					
 				}else{
-					Toast.makeText(Login.this, "Usuário ou senha inválidos", Toast.LENGTH_SHORT).show();
+					Toast.makeText(LoginActivity.this, "Usuário ou senha inválidos", Toast.LENGTH_SHORT).show();
 				}
 			}
 		}); 
@@ -48,7 +48,7 @@ public class Login extends Activity{
 		btCadastro.setOnClickListener(new View.OnClickListener() {			
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(Login.this, NovoUsuario.class);
+				Intent i = new Intent(LoginActivity.this, NovoUsuarioActivity.class);
                 startActivity(i);
 			}
 		});

@@ -1,10 +1,9 @@
-package br.com.geostore.activities;
+package br.com.geostore.util;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 
-public class Alertas {	
+public class AlertasGS {	
 		
 	
 	public void mostraMsg(String titulo, String texto, Context context){			

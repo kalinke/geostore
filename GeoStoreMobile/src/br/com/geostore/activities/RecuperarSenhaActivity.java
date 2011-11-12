@@ -1,23 +1,14 @@
 package br.com.geostore.activities;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-
-import org.json.JSONObject;
-import org.json.JSONTokener;
-
-import br.com.geostore.http.HttpGS;
-
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import br.com.geostore.activities.Alertas;
+import br.com.geostore.http.HttpGS;
+import br.com.geostore.util.AlertasGS;
 
-public class SenhaRecupera extends Activity{
+public class RecuperarSenhaActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState); 
 		setContentView(R.layout.senha_recup);
@@ -31,17 +22,17 @@ public class SenhaRecupera extends Activity{
 			public void onClick(View v) {
 				String email = etEmail.getText().toString();
 				
-				HttpGS hgs = new HttpGS(SenhaRecupera.this);
+				HttpGS hgs = new HttpGS(RecuperarSenhaActivity.this);
 				
 				String response = hgs.recuperaSenha(email);
 				
 								
-				Alertas msg = new Alertas();
+				AlertasGS msg = new AlertasGS();
 				
 				if(response.equals("ENVIADO")){					
-					msg.mostraMsg("Recupera senha", "Senha enviada com sucesso.", SenhaRecupera.this);
+					msg.mostraMsg("Recupera senha", "Senha enviada com sucesso.", RecuperarSenhaActivity.this);
 				}else{
-					msg.mostraMsg("Recupera senha", "Erro, verifique o e-mail e tente novamente.", SenhaRecupera.this);
+					msg.mostraMsg("Recupera senha", "Erro, verifique o e-mail e tente novamente.", RecuperarSenhaActivity.this);
 				}
 					
 			}		

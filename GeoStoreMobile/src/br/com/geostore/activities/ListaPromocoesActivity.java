@@ -19,7 +19,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
-public class ListaPromocoes extends ListActivity {
+public class ListaPromocoesActivity extends ListActivity {
 
 	protected static final int CONTEXTMENU_VOUCHER    = 1;
 	protected static final String TAG = "ListaPromocoes";
@@ -47,17 +47,17 @@ public class ListaPromocoes extends ListActivity {
 	    Promocao p = promocoes.get(info.position);
 	    switch (i) {
 	    	case CONTEXTMENU_VOUCHER:    		
-	    		Long idUsuario = GeoStoreActivity.getIdUsuario();
+	    		Long idUsuario = BuscarActivity.getIdUsuario();
 	    		if (idUsuario!=null){
 	    			String voucher = GerarVoucher(p.getId(), p.getProduto().getId(), idUsuario);
 	    			if (voucher!=null){
-	    				Toast.makeText(ListaPromocoes.this, "Número do voucher gerado: " + voucher, Toast.LENGTH_SHORT).show();
+	    				Toast.makeText(ListaPromocoesActivity.this, "Número do voucher gerado: " + voucher, Toast.LENGTH_SHORT).show();
 	    			}else{
-	    				Toast.makeText(ListaPromocoes.this, "Não foi possível gerar o voucher.", Toast.LENGTH_SHORT).show();
+	    				Toast.makeText(ListaPromocoesActivity.this, "Não foi possível gerar o voucher.", Toast.LENGTH_SHORT).show();
 	    			}
 	    			
 	    		}else{
-	    			Toast.makeText(ListaPromocoes.this, "Para gerar o voucher é necessário efetuar o login!", Toast.LENGTH_SHORT).show();
+	    			Toast.makeText(ListaPromocoesActivity.this, "Para gerar o voucher é necessário efetuar o login!", Toast.LENGTH_SHORT).show();
 	    		}
 	    		return true;    	
 	    	default:
