@@ -8,21 +8,16 @@
   <navigation from-action="#{identity.logout()}">
    <redirect view-id="/login.xhtml"/>
   </navigation>
-  
   <navigation>
    <rule if-outcome="home">
     <redirect view-id="/home.xhtml"/>
    </rule>
-   
    <rule if-outcome="reenvio.senha">
     <redirect view-id="/Email/ReenvioSenha.xhtml"/>
    </rule>
-   
    <rule if-outcome="fale.conosco">
     <redirect view-id="/Email/FaleConosco.xhtml"/>
    </rule>
-   
-  
    <rule if-outcome="cadastro.empresa">
     <redirect view-id="/Cadastro/Empresa/CadastroEmpresa.xhtml"/>
    </rule>
@@ -53,13 +48,16 @@
    <rule if-outcome="cadastro.promocao">
     <redirect view-id="/Cadastro/Promocao/CadastroPromocao.xhtml"/>
    </rule>
-    <rule if-outcome="controle.promocao">
+   <rule if-outcome="controle.promocao">
     <redirect view-id="/Cadastro/Promocao/ControlePromocao.xhtml"/>
    </rule>
+   <rule if-outcome="resgatar.voucher">
+    <redirect view-id="/Cadastro/Promocao/ResgatarVoucher.xhtml"/>
+   </rule>
+   
   </navigation>
  </page>
- 
-  <!-- FLUXO REENVIO SENHA -->
+ <!-- FLUXO REENVIO SENHA -->
  <page view-id="/Email/ReenvioSenha.xhtml">
   <navigation>
    <rule if-outcome="ENVIADO">
@@ -67,7 +65,6 @@
    </rule>
   </navigation>
  </page>
- 
  <!-- FLUXO CONTROLE EMPRESAS -->
  <page login-required="true" view-id="/Cadastro/Empresa/ControleEmpresa.xhtml">
   <restrict>#{s:hasRole('admin')}</restrict>
@@ -203,16 +200,16 @@
   </navigation>
  </page>
  <!-- FLUXO CONTROLE PROMOCAO -->
-	<page login-required="true" view-id="/Cadastro/Promocao/ControlePromocao.xhtml">
-		<navigation>
-			<rule if-outcome="ADICIONAR">
-				<redirect view-id="/Cadastro/Promocao/CadastroPromocao.xhtml" />
-			</rule>
-			<rule if-outcome="EDITAR">
-				<redirect view-id="/Cadastro/Promocao/CadastroPromocao.xhtml" />
-			</rule>
-		</navigation>
-	</page> 
+ <page login-required="true" view-id="/Cadastro/Promocao/ControlePromocao.xhtml">
+  <navigation>
+   <rule if-outcome="ADICIONAR">
+    <redirect view-id="/Cadastro/Promocao/CadastroPromocao.xhtml"/>
+   </rule>
+   <rule if-outcome="EDITAR">
+    <redirect view-id="/Cadastro/Promocao/CadastroPromocao.xhtml"/>
+   </rule>
+  </navigation>
+ </page>
  <!--FLUXO CADASTRO PROMOCAO -->
  <page login-required="true" view-id="/Cadastro/Promocao/CadastroPromocao.xhtml">
   <begin-conversation flush-mode="manual" join="true"/>
@@ -227,6 +224,15 @@
    </rule>
    <rule if-outcome="EXCLUIR">
     <end-conversation/>
+    <redirect view-id="/Cadastro/Promocao/ControlePromocao.xhtml"/>
+   </rule>
+  </navigation>
+ </page>
+ <!-- FLUXO RESGATE VOUCHER -->
+ <page login-required="true" view-id="/Cadastro/Promocao/ResgatarVoucher.xhtml">
+  <begin-conversation flush-mode="manual" join="true"/>
+  <navigation>
+   <rule if-outcome="RESGATAR">
     <redirect view-id="/Cadastro/Promocao/ControlePromocao.xhtml"/>
    </rule>
   </navigation>

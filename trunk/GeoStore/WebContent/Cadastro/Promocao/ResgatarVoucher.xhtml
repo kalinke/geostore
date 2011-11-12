@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:richfaces="http://richfaces.ajax4jsf.org/rich"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:s="http://jboss.com/products/seam/taglib"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ajax="https://ajax4jsf.dev.java.net/ajax">
+
+<ui:composition template="../../layout/template.xhtml">
+	
+		<ui:define name="body" >
+		
+		
+		<rich:panel>
+		
+		<f:facet name="header">Resgatar Voucher</f:facet>
+		
+		<a4j:form id="resgateVoucherForm">
+			<rich:panel>
+				<rich:toolBar height="34"  itemSeparator="line" >					
+					
+       		    	<rich:toolBarGroup>
+       		    		<rich:menuItem action="#{voucherController.buscarVoucher()}">
+        					<h:graphicImage value="../../img/salvarIcon.png" styleClass="pic"/>
+	   		 				<h:outputText value="Buscar" styleClass="txtButton" />
+	   		 				<a4j:support event="onclick" reRender="resgateVoucherForm" />
+	   					</rich:menuItem>
+       		    	</rich:toolBarGroup>     		    		
+					
+       		    	<rich:toolBarGroup>
+       		    		<rich:menuItem action="#{promocaoController.cancelar()}"  >
+        					<h:graphicImage value="../../img/cancelarIcon.png" styleClass="pic"/>
+	   		 				<h:outputText value="Voltar" styleClass="txtButton"/>
+	   					</rich:menuItem>
+       		    	</rich:toolBarGroup>
+		   		    
+
+		   		    
+		   		     			
+	   		    	<rich:toolBarGroup/>	   		    			
+				</rich:toolBar>		
+			</rich:panel>	
+
+			<rich:spacer height="10" />		
+		 	<a4j:loadScript src="../../js/jquery.maskedinput-1.1.4.pack.js" />
+		 	<rich:tabPanel switchType="client">
+		  	
+		  		<rich:tab label="Dados Cadastrais" >	
+					<h:panelGrid>		
+						
+						<s:decorate template="../../layout/edit.xhtml">
+							<ui:define name="label">Número do Voucher</ui:define>
+							<h:inputText value="#{voucherController.codigoVoucher}" />	
+						</s:decorate>
+					
+					<rich:panel rendered="#{voucherController.voucher.id != null}" >
+
+						<rich:dataTable id="tabelaVouchers"  
+						onRowMouseOver="this.style.backgroundColor='#D0D0D0'"
+	                    onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'">
+	                    
+							<f:facet name="header">Confirmação de dados para resgate</f:facet>				
+				
+							<rich:column>
+								<f:facet name="header">Nome</f:facet>
+								#{voucherController.voucher.usuario.nome}
+							</rich:column>
+							
+							<rich:column>
+								<f:facet name="header">Documento</f:facet>
+								<h:outputLabel value="#{voucherController.voucher.usuario.cpf}" converter="#{cpfConverter}" />	
+							</rich:column>
+							
+							<rich:column>
+								<f:facet name="header">E-mail</f:facet>
+								<h:outputLabel value="#{voucherController.voucher.usuario.email}" converter="#{cpfConverter}" />	
+							</rich:column>
+							
+						</rich:dataTable>
+		   		    	
+		   		    	
+		   		    	
+		   		    	<h:commandButton action="#{voucherController.buscarVoucher()}" value="Confirmar Resgate" />
+		   		    </rich:panel>
+					
+															
+					</h:panelGrid>
+										
+				</rich:tab>		
+			</rich:tabPanel>
+		</a4j:form>
+		</rich:panel>
+		</ui:define>
+	</ui:composition>
+</html>
