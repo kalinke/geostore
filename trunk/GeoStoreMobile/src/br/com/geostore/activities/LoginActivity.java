@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginActivity extends Activity{
@@ -18,8 +19,8 @@ public class LoginActivity extends Activity{
 		setContentView(R.layout.login_tela);
 		
 		Button btLogin = (Button)findViewById(R.id.btLoginLog);
-		Button btCadastro = (Button)findViewById(R.id.btCadastrarLog);
-		
+		TextView tvCadastro = (Button)findViewById(R.id.tvCadLoginClick);
+		TextView tvRecSenha = (Button)findViewById(R.id.tvRecSenhaLoginClick);
 				
 		btLogin.setOnClickListener(new View.OnClickListener() {			
 			@Override
@@ -45,13 +46,21 @@ public class LoginActivity extends Activity{
 			}
 		}); 
 
-		btCadastro.setOnClickListener(new View.OnClickListener() {			
+		tvCadastro.setOnClickListener(new View.OnClickListener() {			
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(LoginActivity.this, NovoUsuarioActivity.class);
                 startActivity(i);
 			}
 		});
+		
+		tvRecSenha.setOnClickListener(new View.OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				
+			}
+		});
+
 	}
 	
 	public Usuario efetuarLogin(String email, String senha){
