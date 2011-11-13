@@ -47,6 +47,7 @@ public class NovoUsuarioActivity extends Activity {
 				if (validaDados()){
 					if (novoUsuario()){
 						Toast.makeText(NovoUsuarioActivity.this, msg, Toast.LENGTH_SHORT).show();
+						finish();
 					}else{
 						Toast.makeText(NovoUsuarioActivity.this, "Ocorreu um erro, por favor, tente mais tarde!", Toast.LENGTH_SHORT).show();
 					}

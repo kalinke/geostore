@@ -23,7 +23,8 @@
 	 	android:layout_width="276dp" 
 	 	android:id="@+id/etEmailLog"
 	 	android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="15dp"
+        android:text="jonascarig@gmail.com">
 	     <requestFocus></requestFocus>
 	 </EditText>
 	 	
@@ -35,7 +36,8 @@
 		android:layout_height="wrap_content"
 		android:layout_width="276dp" 			
 		android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="15dp"
+        android:text="aml7080">
 	</EditText>
 		
 	<Button 

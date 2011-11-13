@@ -86,21 +86,33 @@ public class HttpGS {
 	
 	public String doPost(String servlet, List<NameValuePair> params){		
 		HttpResponse res = null;		
+		
 		if (this.checkInternetConnection()){			
 			HttpPost post = new HttpPost(URL_SERVER.concat(servlet));			
 			try {				
+				
 				post.setEntity(new UrlEncodedFormEntity(params));
+				
 				res = httpClient.execute(post);
-				return EntityUtils.toString(res.getEntity());						
+				
+				return EntityUtils.toString(res.getEntity());
+				
 			} catch (UnsupportedEncodingException e) {				
 				Log.e(TAG,"UnsupportedEncodingException: " + e.getMessage());			
 			} catch (ClientProtocolException e) {				
 				Log.e(TAG,"ClientProtocolException: " + e.getMessage());			
 			} catch (IOException e) {				
 				Log.e(TAG,"IOException: " + e.getMessage());			
-			}			
-		}				
-		Toast.makeText(this.ctx, "O servidor não pode retornar os dados ou você está sem conexão com a internet.", Toast.LENGTH_LONG).show();		
+			}
+			
+			Toast.makeText(this.ctx, "Não foi possível conectar ao servidor.", Toast.LENGTH_LONG).show();
+			
+		}else{
+			
+			Toast.makeText(this.ctx, "Não foi possível conectar a internet.", Toast.LENGTH_LONG).show();
+			
+		}		
+				
 		return null;
 	}
 	
@@ -108,8 +120,7 @@ public class HttpGS {
 	    ConnectivityManager cm = (ConnectivityManager) this.ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
 	    if (cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isAvailable() && cm.getActiveNetworkInfo().isConnected()) {
 	        return true;
-	    } else {
-	        Log.v(TAG, "Internet Connection Not Present");
+	    } else {	    	
 	        return false;
 	    }
 	}
