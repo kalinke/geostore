@@ -20,6 +20,7 @@ import org.jboss.seam.web.AbstractResource;
 import br.com.geostore.dao.PromocaoDAO;
 import br.com.geostore.dao.VoucherDAO;
 import br.com.geostore.entity.Promocao;
+import br.com.geostore.entity.StatusPromocao;
 import br.com.geostore.entity.StatusVoucher;
 import br.com.geostore.entity.Usuario;
 import br.com.geostore.entity.Voucher;
@@ -60,6 +61,11 @@ public class PromocaoServlet extends AbstractResource {
 							//Atualiza o saldo da promoção
 							int qdeSolicitado = promocao.getQdeSolicitada() + 1;
 							promocao.setQdeSolicitada(qdeSolicitado);
+							if (qdeSolicitado==promocao.getQdeVoucher()){
+								StatusPromocao statusPromocao = new StatusPromocao();
+								statusPromocao.setId(2l);
+								promocao.setStatusPromocao(statusPromocao);
+							}
 							pDao.alterarAndroid(promocao);
 							
 							//Cria o voucher e suas dependencias 
