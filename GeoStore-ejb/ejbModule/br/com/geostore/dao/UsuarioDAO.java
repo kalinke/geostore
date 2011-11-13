@@ -162,26 +162,43 @@ public class UsuarioDAO {
 		}
 	}
 
-	public boolean buscarPorEmail(Usuario usuario) throws Exception {
+	public boolean buscarPorEmail(Usuario usuario, String acao) throws Exception {
 		try{
 			
 			log.info("Buscando se Email já existe no Banco de Dados: " + usuario.getEmail());
 			
-			String sQuery;			
+			String sQuery;	
+			
+			if(acao=="NOVA"){
+				
+				sQuery = " from Usuario as u ";	
+				sQuery += " where u.email = :usuarioEmail ";
+				sQuery += " order by u.id ";			
+				
+				Query query = entityManager.createQuery(sQuery);
+				query.setParameter("usuarioEmail", usuario.getEmail());
+				
+				if(query.getResultList()==null || query.getResultList().isEmpty())				
+					return false;	
+					
+			}
+			
+			if(acao=="EDITAR"){		
 			
 			sQuery = " from Usuario as u ";	
 			sQuery += " where u.email = :usuarioEmail ";
 			sQuery += " and u.id <> :usuarioID ";
 			sQuery += " order by u.id ";			
-			
+					
 			Query query = entityManager.createQuery(sQuery);			
 			query.setParameter("usuarioEmail", usuario.getEmail());
 			query.setParameter("usuarioID", usuario.getId());
-				
+			
 				if(query.getResultList()==null || query.getResultList().isEmpty())				
 					return false;	
-			
-			
+
+			}
+	
 			return true;
 		}catch (Exception e) {
 			throw new Exception(e);
