@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import br.com.geostore.http.HttpGS;
-import br.com.geostore.util.AlertasGS;
 
 public class RecuperarSenhaActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState) { 
