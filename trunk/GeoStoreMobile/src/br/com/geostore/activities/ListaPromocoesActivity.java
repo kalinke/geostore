@@ -8,7 +8,6 @@ import org.json.JSONObject;
 import br.com.geostore.adapters.ListaPromocoesAdapter;
 import br.com.geostore.entity.Promocao;
 import br.com.geostore.http.HttpGS;
-import br.com.geostore.util.AlertasGS;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
