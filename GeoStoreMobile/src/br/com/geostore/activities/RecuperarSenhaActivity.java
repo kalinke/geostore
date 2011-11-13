@@ -1,6 +1,8 @@
 package br.com.geostore.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,13 +27,26 @@ public class RecuperarSenhaActivity extends Activity{
 				HttpGS hgs = new HttpGS(RecuperarSenhaActivity.this);
 				
 				String response = hgs.recuperaSenha(email);
-				
-				if(response.equals("ENVIADO")){					
-					AlertasGS.showMsgOk("Recupera senha", "Senha enviada com sucesso.", RecuperarSenhaActivity.this);
-				}else{
-					AlertasGS.showMsgOk("Recupera senha", "Erro, verifique o e-mail e tente novamente.", RecuperarSenhaActivity.this);
-				}
+				String msg = null;
+				if(response != null && response.equals("ENVIADO")){					
 					
+					msg = "Senha enviada com sucesso.";
+					
+				}else{
+
+					msg = "Erro, verifique o e-mail e tente novamente.";
+					
+				}
+				
+				AlertDialog alertDialog = new AlertDialog.Builder(RecuperarSenhaActivity.this).create();  
+			    alertDialog.setTitle("Recupera senha");  
+			    alertDialog.setMessage(msg);  
+			    alertDialog.setButton("OK", new DialogInterface.OnClickListener() {  
+			      public void onClick(DialogInterface dialog, int which) {  
+			    	  finish();
+			    	  return;  
+			    } });
+			    alertDialog.show();					
 			}		
 			
 		});
