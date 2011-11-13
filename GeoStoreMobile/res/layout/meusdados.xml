@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="@color/branco">
+	<LinearLayout 
+		android:id="@+id/layout1"
+		android:background="@color/branco"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent" 
+		android:orientation="vertical">		
+		 <ImageView 
+	       	android:layout_height="wrap_content" 
+	       	android:id="@+id/img_logo" 
+	       	android:layout_width="wrap_content" 
+	       	android:src="@drawable/gs_logomaior_70" 
+	       	android:layout_gravity="center_horizontal"
+	       	android:layout_marginTop="30dp">
+	     </ImageView>
+		 <TextView 
+		 	android:layout_width="wrap_content" 
+		 	android:id="@+id/lbl_dados" 
+		 	android:layout_gravity="left"
+		 	android:layout_marginTop="20dp" 
+		 	android:text="  Dados do cadastro" 
+		 	android:textSize="17dp"
+		 	android:layout_height="wrap_content" 
+		 	android:textColor="@color/preto">
+		 </TextView>
+		 
+		 <TableLayout 
+	    	android:orientation="horizontal"
+	    	android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content"
+	    	android:background="@color/branco"     	
+	    	android:stretchColumns="1">
+	    	<TableRow
+	    		android:layout_marginTop="10dp">
+	    		<TextView     			
+	    			android:id="@+id/tvNome"     	
+	    			android:text="   Nome: "
+	    			android:textColor="@color/azul_gs"
+			    	android:textSize="15dp"/>    	
+	    		<TextView 
+	    			android:id="@+id/tvLoginMainBuscaclick" 
+	    			android:hint="Seu nome aqui.."  	
+	    			android:text=""
+			    	android:layout_gravity="left"
+			    	android:textSize="15dp"/>    		
+	    	</TableRow>
+	    	<TableRow
+	    		android:layout_marginTop="10dp">
+	    		<TextView     			
+	    			android:id="@+id/tvNome"     	
+	    			android:text="   Email: "
+	    			android:textColor="@color/azul_gs"
+			    	android:textSize="15dp"/>    	
+	    		<TextView 
+	    			android:id="@+id/tvLoginMainBuscaclick" 
+	    			android:hint="Seu email aqui.."  	
+	    			android:text=""
+			    	android:layout_gravity="left"
+			    	android:textSize="15dp"/>    		
+	    	</TableRow> 
+	    	<TableRow
+	    		android:layout_marginTop="10dp">
+	    		<TextView     			
+	    			android:id="@+id/tvNome"     	
+	    			android:text="   CPF: "
+	    			android:textColor="@color/azul_gs"
+			    	android:textSize="15dp"/>    	
+	    		<TextView 
+	    			android:id="@+id/tvLoginMainBuscaclick" 
+	    			android:hint="Seu CPF aqui.."  	
+	    			android:text=""
+			    	android:layout_gravity="left"
+			    	android:textSize="15dp"/>    		
+	    	</TableRow>     	
+	    </TableLayout>
+	      	
+	   <TextView 
+		 	android:layout_width="wrap_content" 
+		 	android:id="@+id/lbl_dados" 
+		 	android:layout_gravity="left"
+		 	android:layout_marginTop="10dp" 
+		 	android:text="  Vouchers" 
+		 	android:textSize="17dp"
+		 	android:layout_height="wrap_content" 
+		 	android:textColor="@color/preto">
+		 </TextView>
+		 
+	</LinearLayout>
+</ScrollView>
