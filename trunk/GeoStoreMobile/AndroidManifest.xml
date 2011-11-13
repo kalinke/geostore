@@ -22,12 +22,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />               
             </intent-filter>
         </activity>                         	 
-        <activity android:name=".BuscarActivity" android:screenOrientation="portrait"/>
+        <activity android:name="BuscarActivity" android:screenOrientation="portrait"/>
         <activity android:name="ListaProdutosActivity" android:screenOrientation="portrait"/>                             
-        <activity android:name=".RotaActivity" android:screenOrientation="portrait"/>                        
+        <activity android:name="RotaActivity" android:screenOrientation="portrait"/>                        
         <activity android:name="Voucher" android:screenOrientation="portrait"/>          
-		<activity android:name=".LoginActivity" android:screenOrientation="portrait"/> 
-        <activity android:name=".NovoUsuarioActivity" android:screenOrientation="portrait"/>       	                                           
-        <activity android:name=".ListaPromocoesActivity" android:screenOrientation="portrait"/>
+		<activity android:name="LoginActivity" android:screenOrientation="portrait"/> 
+        <activity android:name="NovoUsuarioActivity" android:screenOrientation="portrait"/>       	                                           
+        <activity android:name="ListaPromocoesActivity" android:screenOrientation="portrait"/>
+        <activity android:name="RecuperarSenhaActivity" android:screenOrientation="portrait"/>
     </application>
 </manifest>
