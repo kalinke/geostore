@@ -55,7 +55,7 @@ public class NovoUsuarioServlet extends AbstractResource {
 
 					if (uDao.buscarPorCPF(u,"NOVA")) {
 						retorno = 1;
-					} else if (uDao.buscarPorEmail(u)) {
+					} else if (uDao.buscarPorEmail(u, "NOVA")) {
 						retorno = 2;
 					} else {
 						uDao.incluir(u);
