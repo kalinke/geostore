@@ -17,12 +17,12 @@
     		<TextView     			
     			android:id="@+id/tvDadosMainBuscaClick"     	
     			android:clickable="true" 
-		    	android:text=" Meus Dados"
+		    	android:text="  Meus Dados"
 		    	android:textSize="20dp"/>    	
     		<TextView 
     			android:id="@+id/tvLoginMainBuscaclick"     	
     			android:clickable="true" 
-		    	android:text="Login"
+		    	android:text="Login  "
 		    	android:layout_gravity="right"
 		    	android:textSize="20dp"/>    		
     	</TableRow>    	
