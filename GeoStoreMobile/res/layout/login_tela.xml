@@ -51,7 +51,6 @@
 	
 	<TextView 
 		android:clickable="true"
-		android:lines="2"		
 		android:id="@+id/tvCadLoginClick" 
 		android:textSize="16px"
 		android:textColor="@color/azul"
