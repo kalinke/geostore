@@ -35,6 +35,7 @@ public class PromocaoDAO {
 	
 	public void alterar(Promocao promocao) throws Exception {
 		try{
+			
 			log.info("Alterar promocao: #0", promocao.getId());			
 			entityManager.merge(promocao);			
 			entityManager.flush();			
