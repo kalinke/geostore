@@ -105,7 +105,7 @@ public class HttpGS {
 				Log.e(TAG,"IOException: " + e.getMessage());			
 			}
 			
-			Toast.makeText(this.ctx, "Não foi possível conectar ao servidor.", Toast.LENGTH_LONG).show();
+			Toast.makeText(this.ctx, "A comunicação com o servidor não foi bem sucedida.", Toast.LENGTH_LONG).show();			
 			
 		}else{
 			
