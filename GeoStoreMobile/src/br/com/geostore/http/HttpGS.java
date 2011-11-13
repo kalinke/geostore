@@ -74,7 +74,7 @@ public class HttpGS {
 	public String recuperaSenha(String email){
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("email",  email));		
-		return doPost("recuperaSenha",params);
+		return doPost("recuperaSenhaServlet",params);
 	}
 	
 	public String gerarVoucher(String idPromocao, String idUsuario){
