@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import br.com.geostore.adapters.ListaPromocoesAdapter;
 import br.com.geostore.entity.Promocao;
 import br.com.geostore.http.HttpGS;
+import br.com.geostore.util.AlertasGS;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -55,7 +56,9 @@ public class ListaPromocoesActivity extends ListActivity {
 	    				if (voucher.equals("0")){
 	    					Toast.makeText(ListaPromocoesActivity.this, MsgServidor, Toast.LENGTH_SHORT).show();	    					
 	    				}else{
-	    					Toast.makeText(ListaPromocoesActivity.this, "Número do voucher gerado: " + voucher, Toast.LENGTH_SHORT).show();	    					
+	    					AlertasGS.showMsgOk("Voucher", "Número do voucher gerado: " + voucher, this);
+	    					finish();
+	    					//Toast.makeText(ListaPromocoesActivity.this, "Número do voucher gerado: " + voucher, Toast.LENGTH_SHORT).show();	    					
 	    				}
 	    			}else{
 	    				Toast.makeText(ListaPromocoesActivity.this, "Não foi possível gerar o voucher, por favor, tente mais tarde.", Toast.LENGTH_SHORT).show();
