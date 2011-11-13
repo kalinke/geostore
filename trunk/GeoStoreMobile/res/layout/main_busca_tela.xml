@@ -22,19 +22,20 @@
     		<TextView 
     			android:id="@+id/tvLoginMainBuscaclick"     	
     			android:clickable="true" 
-		    	android:text="Login "
+		    	android:text="Login"
 		    	android:layout_gravity="right"
 		    	android:textSize="20dp"/>    		
     	</TableRow>    	
-    </TableLayout>    
+    </TableLayout>
+    
     <ImageView 
-        	android:layout_height="wrap_content" 
-        	android:id="@+id/logoMainBusca" 
-        	android:layout_width="wrap_content" 
-        	android:src="@drawable/gs_logomaior_70" 
-        	android:layout_gravity="center_horizontal"
-        	android:layout_marginTop="30dp">
-        </ImageView>    
+        android:layout_height="wrap_content" 
+        android:id="@+id/logoMainBusca" 
+        android:layout_width="wrap_content" 
+        android:src="@drawable/gs_logomaior_70" 
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp">
+    </ImageView>    
     
     <EditText 
     	android:layout_height="wrap_content" 
