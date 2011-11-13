@@ -37,6 +37,7 @@ public class VoucherDAO {
 	
 	public void alterar(Voucher voucher) throws Exception {
 		try{
+			
 			log.info("Alterar voucher: #0", voucher.getId());			
 			entityManager.merge(voucher);
 			entityManager.flush();			
