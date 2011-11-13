@@ -61,7 +61,7 @@ public class ListaPromocoesActivity extends ListActivity {
 	    					
 	    				}else{
 	    					
-	    					AlertDialog alertDialog = new AlertDialog.Builder(this).create();  
+	    					AlertDialog alertDialog = new AlertDialog.Builder(ListaPromocoesActivity.this).create();  
 	    				    alertDialog.setTitle("Voucher");  
 	    				    alertDialog.setMessage("Número do voucher gerado: " + voucher);  
 	    				    alertDialog.setButton("OK", new DialogInterface.OnClickListener() {  
@@ -69,8 +69,8 @@ public class ListaPromocoesActivity extends ListActivity {
 	    				    	  finish();
 	    				    	  return;  
 	    				    } });
+	    				    alertDialog.show();
 	    				    
-	    				    //AlertasGS.showMsgOk("Voucher", "Número do voucher gerado: " + voucher, this);
 	    					//Toast.makeText(ListaPromocoesActivity.this, "Número do voucher gerado: " + voucher, Toast.LENGTH_SHORT).show();	    					
 	    				}
 	    			}else{
@@ -95,12 +95,14 @@ public class ListaPromocoesActivity extends ListActivity {
     	String s = h.gerarVoucher(Long.toString(idPromocao), Long.toString(idUsuario));
     	
     	try{    		
-    		
-    		JSONObject jVoucher = new JSONObject(s);
-    		this.MsgServidor = jVoucher.getString("mensagem");
-    		
-    		return jVoucher.getString("voucher");
-    		
+    		if (s!=null){
+	    		
+    			JSONObject jVoucher = new JSONObject(s);
+	    		this.MsgServidor = jVoucher.getString("mensagem");
+	    		
+	    		return jVoucher.getString("voucher");
+	    		
+    		}
     	}catch (Exception e) {
     		Log.e(TAG, e.getMessage());
 		}
