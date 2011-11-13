@@ -119,12 +119,28 @@ public class UsuarioDAO {
 		}
 	}
 
-	public boolean buscarPorCPF(Usuario usuario) throws Exception {
+	public boolean buscarPorCPF(Usuario usuario, String acao) throws Exception {
 		try{
 			
-			log.info("Buscando se CPF j√° existe no Banco de Dados: " + usuario.getCpf());
+			log.info("Buscando se CPF j· existe no Banco de Dados: " + usuario.getCpf());
 			
-			String sQuery;			
+			String sQuery;	
+			
+			if(acao=="NOVA"){
+				
+				sQuery = " from Usuario as u ";	
+				sQuery += " where u.cpf = :usuarioCPF ";
+				sQuery += " order by u.id ";			
+				
+				Query query = entityManager.createQuery(sQuery);
+				query.setParameter("usuarioCPF", usuario.getCpf());
+				
+				if(query.getResultList()==null || query.getResultList().isEmpty())				
+					return false;	
+					
+			}
+			
+			if(acao=="EDITAR"){		
 			
 			sQuery = " from Usuario as u ";	
 			sQuery += " where u.cpf = :usuarioCPF ";
@@ -138,7 +154,8 @@ public class UsuarioDAO {
 				if(query.getResultList()==null || query.getResultList().isEmpty())				
 					return false;	
 
-			
+			}
+		
 			return true;
 		}catch (Exception e) {
 			throw new Exception(e);
