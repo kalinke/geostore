@@ -58,8 +58,9 @@ public class PromocaoServlet extends AbstractResource {
 						if (promocao!=null && promocao.getQdeVoucher()-promocao.getQdeSolicitada()>0){
 							
 							//Atualiza o saldo da promoção
-							promocao.setQdeSolicitada(promocao.getQdeSolicitada()+1);
-							pDao.salvar(promocao);
+							int qdeSolicitado = promocao.getQdeSolicitada() + 1;
+							promocao.setQdeSolicitada(qdeSolicitado);
+							pDao.alterarAndroid(promocao);
 							
 							//Cria o voucher e suas dependencias 
 							Voucher voucher = new Voucher();
@@ -78,7 +79,7 @@ public class PromocaoServlet extends AbstractResource {
 							voucher.setStatusVoucher(status);
 							
 							//Inclui o voucher							
-							vDao.incluir(voucher);
+							vDao.salvar(voucher);
 														
 							j.put("voucher",  numVoucher);
 							j.put("mensagem", "");							

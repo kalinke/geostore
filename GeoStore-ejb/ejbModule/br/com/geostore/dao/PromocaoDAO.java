@@ -3,6 +3,7 @@ package br.com.geostore.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.FlushModeType;
 import javax.persistence.Query;
 
 import org.jboss.seam.annotations.In;
@@ -35,14 +36,26 @@ public class PromocaoDAO {
 	public void alterar(Promocao promocao) throws Exception {
 		try{
 			log.info("Alterar promocao: #0", promocao.getId());			
-			entityManager.merge(promocao);
+			entityManager.merge(promocao);			
 			entityManager.flush();			
 			
 		}catch (Exception e) {
 			throw new Exception(e);
 		}
 	}
-	
+
+	public void alterarAndroid(Promocao promocao) throws Exception {
+		try{
+			log.info("Alterar promocao: #0", promocao.getId());			
+			entityManager.setFlushMode(FlushModeType.AUTO);
+			entityManager.merge(promocao);
+			
+			//entityManager.flush();			
+			
+		}catch (Exception e) {
+			throw new Exception(e);
+		}
+	}
 	public void salvar(Promocao promocao) throws Exception {
 		try{
 			log.info("Persistir Promocao: #0", promocao.getId());

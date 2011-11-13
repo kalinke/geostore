@@ -8,6 +8,7 @@ import javax.persistence.Query;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
+import org.jboss.seam.annotations.TransactionPropagationType;
 import org.jboss.seam.annotations.Transactional;
 import org.jboss.seam.log.Log;
 
@@ -15,10 +16,10 @@ import br.com.geostore.entity.Usuario;
 import br.com.geostore.entity.Voucher;
 
 @Name("voucherDAO")
-@Transactional
+@Transactional(TransactionPropagationType.REQUIRED)
 public class VoucherDAO {
 
-	@In
+	@In(create=true)
 	private EntityManager entityManager;
 	
 	@Logger
