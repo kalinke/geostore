@@ -81,7 +81,7 @@ public class BuscarActivity extends Activity implements Button.OnClickListener, 
 		String log  = "0";
 		String lat  = "0";
 		
-		if (edtBuscar.getText().length()>3){
+		if (edtBuscar.getText().length()>0){
 		
 			GpsGS g = new GpsGS(this);
 			lat = Double.toString(g.getLastLatitude());
