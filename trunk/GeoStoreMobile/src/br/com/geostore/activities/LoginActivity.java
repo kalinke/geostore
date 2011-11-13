@@ -19,8 +19,8 @@ public class LoginActivity extends Activity{
 		setContentView(R.layout.login_tela);
 		
 		Button btLogin = (Button)findViewById(R.id.btLoginLog);
-		TextView tvCadastro = (Button)findViewById(R.id.tvCadLoginClick);
-		TextView tvRecSenha = (Button)findViewById(R.id.tvRecSenhaLoginClick);
+		TextView tvCadastro = (TextView)findViewById(R.id.tvCadLoginClick);
+		TextView tvRecSenha = (TextView)findViewById(R.id.tvRecSenhaLoginClick);
 				
 		btLogin.setOnClickListener(new View.OnClickListener() {			
 			@Override
@@ -57,7 +57,8 @@ public class LoginActivity extends Activity{
 		tvRecSenha.setOnClickListener(new View.OnClickListener() {			
 			@Override
 			public void onClick(View v) {
-				
+				Intent i = new Intent(LoginActivity.this, RecuperarSenhaActivity.class);
+                startActivity(i);				
 			}
 		});
 	}
