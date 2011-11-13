@@ -8,7 +8,9 @@ import android.widget.Toast;
 
 public class InicioActivity extends Activity implements Runnable{
 	
+		private static final String TAG = "InicioActivity";
 		private final int DELAY = 2240;
+		
 
 		@Override
 		public void onCreate(Bundle icicle) {

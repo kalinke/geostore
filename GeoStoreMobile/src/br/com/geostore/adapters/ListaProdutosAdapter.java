@@ -14,8 +14,9 @@ import android.widget.TextView;
 
 public class ListaProdutosAdapter extends BaseAdapter {  
 	  
-	   private Context ctx;  
-	   private List<Produto> produtos;  
+	private static final String TAG = "ListaProdutosAdapter";
+	private Context ctx;  
+	private List<Produto> produtos;  
 	  
 	   public ListaProdutosAdapter(Context ctx, List <Produto> produtos) {  
 	      this.ctx = ctx;  

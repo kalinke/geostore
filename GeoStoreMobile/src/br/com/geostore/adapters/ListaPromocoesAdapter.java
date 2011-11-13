@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 public class ListaPromocoesAdapter extends BaseAdapter {  
 	  
+	   private static final String TAG = "ListaPromocoesAdapter";
 	   private Context ctx;  
 	   private List<Promocao> promocoes;  
 	  

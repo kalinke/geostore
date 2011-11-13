@@ -27,6 +27,8 @@ import android.widget.Toast;
 
 public class RotaActivity extends MapActivity {
 	
+	private static final String TAG = "RotaActivity";
+	
 	public void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState); 
 		setContentView(R.layout.mapa_tela); 

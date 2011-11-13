@@ -24,9 +24,9 @@ import android.widget.Toast;
 
 public class ListaPromocoesActivity extends ListActivity {
 
-	protected static final int CONTEXTMENU_VOUCHER    = 1;
-	protected static final String TAG = "ListaPromocoes";
-	
+	private static final String TAG = "ListaPromocoesActivity";
+	private static final int CONTEXTMENU_VOUCHER    = 1;
+		
 	private List<Promocao> promocoes = null;
 	private String MsgServidor = "";
 	

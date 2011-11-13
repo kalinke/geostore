@@ -10,6 +10,7 @@ import com.google.android.maps.GeoPoint;
 
 public class GpsGS{
 	
+	private static final String TAG = "GpsGS";
 	private Context ctx = null;
 	private Location l = null;
 	

@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 public class NovoUsuarioActivity extends Activity {
 	
+	private static final String TAG = "NovoUsuarioActivity";
 	private static final int INCLUIU    = 0; 
 	private static final int CPFEXIST   = 1; 
 	private static final int EMAILEXIST = 2;

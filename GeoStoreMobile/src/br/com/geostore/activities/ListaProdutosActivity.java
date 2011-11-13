@@ -19,9 +19,10 @@ import br.com.geostore.entity.Promocao;
 
 public class ListaProdutosActivity extends ListActivity {
 
-	protected static final int CONTEXTMENU_ROTA    = 1; 
-	protected static final int CONTEXTMENU_DISCAR  = 2; 
-	protected static final int CONTEXTMENU_PROMO = 3; 
+	private static final String TAG = "ListaProdutosActivity";
+	private static final int CONTEXTMENU_ROTA    = 1; 
+	private static final int CONTEXTMENU_DISCAR  = 2; 
+	private static final int CONTEXTMENU_PROMO = 3; 
 	private List<Produto> prods = null;
 	
 	@SuppressWarnings("unchecked")

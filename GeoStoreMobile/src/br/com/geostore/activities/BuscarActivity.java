@@ -32,14 +32,14 @@ import android.widget.Toast;
 
 public class BuscarActivity extends Activity implements Button.OnClickListener, Spinner.OnItemSelectedListener{    	
 		
-	protected static final int RAIO_ILIMITADO = 0;
-	protected static final int RAIO_100       = 1; 
-    protected static final int RAIO_500       = 2;
-    protected static final int RAIO_1000      = 3;
-    protected static final int RAIO_10000     = 4;
-    protected static final String TAG = "BuscarActivity";
-    
+	private static final String TAG = "BuscarActivity";
+	private static final int RAIO_ILIMITADO = 0;
+	private static final int RAIO_100       = 1; 
+	private static final int RAIO_500       = 2;
+	private static final int RAIO_1000      = 3;
+	private static final int RAIO_10000     = 4;	    
     private static Usuario usuario = null;
+    
 	private int raio;
      
     
@@ -81,76 +81,82 @@ public class BuscarActivity extends Activity implements Button.OnClickListener, 
 		String log  = "0";
 		String lat  = "0";
 		
-		GpsGS g = new GpsGS(this);
-		lat = Double.toString(g.getLastLatitude());
-		log = Double.toString(g.getLastLongitude());		
+		if (edtBuscar.getText().length()>3){
 		
-		HttpGS h = new HttpGS(this);
-		String s = h.buscarProdutos(edtBuscar.getText().toString(), log, lat, String.valueOf(raio));
+			GpsGS g = new GpsGS(this);
+			lat = Double.toString(g.getLastLatitude());
+			log = Double.toString(g.getLastLongitude());		
 			
-		if (s != null){			
-			try {
-				JSONObject jObj = new JSONObject(s);
-				JSONArray jArray = jObj.getJSONArray("produtos");
-				ArrayList<Produto> pList = new ArrayList<Produto>();
+			HttpGS h = new HttpGS(this);
+			String s = h.buscarProdutos(edtBuscar.getText().toString(), log, lat, String.valueOf(raio));
 				
-				for (int i=0;i<jArray.length();i++){
-					JSONObject j = jArray.getJSONObject(i).getJSONObject("produto");
+			if (s != null){			
+				try {
+					JSONObject jObj = new JSONObject(s);
+					JSONArray jArray = jObj.getJSONArray("produtos");
+					ArrayList<Produto> pList = new ArrayList<Produto>();
 					
-					JSONArray jArrayPromo = j.getJSONArray("promocoes");
-					ArrayList<Promocao> promoList = new ArrayList<Promocao>();
-					Produto prod = null;
-					
-					for (int x=0;x<jArrayPromo.length();x++){
+					for (int i=0;i<jArray.length();i++){
+						JSONObject j = jArray.getJSONObject(i).getJSONObject("produto");
 						
-						JSONObject jPromo = jArrayPromo.getJSONObject(i).getJSONObject("promocao");
-						Promocao promo = new Promocao();
-						promo.setId(jPromo.getLong("idPromo"));
-						promo.setDescricao(jPromo.getString("descPromo"));						
-						promo.setQdeSolicitada(jPromo.getInt("qtdeSolic"));
-						promo.setQdeVoucher(jPromo.getInt("qtdeVouch"));
-						prod = new Produto();
-						prod.setId(jPromo.getLong("idProduto"));
-						promo.setProduto(prod);
-						promoList.add(promo);
+						JSONArray jArrayPromo = j.getJSONArray("promocoes");
+						ArrayList<Promocao> promoList = new ArrayList<Promocao>();
+						Produto prod = null;
 						
+						for (int x=0;x<jArrayPromo.length();x++){
+							
+							JSONObject jPromo = jArrayPromo.getJSONObject(i).getJSONObject("promocao");
+							Promocao promo = new Promocao();
+							promo.setId(jPromo.getLong("idPromo"));
+							promo.setDescricao(jPromo.getString("descPromo"));						
+							promo.setQdeSolicitada(jPromo.getInt("qtdeSolic"));
+							promo.setQdeVoucher(jPromo.getInt("qtdeVouch"));
+							prod = new Produto();
+							prod.setId(jPromo.getLong("idProduto"));
+							promo.setProduto(prod);
+							promoList.add(promo);
+							
+						}
+						
+						
+						Loja l = new Loja();
+						Endereco e = new Endereco();					
+						Produto p = new Produto();					
+						
+						p.setId(j.getLong("idProd"));
+						p.setNome(j.getString("nomeProd"));
+						p.setDescricao(j.getString("descProd"));
+						p.setValor(j.getDouble("prcProd"));
+						l.setId(j.getLong("idLoja"));
+						l.setNomeFantasia(j.getString("nomeLoja"));
+						l.setTelefone(j.getString("foneLoja"));
+						e.setLongitude(j.getDouble("logLoja"));
+						e.setLatitude(j.getDouble("latLoja"));
+						l.setEndereco(e);
+						p.setLoja(l);
+						p.setPromocoes(promoList);
+						
+						pList.add(p);					
 					}
 					
+					if (pList.size() > 0){
+						Intent i = new Intent(BuscarActivity.this, ListaProdutosActivity.class);
+						i.putExtra("produtos", pList);										
+						startActivity(i);
+					}else{
+						Toast.makeText(this, "Nenhum produto encontrado.", Toast.LENGTH_SHORT).show();
+					}
+						
+				} catch (JSONException e) {
 					
-					Loja l = new Loja();
-					Endereco e = new Endereco();					
-					Produto p = new Produto();					
-					
-					p.setId(j.getLong("idProd"));
-					p.setNome(j.getString("nomeProd"));
-					p.setDescricao(j.getString("descProd"));
-					p.setValor(j.getDouble("prcProd"));
-					l.setId(j.getLong("idLoja"));
-					l.setNomeFantasia(j.getString("nomeLoja"));
-					l.setTelefone(j.getString("foneLoja"));
-					e.setLongitude(j.getDouble("logLoja"));
-					e.setLatitude(j.getDouble("latLoja"));
-					l.setEndereco(e);
-					p.setLoja(l);
-					p.setPromocoes(promoList);
-					
-					pList.add(p);					
-				}
-				
-				if (pList.size() > 0){
-					Intent i = new Intent(BuscarActivity.this, ListaProdutosActivity.class);
-					i.putExtra("produtos", pList);										
-					startActivity(i);
-				}else{
-					Toast.makeText(this, "Nenhum produto encontrado.", Toast.LENGTH_LONG).show();
-				}
-					
-			} catch (JSONException e) {
-				
-				Toast.makeText(this, "O servidor retornou dados inesperados.", Toast.LENGTH_LONG).show();
-				Log.e(TAG,"JSONException: " + e.getMessage());
-			}								
+					Toast.makeText(this, "O servidor retornou dados inesperados.", Toast.LENGTH_SHORT).show();
+					Log.e(TAG,"JSONException: " + e.getMessage());
+				}								
+			}
+		}else{
+			Toast.makeText(this, "Conteúdo inválido para pesquisa.", Toast.LENGTH_SHORT).show();
 		}
+		
 	}
 	
 	@Override
@@ -205,7 +211,7 @@ public class BuscarActivity extends Activity implements Button.OnClickListener, 
 	
 	protected void onRestart() {
     	String txt = null;
-		if (this.usuario!=null){
+		if (BuscarActivity.usuario!=null){
     		txt = "Logout";    		
     	}else{
     		txt = "Login";

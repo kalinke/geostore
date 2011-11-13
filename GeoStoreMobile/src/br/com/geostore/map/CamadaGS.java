@@ -13,6 +13,7 @@ import com.google.android.maps.Projection;
 @SuppressWarnings("unused")
 public class CamadaGS extends Overlay{
 	
+	private static final String TAG = "CamadaGS";
 	private GeoPoint gp1; 
 	private GeoPoint gp2; 
 	private int mRadius=6; 
