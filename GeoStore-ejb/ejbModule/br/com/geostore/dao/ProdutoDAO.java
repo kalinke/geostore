@@ -124,7 +124,6 @@ public class ProdutoDAO {
 	@SuppressWarnings("unchecked")
 	public List<Produto> buscarPorProximidade(String texto, double lat, double log, double raio) throws Exception {
 		try{
-						
 			String sQry = "";
 			sQry += " select p.* ";			
 			sQry += " from gs_produtos as p, gs_lojas as l, gs_enderecos as e ";
