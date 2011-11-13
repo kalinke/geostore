@@ -43,7 +43,7 @@ public class EmpresaController {
 	private Empresa empresa = new Empresa();
 	private Long idEmpresa;
 	
-	String acao = null;
+	private String acao = "NOVA";
 	
 	public EmpresaController() {
 		this.usuarioLogado = (Usuario) Contexts.getSessionContext().get("usuarioLogado");

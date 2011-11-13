@@ -115,8 +115,8 @@ public class LojaController {
         if(loja.getNomeFantasia().isEmpty())
                 throw new RuntimeException("É necessário preencher o nome fantasia!");       
 
-        if(loja.getInscricaoEstadual().isEmpty())
-                throw new RuntimeException("É necessário preencher a inscrição estadual!");       
+        //if(loja.getInscricaoEstadual().isEmpty())
+               // throw new RuntimeException("É necessário preencher a inscrição estadual!");       
 
         //if(loja.getContato().isEmpty())
                 //throw new RuntimeException("É necessário preencher o contato!");       
