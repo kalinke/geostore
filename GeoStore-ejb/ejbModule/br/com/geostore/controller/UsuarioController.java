@@ -134,7 +134,7 @@ public class UsuarioController {
 		if(usuario.getEmail().isEmpty())
             throw new RuntimeException("É necessário preencher o email!");       
 
-		if(usuarioDAO.buscarPorEmail(usuario))
+		if(usuarioDAO.buscarPorEmail(usuario, acao))
 			throw new RuntimeException("E-Mail já existe!");
 		
         if(!emailValidator.validarEmail(usuario.getEmail()))
