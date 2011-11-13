@@ -33,6 +33,7 @@ public class UsuarioController {
 	private String senhaAtual;
 	private String novaSenha;
 	private String confirmaNovaSenha;
+	private String acao=null;
 			
 	public UsuarioController() {
 		this.usuarioLogado = (Usuario) Contexts.getSessionContext().get("usuarioLogado");
@@ -40,13 +41,14 @@ public class UsuarioController {
 	
 	public String novo(){
 		this.usuario = new Usuario();
-		
+		acao = "NOVA";
 		return "ADICIONAR";
 	}
 	
 
 	public String editar() throws Exception{
 		this.usuario = usuarioDAO.buscarPorId(idUsuario);
+		acao = "EDITAR";
 		return "EDITAR";
 	}
 
@@ -126,7 +128,7 @@ public class UsuarioController {
 		if(!DocumentoValidator.validarCNPJCPF(usuario.getCpf()))
 			throw new RuntimeException("CPF Inválido!");       
 		
-		if(usuarioDAO.buscarPorCPF(usuario))
+		if(usuarioDAO.buscarPorCPF(usuario, acao))
 			throw new RuntimeException("CPF já existe!");       
 		
 		if(usuario.getEmail().isEmpty())
