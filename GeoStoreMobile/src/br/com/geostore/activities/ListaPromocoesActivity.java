@@ -10,7 +10,9 @@ import br.com.geostore.entity.Promocao;
 import br.com.geostore.http.HttpGS;
 import br.com.geostore.util.AlertasGS;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,14 +56,27 @@ public class ListaPromocoesActivity extends ListActivity {
 	    			String voucher = GerarVoucher(promocao.getId(), BuscarActivity.getUsuario().getId());
 	    			if (voucher!=null){
 	    				if (voucher.equals("0")){
-	    					Toast.makeText(ListaPromocoesActivity.this, MsgServidor, Toast.LENGTH_SHORT).show();	    					
+	    					
+	    					Toast.makeText(ListaPromocoesActivity.this, MsgServidor, Toast.LENGTH_SHORT).show();
+	    					
 	    				}else{
-	    					AlertasGS.showMsgOk("Voucher", "Número do voucher gerado: " + voucher, this);
-	    					finish();
+	    					
+	    					AlertDialog alertDialog = new AlertDialog.Builder(this).create();  
+	    				    alertDialog.setTitle("Voucher");  
+	    				    alertDialog.setMessage("Número do voucher gerado: " + voucher);  
+	    				    alertDialog.setButton("OK", new DialogInterface.OnClickListener() {  
+	    				      public void onClick(DialogInterface dialog, int which) {  
+	    				    	  finish();
+	    				    	  return;  
+	    				    } });
+	    				    
+	    				    //AlertasGS.showMsgOk("Voucher", "Número do voucher gerado: " + voucher, this);
 	    					//Toast.makeText(ListaPromocoesActivity.this, "Número do voucher gerado: " + voucher, Toast.LENGTH_SHORT).show();	    					
 	    				}
 	    			}else{
+	    				
 	    				Toast.makeText(ListaPromocoesActivity.this, "Não foi possível gerar o voucher, por favor, tente mais tarde.", Toast.LENGTH_SHORT).show();
+	    				
 	    			}	    			
 	    		}else{
 	    			Intent in = new Intent(ListaPromocoesActivity.this, LoginActivity.class);
