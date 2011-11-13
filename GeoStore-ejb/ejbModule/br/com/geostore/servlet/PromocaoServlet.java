@@ -61,10 +61,13 @@ public class PromocaoServlet extends AbstractResource {
 							//Atualiza o saldo da promoção
 							int qdeSolicitado = promocao.getQdeSolicitada() + 1;
 							promocao.setQdeSolicitada(qdeSolicitado);
-							if (qdeSolicitado==promocao.getQdeVoucher()){
+							
+							if (qdeSolicitado >= promocao.getQdeVoucher()){
+								
 								StatusPromocao statusPromocao = new StatusPromocao();
 								statusPromocao.setId(2l);
 								promocao.setStatusPromocao(statusPromocao);
+								
 							}
 							pDao.alterarAndroid(promocao);
 							
