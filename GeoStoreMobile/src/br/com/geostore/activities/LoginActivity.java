@@ -1,8 +1,10 @@
 package br.com.geostore.activities;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import br.com.geostore.entity.Usuario;
 import br.com.geostore.http.HttpGS;
-import br.com.geostore.json.JsonGS;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,20 +30,21 @@ public class LoginActivity extends Activity{
 				
 				EditText email = (EditText)findViewById(R.id.etEmailLog);
 				EditText senha = (EditText)findViewById(R.id.etSenhaLogin);
-				Usuario usuario = efetuarLogin(email.getText().toString(),senha.getText().toString());
+				Object login = efetuarLogin(email.getText().toString(),senha.getText().toString());
 				
-				if (usuario != null){
-					Toast.makeText(LoginActivity.this, "Login efetuado com sucesso!", Toast.LENGTH_SHORT).show();
+				if (login==null){
 					
-					/*Bundle params = new Bundle();
-					params.putBoolean("logado", true);*/
-					BuscarActivity.setIdUsuario(usuario.getId());
-					Intent it = new Intent(LoginActivity.this, BuscarActivity.class);
-					//it.putExtras(params);
-					startActivity(it);
+					Toast.makeText(LoginActivity.this, "O servidor não pode verificar os dados, por favor, tente novamente mais tarde!", Toast.LENGTH_SHORT).show();
+					
+				}else if ((Boolean) login){
+					
+					Toast.makeText(LoginActivity.this, "Login efetuado com sucesso!", Toast.LENGTH_SHORT).show();					
+					finish();
 					
 				}else{
-					Toast.makeText(LoginActivity.this, "Usuário ou senha inválidos", Toast.LENGTH_SHORT).show();
+					
+					Toast.makeText(LoginActivity.this, "Usuário ou senha inválidos!", Toast.LENGTH_SHORT).show();
+					
 				}
 			}
 		}); 
@@ -63,11 +66,37 @@ public class LoginActivity extends Activity{
 		});
 	}
 	
-	public Usuario efetuarLogin(String email, String senha){
+	public Object efetuarLogin(String email, String senha){
 		HttpGS http = new HttpGS(this);
 		String response = http.efetuarLogin(email, senha);
-		JsonGS json = new JsonGS();
-		Usuario usuario = json.JSonObjectToUsuario(response);
-		return usuario;
+		
+		try {
+			
+			JSONObject jObj = new JSONObject(response);
+			boolean login = jObj.getBoolean("encontrou");
+			
+			if (login){
+				
+				Usuario usuario = new Usuario();			
+				usuario.setId(jObj.getLong("id"));
+				usuario.setNome(jObj.getString("nome"));
+				usuario.setCpf(jObj.getString("cpf"));
+				usuario.setEmail(jObj.getString("email"));						
+				usuario.setSenha(jObj.getString("senha"));
+				
+				BuscarActivity.setUsuario(usuario);
+				
+				return login;
+				
+			}else{
+				
+				return login;
+			}
+			
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 }

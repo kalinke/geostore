@@ -10,6 +10,7 @@ import br.com.geostore.entity.Promocao;
 import br.com.geostore.http.HttpGS;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -48,20 +49,21 @@ public class ListaPromocoesActivity extends ListActivity {
 	    Promocao promocao = promocoes.get(info.position);
 	    switch (i) {
 	    	case CONTEXTMENU_VOUCHER:    		
-	    		Long idUsuario = BuscarActivity.getIdUsuario();
-	    		if (idUsuario!=null){
-	    			String voucher = GerarVoucher(promocao.getId(), idUsuario);
+	    		if (BuscarActivity.getUsuario()!=null){
+	    			String voucher = GerarVoucher(promocao.getId(), BuscarActivity.getUsuario().getId());
 	    			if (voucher!=null){
 	    				if (voucher.equals("0")){
 	    					Toast.makeText(ListaPromocoesActivity.this, MsgServidor, Toast.LENGTH_SHORT).show();	    					
 	    				}else{
-	    					Toast.makeText(ListaPromocoesActivity.this, "Número do voucher gerado: " + voucher, Toast.LENGTH_SHORT).show();
+	    					Toast.makeText(ListaPromocoesActivity.this, "Número do voucher gerado: " + voucher, Toast.LENGTH_SHORT).show();	    					
 	    				}
 	    			}else{
 	    				Toast.makeText(ListaPromocoesActivity.this, "Não foi possível gerar o voucher, por favor, tente mais tarde.", Toast.LENGTH_SHORT).show();
 	    			}	    			
 	    		}else{
-	    			Toast.makeText(ListaPromocoesActivity.this, "Para gerar o voucher é necessário efetuar o login!", Toast.LENGTH_SHORT).show();
+	    			Intent in = new Intent(ListaPromocoesActivity.this, LoginActivity.class);
+					startActivity(in);
+	    			Toast.makeText(ListaPromocoesActivity.this, "Para gerar o voucher é necessário efetuar o login!", Toast.LENGTH_SHORT).show();	    			
 	    		}
 	    		return true;    	
 	    	default:
