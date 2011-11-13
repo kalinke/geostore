@@ -8,12 +8,14 @@ import javax.persistence.Query;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
+import org.jboss.seam.annotations.Transactional;
 import org.jboss.seam.log.Log;
 
 import br.com.geostore.entity.Produto;
 import br.com.geostore.entity.Usuario;
 
 @Name("produtoDAO")
+@Transactional
 public class ProdutoDAO {
 
 	@In
@@ -32,6 +34,7 @@ public class ProdutoDAO {
 		}
 	}
 	
+	@Transactional
 	public void alterar(Produto produto) throws Exception {
 		try{
 			log.info("Alterar produto: #0", produto.getId());			
