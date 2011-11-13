@@ -48,21 +48,21 @@ public class NovoUsuarioServlet extends AbstractResource {
 				s.setId(1l);
 				u.setStatusUsuario(s);
 				
-				int incluiu = 0;
+				int retorno = 0;
 
 				try {
 					UsuarioDAO uDao = (UsuarioDAO) Component.getInstance(UsuarioDAO.class);
 
-					if (uDao.buscarPorCPF(u,"NOVO")) {
-						incluiu = 1;
+					if (uDao.buscarPorCPF(u,"NOVA")) {
+						retorno = 1;
 					} else if (uDao.buscarPorEmail(u)) {
-						incluiu = 2;
+						retorno = 2;
 					} else {
 						uDao.incluir(u);
 					}
 
 					JSONObject j = new JSONObject();
-					j.put("incluiu", incluiu);
+					j.put("retorno", retorno);
 					response.setContentType("application/json");
 					PrintWriter out = response.getWriter();
 					out.print(j);
