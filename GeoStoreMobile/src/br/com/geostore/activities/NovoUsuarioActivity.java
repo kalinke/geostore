@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import br.com.geostore.entity.Usuario;
 import br.com.geostore.http.HttpGS;
+import br.com.geostore.validator.DocumentoValidator;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,15 +15,16 @@ import android.widget.Toast;
 
 public class NovoUsuarioActivity extends Activity {
 	
-	protected static final int INCLUIU    = 0; 
-	protected static final int CPFEXIST   = 1; 
-	protected static final int EMAILEXIST = 2;
+	private static final int INCLUIU    = 0; 
+	private static final int CPFEXIST   = 1; 
+	private static final int EMAILEXIST = 2;
+	private static final int DADOSINV   = 3;
+	private static final int CPFINV     = 4;
+	private static final int ERRO       = 9;
+	private static final int OK         = 99;
 	
-	private String nome = null;
-	private String cpf  = null;
-	private String email= null;
-	private String senha= null;
-	private String msg  = null;
+	private Usuario usuario;
+	private int retorno;
 	
 	public void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState); 
@@ -34,25 +36,43 @@ public class NovoUsuarioActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				
+				retorno = NovoUsuarioActivity.OK;
+				
 				EditText edtNome  = (EditText)findViewById(R.id.etNomeCad);
 				EditText edtCPF   = (EditText)findViewById(R.id.etCPFCad);
 				EditText edtEmail = (EditText)findViewById(R.id.etEmailCad);
 				EditText edtSenha = (EditText)findViewById(R.id.etSenhaCad);
 				
-				nome  = edtNome.getText().toString();
-				cpf   = edtCPF.getText().toString();
-				email = edtEmail.getText().toString();
-				senha = edtSenha.getText().toString();								
+				usuario = new Usuario();
+				usuario.setNome(edtNome.getText().toString());
+				usuario.setCpf(edtCPF.getText().toString());
+				usuario.setEmail(edtEmail.getText().toString());
+				usuario.setSenha(edtSenha.getText().toString());								
 				
 				if (validaDados()){
-					if (novoUsuario()){
-						Toast.makeText(NovoUsuarioActivity.this, msg, Toast.LENGTH_SHORT).show();
+					novoUsuario();
+				}
+				
+				switch (retorno){
+					case INCLUIU:
+						Toast.makeText(NovoUsuarioActivity.this, "Cadastro efetuado com sucesso!", Toast.LENGTH_SHORT).show();
 						finish();
-					}else{
+						break;
+					case CPFEXIST:
+						Toast.makeText(NovoUsuarioActivity.this, "Seu CPF já existe em nossa base de dados!", Toast.LENGTH_SHORT).show();
+						break;
+					case EMAILEXIST:
+						Toast.makeText(NovoUsuarioActivity.this, "Seu e-mail já existe em nossa base de dados!", Toast.LENGTH_SHORT).show();
+						break;									
+					case DADOSINV:
+						Toast.makeText(NovoUsuarioActivity.this, "Dados inválidos para criação do usuário...", Toast.LENGTH_SHORT).show();
+						break;
+					case CPFINV:
+						Toast.makeText(NovoUsuarioActivity.this, "CPF inválido.", Toast.LENGTH_SHORT).show();
+						break;
+					case ERRO:
 						Toast.makeText(NovoUsuarioActivity.this, "Ocorreu um erro, por favor, tente mais tarde!", Toast.LENGTH_SHORT).show();
-					}
-				}else{
-					Toast.makeText(NovoUsuarioActivity.this, "Dados inválidos para criação do usuário...", Toast.LENGTH_SHORT).show();
+						break;
 				}
 			}
 		});
@@ -60,54 +80,38 @@ public class NovoUsuarioActivity extends Activity {
 	
 	public boolean validaDados(){
 		
-		boolean dados = true;
-		
-		if (nome.equals("")){
-			dados = false;
-		}else if (cpf.equals("")){
-			dados = false;
-		}else if (email.equals("")){
-			dados = false;
-		}else if (senha.equals("")){
-			dados = false;
-		}				
-		
-		return dados;
-	}
-	
-	public boolean novoUsuario(){
-		
-		Usuario usuario = new Usuario();		
-		usuario.setNome(nome);
-		usuario.setCpf(cpf);
-		usuario.setEmail(email);				
-		usuario.setSenha(senha);
-		
-		HttpGS http = new HttpGS(this);
-		String response = http.novoUsuario(usuario);
-		try {
-			
-			JSONObject jObj = new JSONObject(response);
-			int i = jObj.getInt("incluiu");
-			
-			switch (i){
-				case INCLUIU:
-					this.msg = "Cadastro efetuado com sucesso!";
-					break;
-				case CPFEXIST:
-					this.msg = "Seu CPF já existe em nossa base de dados!";
-					break;
-				case EMAILEXIST:
-					this.msg = "Seu e-mail já existe em nossa base de dados!";
-					break;				
-			}		
-			
-			return true;
-			
-		} catch (JSONException e) {
-			e.printStackTrace();
+		if (usuario.getNome().equals("")){
+			this.retorno = NovoUsuarioActivity.DADOSINV;
+		}else if (usuario.getCpf().equals("")){
+			this.retorno = NovoUsuarioActivity.DADOSINV;
+		}else if (!DocumentoValidator.validarCNPJCPF(usuario.getCpf())){
+			this.retorno = NovoUsuarioActivity.CPFINV;
+		}else if (usuario.getEmail().equals("")){
+			this.retorno = NovoUsuarioActivity.DADOSINV;
+		}else if (usuario.getSenha().equals("")){
+			this.retorno = NovoUsuarioActivity.DADOSINV;
 		}
 		
-		return false;
+		return this.retorno==NovoUsuarioActivity.OK;
+
+	}
+	
+	public void novoUsuario(){
+				
+		HttpGS http = new HttpGS(this);
+		String response = http.novoUsuario(this.usuario);
+		if (response!=null){
+			try {
+				
+				JSONObject jObj = new JSONObject(response);
+				this.retorno = jObj.getInt("retorno");				
+				
+			} catch (JSONException e) {
+				
+				this.retorno = this.ERRO;
+				e.printStackTrace();
+				
+			}
+		}
 	}
 }
