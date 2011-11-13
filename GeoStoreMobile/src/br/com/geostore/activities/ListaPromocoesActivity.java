@@ -71,7 +71,6 @@ public class ListaPromocoesActivity extends ListActivity {
 	    				    } });
 	    				    alertDialog.show();
 	    				    
-	    					//Toast.makeText(ListaPromocoesActivity.this, "Número do voucher gerado: " + voucher, Toast.LENGTH_SHORT).show();	    					
 	    				}
 	    			}else{
 	    				
