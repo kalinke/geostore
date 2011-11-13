@@ -10,6 +10,9 @@ import android.widget.EditText;
 import br.com.geostore.http.HttpGS;
 
 public class RecuperarSenhaActivity extends Activity{
+	
+	private static final String TAG = "RecuperarSenhaActivity";
+	
 	public void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState); 
 		setContentView(R.layout.senha_recup);

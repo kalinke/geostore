@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 public class LoginActivity extends Activity{
 	
+	private static final String TAG = "LoginActivity";
+	
 	public void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState); 
 		setContentView(R.layout.login_tela);
