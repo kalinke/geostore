@@ -14,8 +14,10 @@
 		    android:layout_height="wrap_content"
 		    android:textColor="@color/branco"
 		    android:textSize="16dp">
-	    </TextView>
-	    <TextView
+	    </TextView>	    		    	   
+    </TableRow>
+    <TableRow>
+    	<TextView
 	    	android:layout_gravity="right" 
 		    android:text="txtQtde" 
 		    android:id="@+id/txtQtde" 
@@ -23,6 +25,6 @@
 		    android:layout_height="wrap_content"
 		    android:textColor="@color/branco"
 		    android:textSize="16dp">
-	    </TextView>			    	   
-    </TableRow>                   
+	    </TextView>
+	  </TableRow>	               
 </TableLayout>
