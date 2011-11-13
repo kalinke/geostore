@@ -53,7 +53,7 @@ public class NovoUsuarioServlet extends AbstractResource {
 				try {
 					UsuarioDAO uDao = (UsuarioDAO) Component.getInstance(UsuarioDAO.class);
 
-					if (uDao.buscarPorCPF(u)) {
+					if (uDao.buscarPorCPF(u,"NOVO")) {
 						incluiu = 1;
 					} else if (uDao.buscarPorEmail(u)) {
 						incluiu = 2;
