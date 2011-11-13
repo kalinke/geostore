@@ -58,9 +58,10 @@ public class ListaProdutosActivity extends ListActivity {
 	    		startActivity(in);
 	    		return true;	    	
 	    	case CONTEXTMENU_PROMO:	    		    			    			    		    	
-	    		if (p.getPromocoes().size()>0){
-		    		in = new Intent(ListaProdutosActivity.this, ListaPromocoesActivity.class);
-					in.putExtra("promocoes", (ArrayList<Promocao>) p.getPromocoes());										
+	    		if (p.getPromocoes().size()>0){		    		
+	    			in = new Intent(ListaProdutosActivity.this, ListaPromocoesActivity.class);					
+	    			in.putExtra("promocoes", (ArrayList<Promocao>) p.getPromocoes());
+	    			finish();
 					startActivity(in);
 	    		}else{
 	    			Toast.makeText(ListaProdutosActivity.this, "Não existe nenhuma promoção cadastrada para este produto...", Toast.LENGTH_SHORT).show();

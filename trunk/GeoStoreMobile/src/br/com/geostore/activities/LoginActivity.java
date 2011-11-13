@@ -32,19 +32,19 @@ public class LoginActivity extends Activity{
 				EditText senha = (EditText)findViewById(R.id.etSenhaLogin);
 				Object login = efetuarLogin(email.getText().toString(),senha.getText().toString());
 				
-				if (login==null){
-					
-					Toast.makeText(LoginActivity.this, "O servidor não pode verificar os dados, por favor, tente novamente mais tarde!", Toast.LENGTH_SHORT).show();
-					
-				}else if ((Boolean) login){
-					
-					Toast.makeText(LoginActivity.this, "Login efetuado com sucesso!", Toast.LENGTH_SHORT).show();					
-					finish();
-					
-				}else{
-					
-					Toast.makeText(LoginActivity.this, "Usuário ou senha inválidos!", Toast.LENGTH_SHORT).show();
-					
+				if (login!=null){
+										
+					if ((Boolean) login){
+						
+						Toast.makeText(LoginActivity.this, "Login efetuado com sucesso!", Toast.LENGTH_SHORT).show();					
+						finish();
+						
+					}else{
+						
+						Toast.makeText(LoginActivity.this, "Usuário ou senha inválidos!", Toast.LENGTH_SHORT).show();
+						
+					}
+				
 				}
 			}
 		}); 
@@ -70,33 +70,34 @@ public class LoginActivity extends Activity{
 		HttpGS http = new HttpGS(this);
 		String response = http.efetuarLogin(email, senha);
 		
-		try {
-			
-			JSONObject jObj = new JSONObject(response);
-			boolean login = jObj.getBoolean("encontrou");
-			
-			if (login){
+		if (response!=null){
+			try {
 				
-				Usuario usuario = new Usuario();			
-				usuario.setId(jObj.getLong("id"));
-				usuario.setNome(jObj.getString("nome"));
-				usuario.setCpf(jObj.getString("cpf"));
-				usuario.setEmail(jObj.getString("email"));						
-				usuario.setSenha(jObj.getString("senha"));
+				JSONObject jObj = new JSONObject(response);
+				boolean login = jObj.getBoolean("encontrou");
 				
-				BuscarActivity.setUsuario(usuario);
+				if (login){
+					
+					Usuario usuario = new Usuario();			
+					usuario.setId(jObj.getLong("id"));
+					usuario.setNome(jObj.getString("nome"));
+					usuario.setCpf(jObj.getString("cpf"));
+					usuario.setEmail(jObj.getString("email"));						
+					usuario.setSenha(jObj.getString("senha"));
+					
+					BuscarActivity.setUsuario(usuario);
+					
+					return login;
+					
+				}else{
+					
+					return login;
+				}
 				
-				return login;
-				
-			}else{
-				
-				return login;
+			} catch (JSONException e) {
+				e.printStackTrace();
 			}
-			
-		} catch (JSONException e) {
-			e.printStackTrace();
 		}
-		
 		return null;
 	}
 }

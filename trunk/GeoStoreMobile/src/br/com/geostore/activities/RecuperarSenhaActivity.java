@@ -26,13 +26,10 @@ public class RecuperarSenhaActivity extends Activity{
 				
 				String response = hgs.recuperaSenha(email);
 				
-								
-				AlertasGS msg = new AlertasGS();
-				
 				if(response.equals("ENVIADO")){					
-					msg.mostraMsg("Recupera senha", "Senha enviada com sucesso.", RecuperarSenhaActivity.this);
+					AlertasGS.showMsgOk("Recupera senha", "Senha enviada com sucesso.", RecuperarSenhaActivity.this);
 				}else{
-					msg.mostraMsg("Recupera senha", "Erro, verifique o e-mail e tente novamente.", RecuperarSenhaActivity.this);
+					AlertasGS.showMsgOk("Recupera senha", "Erro, verifique o e-mail e tente novamente.", RecuperarSenhaActivity.this);
 				}
 					
 			}		
