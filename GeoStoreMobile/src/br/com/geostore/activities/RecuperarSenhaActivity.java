@@ -21,9 +21,13 @@ public class RecuperarSenhaActivity extends Activity{
 		final EditText etEmail = (EditText)findViewById(R.id.etEmailSenhaRec);
 				
 		//envia email para recuperar senha
-		btEnviar.setOnClickListener(new View.OnClickListener() {			
-			@Override
-			public void onClick(View v) {
+		btEnviar.setOnClickListener(new View.OnClickListener() {	
+			
+			public void onClick(View v){
+				recuperarSenha();
+			}
+
+			public void recuperarSenha() {
 				String email = etEmail.getText().toString();
 				
 				HttpGS hgs = new HttpGS(RecuperarSenhaActivity.this);

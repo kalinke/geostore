@@ -26,16 +26,20 @@ public class LoginActivity extends Activity{
 		TextView tvCadastro = (TextView)findViewById(R.id.tvCadLoginClick);
 		TextView tvRecSenha = (TextView)findViewById(R.id.tvRecSenhaLoginClick);
 				
-		btLogin.setOnClickListener(new View.OnClickListener() {			
-			@Override
-			public void onClick(View v) {										
+		btLogin.setOnClickListener(new View.OnClickListener() {	
+			
+			public void onClick(View v){
+				realizarLogin();
+			}
+			
+			public void realizarLogin() {										
 				
 				EditText email = (EditText)findViewById(R.id.etEmailLog);
 				EditText senha = (EditText)findViewById(R.id.etSenhaLogin);
 				Object login = efetuarLogin(email.getText().toString(),senha.getText().toString());
 				
 				if (login!=null){
-										
+					
 					if ((Boolean) login){
 						
 						Toast.makeText(LoginActivity.this, "Login efetuado com sucesso!", Toast.LENGTH_SHORT).show();					
