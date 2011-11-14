@@ -61,6 +61,9 @@ public class MeusDadosServlet extends AbstractResource {
 						jAtributos.put("bairroLoja",voucher.getPromocao().getProduto().getLoja().getEndereco().getBairro());
 						jAtributos.put("descPromocao",voucher.getPromocao().getDescricao());
 						jAtributos.put("numVoucher",voucher.getCodigoVoucher());
+						jAtributos.put("telLoja", voucher.getPromocao().getProduto().getLoja().getTelefone());
+						jAtributos.put("latLoja", voucher.getPromocao().getProduto().getLoja().getEndereco().getLatitude());
+						jAtributos.put("logLoja", voucher.getPromocao().getProduto().getLoja().getEndereco().getLongitude());
 						
 						JSONObject jVoucher = new JSONObject();
 						jVoucher.put("voucher", jAtributos);
