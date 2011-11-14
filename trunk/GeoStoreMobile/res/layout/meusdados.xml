@@ -140,8 +140,8 @@
 				android:layout_gravity="right"
 				android:layout_height="wrap_content" 
 				android:layout_width="wrap_content" 			
-				android:text="txtPromo" 
-				android:id="@+id/txtPromo"
+				android:text="txtVoucher" 
+				android:id="@+id/txtVoucher"
 				android:textColor="@color/azul_2"
 				android:textSize="12dp">
 			</TextView>	   	    
@@ -150,21 +150,22 @@
 		    <TextView 
 		    	android:layout_height="wrap_content" 
 		    	android:layout_width="wrap_content" 
-		    	android:text="txtLoja" 
-		    	android:id="@+id/txtLoja"
+		    	android:text="txtEndLoja" 
+		    	android:id="@+id/txtEndLoja"
 		    	android:textColor="@color/azul_2"
 		    	android:textSize="12dp">
-		    </TextView>
+		    </TextView>		    	   	    
+	    </TableRow>	
+	    <TableRow>
 		    <TextView 
-				android:layout_gravity="right"
-				android:layout_height="wrap_content" 
-				android:layout_width="wrap_content" 			
-				android:text="txtPromo" 
-				android:id="@+id/txtPromo"
-				android:textColor="@color/azul_2"
-				android:textSize="12dp">
-			</TextView>	   	    
-	    </TableRow>	      	                    
+		    	android:layout_height="wrap_content" 
+		    	android:layout_width="wrap_content" 
+		    	android:text="txtPromoDesc" 
+		    	android:id="@+id/txtPromoDesc"
+		    	android:textColor="@color/azul_2"
+		    	android:textSize="12dp">
+		    </TextView>		    	   	    
+	    </TableRow>      	                    
 	</TableLayout>
 		 
 		 
