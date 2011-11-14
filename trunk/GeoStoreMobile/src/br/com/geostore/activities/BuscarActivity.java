@@ -119,7 +119,7 @@ public class BuscarActivity extends Activity implements Button.OnClickListener, 
 						
 						for (int x=0;x<jArrayPromo.length();x++){
 							
-							JSONObject jPromo = jArrayPromo.getJSONObject(i).getJSONObject("promocao");
+							JSONObject jPromo = jArrayPromo.getJSONObject(x).getJSONObject("promocao");
 							Promocao promo = new Promocao();
 							promo.setId(jPromo.getLong("idPromo"));
 							promo.setDescricao(jPromo.getString("descPromo"));						
