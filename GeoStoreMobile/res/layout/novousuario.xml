@@ -26,8 +26,7 @@
 	 		android:layout_width="276dp" 
 	 		android:id="@+id/etNomeCad"
 	 		android:layout_gravity="center_horizontal"
-	        android:layout_marginTop="10dp"
-	        android:text="Teste">
+	        android:layout_marginTop="10dp">
 	 		<requestFocus></requestFocus>
 	 	</EditText>
 	 	  	
@@ -40,8 +39,7 @@
 	  		android:layout_width="276dp" 
 	  		android:textSize="18sp" 
 	  		android:layout_gravity="center_horizontal"
-	        android:layout_marginTop="15dp"
-	        android:text="99999999999">
+	        android:layout_marginTop="15dp">
 	  	</EditText>
 	  	  	
 	  	<EditText 
@@ -52,8 +50,7 @@
 	  		android:layout_width="276dp" 
 	  		android:textSize="18sp" 
 	  		android:layout_gravity="center_horizontal"
-	        android:layout_marginTop="15dp"
-	        android:text="teste@teste.com">
+	        android:layout_marginTop="15dp">
 	  	</EditText>
 	  	
 	  	<EditText 
@@ -64,8 +61,7 @@
 	  		android:layout_width="276dp" 
 	  		android:id="@+id/etSenhaCad"
 	  		android:layout_gravity="center_horizontal"
-	        android:layout_marginTop="15dp"
-	        android:text="teste">
+	        android:layout_marginTop="15dp">
 	  	</EditText>
 	  	
 	  	<Button 

@@ -17,7 +17,7 @@
 				android:layout_x="0px" 
 				android:enabled="true" 
 				android:clickable="true" 
-				android:apiKey="0c0s9lyHJyuq1sj16MAW_JxCuxYY-5ZobVheB2g"
+				android:apiKey="0VzcOsEORQ150EdaHWWVP8X_00oF2YyecxBh6VQ"
 				android:layout_y="105px"> 
 			</com.google.android.maps.MapView> 
   	</TableLayout>
