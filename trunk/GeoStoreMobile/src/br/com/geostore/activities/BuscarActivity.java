@@ -18,10 +18,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnKeyListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -48,6 +50,16 @@ public class BuscarActivity extends Activity implements Button.OnClickListener, 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.buscar);        
+               
+		EditText edtBuscar = (EditText) findViewById(R.id.etItemMainBusca);		
+		edtBuscar.setOnKeyListener(new OnKeyListener() {
+		    public boolean onKey(View v, int keyCode, KeyEvent event) {
+		        if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+		          return true;
+		        }
+		        return false;
+		    }
+		});
         
         Button btnBuscar = (Button) findViewById(R.id.btBuscarMainBusca);        
         btnBuscar.setOnClickListener(this);               
@@ -88,10 +100,25 @@ public class BuscarActivity extends Activity implements Button.OnClickListener, 
 		});
 	}
 
+
 	@Override
 	public void onClick(View v) {			
 				
 		EditText edtBuscar = (EditText) findViewById(R.id.etItemMainBusca);
+	
+		edtBuscar.setOnKeyListener(new OnKeyListener() {
+		    public boolean onKey(View v, int keyCode, KeyEvent event) {
+		        // If the event is a key-down event on the "enter" button
+		        if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+		        	Toast.makeText(null, "Nenhum produto encontrado, aumente o raio ou tente outros termos.", Toast.LENGTH_SHORT).show();
+		        
+		          return true;
+		        }
+		        return false;
+		    }
+		});
+		
+		
 		String log  = "0";
 		String lat  = "0";
 		
@@ -158,7 +185,7 @@ public class BuscarActivity extends Activity implements Button.OnClickListener, 
 						i.putExtra("produtos", pList);										
 						startActivity(i);
 					}else{
-						Toast.makeText(this, "Nenhum produto encontrado.", Toast.LENGTH_SHORT).show();
+						Toast.makeText(this, "Nenhum produto encontrado, aumente o raio ou tente outros termos.", Toast.LENGTH_SHORT).show();
 					}
 						
 				} catch (JSONException e) {
