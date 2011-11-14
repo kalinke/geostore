@@ -17,6 +17,10 @@
 	    </TextView>	   
     </TableRow>	
     
+    <View
+        android:layout_height="2dip"
+        android:background="@color/azul_2" />
+    
     <TableRow>
 	    <TextView 
 	    	android:hint="Descrição do Produto"
@@ -36,13 +40,15 @@
 		    android:layout_height="wrap_content"
 		    android:textColor="@color/azul_2"
 	    	android:textSize="12dp">
-	    </TextView>
-	    <TextView 
+	    </TextView>	        						    		    	   
+    </TableRow>
+    
+    <TableRow>
+		<TextView 
 	    	android:hint="Preço Produto"
 	    	android:id="@+id/tvPrcProdMeusVouchers"
 	    	android:layout_width="wrap_content" 
 		    android:layout_height="wrap_content"
-		    android:layout_gravity="center_horizontal"
 		    android:textColor="@color/azul_2"
 	    	android:textSize="12dp">
 	    </TextView>	    						    		    	   
@@ -78,17 +84,18 @@
 		    android:layout_height="wrap_content"
 		    android:textColor="@color/azul_2"
 	    	android:textSize="12dp">
-	    </TextView>
+	    </TextView>	    	    						    		    	   
+    </TableRow>    
+    <TableRow>		
 	    <TextView 
 	    	android:hint="Bairro"
 	    	android:id="@+id/tvBairroMeusVouchers"
 	    	android:layout_width="wrap_content" 
 		    android:layout_height="wrap_content"
-		    android:layout_gravity="center_horizontal"
 		    android:textColor="@color/azul_2"
 	    	android:textSize="12dp">
 	    </TextView>	    						    		    	   
-    </TableRow>      
+    </TableRow>   
     <TableRow>
 	    <TextView 
 	    	android:hint="Descrição Promoção"
