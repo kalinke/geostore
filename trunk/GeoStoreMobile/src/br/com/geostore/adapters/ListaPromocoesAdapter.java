@@ -38,7 +38,7 @@ public class ListaPromocoesAdapter extends BaseAdapter {
 		
 		Promocao p = promocoes.get(position);
 		
-		View v = LayoutInflater.from(ctx).inflate(R.layout.lista_promocoes, null);		
+		View v = LayoutInflater.from(ctx).inflate(R.layout.listapromocoes, null);		
    
 		TextView txtDesc  = (TextView) v.findViewById(R.id.txtDesc);
 		TextView txtQtde  = (TextView) v.findViewById(R.id.txtQtde);
