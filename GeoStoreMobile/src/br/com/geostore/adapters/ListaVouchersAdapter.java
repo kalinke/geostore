@@ -45,16 +45,22 @@ public class ListaVouchersAdapter extends BaseAdapter {
 		TextView tvDescProd  = (TextView) v.findViewById(R.id.tvDescProdMeusVouchers);
 		TextView tvNomeLoja  = (TextView) v.findViewById(R.id.tvNomeLojaMeusVouchers);
 		TextView tvEndLoja   = (TextView) v.findViewById(R.id.tvEndLojaMeusVouchers);
+		TextView tvNumLoja   = (TextView) v.findViewById(R.id.tvNumLojaMeusVouchers);
+		TextView tvBairroLoja   = (TextView) v.findViewById(R.id.tvBairroMeusVouchers);
 		TextView tvPrcProd   = (TextView) v.findViewById(R.id.tvPrcProdMeusVouchers);
 		TextView tvNumVoucher  = (TextView) v.findViewById(R.id.tvNumVoucherMeusVouchers);
+		TextView tvDescPromo  = (TextView) v.findViewById(R.id.tvDescPromoMeusVouchers);
 		
-		tvNomeProd.setText(voucher.getPromocao().getProduto().getNome());
-		tvDescProd.setText(voucher.getPromocao().getProduto().getDescricao());
-		tvNomeLoja.setText(voucher.getPromocao().getProduto().getLoja().getNomeFantasia());
-		tvEndLoja.setText(voucher.getPromocao().getProduto().getLoja().getEndereco().getLogradouro());
-		tvPrcProd.setText(voucher.getPromocao().getProduto().getValor().toString());
-		tvNumVoucher.setText(voucher.getCodigoVoucher());
-				  		
+		tvNomeProd.setText("Nome: ".concat(voucher.getPromocao().getProduto().getNome()));
+		tvDescProd.setText("Desc: ".concat(voucher.getPromocao().getProduto().getDescricao()));
+		tvNomeLoja.setText("Loja: ".concat(voucher.getPromocao().getProduto().getLoja().getNomeFantasia()));
+		tvEndLoja.setText("End: ".concat(voucher.getPromocao().getProduto().getLoja().getEndereco().getLogradouro()));
+		tvNumLoja.setText("Num: ".concat(voucher.getPromocao().getProduto().getLoja().getEndereco().getNumeroLogradouro()));
+		tvBairroLoja.setText("Bairro: ".concat(voucher.getPromocao().getProduto().getLoja().getEndereco().getBairro()));
+		tvPrcProd.setText("Preço: ".concat(voucher.getPromocao().getProduto().getValor().toString()));
+		tvNumVoucher.setText("Voucher: ".concat(voucher.getCodigoVoucher()));
+		tvDescPromo.setText("Promoção: ".concat(voucher.getPromocao().getDescricao()));
+		
 		return v;
 		      	
 	}
