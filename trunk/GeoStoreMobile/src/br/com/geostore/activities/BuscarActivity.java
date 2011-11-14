@@ -84,13 +84,12 @@ public class BuscarActivity extends Activity implements Button.OnClickListener, 
 				}
 			}
 		});
-
+        
         TextView txtMeusDados = (TextView) findViewById(R.id.tvDadosMainBuscaClick);
         txtMeusDados.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if (logado()){
-					Intent i = new Intent(BuscarActivity.this, MeusVouchersActivity.class);
-					startActivity(i);
+					meusVouchers();
 				}else{
 					Toast.makeText(BuscarActivity.this, "Para acessar seus dados é necessário efetuar o login.", Toast.LENGTH_SHORT).show();
 					Intent i = new Intent(BuscarActivity.this, LoginActivity.class);
@@ -99,6 +98,11 @@ public class BuscarActivity extends Activity implements Button.OnClickListener, 
 			}
 		});
 	}
+    
+    public void meusVouchers(){
+		Intent i = new Intent(BuscarActivity.this, MeusVouchersActivity.class);
+		startActivity(i);
+    }
     
     public void onClick(View v){
     	buscarProduto();
