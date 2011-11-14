@@ -30,6 +30,6 @@
         <activity android:name="NovoUsuarioActivity" android:screenOrientation="portrait"/>       	                                           
         <activity android:name="ListaPromocoesActivity" android:screenOrientation="portrait"/>
         <activity android:name="RecuperarSenhaActivity" android:screenOrientation="portrait"/>
-        <activity android:name="MeusDadosActivity" android:screenOrientation="portrait"/>
+        <activity android:name="MeusVouchersActivity" android:screenOrientation="portrait"/>
     </application>
 </manifest>
