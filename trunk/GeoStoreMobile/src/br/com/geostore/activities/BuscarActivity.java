@@ -133,12 +133,12 @@ public class BuscarActivity extends Activity implements Button.OnClickListener, 
 			boolean emulator = false;
 			
 			if (emulator){
-				GpsGS g = new GpsGS(this);
-				lat = Double.toString(g.getLastLatitude());
-				log = Double.toString(g.getLastLongitude());			
-			}else{
 				lat = "-25.494805";
 				log = "-49.2922";
+			}else{
+				GpsGS g = new GpsGS(this);
+				lat = Double.toString(g.getLastLatitude());
+				log = Double.toString(g.getLastLongitude());				
 			}
 			
 			HttpGS h = new HttpGS(this);
