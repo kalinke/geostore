@@ -41,6 +41,12 @@ public class ListaProdutosActivity extends ListActivity {
 		menu.add(0,CONTEXTMENU_PROMO,  0,"Promoções");
 	}
 	
+	public void tracarRota(Produto p){
+		Intent in = new Intent(ListaProdutosActivity.this, RotaActivity.class);
+		in.putExtra("produto", p);										
+		startActivity(in);	  
+	}
+	
     public boolean onContextItemSelected(MenuItem item) {
 	    
     	AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();	    
@@ -49,9 +55,7 @@ public class ListaProdutosActivity extends ListActivity {
 	    Intent in;
 	    switch (i) {
 	    	case CONTEXTMENU_ROTA:    		
-	    		in = new Intent(ListaProdutosActivity.this, RotaActivity.class);
-				in.putExtra("produto", p);										
-				startActivity(in);	    		
+	    		tracarRota(p);
 	    		return true;
 	    	case CONTEXTMENU_DISCAR:	    		
 	    		Uri fone = Uri.parse("tel:" + p.getLoja().getTelefone());
