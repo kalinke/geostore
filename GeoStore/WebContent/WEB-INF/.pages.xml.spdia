@@ -216,6 +216,9 @@
   <output ID="/Cadastro/Promocao/ControlePromocao.xhtml" NAME="output"
    PATH="/Cadastro/Promocao/ControlePromocao.xhtml"
    TARGET="#xCadastro#xPromocao#xControlePromocao.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/Cadastro/Promocao/ControlePromocao.xhtml" NAME="output1"
+   PATH="/Cadastro/Promocao/ControlePromocao.xhtml"
+   TARGET="#xCadastro#xPromocao#xControlePromocao.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
  </item>
  <item ID="#Cadastro#Promocao#CadastroPromocao.xhtml"
   NAME="#xCadastro#xPromocao#xCadastroPromocao.xhtml"
