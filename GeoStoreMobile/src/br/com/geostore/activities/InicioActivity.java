@@ -22,6 +22,7 @@ public class InicioActivity extends Activity implements Runnable{
 		}
 
 		public void run() {
+			BuscarActivity.setUsuario(null);
 			startActivity(new Intent(InicioActivity.this, BuscarActivity.class));
 			finish();
 		}
