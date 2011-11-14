@@ -7,51 +7,96 @@
   android:layout_marginTop="5dp"
   android:stretchColumns="1">    
     <TableRow>
-	    <TextView 
+	    <TextView
+	    	android:hint="Nome Produto" 
 	    	android:id="@+id/tvNomeProdMeusVouchers"
 	    	android:layout_width="wrap_content" 
 		    android:layout_height="wrap_content"
-		    android:textColor="@color/azul_2"
-		    android:textSize="16dp">
-	    </TextView>
+		    android:textColor="@color/preto"
+		    android:textSize="20dp">
+	    </TextView>	   
+    </TableRow>	
+    
+    <TableRow>
 	    <TextView 
+	    	android:hint="Descrição do Produto"
 	    	android:id="@+id/tvDescProdMeusVouchers"
 	    	android:layout_width="wrap_content" 
 		    android:layout_height="wrap_content"
 		    android:textColor="@color/azul_2"
-		    android:textSize="16dp">
-	    </TextView>]
-    </TableRow>		    
-<TableRow>
-	    <TextView 
-	    	android:id="@+id/tvNomeLojaMeusVouchers"
-	    	android:layout_width="wrap_content" 
-		    android:layout_height="wrap_content"
-		    android:textColor="@color/azul_2"
-		    android:textSize="16dp">
+	    	android:textSize="12dp">
 	    </TextView>
-	    <TextView 
-	    	android:id="@+id/tvEndLojaMeusVouchers"
-	    	android:layout_width="wrap_content" 
-		    android:layout_height="wrap_content"
-		    android:textColor="@color/azul_2"
-		    android:textSize="16dp">
-	    </TextView>
-    </TableRow>		    
-<TableRow>
-	    <TextView 
-	    	android:id="@+id/tvPrcProdMeusVouchers"
-	    	android:layout_width="wrap_content" 
-		    android:layout_height="wrap_content"
-		    android:textColor="@color/azul_2"
-		    android:textSize="16dp">
-	    </TextView>
-	    <TextView 
+    </TableRow>    
+    
+    <TableRow>
+		<TextView
+	    	android:hint="Num Voucher" 
 	    	android:id="@+id/tvNumVoucherMeusVouchers"
 	    	android:layout_width="wrap_content" 
 		    android:layout_height="wrap_content"
 		    android:textColor="@color/azul_2"
-		    android:textSize="16dp">
-	    </TextView>						    		    	   
+	    	android:textSize="12dp">
+	    </TextView>
+	    <TextView 
+	    	android:hint="Preço Produto"
+	    	android:id="@+id/tvPrcProdMeusVouchers"
+	    	android:layout_width="wrap_content" 
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="center_horizontal"
+		    android:textColor="@color/azul_2"
+	    	android:textSize="12dp">
+	    </TextView>	    						    		    	   
+    </TableRow>
+    
+    <TableRow>
+	    <TextView 
+	    	android:hint="Nome Loja"
+	    	android:id="@+id/tvNomeLojaMeusVouchers"
+	    	android:layout_width="wrap_content" 
+		    android:layout_height="wrap_content"
+		    android:textColor="@color/azul_2"
+	    	android:textSize="12dp">
+	    </TextView>	    
+    </TableRow>
+    	    
+	<TableRow>
+	    <TextView
+	    	android:hint="Endereço Loja" 
+	    	android:id="@+id/tvEndLojaMeusVouchers"
+	    	android:layout_width="wrap_content" 
+		    android:layout_height="wrap_content"
+		    android:textColor="@color/azul_2"
+	    	android:textSize="12dp">
+	    </TextView>	    
+    </TableRow>		  
+    
+    <TableRow>
+		<TextView
+	    	android:hint="Num Loja" 
+	    	android:id="@+id/tvNumLojaMeusVouchers"
+	    	android:layout_width="wrap_content" 
+		    android:layout_height="wrap_content"
+		    android:textColor="@color/azul_2"
+	    	android:textSize="12dp">
+	    </TextView>
+	    <TextView 
+	    	android:hint="Bairro"
+	    	android:id="@+id/tvBairroMeusVouchers"
+	    	android:layout_width="wrap_content" 
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="center_horizontal"
+		    android:textColor="@color/azul_2"
+	    	android:textSize="12dp">
+	    </TextView>	    						    		    	   
+    </TableRow>      
+    <TableRow>
+	    <TextView 
+	    	android:hint="Descrição Promoção"
+	    	android:id="@+id/tvDescPromoMeusVouchers"
+	    	android:layout_width="wrap_content" 
+		    android:layout_height="wrap_content"
+		    android:textColor="@color/azul_2"
+	    	android:textSize="12dp">
+	    </TextView>	    
     </TableRow>	    
 </TableLayout>
