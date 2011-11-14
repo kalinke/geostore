@@ -89,5 +89,84 @@
 		 	android:textColor="@color/preto">
 		 </TextView>
 		 
+		 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"	
+			  android:padding="15dip"
+			  android:orientation="vertical"
+			  android:layout_width="fill_parent"
+			  android:layout_height="fill_parent"
+			  android:layout_marginTop="1dp" 
+			  android:stretchColumns="1">   	   
+		    <TableRow>
+			    <TextView 
+				    android:text="txtNome" 
+				    android:id="@+id/txtNome" 
+				    android:layout_width="wrap_content" 
+				    android:layout_height="wrap_content"
+				    android:textColor="@color/preto"
+				    android:textSize="20dp">
+			    </TextView>				    	    
+		    </TableRow>
+    
+		    <TableRow>
+			    <TextView 
+			    	android:layout_height="wrap_content" 
+			    	android:layout_width="wrap_content" 
+			    	android:text="txtDesc" 
+			    	android:id="@+id/txtDesc"
+			    	android:textColor="@color/azul_2"
+			    	android:textSize="12dp">
+			    </TextView>   	
+			    <TextView 
+					android:layout_gravity="right"
+					android:layout_height="wrap_content" 
+					android:layout_width="wrap_content" 			
+					android:text="txtPreco" 
+					android:id="@+id/txtPrc"
+					android:textColor="@color/azul_2"
+					android:textSize="12dp">
+				</TextView>    
+		    </TableRow>
+    
+	    <TableRow>
+		    <TextView 
+		    	android:layout_height="wrap_content" 
+		    	android:layout_width="wrap_content" 
+		    	android:text="txtLoja" 
+		    	android:id="@+id/txtLoja"
+		    	android:textColor="@color/azul_2"
+		    	android:textSize="12dp">
+		    </TextView>
+		    <TextView 
+				android:layout_gravity="right"
+				android:layout_height="wrap_content" 
+				android:layout_width="wrap_content" 			
+				android:text="txtPromo" 
+				android:id="@+id/txtPromo"
+				android:textColor="@color/azul_2"
+				android:textSize="12dp">
+			</TextView>	   	    
+	    </TableRow>	
+	    <TableRow>
+		    <TextView 
+		    	android:layout_height="wrap_content" 
+		    	android:layout_width="wrap_content" 
+		    	android:text="txtLoja" 
+		    	android:id="@+id/txtLoja"
+		    	android:textColor="@color/azul_2"
+		    	android:textSize="12dp">
+		    </TextView>
+		    <TextView 
+				android:layout_gravity="right"
+				android:layout_height="wrap_content" 
+				android:layout_width="wrap_content" 			
+				android:text="txtPromo" 
+				android:id="@+id/txtPromo"
+				android:textColor="@color/azul_2"
+				android:textSize="12dp">
+			</TextView>	   	    
+	    </TableRow>	      	                    
+	</TableLayout>
+		 
+		 
 	</LinearLayout>
 </ScrollView>
