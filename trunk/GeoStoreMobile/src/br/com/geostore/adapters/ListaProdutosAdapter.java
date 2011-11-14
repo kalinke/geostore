@@ -45,7 +45,7 @@ public class ListaProdutosAdapter extends BaseAdapter {
 		TextView txtLoja  = (TextView) v.findViewById(R.id.txtLoja);
 		TextView txtPromo = (TextView) v.findViewById(R.id.txtPromo);
 		  
-		txtNome.setText("Nome: ".concat(p.getNome().toUpperCase()));
+		txtNome.setText(p.getNome().toUpperCase());
 		txtDesc.setText("Descrição: ".concat(p.getDescricao().toUpperCase()));
 		txtPrc.setText("Preço Unt.: ".concat(Double.toString(p.getValor()).toUpperCase()));
 		txtLoja.setText("Loja: ".concat(p.getLoja().getNomeFantasia().toUpperCase()));
