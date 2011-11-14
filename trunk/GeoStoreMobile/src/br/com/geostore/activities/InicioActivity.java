@@ -15,7 +15,7 @@ public class InicioActivity extends Activity implements Runnable{
 		@Override
 		public void onCreate(Bundle icicle) {
 			super.onCreate(icicle);
-			setContentView(R.layout.telainicio_bd);
+			setContentView(R.layout.inicio);
 			Toast.makeText(this, "Iniciando...", Toast.LENGTH_SHORT).show();
 			Handler h = new Handler();
 			h.postDelayed(this, DELAY);

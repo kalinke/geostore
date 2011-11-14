@@ -31,7 +31,7 @@ public class RotaActivity extends MapActivity {
 	
 	public void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState); 
-		setContentView(R.layout.mapa_tela); 
+		setContentView(R.layout.rota); 
 
 		Produto p = (Produto) getIntent().getSerializableExtra("produto");
 								

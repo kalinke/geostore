@@ -29,7 +29,7 @@ public class NovoUsuarioActivity extends Activity {
 	
 	public void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState); 
-		setContentView(R.layout.cadastro_tela);
+		setContentView(R.layout.novousuario);
 		
 		Button btRegistrar = (Button)findViewById(R.id.btRegCad);			
 		

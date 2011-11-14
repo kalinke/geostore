@@ -15,7 +15,7 @@ public class RecuperarSenhaActivity extends Activity{
 	
 	public void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState); 
-		setContentView(R.layout.senha_recup);
+		setContentView(R.layout.recuperarsenha);
 		
 		Button btEnviar = (Button)findViewById(R.id.btEnviarSenhaRec);
 		final EditText etEmail = (EditText)findViewById(R.id.etEmailSenhaRec);

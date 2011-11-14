@@ -47,7 +47,7 @@ public class BuscarActivity extends Activity implements Button.OnClickListener, 
 	@SuppressWarnings("rawtypes")
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_busca_tela);        
+        setContentView(R.layout.buscar);        
         
         Button btnBuscar = (Button) findViewById(R.id.btBuscarMainBusca);        
         btnBuscar.setOnClickListener(this);               
