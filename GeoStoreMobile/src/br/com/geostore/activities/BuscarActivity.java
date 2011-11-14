@@ -130,7 +130,7 @@ public class BuscarActivity extends Activity implements Button.OnClickListener, 
 		
 		if (edtBuscar.getText().length()>1){
 			
-			boolean emulator = true;
+			boolean emulator = false;
 			
 			if (emulator){
 				GpsGS g = new GpsGS(this);
