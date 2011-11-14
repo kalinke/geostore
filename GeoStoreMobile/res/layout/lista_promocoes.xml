@@ -12,7 +12,7 @@
 		    android:id="@+id/txtDesc" 
 		    android:layout_width="wrap_content" 
 		    android:layout_height="wrap_content"
-		    android:textColor="@color/branco"
+		    android:textColor="@color/azul_2"
 		    android:textSize="16dp">
 	    </TextView>	    		    	   
     </TableRow>
@@ -22,7 +22,7 @@
 		    android:id="@+id/txtQtde" 
 		    android:layout_width="wrap_content" 
 		    android:layout_height="wrap_content"
-		    android:textColor="@color/branco"
+		    android:textColor="@color/azul_2"
 		    android:textSize="16dp">
 	    </TextView>
 	  </TableRow>	               
