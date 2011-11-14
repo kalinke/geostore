@@ -84,6 +84,12 @@ public class HttpGS {
 		return doPost("promocaoServlet",params);
 	}
 	
+	public String getVouchers(String idUsuario){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("idUsuario",  idUsuario));
+		return doPost("meusDadosServlet",params);
+	}
+	
 	public String doPost(String servlet, List<NameValuePair> params){		
 		HttpResponse res = null;		
 		
