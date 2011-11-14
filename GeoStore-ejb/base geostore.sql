@@ -231,7 +231,7 @@ CREATE TABLE `gs_promocao` (
   KEY `FK6F0ED6559CAFF817` (`id_status_promocao`),
   CONSTRAINT `FK6F0ED6559CAFF817` FOREIGN KEY (`id_status_promocao`) REFERENCES `gs_status_promocao` (`id`),
   CONSTRAINT `FK6F0ED655E1689F16` FOREIGN KEY (`id_produto`) REFERENCES `gs_produtos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `gs_promocao`
@@ -239,7 +239,8 @@ CREATE TABLE `gs_promocao` (
 
 /*!40000 ALTER TABLE `gs_promocao` DISABLE KEYS */;
 INSERT INTO `gs_promocao` (`id`,`qde_solicitada`,`qde_voucher`,`id_produto`,`id_status_promocao`,`descricao`) VALUES 
- (1,NULL,'100',1,1,'50% de desconto...');
+ (2,'2','5',1,2,'Com este, 50% de desconto...'),
+ (3,'1','10',2,1,'10% de desconto');
 /*!40000 ALTER TABLE `gs_promocao` ENABLE KEYS */;
 
 
@@ -358,6 +359,28 @@ INSERT INTO `gs_status_usuario` (`id`,`descricao`) VALUES
 
 
 --
+-- Definition of table `gs_status_voucher`
+--
+
+DROP TABLE IF EXISTS `gs_status_voucher`;
+CREATE TABLE `gs_status_voucher` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `gs_status_voucher`
+--
+
+/*!40000 ALTER TABLE `gs_status_voucher` DISABLE KEYS */;
+INSERT INTO `gs_status_voucher` (`id`,`descricao`) VALUES 
+ (1,'Não resgatado'),
+ (2,'Resgatado');
+/*!40000 ALTER TABLE `gs_status_voucher` ENABLE KEYS */;
+
+
+--
 -- Definition of table `gs_tipo_usuario`
 --
 
@@ -427,7 +450,7 @@ CREATE TABLE `gs_usuarios` (
   CONSTRAINT `FKB4F060F814E08A9` FOREIGN KEY (`id_status_usuario`) REFERENCES `gs_status_loja` (`id`),
   CONSTRAINT `FKB4F060F8406D6369` FOREIGN KEY (`id_tipo_usuario`) REFERENCES `gs_tipo_usuario` (`id`),
   CONSTRAINT `FKB4F060F88A16FC07` FOREIGN KEY (`id_empresa_vinculo`) REFERENCES `gs_empresa` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `gs_usuarios`
@@ -436,7 +459,11 @@ CREATE TABLE `gs_usuarios` (
 /*!40000 ALTER TABLE `gs_usuarios` DISABLE KEYS */;
 INSERT INTO `gs_usuarios` (`id`,`email`,`nome`,`senha`,`telefone`,`id_empresa_vinculo`,`id_status_usuario`,`id_tipo_usuario`,`cpf`,`flag`) VALUES 
  (1,'admin',NULL,'a',NULL,NULL,1,1,NULL,0),
- (6,'jonascarig@gmail.com','Jonas Carignano','aml7080',NULL,NULL,NULL,3,'04696097960',0);
+ (6,'jonascarig@gmail.com','Jonas Carignano','aml7080',NULL,NULL,NULL,3,'04696097960',0),
+ (9,'teste@teste.com','Teste','teste',NULL,NULL,1,3,'01771943912',0),
+ (12,'teste@testve.com','Teste','teste',NULL,NULL,1,3,'99999999999',0),
+ (13,'evandrohagy@gmail.com','Teste','teste',NULL,NULL,1,3,'11111111111',0),
+ (14,NULL,NULL,NULL,NULL,NULL,1,3,NULL,0);
 /*!40000 ALTER TABLE `gs_usuarios` ENABLE KEYS */;
 
 
@@ -451,20 +478,24 @@ CREATE TABLE `gs_voucher` (
   `num_gerado` int(11) DEFAULT NULL,
   `id_promocao` bigint(20) DEFAULT NULL,
   `id_usuario` bigint(20) DEFAULT NULL,
+  `id_status_voucher` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK9702965BF676E780` (`id_usuario`),
   KEY `FK9702965B4CA2F420` (`id_promocao`),
+  KEY `FK9702965B5D753FA9` (`id_status_voucher`),
   CONSTRAINT `FK9702965B4CA2F420` FOREIGN KEY (`id_promocao`) REFERENCES `gs_promocao` (`id`),
+  CONSTRAINT `FK9702965B5D753FA9` FOREIGN KEY (`id_status_voucher`) REFERENCES `gs_status_voucher` (`id`),
   CONSTRAINT `FK9702965BF676E780` FOREIGN KEY (`id_usuario`) REFERENCES `gs_usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `gs_voucher`
 --
 
 /*!40000 ALTER TABLE `gs_voucher` DISABLE KEYS */;
-INSERT INTO `gs_voucher` (`id`,`codigo_voucher`,`num_gerado`,`id_promocao`,`id_usuario`) VALUES 
- (3,'116',0,1,6);
+INSERT INTO `gs_voucher` (`id`,`codigo_voucher`,`num_gerado`,`id_promocao`,`id_usuario`,`id_status_voucher`) VALUES 
+ (13,'362',NULL,3,6,1),
+ (14,'261',NULL,2,6,1);
 /*!40000 ALTER TABLE `gs_voucher` ENABLE KEYS */;
 
 
