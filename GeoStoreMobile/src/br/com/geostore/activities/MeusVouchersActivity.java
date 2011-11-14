@@ -7,11 +7,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
+import android.app.ListActivity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.view.ContextMenu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AdapterView;
 import android.widget.Toast;
-import br.com.geostore.adapters.MeusDadosAdapter;
+import br.com.geostore.adapters.ListaVouchersAdapter;
 import br.com.geostore.entity.Endereco;
 import br.com.geostore.entity.Loja;
 import br.com.geostore.entity.Produto;
@@ -20,42 +26,36 @@ import br.com.geostore.entity.Voucher;
 import br.com.geostore.http.HttpGS;
 
 
-public class MeusDadosActivity extends Activity{
+public class MeusVouchersActivity extends ListActivity{
 	
 	private static final int NENHUMVOUCHER  = 1;
 	private static final int ERRO           = 9;
 	private static final int OK             = 99;
+	private static final int CONTEXTMENU_ROTA    = 1; 
+	private static final int CONTEXTMENU_DISCAR  = 2; 
 	
 	private int retorno;
-	private MeusDadosAdapter adapter;
 	private List<Voucher> vouchers;
 	
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.meusdados);
         
-        TextView txtNome = (TextView) findViewById(R.id.tvNomeUsuarioMeusDados);
-    	txtNome.setText(BuscarActivity.getUsuario().getNome());
-    	
-    	TextView txtEmail = (TextView) findViewById(R.id.tvEmailUsuarioMeusDados);
-    	txtEmail.setText(BuscarActivity.getUsuario().getEmail());
-    	
-    	TextView txtCpf = (TextView) findViewById(R.id.tvCpfUsuarioMeusDados);
-    	txtCpf.setText(BuscarActivity.getUsuario().getCpf());
-
+        this.retorno = MeusVouchersActivity.OK;
     	getVouchers();
     	
     	switch (this.retorno){
     		case OK:
-    			adapter = new MeusDadosAdapter(this, R.id.l, this.vouchers);
-    			
+    			ListaVouchersAdapter adapter = new ListaVouchersAdapter(this, vouchers);  
+    			setListAdapter(adapter);
+    			registerForContextMenu(getListView());
     			break;
     		case NENHUMVOUCHER:
-    			TextView txtNomeVoucher = (TextView) findViewById(R.id.txtNomeVoucher);
-    			txtNomeVoucher.setText("Você não possui nenhum voucher...");
+    			Toast.makeText(MeusVouchersActivity.this, "Você não possui nenhum voucher.", Toast.LENGTH_SHORT).show();
+    			finish();
     			break;
 			case ERRO:
-				Toast.makeText(MeusDadosActivity.this, "O servidor retornou dados inesperados!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(MeusVouchersActivity.this, "O servidor retornou dados inesperados!", Toast.LENGTH_SHORT).show();
+				finish();
 				break;
     	}        
 	}
@@ -81,9 +81,12 @@ public class MeusDadosActivity extends Activity{
 					endereco.setLogradouro(jVoucher.getString("endLoja"));
 					endereco.setNumeroLogradouro(jVoucher.getString("numLoja"));
 					endereco.setBairro(jVoucher.getString("bairroLoja"));
+					endereco.setLatitude(jVoucher.getDouble("latLoja"));
+					endereco.setLongitude(jVoucher.getDouble("logLoja"));
 					
 					Loja loja = new Loja();
 					loja.setNomeFantasia(jVoucher.getString("nomeLoja"));
+					loja.setTelefone(jVoucher.getString("telLoja"));
 					loja.setEndereco(endereco);
 					
 					Produto produto = new Produto();
@@ -105,12 +108,12 @@ public class MeusDadosActivity extends Activity{
 				}
 				
 				if (this.vouchers.size()<=0){
-					this.retorno = MeusDadosActivity.NENHUMVOUCHER;
+					this.retorno = MeusVouchersActivity.NENHUMVOUCHER;
 				}
 				
 			} catch (JSONException e1) {
 				
-				this.retorno = MeusDadosActivity.ERRO;
+				this.retorno = MeusVouchersActivity.ERRO;
 				e1.printStackTrace();
 				
 			}
@@ -118,5 +121,33 @@ public class MeusDadosActivity extends Activity{
 		}
 		
 	}
+	
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+		menu.setHeaderTitle("Escolha uma opção...");
+		menu.add(0,CONTEXTMENU_ROTA,   0,"Traçar Rota");
+		menu.add(0,CONTEXTMENU_DISCAR, 0,"Discar Loja");
+	}
+	
+    public boolean onContextItemSelected(MenuItem item) {
+	    
+    	AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();	    
+	    int i   = item.getItemId();
+	    Voucher voucher = vouchers.get(info.position);
+	    Intent in;
+	    switch (i) {
+	    	case CONTEXTMENU_ROTA:    		
+	    		in = new Intent(MeusVouchersActivity.this, RotaActivity.class);
+				in.putExtra("produto", voucher.getPromocao().getProduto());										
+				startActivity(in);	    		
+	    		return true;
+	    	case CONTEXTMENU_DISCAR:	    		
+	    		Uri fone = Uri.parse("tel:" + voucher.getPromocao().getProduto().getLoja().getTelefone());
+	    		in = new Intent(Intent.ACTION_CALL,fone);
+	    		startActivity(in);
+	    		return true;	    	  	
+	    	default:
+	    		return super.onContextItemSelected(item);
+	    }
+    }
 	
 }
