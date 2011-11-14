@@ -99,7 +99,7 @@
 		    <TableRow>
 			    <TextView 
 				    android:text="txtNome" 
-				    android:id="@+id/txtNome" 
+				    android:id="@+id/txtNomeVoucher" 
 				    android:layout_width="wrap_content" 
 				    android:layout_height="wrap_content"
 				    android:textColor="@color/preto"
@@ -112,7 +112,7 @@
 			    	android:layout_height="wrap_content" 
 			    	android:layout_width="wrap_content" 
 			    	android:text="txtDesc" 
-			    	android:id="@+id/txtDesc"
+			    	android:id="@+id/txtDescVoucher"
 			    	android:textColor="@color/azul_2"
 			    	android:textSize="12dp">
 			    </TextView>   	
@@ -121,7 +121,7 @@
 					android:layout_height="wrap_content" 
 					android:layout_width="wrap_content" 			
 					android:text="txtPreco" 
-					android:id="@+id/txtPrc"
+					android:id="@+id/txtPrcVoucher"
 					android:textColor="@color/azul_2"
 					android:textSize="12dp">
 				</TextView>    
@@ -132,7 +132,7 @@
 		    	android:layout_height="wrap_content" 
 		    	android:layout_width="wrap_content" 
 		    	android:text="txtLoja" 
-		    	android:id="@+id/txtLoja"
+		    	android:id="@+id/txtLojaVoucher"
 		    	android:textColor="@color/azul_2"
 		    	android:textSize="12dp">
 		    </TextView>
@@ -141,7 +141,7 @@
 				android:layout_height="wrap_content" 
 				android:layout_width="wrap_content" 			
 				android:text="txtVoucher" 
-				android:id="@+id/txtVoucher"
+				android:id="@+id/txtVoucherVoucher"
 				android:textColor="@color/azul_2"
 				android:textSize="12dp">
 			</TextView>	   	    
@@ -151,7 +151,7 @@
 		    	android:layout_height="wrap_content" 
 		    	android:layout_width="wrap_content" 
 		    	android:text="txtEndLoja" 
-		    	android:id="@+id/txtEndLoja"
+		    	android:id="@+id/txtEndLojaVoucher"
 		    	android:textColor="@color/azul_2"
 		    	android:textSize="12dp">
 		    </TextView>		    	   	    
@@ -161,7 +161,7 @@
 		    	android:layout_height="wrap_content" 
 		    	android:layout_width="wrap_content" 
 		    	android:text="txtPromoDesc" 
-		    	android:id="@+id/txtPromoDesc"
+		    	android:id="@+id/txtPromoDescVoucher"
 		    	android:textColor="@color/azul_2"
 		    	android:textSize="12dp">
 		    </TextView>		    	   	    
