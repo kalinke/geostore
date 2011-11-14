@@ -99,10 +99,12 @@ public class BuscarActivity extends Activity implements Button.OnClickListener, 
 			}
 		});
 	}
+    
+    public void onClick(View v){
+    	buscarProduto();
+    }
 
-
-	@Override
-	public void onClick(View v) {			
+	public void buscarProduto() {			
 				
 		EditText edtBuscar = (EditText) findViewById(R.id.etItemMainBusca);
 	
