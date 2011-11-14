@@ -20,7 +20,7 @@ public class LoginActivity extends Activity{
 	
 	public void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState); 
-		setContentView(R.layout.login_tela);
+		setContentView(R.layout.login);
 		
 		Button btLogin = (Button)findViewById(R.id.btLoginLog);
 		TextView tvCadastro = (TextView)findViewById(R.id.tvCadLoginClick);
