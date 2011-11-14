@@ -45,7 +45,7 @@ public class LojaController {
 	private UnidadeFederacao unidadeFederacao = new UnidadeFederacao();	
 	private Long idLoja;
 	
-	private String acao = null;
+	private String acao = "NOVA";
 	
 	public LojaController(){
 		this.usuarioLogado = (Usuario) Contexts.getSessionContext().get("usuarioLogado");

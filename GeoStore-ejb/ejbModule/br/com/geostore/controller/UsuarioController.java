@@ -33,7 +33,7 @@ public class UsuarioController {
 	private String senhaAtual;
 	private String novaSenha;
 	private String confirmaNovaSenha;
-	private String acao=null;
+	private String acao="NOVA";
 			
 	public UsuarioController() {
 		this.usuarioLogado = (Usuario) Contexts.getSessionContext().get("usuarioLogado");
