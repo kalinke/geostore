@@ -57,21 +57,35 @@ public class BuscarActivity extends Activity implements Button.OnClickListener, 
 	    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	    sp.setAdapter(adapter);
 	    sp.setOnItemSelectedListener(this);
-	    	    
+	    
 	    TextView txtLogin = (TextView) findViewById(R.id.tvLoginMainBuscaclick);    	
         txtLogin.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				if (BuscarActivity.usuario!=null){
+				if (logado()){
 					setUsuario(null);
 					TextView textViewToChange = (TextView) findViewById(R.id.tvLoginMainBuscaclick);
-			    	textViewToChange.setText("Login");
+			    	textViewToChange.setText("Login ");
 					Toast.makeText(BuscarActivity.this, "Logoff efetuado com sucesso!", Toast.LENGTH_SHORT).show();
 				}else{
 					Intent i = new Intent(BuscarActivity.this, LoginActivity.class);
 					startActivity(i);
 				}
 			}
-		});	   
+		});
+
+        TextView txtMeusDados = (TextView) findViewById(R.id.tvDadosMainBuscaClick);
+        txtMeusDados.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				if (logado()){
+					Intent i = new Intent(BuscarActivity.this, MeusDadosActivity.class);
+					startActivity(i);
+				}else{
+					Toast.makeText(BuscarActivity.this, "Para acessar seus dados é necessário efetuar o login.", Toast.LENGTH_SHORT).show();
+					Intent i = new Intent(BuscarActivity.this, LoginActivity.class);
+					startActivity(i);
+				}
+			}
+		});
 	}
 
 	@Override
@@ -81,7 +95,7 @@ public class BuscarActivity extends Activity implements Button.OnClickListener, 
 		String log  = "0";
 		String lat  = "0";
 		
-		if (edtBuscar.getText().length()>0){
+		if (edtBuscar.getText().length()>1){
 		
 			GpsGS g = new GpsGS(this);
 			lat = Double.toString(g.getLastLatitude());
@@ -212,9 +226,9 @@ public class BuscarActivity extends Activity implements Button.OnClickListener, 
 	protected void onRestart() {
     	String txt = null;
 		if (BuscarActivity.usuario!=null){
-    		txt = "Logout";    		
+    		txt = "Logout ";    		
     	}else{
-    		txt = "Login";
+    		txt = "Login ";
     	}
 		TextView textViewToChange = (TextView) findViewById(R.id.tvLoginMainBuscaclick);
     	textViewToChange.setText(txt);
@@ -227,5 +241,8 @@ public class BuscarActivity extends Activity implements Button.OnClickListener, 
 
 	public static void setUsuario(Usuario usuario) {
 		BuscarActivity.usuario = usuario;
+	}
+	public boolean logado(){
+		return BuscarActivity.usuario!=null;
 	}
 }
