@@ -43,8 +43,7 @@
     	android:hint="Digite o produto desejado:" 
     	android:layout_width="276dp" 
     	android:id="@+id/etItemMainBusca"
-    	android:layout_gravity="center_horizontal"
-    	android:text="CELULAR">
+    	android:layout_gravity="center_horizontal">
     </EditText>
     
     <TextView 

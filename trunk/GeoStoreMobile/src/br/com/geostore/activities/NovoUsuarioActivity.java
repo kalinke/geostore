@@ -55,7 +55,7 @@ public class NovoUsuarioActivity extends Activity {
 				usuario.setSenha(edtSenha.getText().toString());								
 				
 				if (validaDados()){
-					novoUsuario();
+					incluiUsuario();
 				}
 				
 				switch (retorno){
@@ -101,7 +101,7 @@ public class NovoUsuarioActivity extends Activity {
 
 	}
 	
-	public void novoUsuario(){
+	public void incluiUsuario(){
 				
 		HttpGS http = new HttpGS(this);
 		String response = http.novoUsuario(this.usuario);
