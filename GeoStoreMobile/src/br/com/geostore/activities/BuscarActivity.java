@@ -129,10 +129,17 @@ public class BuscarActivity extends Activity implements Button.OnClickListener, 
 		String lat  = "0";
 		
 		if (edtBuscar.getText().length()>1){
-		
-			GpsGS g = new GpsGS(this);
-			lat = Double.toString(g.getLastLatitude());
-			log = Double.toString(g.getLastLongitude());		
+			
+			boolean emulator = true;
+			
+			if (emulator){
+				GpsGS g = new GpsGS(this);
+				lat = Double.toString(g.getLastLatitude());
+				log = Double.toString(g.getLastLongitude());			
+			}else{
+				lat = "-25.494805";
+				log = "-49.2922";
+			}
 			
 			HttpGS h = new HttpGS(this);
 			String s = h.buscarProdutos(edtBuscar.getText().toString(), log, lat, String.valueOf(raio));
