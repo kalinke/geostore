@@ -11,8 +11,8 @@ import javax.persistence.Table;
 import org.jboss.seam.annotations.Name;
 
 @Entity
-@Name("statusLoja")
-@Table(name = "gs_status_loja")
+@Name("statusUsuario")
+@Table(name = "gs_status_usuario")
 public class StatusUsuario implements Serializable {
 
 	/**
