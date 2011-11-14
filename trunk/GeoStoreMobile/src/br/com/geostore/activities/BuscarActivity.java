@@ -77,7 +77,7 @@ public class BuscarActivity extends Activity implements Button.OnClickListener, 
         txtMeusDados.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if (logado()){
-					Intent i = new Intent(BuscarActivity.this, MeusDadosActivity.class);
+					Intent i = new Intent(BuscarActivity.this, MeusVouchersActivity.class);
 					startActivity(i);
 				}else{
 					Toast.makeText(BuscarActivity.this, "Para acessar seus dados é necessário efetuar o login.", Toast.LENGTH_SHORT).show();

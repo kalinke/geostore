@@ -65,7 +65,9 @@ public class ListaPromocoesActivity extends ListActivity {
 	    				    alertDialog.setMessage("Número do voucher gerado: " + voucher);  
 	    				    alertDialog.setButton("OK", new DialogInterface.OnClickListener() {  
 	    				      public void onClick(DialogInterface dialog, int which) {  
+	    				    	  Intent i = new Intent(ListaPromocoesActivity.this, MeusVouchersActivity.class);	    							
 	    				    	  finish();
+	    				    	  startActivity(i);
 	    				    	  return;  
 	    				    } });
 	    				    alertDialog.show();
