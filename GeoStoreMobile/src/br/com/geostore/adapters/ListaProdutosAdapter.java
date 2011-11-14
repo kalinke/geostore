@@ -37,7 +37,7 @@ public class ListaProdutosAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		Produto p = produtos.get(position);
 		
-		View v = LayoutInflater.from(ctx).inflate(R.layout.lista_produtos, null);		
+		View v = LayoutInflater.from(ctx).inflate(R.layout.listaprodutos, null);		
    
 		TextView txtNome  = (TextView) v.findViewById(R.id.txtNome);
 		TextView txtDesc  = (TextView) v.findViewById(R.id.txtDesc);
