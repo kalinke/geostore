@@ -33,9 +33,13 @@ public class NovoUsuarioActivity extends Activity {
 		
 		Button btRegistrar = (Button)findViewById(R.id.btRegCad);			
 		
-		btRegistrar.setOnClickListener(new View.OnClickListener() {			
-			@Override
-			public void onClick(View v) {
+		btRegistrar.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v){
+				novoUsuario();
+			}
+			
+			public void novoUsuario() {
 				
 				retorno = NovoUsuarioActivity.OK;
 				
