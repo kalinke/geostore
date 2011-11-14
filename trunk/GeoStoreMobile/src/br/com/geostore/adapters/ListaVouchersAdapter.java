@@ -51,7 +51,7 @@ public class ListaVouchersAdapter extends BaseAdapter {
 		TextView tvNumVoucher  = (TextView) v.findViewById(R.id.tvNumVoucherMeusVouchers);
 		TextView tvDescPromo  = (TextView) v.findViewById(R.id.tvDescPromoMeusVouchers);
 		
-		tvNomeProd.setText("Nome: ".concat(voucher.getPromocao().getProduto().getNome()));
+		tvNomeProd.setText(voucher.getPromocao().getProduto().getNome());
 		tvDescProd.setText("Desc: ".concat(voucher.getPromocao().getProduto().getDescricao()));
 		tvNomeLoja.setText("Loja: ".concat(voucher.getPromocao().getProduto().getLoja().getNomeFantasia()));
 		tvEndLoja.setText("End: ".concat(voucher.getPromocao().getProduto().getLoja().getEndereco().getLogradouro()));
