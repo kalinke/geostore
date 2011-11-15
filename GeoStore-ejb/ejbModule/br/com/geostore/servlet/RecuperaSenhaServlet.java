@@ -16,6 +16,7 @@ import org.jboss.seam.servlet.ContextualHttpServletRequest;
 import org.jboss.seam.web.AbstractResource;
 
 import br.com.geostore.email.controller.ReenvioSenhaController;
+import br.com.geostore.security.Security;
 
 
 @Scope(ScopeType.APPLICATION)
@@ -34,23 +35,28 @@ public class RecuperaSenhaServlet extends AbstractResource {
 
 			@Override
 			public void process() {				
-					
-				String email = request.getParameter("email");
-					
-				ReenvioSenhaController r = (ReenvioSenhaController) Component.getInstance(ReenvioSenhaController.class);	
-				r.setEmail(email);
-				String retorno = r.send();
 				
-				try{
+				Security sec = new Security();
+				
+				if (sec.clientAutenticado(request,"recuperaSenhaServlet")){
 					
-					PrintWriter out = response.getWriter();
-					out.print(retorno);
-					out.flush();
+					String email = request.getParameter("email");
+						
+					ReenvioSenhaController r = (ReenvioSenhaController) Component.getInstance(ReenvioSenhaController.class);	
+					r.setEmail(email);
+					String retorno = r.send();
 					
-				}catch(Exception e){
-					e.printStackTrace();
+					try{
+						
+						PrintWriter out = response.getWriter();
+						out.print(retorno);
+						out.flush();
+						
+					}catch(Exception e){
+						e.printStackTrace();
+					}
+					
 				}
-				
 				
 			}
 

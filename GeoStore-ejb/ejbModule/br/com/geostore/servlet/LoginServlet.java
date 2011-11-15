@@ -18,6 +18,7 @@ import org.jboss.seam.web.AbstractResource;
 
 import br.com.geostore.dao.UsuarioDAO;
 import br.com.geostore.entity.Usuario;
+import br.com.geostore.security.Security;
 
 @Scope(ScopeType.APPLICATION)
 @Name("loginServlet")
@@ -31,37 +32,41 @@ public class LoginServlet extends AbstractResource {
         	
         	@Override
             public void process(){       		        
+        		Security sec = new Security();
+				
+				if (sec.clientAutenticado(request,"loginServlet")){
         		
-        		String email = request.getParameter("email");
-        		String senha = request.getParameter("senha");
-        	        		
-    			UsuarioDAO uDao = (UsuarioDAO) Component.getInstance(UsuarioDAO.class);
-    			Usuario u = new Usuario();
-    			u.setEmail(email);
-    			u.setSenha(senha);
-    			
-    			try {
-					u = uDao.buscarAutenticacao(u);
-					JSONObject j = new JSONObject();
-					
-					if (u != null){						
+					String email = request.getParameter("email");
+	        		String senha = request.getParameter("senha");
+	        	        		
+	    			UsuarioDAO uDao = (UsuarioDAO) Component.getInstance(UsuarioDAO.class);
+	    			Usuario u = new Usuario();
+	    			u.setEmail(email);
+	    			u.setSenha(senha);
+	    			
+	    			try {
+						u = uDao.buscarAutenticacao(u);
+						JSONObject j = new JSONObject();
+						
+						if (u != null){						
+								
+							j.put("id",    u.getId());
+							j.put("nome",  u.getNome());
+							j.put("cpf",   u.getCpf());
+							j.put("email", u.getEmail());
+							j.put("senha", u.getSenha());
 							
-						j.put("id",    u.getId());
-						j.put("nome",  u.getNome());
-						j.put("cpf",   u.getCpf());
-						j.put("email", u.getEmail());
-						j.put("senha", u.getSenha());
-						
+						}
+							
+						j.put("encontrou", u != null);
+						response.setContentType("application/json");
+						PrintWriter out = response.getWriter();
+						out.print(j);
+						out.flush();
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
-						
-					j.put("encontrou", u != null);
-					response.setContentType("application/json");
-					PrintWriter out = response.getWriter();
-					out.print(j);
-					out.flush();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}									
+				}
         	}
         }.run();
     }		    	
