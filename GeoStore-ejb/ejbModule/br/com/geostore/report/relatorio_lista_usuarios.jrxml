@@ -129,7 +129,14 @@
 			</textField>
 			<textField>
 				<reportElement x="0" y="0" width="80" height="12"/>
-				<textElement verticalAlignment="Middle">
+				<box>
+					<pen lineWidth="0.25" lineColor="#CCCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#CCCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#CCCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#CCCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{empresaVinculo.documento}]]></textFieldExpression>
