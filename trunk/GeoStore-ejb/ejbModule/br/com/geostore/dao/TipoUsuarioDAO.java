@@ -20,61 +20,6 @@ public class TipoUsuarioDAO {
 	
 	@Logger
 	private Log log;
-
-	public void incluir(TipoUsuario tipoUsuario) throws Exception {
-		try{
-			log.info("Incluir TipoUsuario: #0", tipoUsuario.getId());
-			entityManager.persist(tipoUsuario);
-			entityManager.flush();
-		}catch (Exception e) {
-			throw new Exception(e);
-		}
-	}
-	
-	public void alterar(TipoUsuario tipoUsuario) throws Exception {
-		try{
-			log.info("Alterar tipoEmpresa: #0", tipoUsuario.getId());			
-			entityManager.merge(tipoUsuario);
-			entityManager.flush();			
-		}catch (Exception e) {
-			throw new Exception(e);
-		}
-	}
-	
-	
-	public void salvar(TipoUsuario tipoUsuario) throws Exception {
-		try{
-			log.info("Persistir tipoUsuario: #0", tipoUsuario.getId());
-			entityManager.persist(tipoUsuario);	
-			entityManager.flush();
-			
-		}catch (Exception e) {
-			throw new Exception(e);
-		}
-	}
-	
-	
-	public void excluir(TipoUsuario tipoUsuario) throws Exception {
-		try{
-			if(!entityManager.contains(tipoUsuario))
-				tipoUsuario = entityManager.merge(tipoUsuario);
-			
-			log.info("Remover TipoEmpresa: #0", tipoUsuario.getId());
-			entityManager.remove(tipoUsuario);
-			entityManager.flush();
-			
-		}catch (Exception e) {
-			throw new Exception(e);
-		}
-	}
-	
-	public TipoUsuario buscarPorId(Long id) throws Exception {
-		try{
-			return entityManager.find(TipoUsuario.class, id);
-		}catch (Exception e) {
-			throw new Exception(e);
-		}
-	}
 		
 	@SuppressWarnings("unchecked")
 	public List<TipoUsuario> buscarTodos() throws Exception {
