@@ -19,8 +19,10 @@ import org.jboss.seam.annotations.intercept.BypassInterceptors;
 import org.jboss.seam.servlet.ContextualHttpServletRequest;
 import org.jboss.seam.web.AbstractResource;
 
+import br.com.geostore.dao.HistoricoBuscasDAO;
 import br.com.geostore.dao.ProdutoDAO;
 import br.com.geostore.entity.Endereco;
+import br.com.geostore.entity.HistoricoBuscas;
 import br.com.geostore.entity.Loja;
 import br.com.geostore.entity.Produto;
 import br.com.geostore.entity.Promocao;
@@ -46,8 +48,20 @@ public class ProdutoServlet extends AbstractResource {
         		
         		if (texto != null){
         			        			
-        			ProdutoDAO pDao = (ProdutoDAO) Component.getInstance(ProdutoDAO.class);		        			
+        			ProdutoDAO pDao = (ProdutoDAO) Component.getInstance(ProdutoDAO.class);
+        			
+        			HistoricoBuscas hist = new HistoricoBuscas();
+        			HistoricoBuscasDAO histDAO = (HistoricoBuscasDAO) Component.getInstance(HistoricoBuscasDAO.class);
+        			
+        			hist.setDescricao(texto);
+        			hist.setLatitude(lat);
+        			hist.setLongitude(log);
+        			
+        			
+        			
         			try {
+        				
+        				histDAO.incluir(hist);
 						List<Produto> p = pDao.buscarPorProximidade(texto, lat, log, raio);
 						
 						if (p != null){
