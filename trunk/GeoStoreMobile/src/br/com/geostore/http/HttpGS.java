@@ -2,7 +2,11 @@ package br.com.geostore.http;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
@@ -18,6 +22,7 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
 import br.com.geostore.entity.Usuario;
+import br.com.geostore.security.Security;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -26,15 +31,11 @@ import android.widget.Toast;
 
 
 public class HttpGS {
-	//LOCAL
-	//private static final String URL_SERVER = "http://10.0.2.2:8080/GeoStore/seam/resource/";
-	
-	//PRODIET
-	//private static final String URL_SERVER = "http://172.16.1.104:8080/GeoStore/seam/resource/";
-
-	//ALISSON
+	//CELULAR
+	private static final String URL_SERVER = "http://192.168.1.10:8080/GeoStore/seam/resource/";
+	//EMULADOR
+	//private static final String URL_SERVER = "http://10.0.2.2:8080/GeoStore/seam/resource/";	
 	private static final String TAG = "HttpGS";
-	private static final String URL_SERVER = "http://192.168.1.10:8080/GeoStore/seam/resource/";		
 	private DefaultHttpClient httpClient = null;
 	private Context ctx = null;
 	
@@ -90,11 +91,14 @@ public class HttpGS {
 		return doPost("meusDadosServlet",params);
 	}
 	
-	public String doPost(String servlet, List<NameValuePair> params){		
+	public String doPost(String servletName, List<NameValuePair> params){		
 		HttpResponse res = null;		
 		
+		Security sec = new Security();		
+		params.add(new BasicNameValuePair("senhaClient",sec.crypto(sec.geraSenha(servletName))));
+		
 		if (this.checkInternetConnection()){			
-			HttpPost post = new HttpPost(URL_SERVER.concat(servlet));			
+			HttpPost post = new HttpPost(URL_SERVER.concat(servletName));			
 			try {				
 				
 				post.setEntity(new UrlEncodedFormEntity(params));
