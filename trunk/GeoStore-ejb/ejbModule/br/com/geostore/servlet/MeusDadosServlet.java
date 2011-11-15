@@ -49,26 +49,32 @@ public class MeusDadosServlet extends AbstractResource {
 					JSONArray jVouchers = new JSONArray();
 					
 					for (Voucher voucher : vouchers) {
-										
-						JSONObject jAtributos = new JSONObject();
 						
-						jAtributos.put("nomeProduto", voucher.getPromocao().getProduto().getNome());
-						jAtributos.put("descProduto",voucher.getPromocao().getProduto().getDescricao());
-						jAtributos.put("precoProduto",voucher.getPromocao().getProduto().getValor());
-						jAtributos.put("nomeLoja",voucher.getPromocao().getProduto().getLoja().getNomeFantasia());
-						jAtributos.put("endLoja",voucher.getPromocao().getProduto().getLoja().getEndereco().getLogradouro());
-						jAtributos.put("numLoja",voucher.getPromocao().getProduto().getLoja().getEndereco().getNumeroLogradouro());
-						jAtributos.put("bairroLoja",voucher.getPromocao().getProduto().getLoja().getEndereco().getBairro());
-						jAtributos.put("descPromocao",voucher.getPromocao().getDescricao());
-						jAtributos.put("numVoucher",voucher.getCodigoVoucher());
-						jAtributos.put("telLoja", voucher.getPromocao().getProduto().getLoja().getTelefone());
-						jAtributos.put("latLoja", voucher.getPromocao().getProduto().getLoja().getEndereco().getLatitude());
-						jAtributos.put("logLoja", voucher.getPromocao().getProduto().getLoja().getEndereco().getLongitude());
+						//Apenas vouchers ativos...
+						Long status = voucher.getStatusVoucher().getId().longValue();
 						
-						JSONObject jVoucher = new JSONObject();
-						jVoucher.put("voucher", jAtributos);
-						jVouchers.put(jVoucher);
+						if (status==1l){
+													
+							JSONObject jAtributos = new JSONObject();
+							
+							jAtributos.put("nomeProduto", voucher.getPromocao().getProduto().getNome());
+							jAtributos.put("descProduto",voucher.getPromocao().getProduto().getDescricao());
+							jAtributos.put("precoProduto",voucher.getPromocao().getProduto().getValor());
+							jAtributos.put("nomeLoja",voucher.getPromocao().getProduto().getLoja().getNomeFantasia());
+							jAtributos.put("endLoja",voucher.getPromocao().getProduto().getLoja().getEndereco().getLogradouro());
+							jAtributos.put("numLoja",voucher.getPromocao().getProduto().getLoja().getEndereco().getNumeroLogradouro());
+							jAtributos.put("bairroLoja",voucher.getPromocao().getProduto().getLoja().getEndereco().getBairro());
+							jAtributos.put("descPromocao",voucher.getPromocao().getDescricao());
+							jAtributos.put("numVoucher",voucher.getCodigoVoucher());
+							jAtributos.put("telLoja", voucher.getPromocao().getProduto().getLoja().getTelefone());
+							jAtributos.put("latLoja", voucher.getPromocao().getProduto().getLoja().getEndereco().getLatitude());
+							jAtributos.put("logLoja", voucher.getPromocao().getProduto().getLoja().getEndereco().getLongitude());
+							
+							JSONObject jVoucher = new JSONObject();
+							jVoucher.put("voucher", jAtributos);
+							jVouchers.put(jVoucher);
 						
+						}
 					}
 					
 					response.setContentType("application/json");
