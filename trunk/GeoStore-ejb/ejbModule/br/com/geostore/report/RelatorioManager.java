@@ -30,11 +30,13 @@ import org.jboss.seam.contexts.Contexts;
 import org.jboss.seam.faces.FacesMessages;
 
 import br.com.geostore.dao.EmpresaDAO;
+import br.com.geostore.dao.HistoricoBuscasDAO;
 import br.com.geostore.dao.LojaDAO;
 import br.com.geostore.dao.ProdutoDAO;
 import br.com.geostore.dao.PromocaoDAO;
 import br.com.geostore.dao.UsuarioDAO;
 import br.com.geostore.entity.Empresa;
+import br.com.geostore.entity.HistoricoBuscas;
 import br.com.geostore.entity.Loja;
 import br.com.geostore.entity.Produto;
 import br.com.geostore.entity.Promocao;
@@ -58,6 +60,7 @@ public class RelatorioManager {
 	@In (create=true) UsuarioDAO usuarioDAO;
 	@In (create=true) PromocaoDAO promocaoDAO;
 	@In (create=true) LojaDAO lojaDAO;
+	@In (create=true) HistoricoBuscasDAO historicoBuscasDAO;
 	
 	private Usuario usuarioLogado;
 	/**
@@ -387,7 +390,73 @@ public class RelatorioManager {
 
 	}
 	
+	public void geraRelatorioUltimasConsultas() throws Exception{
+        
+		List<HistoricoBuscas> list = new ArrayList<HistoricoBuscas>();
+		
+		//list = entityManager.createQuery(" from Usuario ").getResultList();
+		list = historicoBuscasDAO.buscarUltimas50();
+		
+//		String sQuery;
+//		
+//		sQuery = " from Promocao as p ";			
+//		if(usuarioLogado.getTipoUsuario().getId().longValue() != 1) sQuery += " where p.produto.loja.empresaSuperior.id = :idEmpresaUsuario ";						
+//		sQuery += " order by p.id ";			
+//		
+//		Query query = entityManager.createQuery(sQuery);			
+//		if(usuarioLogado.getTipoUsuario().getId().longValue() != 1) query.setParameter("idEmpresaUsuario", usuarioLogado.getEmpresaVinculo().getId());
+//
+//		list = query.getResultList();
 	
+			
+        if (list.isEmpty()) {
+            facesMessages.add("Não existem dados cadastrados");
+            return;
+        }
+
+        JasperPrint impressao = null;
+        Map<String, Object> param = new HashMap<String, Object>();
+       
+        // Gerando as imagens do relatório
+        InputStream cabecalho = this.getClass().getResourceAsStream("/br/com/geostore/report/logoGeostore.png");
+        Image imgCabecalho = null;
+		try {
+			imgCabecalho = ImageIO.read(cabecalho);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+        imgCabecalho = gerarImagem(imgCabecalho);
+        
+        param.put("cabecalho", imgCabecalho);
+        try {
+            
+            InputStream pathJasper;
+ 	        pathJasper = this.getClass().getResourceAsStream("/br/com/geostore/report/relatorio_ultimas_consultas.jasper");
+            impressao = JasperFillManager.fillReport(pathJasper, param , new JRBeanCollectionDataSource(list) );
+            
+          //disponibilizar o pdf para download
+            HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            
+            JasperExportManager.exportReportToPdfStream(impressao, pdfStream);
+            response.setContentType("application/pdf");
+            response.setHeader("Content-Disposition", "attachment; filename=\"relatorio_lista_promocoes.pdf\"");
+            response.setHeader("Cache-Control", "no-cache");
+//            JasperViewer.viewReport(impressao,false);
+            ServletOutputStream flusher = response.getOutputStream();
+            pdfStream.writeTo(flusher);
+            flusher.flush();
+            flusher.close();
+            FacesContext.getCurrentInstance().responseComplete();
+            pdfStream.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+	}
+
 	/**
 	 *	Método responsável por gerar as imagens do relatório em um formato padronizado
 	 *
