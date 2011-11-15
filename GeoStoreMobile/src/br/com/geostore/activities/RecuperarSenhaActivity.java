@@ -34,25 +34,27 @@ public class RecuperarSenhaActivity extends Activity{
 				
 				String response = hgs.recuperaSenha(email);
 				String msg = null;
-				if(response != null && response.equals("ENVIADO")){					
+				if (response != null){
+					if(response.equals("ENVIADO")){					
+						
+						msg = "Senha enviada com sucesso.";
+						
+					}else{
+	
+						msg = "Erro, verifique o e-mail e tente novamente.";
+						
+					}
 					
-					msg = "Senha enviada com sucesso.";
-					
-				}else{
-
-					msg = "Erro, verifique o e-mail e tente novamente.";
-					
+					AlertDialog alertDialog = new AlertDialog.Builder(RecuperarSenhaActivity.this).create();  
+				    alertDialog.setTitle("Recupera senha");  
+				    alertDialog.setMessage(msg);  
+				    alertDialog.setButton("OK", new DialogInterface.OnClickListener() {  
+				      public void onClick(DialogInterface dialog, int which) {  
+				    	  finish();
+				    	  return;  
+				    } });
+				    alertDialog.show();		
 				}
-				
-				AlertDialog alertDialog = new AlertDialog.Builder(RecuperarSenhaActivity.this).create();  
-			    alertDialog.setTitle("Recupera senha");  
-			    alertDialog.setMessage(msg);  
-			    alertDialog.setButton("OK", new DialogInterface.OnClickListener() {  
-			      public void onClick(DialogInterface dialog, int which) {  
-			    	  finish();
-			    	  return;  
-			    } });
-			    alertDialog.show();					
 			}		
 			
 		});
