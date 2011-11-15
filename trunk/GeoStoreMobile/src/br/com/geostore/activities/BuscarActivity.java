@@ -130,7 +130,7 @@ public class BuscarActivity extends Activity implements Button.OnClickListener, 
 		
 		if (edtBuscar.getText().length()>1){
 			
-			boolean emulator = false;
+			boolean emulator = true;
 			
 			if (emulator){
 				lat = "-25.494805";

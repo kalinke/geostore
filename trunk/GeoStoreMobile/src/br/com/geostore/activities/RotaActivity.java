@@ -36,7 +36,17 @@ public class RotaActivity extends MapActivity {
 		Produto p = (Produto) getIntent().getSerializableExtra("produto");
 								
 		GpsGS g = new GpsGS(this);
-		GeoPoint origem  = g.getLastPosition();
+		
+		boolean emulator = true;
+		GeoPoint origem = null;
+		
+		if (emulator){
+			origem  = g.DoubleToGeoPoint(-25.494805, -49.2922);
+		}else{
+			origem  = g.getLastPosition();
+		}
+		
+		
 		GeoPoint destino = g.DoubleToGeoPoint(p.getLoja().getEndereco().getLatitude(),p.getLoja().getEndereco().getLongitude());
 		
 		if (origem!=null && destino!=null){

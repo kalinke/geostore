@@ -25,6 +25,7 @@ public class GpsGS{
 		String provider =  LocationManager.GPS_PROVIDER;
 		int minTime = 10000;
 		int minDistance = 10;
+		
 			
 		if(lm.isProviderEnabled(provider)){
 			
