@@ -11,7 +11,7 @@
     
     <application
     	android:theme="@android:style/Theme.Light.NoTitleBar" 
-    	android:icon="@drawable/gslogo" 
+    	android:icon="@drawable/logo_geo_final" 
     	android:label="@string/app_name">    
     	<uses-library android:name="com.google.android.maps"/>
     	
