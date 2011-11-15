@@ -20,6 +20,7 @@ import br.com.geostore.dao.UsuarioDAO;
 import br.com.geostore.entity.StatusUsuario;
 import br.com.geostore.entity.TipoUsuario;
 import br.com.geostore.entity.Usuario;
+import br.com.geostore.security.Security;
 
 @Scope(ScopeType.APPLICATION)
 @Name("novoUsuarioServlet")
@@ -34,42 +35,48 @@ public class NovoUsuarioServlet extends AbstractResource {
 			@Override
 			public void process() {
 
-				Usuario u = new Usuario();
-				u.setNome(request.getParameter("nome"));
-				u.setCpf(request.getParameter("cpf"));
-				u.setEmail(request.getParameter("email"));
-				u.setSenha(request.getParameter("senha"));
+				Security sec = new Security();
 				
-				TipoUsuario t = new TipoUsuario();
-				t.setId(3l);
-				u.setTipoUsuario(t);
+				if (sec.clientAutenticado(request,"novoUsuarioServlet")){
 				
-				StatusUsuario s = new StatusUsuario();
-				s.setId(1l);
-				u.setStatusUsuario(s);
-				
-				int retorno = 0;
-
-				try {
-					UsuarioDAO uDao = (UsuarioDAO) Component.getInstance(UsuarioDAO.class);
-
-					if (uDao.buscarPorCPF(u,"NOVA")) {
-						retorno = 1;
-					} else if (uDao.buscarPorEmail(u, "NOVA")) {
-						retorno = 2;
-					} else {
-						uDao.incluir(u);
+					Usuario u = new Usuario();
+					u.setNome(request.getParameter("nome"));
+					u.setCpf(request.getParameter("cpf"));
+					u.setEmail(request.getParameter("email"));
+					u.setSenha(request.getParameter("senha"));
+					
+					TipoUsuario t = new TipoUsuario();
+					t.setId(3l);
+					u.setTipoUsuario(t);
+					
+					StatusUsuario s = new StatusUsuario();
+					s.setId(1l);
+					u.setStatusUsuario(s);
+					
+					int retorno = 0;
+	
+					try {
+						UsuarioDAO uDao = (UsuarioDAO) Component.getInstance(UsuarioDAO.class);
+	
+						if (uDao.buscarPorCPF(u,"NOVA")) {
+							retorno = 1;
+						} else if (uDao.buscarPorEmail(u, "NOVA")) {
+							retorno = 2;
+						} else {
+							uDao.incluir(u);
+						}
+	
+						JSONObject j = new JSONObject();
+						j.put("retorno", retorno);
+						response.setContentType("application/json");
+						PrintWriter out = response.getWriter();
+						out.print(j);
+						out.flush();
+	
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
-
-					JSONObject j = new JSONObject();
-					j.put("retorno", retorno);
-					response.setContentType("application/json");
-					PrintWriter out = response.getWriter();
-					out.print(j);
-					out.flush();
-
-				} catch (Exception e) {
-					e.printStackTrace();
+					
 				}
 			}
 
