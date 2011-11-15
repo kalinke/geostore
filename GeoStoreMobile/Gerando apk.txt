@@ -1,0 +1,41 @@
+1) Baixar os drivers do G1
+Faça o download dos drivers do aparelho em:
+http://dl.google.com/android/android_usb_windows.zip
+Descompacte o arquivo em algum lugar da sua máquina.
+
+2) Conecte o aparelho ao PC
+O windows detectará o aparelho, selecione o local onde você extraiu os drivers para instalar o telefone no PC.
+
+3) Gerar o APK
+No Eclipse, clique com o botão direito no projeto, selecione "Android Tools | Export Unsigned Application Package".
+Selecione o local onde deseja salvar o arquivo APK
+
+4) Gerar a chave (esse passo só é preciso fazer uma vez)
+No prompt de comando, digite o seguinte comando:
+
+keytool -genkey -v -keystore "C:\Documents and Settings\[seu usuário]\Local Settings\Application Data\Android\debug.keystore" -alias meuAlias -keyalg RSA -validity 10000
+
+Se for solicitado, uma senha, digite: android.
+
+Ele vai fazer várias perguntas para gerar a chave. Responda cada uma delas.
+
+Citação:
+keytool é uma ferramenta do Java SDK (está na pasta bin).
+
+
+5) Assinar a aplicação
+jarsigner -verbose -keystore "C:\Documents and Settings\[seu usuário]\Local Settings\Application Data\Android\debug.keystore" MinhaApp.apk meuAlias
+
+jarsigner é uma ferramenta do Java SDK (está na pasta bin).
+
+6) Instalar a aplicação
+Se você não estiver com o emulador aberto, digite:
+adb install -r MinhaApp.apk
+
+Caso esteja com o emulador aberto, você precisará saber o serial de qual dos dispositivos você quer instalar (emulador ou aparelho). Digite o seguinte comando para listar os seriais:
+adb devices
+
+E depois só é adicionar o serial no comando:
+adb install -s SERIAL -r MinhaApp.apk
+
+adb é uma ferramenta do Android SDK (está na pasta tools).
