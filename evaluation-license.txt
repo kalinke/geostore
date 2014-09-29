@@ -1,0 +1,7 @@
+Email=alissonck@gmail.com
+Name=WANdisco Evaluation
+LicenseCount=1
+FreeUpdatesUntil=2014-10-29
+DemoUntil=2014-10-29
+Epoch=1411979830
+Key=5v8-swoBE-I<p<B-wwNmF-ZIxru-hygDN-JGHcd-<ASSk-uqdx2
