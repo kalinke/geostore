@@ -1,5 +1,6 @@
 # geostore
 Automatically exported from code.google.com/p/geostore
+Project date: Feb-2012.
 
 This is a backup project from a 2011 college project which was exported to here from code.google due to google's decision to discontinue the repository. Please find below a portuguese description of the project.
 
